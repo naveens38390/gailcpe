@@ -1,0 +1,274 @@
+{
+ "effective_date": "2026-08-01",
+ "producers": {
+  "GAIL": {
+   "cash_discount": 1000,
+   "cash_discount_source": "MZO workbook (no GAIL circular supplied)",
+   "quantity_slabs": null,
+   "quantity_slabs_status": "UNKNOWN — not published in the supplied files",
+   "early_payment_per_day": null,
+   "interest_free_credit_days": null
+  },
+  "RIL": {
+   "cash_discount": 1100,
+   "cash_discount_ldpe": 1500,
+   "early_payment_per_day": 80,
+   "early_payment_max_days": 9,
+   "interest_free_credit_days": 10,
+   "quantity_slabs": [
+    {
+     "from_mt": 5,
+     "to_mt": 10,
+     "rate_per_mt": 450
+    },
+    {
+     "from_mt": 10,
+     "to_mt": 30,
+     "rate_per_mt": 550
+    },
+    {
+     "from_mt": 30,
+     "to_mt": 60,
+     "rate_per_mt": 650
+    },
+    {
+     "from_mt": 60,
+     "to_mt": 100,
+     "rate_per_mt": 750
+    },
+    {
+     "from_mt": 100,
+     "to_mt": 200,
+     "rate_per_mt": 850
+    },
+    {
+     "from_mt": 200,
+     "to_mt": 300,
+     "rate_per_mt": 950
+    },
+    {
+     "from_mt": 300,
+     "to_mt": 400,
+     "rate_per_mt": 1050
+    },
+    {
+     "from_mt": 400,
+     "to_mt": null,
+     "rate_per_mt": 1150
+    }
+   ],
+   "dealer_discount": 350
+  },
+  "IOCL": {
+   "cash_discount": 1100,
+   "early_payment_per_day": 78.6,
+   "interest_free_credit_days": 14,
+   "quantity_slabs": [
+    {
+     "from_mt": 5.0,
+     "to_mt": 10.0,
+     "rate_per_mt": 450.0
+    },
+    {
+     "from_mt": 10.0,
+     "to_mt": 25.0,
+     "rate_per_mt": 550.0
+    },
+    {
+     "from_mt": 25.0,
+     "to_mt": 50.0,
+     "rate_per_mt": 650.0
+    },
+    {
+     "from_mt": 50.0,
+     "to_mt": 75.0,
+     "rate_per_mt": 750.0
+    },
+    {
+     "from_mt": 75.0,
+     "to_mt": 100.0,
+     "rate_per_mt": 800.0
+    },
+    {
+     "from_mt": 100.0,
+     "to_mt": 200.0,
+     "rate_per_mt": 850.0
+    },
+    {
+     "from_mt": 200.0,
+     "to_mt": 300.0,
+     "rate_per_mt": 950.0
+    },
+    {
+     "from_mt": 300.0,
+     "to_mt": 400.0,
+     "rate_per_mt": 1050.0
+    },
+    {
+     "from_mt": 400.0,
+     "to_mt": null,
+     "rate_per_mt": 1150.0
+    }
+   ]
+  },
+  "HMEL": {
+   "cash_discount": 1100,
+   "early_payment_per_day": 80,
+   "early_payment_max_days": 13,
+   "interest_free_credit_days": 14,
+   "quantity_slabs": [
+    {
+     "from_mt": 5,
+     "to_mt": 10,
+     "rate_per_mt": 450
+    },
+    {
+     "from_mt": 10,
+     "to_mt": 25,
+     "rate_per_mt": 550
+    },
+    {
+     "from_mt": 25,
+     "to_mt": 50,
+     "rate_per_mt": 650
+    },
+    {
+     "from_mt": 50,
+     "to_mt": 75,
+     "rate_per_mt": 750
+    },
+    {
+     "from_mt": 75,
+     "to_mt": 100,
+     "rate_per_mt": 800
+    },
+    {
+     "from_mt": 100,
+     "to_mt": 200,
+     "rate_per_mt": 850
+    },
+    {
+     "from_mt": 200,
+     "to_mt": 300,
+     "rate_per_mt": 950
+    },
+    {
+     "from_mt": 300,
+     "to_mt": 400,
+     "rate_per_mt": 1050
+    },
+    {
+     "from_mt": 400,
+     "to_mt": 500,
+     "rate_per_mt": 1150
+    },
+    {
+     "from_mt": 500,
+     "to_mt": 750,
+     "rate_per_mt": 1250
+    },
+    {
+     "from_mt": 750,
+     "to_mt": null,
+     "rate_per_mt": 1500
+    }
+   ],
+   "metallocene_qd_cap": 1250
+  },
+  "OPaL": {
+   "cash_discount": 1100,
+   "cash_discount_note": "not available on ex-CSA warehouse sales",
+   "early_payment_per_day": 75,
+   "interest_free_credit_days": 14,
+   "quantity_slabs": [
+    {
+     "from_mt": 5,
+     "to_mt": 10,
+     "rate_per_mt": 450
+    },
+    {
+     "from_mt": 10,
+     "to_mt": 25,
+     "rate_per_mt": 550
+    },
+    {
+     "from_mt": 25,
+     "to_mt": 50,
+     "rate_per_mt": 650
+    },
+    {
+     "from_mt": 50,
+     "to_mt": 100,
+     "rate_per_mt": 750
+    },
+    {
+     "from_mt": 100,
+     "to_mt": 200,
+     "rate_per_mt": 850
+    },
+    {
+     "from_mt": 200,
+     "to_mt": 300,
+     "rate_per_mt": 950
+    },
+    {
+     "from_mt": 300,
+     "to_mt": 400,
+     "rate_per_mt": 1050
+    },
+    {
+     "from_mt": 400,
+     "to_mt": null,
+     "rate_per_mt": 1150
+    }
+   ]
+  },
+  "HPL": {
+   "cash_discount": 1100,
+   "early_payment_per_day": 75,
+   "interest_free_credit_days": 10,
+   "quantity_slabs": [
+    {
+     "from_mt": 5,
+     "to_mt": 10,
+     "rate_per_mt": 450
+    },
+    {
+     "from_mt": 10,
+     "to_mt": 30,
+     "rate_per_mt": 550
+    },
+    {
+     "from_mt": 30,
+     "to_mt": 60,
+     "rate_per_mt": 650
+    },
+    {
+     "from_mt": 60,
+     "to_mt": 100,
+     "rate_per_mt": 750
+    },
+    {
+     "from_mt": 100,
+     "to_mt": 200,
+     "rate_per_mt": 850
+    },
+    {
+     "from_mt": 200,
+     "to_mt": 300,
+     "rate_per_mt": 950
+    },
+    {
+     "from_mt": 300,
+     "to_mt": 400,
+     "rate_per_mt": 1050
+    },
+    {
+     "from_mt": 400,
+     "to_mt": null,
+     "rate_per_mt": 1150
+    }
+   ]
+  }
+ }
+}
