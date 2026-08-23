@@ -1,0 +1,3299 @@
+{
+  "hdpe": [
+    {
+      "gail_grade": "I50A250",
+      "section": "INJECTION MOULDING",
+      "process": "Sclairtech (Solution)",
+      "application": "Injection Moulding",
+      "characteristic": "Very High MFI (>25)",
+      "mfi": "~25",
+      "density": "0.950",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [],
+        "HPL": [
+          "M5025L"
+        ],
+        "IOCL": [],
+        "OPaL": [],
+        "HMEL": [
+          "M3056S"
+        ]
+      },
+      "international": [
+        "M300054"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R4"
+    },
+    {
+      "gail_grade": "I50A180",
+      "section": "INJECTION MOULDING",
+      "process": "Sclairtech (Solution)",
+      "application": "Injection Moulding",
+      "characteristic": "High MFI",
+      "mfi": "~18",
+      "density": "0.950",
+      "equivalents": {
+        "BCPL": [
+          "I52A180I"
+        ],
+        "RIL": [
+          "M60200"
+        ],
+        "HPL": [
+          "M5018L"
+        ],
+        "IOCL": [
+          "180M50"
+        ],
+        "OPaL": [
+          "M5220"
+        ],
+        "HMEL": [
+          "M2056S"
+        ]
+      },
+      "international": [
+        "17450N",
+        "HI1600",
+        "M200056",
+        "DMDA 8920 (ExxonMobil)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R5"
+    },
+    {
+      "gail_grade": "I56A200U",
+      "section": "INJECTION MOULDING",
+      "process": "Unipol (Gas)",
+      "application": "Injection Moulding",
+      "characteristic": "High MFI",
+      "mfi": "~20",
+      "density": "0.956",
+      "equivalents": {
+        "BCPL": [
+          "I52A180I"
+        ],
+        "RIL": [
+          "M60200"
+        ],
+        "HPL": [
+          "M5018L"
+        ],
+        "IOCL": [
+          "180M50"
+        ],
+        "OPaL": [
+          "M5220"
+        ],
+        "HMEL": [
+          "M2056S"
+        ]
+      },
+      "international": [
+        "17450N",
+        "HI1600",
+        "DMDA 8920 (ExxonMobil)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R5"
+    },
+    {
+      "gail_grade": "I60A080",
+      "section": "INJECTION MOULDING",
+      "process": "Sclairtech (Solution)",
+      "application": "Injection Moulding",
+      "characteristic": "Low MFI",
+      "mfi": "~8",
+      "density": "0.960",
+      "equivalents": {
+        "BCPL": [
+          "I58A080I"
+        ],
+        "RIL": [
+          "M60075"
+        ],
+        "HPL": [
+          "M6007L"
+        ],
+        "IOCL": [
+          "080M60"
+        ],
+        "OPaL": [
+          "M6008"
+        ],
+        "HMEL": [
+          "M0662D",
+          "M0861S"
+        ]
+      },
+      "international": [
+        "M80064",
+        "HMA025"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R6"
+    },
+    {
+      "gail_grade": "I62A080U",
+      "section": "INJECTION MOULDING",
+      "process": "Unipol (Gas)",
+      "application": "Injection Moulding",
+      "characteristic": "Low MFI",
+      "mfi": "~8",
+      "density": "0.962",
+      "equivalents": {
+        "BCPL": [
+          "I58A080I"
+        ],
+        "RIL": [
+          "M60075"
+        ],
+        "HPL": [
+          "M6007L"
+        ],
+        "IOCL": [
+          "080M60"
+        ],
+        "OPaL": [
+          "M6008"
+        ],
+        "HMEL": [
+          "M0662D",
+          "M0861S"
+        ]
+      },
+      "international": [
+        "M80064",
+        "HMA025"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R6"
+    },
+    {
+      "gail_grade": "I60U080",
+      "section": "INJECTION MOULDING",
+      "process": "Sclairtech (Solution)",
+      "application": "Injection Moulding",
+      "characteristic": "Low MFI, UV stabilised",
+      "mfi": "~8",
+      "density": "0.960",
+      "equivalents": {
+        "BCPL": [
+          "I58U080I"
+        ],
+        "RIL": [
+          "L60075"
+        ],
+        "HPL": [
+          "M6007LU"
+        ],
+        "IOCL": [
+          "080M60U"
+        ],
+        "OPaL": [
+          "M6008U"
+        ],
+        "HMEL": [
+          "M0861SU"
+        ]
+      },
+      "international": [
+        "KT10000 UE (LyondellBasell)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R7"
+    },
+    {
+      "gail_grade": "I62U080U",
+      "section": "INJECTION MOULDING",
+      "process": "Unipol (Gas)",
+      "application": "Injection Moulding",
+      "characteristic": "Low MFI, UV stabilised",
+      "mfi": "~8",
+      "density": "0.962",
+      "equivalents": {
+        "BCPL": [
+          "I58U080I"
+        ],
+        "RIL": [
+          "L60075"
+        ],
+        "HPL": [
+          "M6007LU"
+        ],
+        "IOCL": [
+          "080M60U"
+        ],
+        "OPaL": [
+          "M6008U"
+        ],
+        "HMEL": [
+          "M0861SU"
+        ]
+      },
+      "international": [
+        "KT10000 UE (LyondellBasell)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R7"
+    },
+    {
+      "gail_grade": "B56A003A",
+      "section": "BLOW MOULDING",
+      "process": "Sclairtech (Solution)",
+      "application": "Blow Moulding",
+      "characteristic": "General purpose, <5L",
+      "mfi": "~0.3",
+      "density": "0.956",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "B56003"
+        ],
+        "HPL": [],
+        "IOCL": [],
+        "OPaL": [],
+        "HMEL": [
+          "B0155D"
+        ]
+      },
+      "international": [
+        "5502",
+        "Q5502 (SABIC)",
+        "H5840B (Hanwha)",
+        "HB0035",
+        "DMDA 6200 (ExxonMobil)",
+        "EMDA 6200"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R9"
+    },
+    {
+      "gail_grade": "B52A003",
+      "section": "BLOW MOULDING",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Blow Moulding",
+      "characteristic": "General purpose, <5L",
+      "mfi": "~0.3",
+      "density": "0.952",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "54GB012",
+          "B56003"
+        ],
+        "HPL": [
+          "E5201",
+          "E5201S"
+        ],
+        "IOCL": [
+          "012DB54"
+        ],
+        "OPaL": [
+          "B5004"
+        ],
+        "HMEL": [
+          "B0155D"
+        ]
+      },
+      "international": [
+        "5502",
+        "Q5502 (SABIC)",
+        "EMDA 6200"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R9"
+    },
+    {
+      "gail_grade": "B52A003NA",
+      "section": "BLOW MOULDING",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Blow Moulding",
+      "characteristic": "General purpose, <5L (NA additive)",
+      "mfi": "~0.3",
+      "density": "0.952",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "54GB012",
+          "B56003"
+        ],
+        "HPL": [
+          "E5201",
+          "E5201S"
+        ],
+        "IOCL": [
+          "012DB54"
+        ],
+        "OPaL": [
+          "B5004"
+        ],
+        "HMEL": [
+          "B0155D"
+        ]
+      },
+      "international": [
+        "5502",
+        "Q5502 (SABIC)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R9"
+    },
+    {
+      "gail_grade": "B53A003U",
+      "section": "BLOW MOULDING",
+      "process": "Unipol (Gas)",
+      "application": "Blow Moulding",
+      "characteristic": "General purpose, <5L",
+      "mfi": "~0.3",
+      "density": "0.953",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "B5502"
+        ],
+        "HPL": [
+          "E5201",
+          "E5201S"
+        ],
+        "IOCL": [
+          "012DB54"
+        ],
+        "OPaL": [
+          "B5004"
+        ],
+        "HMEL": [
+          "B0155D"
+        ]
+      },
+      "international": [
+        "5502",
+        "Q5502 (SABIC)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R9"
+    },
+    {
+      "gail_grade": "B63A003",
+      "section": "BLOW MOULDING",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Blow Moulding",
+      "characteristic": "5–15 litres",
+      "mfi": "~0.3",
+      "density": "0.963",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "B60003"
+        ],
+        "HPL": [
+          "B6401"
+        ],
+        "IOCL": [],
+        "OPaL": [
+          "B6003"
+        ],
+        "HMEL": [
+          "B0158D"
+        ]
+      },
+      "international": [],
+      "confidence": "H",
+      "source": "Excel-HDPE R11"
+    },
+    {
+      "gail_grade": "B55HM0003",
+      "section": "BLOW MOULDING",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Blow Moulding",
+      "characteristic": "15–120L / Open-top 210L",
+      "mfi": "~0.03",
+      "density": "0.955",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "52GB003",
+          "52GB007"
+        ],
+        "HPL": [
+          "B5500",
+          "B5010"
+        ],
+        "IOCL": [
+          "003DB52",
+          "001DB50"
+        ],
+        "OPaL": [
+          "B55H03",
+          "B55H02"
+        ],
+        "HMEL": [
+          "B0148D",
+          "B0053D"
+        ]
+      },
+      "international": [
+        "B5411",
+        "HXM50100P",
+        "HB111R",
+        "EMDA6147"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R12"
+    },
+    {
+      "gail_grade": "E52A003",
+      "section": "PIPE",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Pipe",
+      "characteristic": "PE-63 application",
+      "mfi": "~0.3",
+      "density": "0.952",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "46GP009"
+        ],
+        "HPL": [
+          "P5200"
+        ],
+        "IOCL": [
+          "010DP45"
+        ],
+        "OPaL": [
+          "P5002"
+        ],
+        "HMEL": [
+          "P0148D",
+          "P0142S"
+        ]
+      },
+      "international": [
+        "HE3460 BK",
+        "HE1440 BK (Borouge)",
+        "P4808N",
+        "P952 (LyondellBasell)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R14"
+    },
+    {
+      "gail_grade": "P46A010U",
+      "section": "PIPE",
+      "process": "Unipol (Gas)",
+      "application": "Pipe",
+      "characteristic": "PE-63 application",
+      "mfi": "~1.0",
+      "density": "0.946",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "P4609"
+        ],
+        "HPL": [
+          "P5200"
+        ],
+        "IOCL": [
+          "010DP45"
+        ],
+        "OPaL": [
+          "P5002"
+        ],
+        "HMEL": [
+          "P0142S"
+        ]
+      },
+      "international": [
+        "HE3460 BK",
+        "P4808N"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R14"
+    },
+    {
+      "gail_grade": "E52U003",
+      "section": "PIPE",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Pipe",
+      "characteristic": "PE-63, UV stabilised (OFC duct)",
+      "mfi": "~0.3",
+      "density": "0.952",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "46GP009UV"
+        ],
+        "HPL": [
+          "P5200UV"
+        ],
+        "IOCL": [
+          "010DP45U"
+        ],
+        "OPaL": [],
+        "HMEL": [
+          "P0147DU"
+        ]
+      },
+      "international": [],
+      "confidence": "H",
+      "source": "Excel-HDPE R15"
+    },
+    {
+      "gail_grade": "P54A001",
+      "section": "PIPE",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Pipe",
+      "characteristic": "PE-80 application",
+      "mfi": "~0.1",
+      "density": "0.954",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "45GP004"
+        ],
+        "HPL": [
+          "P5100"
+        ],
+        "IOCL": [
+          "004DP44"
+        ],
+        "OPaL": [
+          "P51H10"
+        ],
+        "HMEL": [
+          "P0148D"
+        ]
+      },
+      "international": [],
+      "confidence": "H",
+      "source": "Excel-HDPE R16"
+    },
+    {
+      "gail_grade": "P52A003",
+      "section": "PIPE",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Pipe",
+      "characteristic": "PE-100 application",
+      "mfi": "~0.3",
+      "density": "0.952",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "46GP003"
+        ],
+        "HPL": [
+          "P5300"
+        ],
+        "IOCL": [
+          "002DP48"
+        ],
+        "OPaL": [
+          "P50H03"
+        ],
+        "HMEL": [
+          "P0049D"
+        ]
+      },
+      "international": [
+        "P6006N (LyondellBasell)",
+        "L4904",
+        "3490",
+        "3492 (Borouge)",
+        "CRP100 BK/OR",
+        "TUB121 BK"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R17"
+    },
+    {
+      "gail_grade": "E45A003",
+      "section": "FILM",
+      "process": "Sclairtech (Solution)",
+      "application": "Film",
+      "characteristic": "HD Film",
+      "mfi": "~0.3",
+      "density": "0.945",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "F46003",
+          "F4600",
+          "F46003E"
+        ],
+        "HPL": [
+          "HDT-6"
+        ],
+        "IOCL": [
+          "003F46"
+        ],
+        "OPaL": [],
+        "HMEL": [
+          "F0146D",
+          "F0153S"
+        ]
+      },
+      "international": [
+        "HTA 108 (Borouge/Borealis)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R18"
+    },
+    {
+      "gail_grade": "F55HM0003",
+      "section": "FILM",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Film",
+      "characteristic": "HM Film (High Molecular Weight)",
+      "mfi": "~0.03",
+      "density": "0.955",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "F56003"
+        ],
+        "HPL": [
+          "F5400"
+        ],
+        "IOCL": [
+          "002DF50",
+          "003DF49"
+        ],
+        "OPaL": [
+          "F52H04"
+        ],
+        "HMEL": [
+          "F0050D"
+        ]
+      },
+      "international": [
+        "DGDZ6095",
+        "DGDZ6097 (LyondellBasell)",
+        "EGDA6888",
+        "F1",
+        "FJ00952",
+        "HHM TR 144",
+        "HTA001HD5",
+        "L5005"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R19"
+    },
+    {
+      "gail_grade": "W50A009",
+      "section": "RAFFIA / MONOFILAMENT",
+      "process": "Sclairtech (Solution)",
+      "application": "Raffia",
+      "characteristic": "High tenacity tape (fertiliser bags)",
+      "mfi": "~0.9",
+      "density": "0.950",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "E52009"
+        ],
+        "HPL": [
+          "R5801"
+        ],
+        "IOCL": [
+          "010E52"
+        ],
+        "OPaL": [],
+        "HMEL": [
+          "R0151D"
+        ]
+      },
+      "international": [],
+      "confidence": "H",
+      "source": "Excel-HDPE R25"
+    },
+    {
+      "gail_grade": "T50A010",
+      "section": "RAFFIA / MONOFILAMENT",
+      "process": "Sclairtech (Solution)",
+      "application": "Raffia / MF",
+      "characteristic": "Medium tenacity tape (tarpaulin) / yarn",
+      "mfi": "~1.0",
+      "density": "0.950",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "EE20",
+          "HD53EA010"
+        ],
+        "HPL": [
+          "HDT-9"
+        ],
+        "IOCL": [
+          "012E50"
+        ],
+        "OPaL": [
+          "Y5710"
+        ],
+        "HMEL": [
+          "R0154S"
+        ]
+      },
+      "international": [
+        "GF 7750 M2"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R26–27"
+    },
+    {
+      "gail_grade": "Y50A010U",
+      "section": "RAFFIA / MONOFILAMENT",
+      "process": "Unipol (Gas)",
+      "application": "Raffia / MF",
+      "characteristic": "Medium tenacity tape, UV / yarn",
+      "mfi": "~1.0",
+      "density": "0.950",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "EE20",
+          "HD53EA010"
+        ],
+        "HPL": [
+          "HDT-9"
+        ],
+        "IOCL": [
+          "012E50"
+        ],
+        "OPaL": [
+          "Y5710"
+        ],
+        "HMEL": [
+          "R0154S"
+        ]
+      },
+      "international": [
+        "GF 7750 M2"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R26–27"
+    },
+    {
+      "gail_grade": "W52A009",
+      "section": "RAFFIA / MONOFILAMENT",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "MF (Monofilament)",
+      "characteristic": "Medium-high tenacity yarn",
+      "mfi": "~0.9",
+      "density": "0.952",
+      "equivalents": {
+        "BCPL": [
+          "W54A009I"
+        ],
+        "RIL": [
+          "HD55EF010"
+        ],
+        "HPL": [
+          "HDT-10",
+          "HDT-10S"
+        ],
+        "IOCL": [
+          "012E50"
+        ],
+        "OPaL": [
+          "R5410"
+        ],
+        "HMEL": [
+          "Y0150S"
+        ]
+      },
+      "international": [
+        "SM5508",
+        "5000S"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R27"
+    },
+    {
+      "gail_grade": "W52ASR009",
+      "section": "RAFFIA / MONOFILAMENT",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "MF (Monofilament)",
+      "characteristic": "Medium-high tenacity yarn (SR additive)",
+      "mfi": "~0.9",
+      "density": "0.952",
+      "equivalents": {
+        "BCPL": [
+          "W54A009I"
+        ],
+        "RIL": [
+          "HD55EF010"
+        ],
+        "HPL": [
+          "HDT-10",
+          "HDT-10S"
+        ],
+        "IOCL": [
+          "012E50"
+        ],
+        "OPaL": [
+          "R5410"
+        ],
+        "HMEL": [
+          "Y0150S"
+        ]
+      },
+      "international": [
+        "SM5508",
+        "5000S"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R27"
+    },
+    {
+      "gail_grade": "W55A004",
+      "section": "RAFFIA / MONOFILAMENT",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "MF (Monofilament)",
+      "characteristic": "Medium-high tenacity yarn",
+      "mfi": "~0.4",
+      "density": "0.955",
+      "equivalents": {
+        "BCPL": [
+          "W54A009I"
+        ],
+        "RIL": [
+          "HD55EF010"
+        ],
+        "HPL": [
+          "HDT-10",
+          "HDT-10S"
+        ],
+        "IOCL": [
+          "012E50"
+        ],
+        "OPaL": [
+          "R5410"
+        ],
+        "HMEL": [
+          "Y0150S"
+        ]
+      },
+      "international": [
+        "SM5508",
+        "5000S"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R27"
+    }
+  ],
+  "lldpe": [
+    {
+      "gail_grade": "F20S009",
+      "section": "FILM — C4 LLDPE",
+      "process": "Sclairtech (Solution)",
+      "application": "Film",
+      "characteristic": "1 MFI C4, Slip",
+      "mfi": "~0.9",
+      "density": "0.920",
+      "equivalents": {
+        "BCPL": [
+          "F20S010I"
+        ],
+        "RIL": [
+          "F19010"
+        ],
+        "HPL": [
+          "71501S"
+        ],
+        "IOCL": [
+          "010F18S"
+        ],
+        "OPaL": [
+          "F2001S"
+        ],
+        "HMEL": [
+          "F0120L"
+        ]
+      },
+      "international": [
+        "118WJ",
+        "1210P",
+        "DFDC7080 (Dow)",
+        "EFDC7087 (ExxonMobil)",
+        "F2111BS",
+        "FC21HN",
+        "HF1810P",
+        "LL1001BU (LyondellBasell)",
+        "Q1018M",
+        "Q1018H (SABIC)",
+        "LL7410D",
+        "Hanwha 3120"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R4"
+    },
+    {
+      "gail_grade": "F18S010U",
+      "section": "FILM — C4 LLDPE",
+      "process": "Unipol (Gas)",
+      "application": "Film",
+      "characteristic": "1 MFI C4, Slip",
+      "mfi": "~1.0",
+      "density": "0.918",
+      "equivalents": {
+        "BCPL": [
+          "F20S010I"
+        ],
+        "RIL": [
+          "JF19010"
+        ],
+        "HPL": [
+          "71501S"
+        ],
+        "IOCL": [
+          "010F18S"
+        ],
+        "OPaL": [
+          "F2001S"
+        ],
+        "HMEL": [
+          "F0120L"
+        ]
+      },
+      "international": [
+        "118WJ",
+        "1210P",
+        "Q1018M",
+        "Q1018H (SABIC)",
+        "Hanwha 3120"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R4"
+    },
+    {
+      "gail_grade": "E20AN009",
+      "section": "FILM — C4 LLDPE",
+      "process": "Sclairtech (Solution)",
+      "application": "Film",
+      "characteristic": "1 MFI C4, Non-slip",
+      "mfi": "~0.9",
+      "density": "0.920",
+      "equivalents": {
+        "BCPL": [
+          "F20A010I"
+        ],
+        "RIL": [
+          "F18010"
+        ],
+        "HPL": [
+          "71601W"
+        ],
+        "IOCL": [
+          "010F18A"
+        ],
+        "OPaL": [
+          "F2001A"
+        ],
+        "HMEL": [
+          "F0118L"
+        ]
+      },
+      "international": [
+        "118NJ",
+        "LL1001AV (LyondellBasell)",
+        "1211P",
+        "Q1018N (SABIC)"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R5"
+    },
+    {
+      "gail_grade": "F18A010U",
+      "section": "FILM — C4 LLDPE",
+      "process": "Unipol (Gas)",
+      "application": "Film",
+      "characteristic": "1 MFI C4, Non-slip",
+      "mfi": "~1.0",
+      "density": "0.918",
+      "equivalents": {
+        "BCPL": [
+          "F20A010I"
+        ],
+        "RIL": [
+          "JF18010"
+        ],
+        "HPL": [
+          "71601W"
+        ],
+        "IOCL": [
+          "010F18A"
+        ],
+        "OPaL": [
+          "F2001A"
+        ],
+        "HMEL": [
+          "F0118L"
+        ]
+      },
+      "international": [
+        "118NJ",
+        "LL1001AV (LyondellBasell)",
+        "Q1018N (SABIC)"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R5"
+    },
+    {
+      "gail_grade": "F20S020",
+      "section": "FILM — C4 LLDPE",
+      "process": "Sclairtech (Solution)",
+      "application": "Film",
+      "characteristic": "2 MFI C4, Slip",
+      "mfi": "~2.0",
+      "density": "0.920",
+      "equivalents": {
+        "BCPL": [
+          "F22S025I"
+        ],
+        "RIL": [],
+        "HPL": [
+          "71602S"
+        ],
+        "IOCL": [
+          "020F18S"
+        ],
+        "OPaL": [
+          "F2002S"
+        ],
+        "HMEL": []
+      },
+      "international": [
+        "218WJ",
+        "Q2018H (SABIC)"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R6"
+    },
+    {
+      "gail_grade": "F18S020U",
+      "section": "FILM — C4 LLDPE",
+      "process": "Unipol (Gas)",
+      "application": "Film",
+      "characteristic": "2 MFI C4, Slip",
+      "mfi": "~2.0",
+      "density": "0.918",
+      "equivalents": {
+        "BCPL": [
+          "F22S025I"
+        ],
+        "RIL": [
+          "JF19020"
+        ],
+        "HPL": [
+          "71602S"
+        ],
+        "IOCL": [
+          "020F18S"
+        ],
+        "OPaL": [
+          "F2002S"
+        ],
+        "HMEL": []
+      },
+      "international": [
+        "218WJ",
+        "Q2018H (SABIC)"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R6"
+    },
+    {
+      "gail_grade": "F20A020",
+      "section": "FILM — C4 LLDPE",
+      "process": "Sclairtech (Solution)",
+      "application": "Film",
+      "characteristic": "2 MFI C4, Non-slip",
+      "mfi": "~2.0",
+      "density": "0.920",
+      "equivalents": {
+        "BCPL": [
+          "F22A025I"
+        ],
+        "RIL": [],
+        "HPL": [
+          "71602W"
+        ],
+        "IOCL": [
+          "020F18A"
+        ],
+        "OPaL": [
+          "F2002A"
+        ],
+        "HMEL": [
+          "F0218L"
+        ]
+      },
+      "international": [
+        "218NJ",
+        "Q2018N (SABIC)",
+        "1221P"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R7"
+    },
+    {
+      "gail_grade": "F18A020U",
+      "section": "FILM — C4 LLDPE",
+      "process": "Unipol (Gas)",
+      "application": "Film",
+      "characteristic": "2 MFI C4, Non-slip",
+      "mfi": "~2.0",
+      "density": "0.918",
+      "equivalents": {
+        "BCPL": [
+          "F22A025I"
+        ],
+        "RIL": [
+          "JF18020"
+        ],
+        "HPL": [
+          "71602W"
+        ],
+        "IOCL": [
+          "020F18A"
+        ],
+        "OPaL": [
+          "F2002A"
+        ],
+        "HMEL": [
+          "F0218L"
+        ]
+      },
+      "international": [
+        "218NJ",
+        "Q2018N (SABIC)",
+        "1221P"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R7"
+    },
+    {
+      "gail_grade": "MF18S010U",
+      "section": "FILM — METALLOCENE LLDPE (mLLDPE)",
+      "process": "Unipol-Gas (mLLDPE)",
+      "application": "Film",
+      "characteristic": "1 MFI metallocene, Slip",
+      "mfi": "~1.0",
+      "density": "0.918",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [],
+        "HPL": [],
+        "IOCL": [],
+        "OPaL": [],
+        "HMEL": [
+          "F0120LM"
+        ]
+      },
+      "international": [
+        "1018MK",
+        "1018MA",
+        "SP1510 (LyondellBasell)",
+        "Dow Elite series",
+        "ExxonMobil Enable series",
+        "Borouge Anteo series"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R9"
+    },
+    {
+      "gail_grade": "MF18A010U",
+      "section": "FILM — METALLOCENE LLDPE (mLLDPE)",
+      "process": "Unipol-Gas (mLLDPE)",
+      "application": "Film",
+      "characteristic": "1 MFI metallocene, Non-slip",
+      "mfi": "~1.0",
+      "density": "0.918",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [],
+        "HPL": [],
+        "IOCL": [],
+        "OPaL": [],
+        "HMEL": [
+          "F0118LM"
+        ]
+      },
+      "international": [
+        "1018MK",
+        "1018MA",
+        "Dow Elite series",
+        "ExxonMobil Enable series",
+        "Borouge Anteo series"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R9"
+    },
+    {
+      "gail_grade": "R35A042",
+      "section": "ROTOMOULDING",
+      "process": "Sclairtech (Solution)",
+      "application": "Rotomoulding",
+      "characteristic": "C4, Non-UV",
+      "mfi": "~4.2",
+      "density": "0.935",
+      "equivalents": {
+        "BCPL": [
+          "R38A040I"
+        ],
+        "RIL": [
+          "R35042",
+          "LL36RA045"
+        ],
+        "HPL": [
+          "73005T",
+          "73204T"
+        ],
+        "IOCL": [
+          "042R35A"
+        ],
+        "OPaL": [
+          "T3804"
+        ],
+        "HMEL": [
+          "R0536L"
+        ]
+      },
+      "international": [
+        "R50035"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R12"
+    },
+    {
+      "gail_grade": "R36A050",
+      "section": "ROTOMOULDING",
+      "process": "Unipol (Gas)",
+      "application": "Rotomoulding",
+      "characteristic": "C4, Non-UV",
+      "mfi": "~5.0",
+      "density": "0.936",
+      "equivalents": {
+        "BCPL": [
+          "R38A040I"
+        ],
+        "RIL": [
+          "JLL36RA045"
+        ],
+        "HPL": [
+          "73005T",
+          "73204T"
+        ],
+        "IOCL": [
+          "042R35A"
+        ],
+        "OPaL": [
+          "T3804"
+        ],
+        "HMEL": [
+          "R0536L"
+        ]
+      },
+      "international": [
+        "R50035"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R12"
+    },
+    {
+      "gail_grade": "R35U042",
+      "section": "ROTOMOULDING",
+      "process": "Sclairtech (Solution)",
+      "application": "Rotomoulding",
+      "characteristic": "C4, UV stabilised",
+      "mfi": "~4.2",
+      "density": "0.935",
+      "equivalents": {
+        "BCPL": [
+          "R38U040I"
+        ],
+        "RIL": [
+          "LL36RA045UV"
+        ],
+        "HPL": [
+          "73005TU",
+          "73204TU"
+        ],
+        "IOCL": [
+          "042R35U"
+        ],
+        "OPaL": [
+          "T3804U"
+        ],
+        "HMEL": [
+          "R0536LU"
+        ]
+      },
+      "international": [
+        "R50035E"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R13"
+    },
+    {
+      "gail_grade": "R36U050U",
+      "section": "ROTOMOULDING",
+      "process": "Unipol (Gas)",
+      "application": "Rotomoulding",
+      "characteristic": "C4, UV stabilised",
+      "mfi": "~5.0",
+      "density": "0.936",
+      "equivalents": {
+        "BCPL": [
+          "R38U040I"
+        ],
+        "RIL": [
+          "JLL36RA045UV"
+        ],
+        "HPL": [
+          "73005TU",
+          "73204TU"
+        ],
+        "IOCL": [
+          "042R35U"
+        ],
+        "OPaL": [
+          "T3804U"
+        ],
+        "HMEL": [
+          "R0536LU"
+        ]
+      },
+      "international": [
+        "R50035E"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R13"
+    },
+    {
+      "gail_grade": "E36A060",
+      "section": "EXTRUSION COATING / WIRE & CABLE",
+      "process": "Sclairtech (Solution)",
+      "application": "Extrusion Coating",
+      "characteristic": "Coating / lamination",
+      "mfi": "~6.0",
+      "density": "0.936",
+      "equivalents": {
+        "BCPL": [
+          "E30A060I"
+        ],
+        "RIL": [
+          "E24065"
+        ],
+        "HPL": [
+          "72307E"
+        ],
+        "IOCL": [
+          "065E24A"
+        ],
+        "OPaL": [
+          "E2507"
+        ],
+        "HMEL": [
+          "E0725L"
+        ]
+      },
+      "international": [
+        "NA204000 (LyondellBasell)"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R17"
+    },
+    {
+      "gail_grade": "E24A070U",
+      "section": "EXTRUSION COATING / WIRE & CABLE",
+      "process": "Unipol (Gas)",
+      "application": "Extrusion Coating / Wire & Cable",
+      "characteristic": "Coating · lamination · W&C XLPE base resin",
+      "mfi": "~7.0",
+      "density": "0.924",
+      "equivalents": {
+        "BCPL": [
+          "E30A060I"
+        ],
+        "RIL": [
+          "JE24065",
+          "X24065",
+          "LL24FA030"
+        ],
+        "HPL": [
+          "72307E"
+        ],
+        "IOCL": [
+          "065E24A"
+        ],
+        "OPaL": [
+          "E2507"
+        ],
+        "HMEL": [
+          "E0725L",
+          "W0426L"
+        ]
+      },
+      "international": [
+        "NA204000",
+        "ll6101XR (LyondellBasell)"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R17, R23"
+    },
+    {
+      "gail_grade": "I26A500U",
+      "section": "INJECTION MOULDING / MASTERBATCH",
+      "process": "Unipol (Gas)",
+      "application": "Injection / Masterbatch",
+      "characteristic": "50 MFI",
+      "mfi": "~50",
+      "density": "0.926",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "M26500"
+        ],
+        "HPL": [],
+        "IOCL": [
+          "500M24A"
+        ],
+        "OPaL": [
+          "M2550"
+        ],
+        "HMEL": [
+          "M5026L"
+        ]
+      },
+      "international": [
+        "LL6201XR",
+        "M500026",
+        "MG500026",
+        "UI2650"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R18"
+    },
+    {
+      "gail_grade": "D22S010",
+      "section": "PIPE",
+      "process": "Sclairtech (Solution)",
+      "application": "Pipe (Drip irrigation)",
+      "characteristic": "Drip pipe",
+      "mfi": "~1.0",
+      "density": "0.922",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "E19010",
+          "JD22010"
+        ],
+        "HPL": [
+          "71601D"
+        ],
+        "IOCL": [
+          "010L22S"
+        ],
+        "OPaL": [],
+        "HMEL": [
+          "D0120L"
+        ]
+      },
+      "international": [
+        "LE 1711",
+        "LE2270 (LyondellBasell)"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R21"
+    }
+  ],
+  "gaps": [
+    {
+      "polymer": "HDPE",
+      "sector": "Injection Moulding",
+      "characteristic": "Very Low MFI (<5 g/10min)",
+      "ril": [],
+      "others": "HPL: M5005L · M5002L  |  IOCL: 020DM54  |  HMEL: M0250S",
+      "international": [
+        "Borepure MB6562",
+        "MB5568",
+        "MB5569 (Borouge)",
+        "SUPERSTRESS CAP602S2",
+        "SX002JA"
+      ]
+    },
+    {
+      "polymer": "HDPE",
+      "sector": "Blow Moulding",
+      "characteristic": "Low density (<5L)",
+      "ril": [
+        "F46003",
+        "F4600"
+      ],
+      "others": "IOCL: 003B46",
+      "international": []
+    },
+    {
+      "polymer": "HDPE",
+      "sector": "Blow Moulding",
+      "characteristic": "220L L-ring drum",
+      "ril": [
+        "52GB002"
+      ],
+      "others": "IOCL: 001DB50  |  HMEL: B0053D",
+      "international": [
+        "QTR 571 (QAPCO)",
+        "HXM TR 571",
+        "7501",
+        "56020XSP",
+        "5431Z"
+      ]
+    },
+    {
+      "polymer": "HDPE",
+      "sector": "Pipe Coating",
+      "characteristic": "Black compound",
+      "ril": [],
+      "others": "—",
+      "international": [
+        "HE3450",
+        "HE7405",
+        "HE3447 (Borouge/Borealis)"
+      ]
+    },
+    {
+      "polymer": "HDPE",
+      "sector": "Pipe Coating",
+      "characteristic": "Base resin",
+      "ril": [],
+      "others": "IOCL: 004P41",
+      "international": []
+    },
+    {
+      "polymer": "HDPE",
+      "sector": "Wire & Cable",
+      "characteristic": "Base resin — sheathing compound",
+      "ril": [
+        "S42005",
+        "S46005"
+      ],
+      "others": "IOCL: 006C45",
+      "international": [
+        "HE6062",
+        "6081",
+        "6069",
+        "6068 (Borouge)",
+        "H2001WC"
+      ]
+    },
+    {
+      "polymer": "HDPE",
+      "sector": "Wire & Cable",
+      "characteristic": "Base resin — insulation compound",
+      "ril": [],
+      "others": "IOCL: 006W43",
+      "international": [
+        "BORSTAR HE3364 (Borouge)",
+        "CHNA 8380"
+      ]
+    },
+    {
+      "polymer": "LLDPE",
+      "sector": "Film",
+      "characteristic": "C8-based (1 MFI, Slip/Non-slip)",
+      "ril": [
+        "O19010",
+        "O21010"
+      ],
+      "others": "IOCL: 8010F18S · 8010F18A",
+      "international": [
+        "Dow Dowlex series"
+      ]
+    },
+    {
+      "polymer": "LLDPE",
+      "sector": "Film",
+      "characteristic": "3–4 MFI C4, Non-slip",
+      "ril": [
+        "F18030"
+      ],
+      "others": "OPaL: F2003A",
+      "international": [
+        "Cefor 1050P",
+        "F2231",
+        "320BJ"
+      ]
+    },
+    {
+      "polymer": "LLDPE",
+      "sector": "Film",
+      "characteristic": "3–4 MFI C8, Slip/Non-slip",
+      "ril": [
+        "O18030"
+      ],
+      "others": "—",
+      "international": [
+        "Dow 2606GC"
+      ]
+    },
+    {
+      "polymer": "LLDPE",
+      "sector": "Rotomoulding",
+      "characteristic": "C8-based",
+      "ril": [
+        "O35042"
+      ],
+      "others": "—",
+      "international": [
+        "M3504DXP",
+        "M50BKM1P"
+      ]
+    },
+    {
+      "polymer": "LLDPE",
+      "sector": "Rotomoulding",
+      "characteristic": "XLPE compound",
+      "ril": [],
+      "others": "—",
+      "international": [
+        "REVOLVE 6329U"
+      ]
+    },
+    {
+      "polymer": "LLDPE",
+      "sector": "Rotomoulding",
+      "characteristic": "Metallocene-based",
+      "ril": [],
+      "others": "—",
+      "international": [
+        "M3581UV",
+        "M4041UV"
+      ]
+    },
+    {
+      "polymer": "LLDPE",
+      "sector": "Injection / Masterbatch",
+      "characteristic": "30 MFI",
+      "ril": [
+        "M24300"
+      ],
+      "others": "IOCL: 300M24A  |  OPaL: M2525",
+      "international": []
+    },
+    {
+      "polymer": "LLDPE",
+      "sector": "Injection / Masterbatch",
+      "characteristic": "20 MFI",
+      "ril": [
+        "M24200"
+      ],
+      "others": "HMEL: M2024L",
+      "international": [
+        "LL 6100.17",
+        "7635 Hanwha",
+        "M200024"
+      ]
+    },
+    {
+      "polymer": "LLDPE",
+      "sector": "Wire & Cable",
+      "characteristic": "XLPE compound (black)",
+      "ril": [
+        "LL24FA030"
+      ],
+      "others": "—",
+      "international": [
+        "4108",
+        "GP 6059 BK CPD"
+      ]
+    }
+  ],
+  "provenance": {
+    "Cross-reference Excel last updated": "31-Dec-2023",
+    "HPL price list effective": "18-Dec-2025",
+    "HMEL price list effective": "18-Dec-2025",
+    "OPaL price list effective": "18-Dec-2025",
+    "RIL price list effective": "01-Jun-2026",
+    "IOCL price list effective": "01-Jun-2026",
+    "BCPL price list": "Not supplied",
+    "Total GAIL HDPE grades identified": "26",
+    "Total GAIL LLDPE grades identified": "18",
+    "Total GAIL grades (HDPE + LLDPE)": "44",
+    "GAIL LDPE grades": "0",
+    "GAIL grades with ≥1 domestic competitor mapped": "44 / 44  (100%)",
+    "GAIL grades with ≥1 international grade mapped": "38 / 44  (86%)",
+    "Truly unmatched GAIL grades (zero equivalents)": "0",
+    "Application sectors with NO GAIL grade (portfolio gaps)": "14",
+    "High confidence (H) — direct Excel cross-ref": "~40 grades",
+    "Medium confidence (M) — HMEL code changes 2023→2025": "~4 grades",
+    "Low confidence (L)": "0",
+    "Domestic Indian producers": "6",
+    "International brands identified": "8+",
+    "GAIL (HDPE)": "3",
+    "GAIL (LLDPE)": "2",
+    "RIL (HDPE)": "3",
+    "RIL (LLDPE)": "3",
+    "HPL (HDPE)": "2",
+    "IOCL (HDPE/LLDPE)": "2",
+    "OPaL (HDPE)": "2",
+    "HMEL (HDPE)": "2",
+    "HMEL (LLDPE)": "1",
+    "BCPL (HDPE/LLDPE)": "1"
+  },
+  "index": {
+    "I50A250": {
+      "gail_grade": "I50A250",
+      "section": "INJECTION MOULDING",
+      "process": "Sclairtech (Solution)",
+      "application": "Injection Moulding",
+      "characteristic": "Very High MFI (>25)",
+      "mfi": "~25",
+      "density": "0.950",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [],
+        "HPL": [
+          "M5025L"
+        ],
+        "IOCL": [],
+        "OPaL": [],
+        "HMEL": [
+          "M3056S"
+        ]
+      },
+      "international": [
+        "M300054"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R4",
+      "polymer": "HDPE"
+    },
+    "I50A180": {
+      "gail_grade": "I50A180",
+      "section": "INJECTION MOULDING",
+      "process": "Sclairtech (Solution)",
+      "application": "Injection Moulding",
+      "characteristic": "High MFI",
+      "mfi": "~18",
+      "density": "0.950",
+      "equivalents": {
+        "BCPL": [
+          "I52A180I"
+        ],
+        "RIL": [
+          "M60200"
+        ],
+        "HPL": [
+          "M5018L"
+        ],
+        "IOCL": [
+          "180M50"
+        ],
+        "OPaL": [
+          "M5220"
+        ],
+        "HMEL": [
+          "M2056S"
+        ]
+      },
+      "international": [
+        "17450N",
+        "HI1600",
+        "M200056",
+        "DMDA 8920 (ExxonMobil)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R5",
+      "polymer": "HDPE"
+    },
+    "I56A200U": {
+      "gail_grade": "I56A200U",
+      "section": "INJECTION MOULDING",
+      "process": "Unipol (Gas)",
+      "application": "Injection Moulding",
+      "characteristic": "High MFI",
+      "mfi": "~20",
+      "density": "0.956",
+      "equivalents": {
+        "BCPL": [
+          "I52A180I"
+        ],
+        "RIL": [
+          "M60200"
+        ],
+        "HPL": [
+          "M5018L"
+        ],
+        "IOCL": [
+          "180M50"
+        ],
+        "OPaL": [
+          "M5220"
+        ],
+        "HMEL": [
+          "M2056S"
+        ]
+      },
+      "international": [
+        "17450N",
+        "HI1600",
+        "DMDA 8920 (ExxonMobil)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R5",
+      "polymer": "HDPE"
+    },
+    "I60A080": {
+      "gail_grade": "I60A080",
+      "section": "INJECTION MOULDING",
+      "process": "Sclairtech (Solution)",
+      "application": "Injection Moulding",
+      "characteristic": "Low MFI",
+      "mfi": "~8",
+      "density": "0.960",
+      "equivalents": {
+        "BCPL": [
+          "I58A080I"
+        ],
+        "RIL": [
+          "M60075"
+        ],
+        "HPL": [
+          "M6007L"
+        ],
+        "IOCL": [
+          "080M60"
+        ],
+        "OPaL": [
+          "M6008"
+        ],
+        "HMEL": [
+          "M0662D",
+          "M0861S"
+        ]
+      },
+      "international": [
+        "M80064",
+        "HMA025"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R6",
+      "polymer": "HDPE"
+    },
+    "I62A080U": {
+      "gail_grade": "I62A080U",
+      "section": "INJECTION MOULDING",
+      "process": "Unipol (Gas)",
+      "application": "Injection Moulding",
+      "characteristic": "Low MFI",
+      "mfi": "~8",
+      "density": "0.962",
+      "equivalents": {
+        "BCPL": [
+          "I58A080I"
+        ],
+        "RIL": [
+          "M60075"
+        ],
+        "HPL": [
+          "M6007L"
+        ],
+        "IOCL": [
+          "080M60"
+        ],
+        "OPaL": [
+          "M6008"
+        ],
+        "HMEL": [
+          "M0662D",
+          "M0861S"
+        ]
+      },
+      "international": [
+        "M80064",
+        "HMA025"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R6",
+      "polymer": "HDPE"
+    },
+    "I60U080": {
+      "gail_grade": "I60U080",
+      "section": "INJECTION MOULDING",
+      "process": "Sclairtech (Solution)",
+      "application": "Injection Moulding",
+      "characteristic": "Low MFI, UV stabilised",
+      "mfi": "~8",
+      "density": "0.960",
+      "equivalents": {
+        "BCPL": [
+          "I58U080I"
+        ],
+        "RIL": [
+          "L60075"
+        ],
+        "HPL": [
+          "M6007LU"
+        ],
+        "IOCL": [
+          "080M60U"
+        ],
+        "OPaL": [
+          "M6008U"
+        ],
+        "HMEL": [
+          "M0861SU"
+        ]
+      },
+      "international": [
+        "KT10000 UE (LyondellBasell)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R7",
+      "polymer": "HDPE"
+    },
+    "I62U080U": {
+      "gail_grade": "I62U080U",
+      "section": "INJECTION MOULDING",
+      "process": "Unipol (Gas)",
+      "application": "Injection Moulding",
+      "characteristic": "Low MFI, UV stabilised",
+      "mfi": "~8",
+      "density": "0.962",
+      "equivalents": {
+        "BCPL": [
+          "I58U080I"
+        ],
+        "RIL": [
+          "L60075"
+        ],
+        "HPL": [
+          "M6007LU"
+        ],
+        "IOCL": [
+          "080M60U"
+        ],
+        "OPaL": [
+          "M6008U"
+        ],
+        "HMEL": [
+          "M0861SU"
+        ]
+      },
+      "international": [
+        "KT10000 UE (LyondellBasell)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R7",
+      "polymer": "HDPE"
+    },
+    "B56A003A": {
+      "gail_grade": "B56A003A",
+      "section": "BLOW MOULDING",
+      "process": "Sclairtech (Solution)",
+      "application": "Blow Moulding",
+      "characteristic": "General purpose, <5L",
+      "mfi": "~0.3",
+      "density": "0.956",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "B56003"
+        ],
+        "HPL": [],
+        "IOCL": [],
+        "OPaL": [],
+        "HMEL": [
+          "B0155D"
+        ]
+      },
+      "international": [
+        "5502",
+        "Q5502 (SABIC)",
+        "H5840B (Hanwha)",
+        "HB0035",
+        "DMDA 6200 (ExxonMobil)",
+        "EMDA 6200"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R9",
+      "polymer": "HDPE"
+    },
+    "B52A003": {
+      "gail_grade": "B52A003",
+      "section": "BLOW MOULDING",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Blow Moulding",
+      "characteristic": "General purpose, <5L",
+      "mfi": "~0.3",
+      "density": "0.952",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "54GB012",
+          "B56003"
+        ],
+        "HPL": [
+          "E5201",
+          "E5201S"
+        ],
+        "IOCL": [
+          "012DB54"
+        ],
+        "OPaL": [
+          "B5004"
+        ],
+        "HMEL": [
+          "B0155D"
+        ]
+      },
+      "international": [
+        "5502",
+        "Q5502 (SABIC)",
+        "EMDA 6200"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R9",
+      "polymer": "HDPE"
+    },
+    "B52A003NA": {
+      "gail_grade": "B52A003NA",
+      "section": "BLOW MOULDING",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Blow Moulding",
+      "characteristic": "General purpose, <5L (NA additive)",
+      "mfi": "~0.3",
+      "density": "0.952",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "54GB012",
+          "B56003"
+        ],
+        "HPL": [
+          "E5201",
+          "E5201S"
+        ],
+        "IOCL": [
+          "012DB54"
+        ],
+        "OPaL": [
+          "B5004"
+        ],
+        "HMEL": [
+          "B0155D"
+        ]
+      },
+      "international": [
+        "5502",
+        "Q5502 (SABIC)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R9",
+      "polymer": "HDPE"
+    },
+    "B53A003U": {
+      "gail_grade": "B53A003U",
+      "section": "BLOW MOULDING",
+      "process": "Unipol (Gas)",
+      "application": "Blow Moulding",
+      "characteristic": "General purpose, <5L",
+      "mfi": "~0.3",
+      "density": "0.953",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "B5502"
+        ],
+        "HPL": [
+          "E5201",
+          "E5201S"
+        ],
+        "IOCL": [
+          "012DB54"
+        ],
+        "OPaL": [
+          "B5004"
+        ],
+        "HMEL": [
+          "B0155D"
+        ]
+      },
+      "international": [
+        "5502",
+        "Q5502 (SABIC)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R9",
+      "polymer": "HDPE"
+    },
+    "B63A003": {
+      "gail_grade": "B63A003",
+      "section": "BLOW MOULDING",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Blow Moulding",
+      "characteristic": "5–15 litres",
+      "mfi": "~0.3",
+      "density": "0.963",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "B60003"
+        ],
+        "HPL": [
+          "B6401"
+        ],
+        "IOCL": [],
+        "OPaL": [
+          "B6003"
+        ],
+        "HMEL": [
+          "B0158D"
+        ]
+      },
+      "international": [],
+      "confidence": "H",
+      "source": "Excel-HDPE R11",
+      "polymer": "HDPE"
+    },
+    "B55HM0003": {
+      "gail_grade": "B55HM0003",
+      "section": "BLOW MOULDING",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Blow Moulding",
+      "characteristic": "15–120L / Open-top 210L",
+      "mfi": "~0.03",
+      "density": "0.955",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "52GB003",
+          "52GB007"
+        ],
+        "HPL": [
+          "B5500",
+          "B5010"
+        ],
+        "IOCL": [
+          "003DB52",
+          "001DB50"
+        ],
+        "OPaL": [
+          "B55H03",
+          "B55H02"
+        ],
+        "HMEL": [
+          "B0148D",
+          "B0053D"
+        ]
+      },
+      "international": [
+        "B5411",
+        "HXM50100P",
+        "HB111R",
+        "EMDA6147"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R12",
+      "polymer": "HDPE"
+    },
+    "E52A003": {
+      "gail_grade": "E52A003",
+      "section": "PIPE",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Pipe",
+      "characteristic": "PE-63 application",
+      "mfi": "~0.3",
+      "density": "0.952",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "46GP009"
+        ],
+        "HPL": [
+          "P5200"
+        ],
+        "IOCL": [
+          "010DP45"
+        ],
+        "OPaL": [
+          "P5002"
+        ],
+        "HMEL": [
+          "P0148D",
+          "P0142S"
+        ]
+      },
+      "international": [
+        "HE3460 BK",
+        "HE1440 BK (Borouge)",
+        "P4808N",
+        "P952 (LyondellBasell)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R14",
+      "polymer": "HDPE"
+    },
+    "P46A010U": {
+      "gail_grade": "P46A010U",
+      "section": "PIPE",
+      "process": "Unipol (Gas)",
+      "application": "Pipe",
+      "characteristic": "PE-63 application",
+      "mfi": "~1.0",
+      "density": "0.946",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "P4609"
+        ],
+        "HPL": [
+          "P5200"
+        ],
+        "IOCL": [
+          "010DP45"
+        ],
+        "OPaL": [
+          "P5002"
+        ],
+        "HMEL": [
+          "P0142S"
+        ]
+      },
+      "international": [
+        "HE3460 BK",
+        "P4808N"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R14",
+      "polymer": "HDPE"
+    },
+    "E52U003": {
+      "gail_grade": "E52U003",
+      "section": "PIPE",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Pipe",
+      "characteristic": "PE-63, UV stabilised (OFC duct)",
+      "mfi": "~0.3",
+      "density": "0.952",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "46GP009UV"
+        ],
+        "HPL": [
+          "P5200UV"
+        ],
+        "IOCL": [
+          "010DP45U"
+        ],
+        "OPaL": [],
+        "HMEL": [
+          "P0147DU"
+        ]
+      },
+      "international": [],
+      "confidence": "H",
+      "source": "Excel-HDPE R15",
+      "polymer": "HDPE"
+    },
+    "P54A001": {
+      "gail_grade": "P54A001",
+      "section": "PIPE",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Pipe",
+      "characteristic": "PE-80 application",
+      "mfi": "~0.1",
+      "density": "0.954",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "45GP004"
+        ],
+        "HPL": [
+          "P5100"
+        ],
+        "IOCL": [
+          "004DP44"
+        ],
+        "OPaL": [
+          "P51H10"
+        ],
+        "HMEL": [
+          "P0148D"
+        ]
+      },
+      "international": [],
+      "confidence": "H",
+      "source": "Excel-HDPE R16",
+      "polymer": "HDPE"
+    },
+    "P52A003": {
+      "gail_grade": "P52A003",
+      "section": "PIPE",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Pipe",
+      "characteristic": "PE-100 application",
+      "mfi": "~0.3",
+      "density": "0.952",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "46GP003"
+        ],
+        "HPL": [
+          "P5300"
+        ],
+        "IOCL": [
+          "002DP48"
+        ],
+        "OPaL": [
+          "P50H03"
+        ],
+        "HMEL": [
+          "P0049D"
+        ]
+      },
+      "international": [
+        "P6006N (LyondellBasell)",
+        "L4904",
+        "3490",
+        "3492 (Borouge)",
+        "CRP100 BK/OR",
+        "TUB121 BK"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R17",
+      "polymer": "HDPE"
+    },
+    "E45A003": {
+      "gail_grade": "E45A003",
+      "section": "FILM",
+      "process": "Sclairtech (Solution)",
+      "application": "Film",
+      "characteristic": "HD Film",
+      "mfi": "~0.3",
+      "density": "0.945",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "F46003",
+          "F4600",
+          "F46003E"
+        ],
+        "HPL": [
+          "HDT-6"
+        ],
+        "IOCL": [
+          "003F46"
+        ],
+        "OPaL": [],
+        "HMEL": [
+          "F0146D",
+          "F0153S"
+        ]
+      },
+      "international": [
+        "HTA 108 (Borouge/Borealis)"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R18",
+      "polymer": "HDPE"
+    },
+    "F55HM0003": {
+      "gail_grade": "F55HM0003",
+      "section": "FILM",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "Film",
+      "characteristic": "HM Film (High Molecular Weight)",
+      "mfi": "~0.03",
+      "density": "0.955",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "F56003"
+        ],
+        "HPL": [
+          "F5400"
+        ],
+        "IOCL": [
+          "002DF50",
+          "003DF49"
+        ],
+        "OPaL": [
+          "F52H04"
+        ],
+        "HMEL": [
+          "F0050D"
+        ]
+      },
+      "international": [
+        "DGDZ6095",
+        "DGDZ6097 (LyondellBasell)",
+        "EGDA6888",
+        "F1",
+        "FJ00952",
+        "HHM TR 144",
+        "HTA001HD5",
+        "L5005"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R19",
+      "polymer": "HDPE"
+    },
+    "W50A009": {
+      "gail_grade": "W50A009",
+      "section": "RAFFIA / MONOFILAMENT",
+      "process": "Sclairtech (Solution)",
+      "application": "Raffia",
+      "characteristic": "High tenacity tape (fertiliser bags)",
+      "mfi": "~0.9",
+      "density": "0.950",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "E52009"
+        ],
+        "HPL": [
+          "R5801"
+        ],
+        "IOCL": [
+          "010E52"
+        ],
+        "OPaL": [],
+        "HMEL": [
+          "R0151D"
+        ]
+      },
+      "international": [],
+      "confidence": "H",
+      "source": "Excel-HDPE R25",
+      "polymer": "HDPE"
+    },
+    "T50A010": {
+      "gail_grade": "T50A010",
+      "section": "RAFFIA / MONOFILAMENT",
+      "process": "Sclairtech (Solution)",
+      "application": "Raffia / MF",
+      "characteristic": "Medium tenacity tape (tarpaulin) / yarn",
+      "mfi": "~1.0",
+      "density": "0.950",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "EE20",
+          "HD53EA010"
+        ],
+        "HPL": [
+          "HDT-9"
+        ],
+        "IOCL": [
+          "012E50"
+        ],
+        "OPaL": [
+          "Y5710"
+        ],
+        "HMEL": [
+          "R0154S"
+        ]
+      },
+      "international": [
+        "GF 7750 M2"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R26–27",
+      "polymer": "HDPE"
+    },
+    "Y50A010U": {
+      "gail_grade": "Y50A010U",
+      "section": "RAFFIA / MONOFILAMENT",
+      "process": "Unipol (Gas)",
+      "application": "Raffia / MF",
+      "characteristic": "Medium tenacity tape, UV / yarn",
+      "mfi": "~1.0",
+      "density": "0.950",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "EE20",
+          "HD53EA010"
+        ],
+        "HPL": [
+          "HDT-9"
+        ],
+        "IOCL": [
+          "012E50"
+        ],
+        "OPaL": [
+          "Y5710"
+        ],
+        "HMEL": [
+          "R0154S"
+        ]
+      },
+      "international": [
+        "GF 7750 M2"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R26–27",
+      "polymer": "HDPE"
+    },
+    "W52A009": {
+      "gail_grade": "W52A009",
+      "section": "RAFFIA / MONOFILAMENT",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "MF (Monofilament)",
+      "characteristic": "Medium-high tenacity yarn",
+      "mfi": "~0.9",
+      "density": "0.952",
+      "equivalents": {
+        "BCPL": [
+          "W54A009I"
+        ],
+        "RIL": [
+          "HD55EF010"
+        ],
+        "HPL": [
+          "HDT-10",
+          "HDT-10S"
+        ],
+        "IOCL": [
+          "012E50"
+        ],
+        "OPaL": [
+          "R5410"
+        ],
+        "HMEL": [
+          "Y0150S"
+        ]
+      },
+      "international": [
+        "SM5508",
+        "5000S"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R27",
+      "polymer": "HDPE"
+    },
+    "W52ASR009": {
+      "gail_grade": "W52ASR009",
+      "section": "RAFFIA / MONOFILAMENT",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "MF (Monofilament)",
+      "characteristic": "Medium-high tenacity yarn (SR additive)",
+      "mfi": "~0.9",
+      "density": "0.952",
+      "equivalents": {
+        "BCPL": [
+          "W54A009I"
+        ],
+        "RIL": [
+          "HD55EF010"
+        ],
+        "HPL": [
+          "HDT-10",
+          "HDT-10S"
+        ],
+        "IOCL": [
+          "012E50"
+        ],
+        "OPaL": [
+          "R5410"
+        ],
+        "HMEL": [
+          "Y0150S"
+        ]
+      },
+      "international": [
+        "SM5508",
+        "5000S"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R27",
+      "polymer": "HDPE"
+    },
+    "W55A004": {
+      "gail_grade": "W55A004",
+      "section": "RAFFIA / MONOFILAMENT",
+      "process": "Mitsui-CX (Slurry)",
+      "application": "MF (Monofilament)",
+      "characteristic": "Medium-high tenacity yarn",
+      "mfi": "~0.4",
+      "density": "0.955",
+      "equivalents": {
+        "BCPL": [
+          "W54A009I"
+        ],
+        "RIL": [
+          "HD55EF010"
+        ],
+        "HPL": [
+          "HDT-10",
+          "HDT-10S"
+        ],
+        "IOCL": [
+          "012E50"
+        ],
+        "OPaL": [
+          "R5410"
+        ],
+        "HMEL": [
+          "Y0150S"
+        ]
+      },
+      "international": [
+        "SM5508",
+        "5000S"
+      ],
+      "confidence": "H",
+      "source": "Excel-HDPE R27",
+      "polymer": "HDPE"
+    },
+    "F20S009": {
+      "gail_grade": "F20S009",
+      "section": "FILM — C4 LLDPE",
+      "process": "Sclairtech (Solution)",
+      "application": "Film",
+      "characteristic": "1 MFI C4, Slip",
+      "mfi": "~0.9",
+      "density": "0.920",
+      "equivalents": {
+        "BCPL": [
+          "F20S010I"
+        ],
+        "RIL": [
+          "F19010"
+        ],
+        "HPL": [
+          "71501S"
+        ],
+        "IOCL": [
+          "010F18S"
+        ],
+        "OPaL": [
+          "F2001S"
+        ],
+        "HMEL": [
+          "F0120L"
+        ]
+      },
+      "international": [
+        "118WJ",
+        "1210P",
+        "DFDC7080 (Dow)",
+        "EFDC7087 (ExxonMobil)",
+        "F2111BS",
+        "FC21HN",
+        "HF1810P",
+        "LL1001BU (LyondellBasell)",
+        "Q1018M",
+        "Q1018H (SABIC)",
+        "LL7410D",
+        "Hanwha 3120"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R4",
+      "polymer": "LLDPE"
+    },
+    "F18S010U": {
+      "gail_grade": "F18S010U",
+      "section": "FILM — C4 LLDPE",
+      "process": "Unipol (Gas)",
+      "application": "Film",
+      "characteristic": "1 MFI C4, Slip",
+      "mfi": "~1.0",
+      "density": "0.918",
+      "equivalents": {
+        "BCPL": [
+          "F20S010I"
+        ],
+        "RIL": [
+          "JF19010"
+        ],
+        "HPL": [
+          "71501S"
+        ],
+        "IOCL": [
+          "010F18S"
+        ],
+        "OPaL": [
+          "F2001S"
+        ],
+        "HMEL": [
+          "F0120L"
+        ]
+      },
+      "international": [
+        "118WJ",
+        "1210P",
+        "Q1018M",
+        "Q1018H (SABIC)",
+        "Hanwha 3120"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R4",
+      "polymer": "LLDPE"
+    },
+    "E20AN009": {
+      "gail_grade": "E20AN009",
+      "section": "FILM — C4 LLDPE",
+      "process": "Sclairtech (Solution)",
+      "application": "Film",
+      "characteristic": "1 MFI C4, Non-slip",
+      "mfi": "~0.9",
+      "density": "0.920",
+      "equivalents": {
+        "BCPL": [
+          "F20A010I"
+        ],
+        "RIL": [
+          "F18010"
+        ],
+        "HPL": [
+          "71601W"
+        ],
+        "IOCL": [
+          "010F18A"
+        ],
+        "OPaL": [
+          "F2001A"
+        ],
+        "HMEL": [
+          "F0118L"
+        ]
+      },
+      "international": [
+        "118NJ",
+        "LL1001AV (LyondellBasell)",
+        "1211P",
+        "Q1018N (SABIC)"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R5",
+      "polymer": "LLDPE"
+    },
+    "F18A010U": {
+      "gail_grade": "F18A010U",
+      "section": "FILM — C4 LLDPE",
+      "process": "Unipol (Gas)",
+      "application": "Film",
+      "characteristic": "1 MFI C4, Non-slip",
+      "mfi": "~1.0",
+      "density": "0.918",
+      "equivalents": {
+        "BCPL": [
+          "F20A010I"
+        ],
+        "RIL": [
+          "JF18010"
+        ],
+        "HPL": [
+          "71601W"
+        ],
+        "IOCL": [
+          "010F18A"
+        ],
+        "OPaL": [
+          "F2001A"
+        ],
+        "HMEL": [
+          "F0118L"
+        ]
+      },
+      "international": [
+        "118NJ",
+        "LL1001AV (LyondellBasell)",
+        "Q1018N (SABIC)"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R5",
+      "polymer": "LLDPE"
+    },
+    "F20S020": {
+      "gail_grade": "F20S020",
+      "section": "FILM — C4 LLDPE",
+      "process": "Sclairtech (Solution)",
+      "application": "Film",
+      "characteristic": "2 MFI C4, Slip",
+      "mfi": "~2.0",
+      "density": "0.920",
+      "equivalents": {
+        "BCPL": [
+          "F22S025I"
+        ],
+        "RIL": [],
+        "HPL": [
+          "71602S"
+        ],
+        "IOCL": [
+          "020F18S"
+        ],
+        "OPaL": [
+          "F2002S"
+        ],
+        "HMEL": []
+      },
+      "international": [
+        "218WJ",
+        "Q2018H (SABIC)"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R6",
+      "polymer": "LLDPE"
+    },
+    "F18S020U": {
+      "gail_grade": "F18S020U",
+      "section": "FILM — C4 LLDPE",
+      "process": "Unipol (Gas)",
+      "application": "Film",
+      "characteristic": "2 MFI C4, Slip",
+      "mfi": "~2.0",
+      "density": "0.918",
+      "equivalents": {
+        "BCPL": [
+          "F22S025I"
+        ],
+        "RIL": [
+          "JF19020"
+        ],
+        "HPL": [
+          "71602S"
+        ],
+        "IOCL": [
+          "020F18S"
+        ],
+        "OPaL": [
+          "F2002S"
+        ],
+        "HMEL": []
+      },
+      "international": [
+        "218WJ",
+        "Q2018H (SABIC)"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R6",
+      "polymer": "LLDPE"
+    },
+    "F20A020": {
+      "gail_grade": "F20A020",
+      "section": "FILM — C4 LLDPE",
+      "process": "Sclairtech (Solution)",
+      "application": "Film",
+      "characteristic": "2 MFI C4, Non-slip",
+      "mfi": "~2.0",
+      "density": "0.920",
+      "equivalents": {
+        "BCPL": [
+          "F22A025I"
+        ],
+        "RIL": [],
+        "HPL": [
+          "71602W"
+        ],
+        "IOCL": [
+          "020F18A"
+        ],
+        "OPaL": [
+          "F2002A"
+        ],
+        "HMEL": [
+          "F0218L"
+        ]
+      },
+      "international": [
+        "218NJ",
+        "Q2018N (SABIC)",
+        "1221P"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R7",
+      "polymer": "LLDPE"
+    },
+    "F18A020U": {
+      "gail_grade": "F18A020U",
+      "section": "FILM — C4 LLDPE",
+      "process": "Unipol (Gas)",
+      "application": "Film",
+      "characteristic": "2 MFI C4, Non-slip",
+      "mfi": "~2.0",
+      "density": "0.918",
+      "equivalents": {
+        "BCPL": [
+          "F22A025I"
+        ],
+        "RIL": [
+          "JF18020"
+        ],
+        "HPL": [
+          "71602W"
+        ],
+        "IOCL": [
+          "020F18A"
+        ],
+        "OPaL": [
+          "F2002A"
+        ],
+        "HMEL": [
+          "F0218L"
+        ]
+      },
+      "international": [
+        "218NJ",
+        "Q2018N (SABIC)",
+        "1221P"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R7",
+      "polymer": "LLDPE"
+    },
+    "MF18S010U": {
+      "gail_grade": "MF18S010U",
+      "section": "FILM — METALLOCENE LLDPE (mLLDPE)",
+      "process": "Unipol-Gas (mLLDPE)",
+      "application": "Film",
+      "characteristic": "1 MFI metallocene, Slip",
+      "mfi": "~1.0",
+      "density": "0.918",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [],
+        "HPL": [],
+        "IOCL": [],
+        "OPaL": [],
+        "HMEL": [
+          "F0120LM"
+        ]
+      },
+      "international": [
+        "1018MK",
+        "1018MA",
+        "SP1510 (LyondellBasell)",
+        "Dow Elite series",
+        "ExxonMobil Enable series",
+        "Borouge Anteo series"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R9",
+      "polymer": "LLDPE"
+    },
+    "MF18A010U": {
+      "gail_grade": "MF18A010U",
+      "section": "FILM — METALLOCENE LLDPE (mLLDPE)",
+      "process": "Unipol-Gas (mLLDPE)",
+      "application": "Film",
+      "characteristic": "1 MFI metallocene, Non-slip",
+      "mfi": "~1.0",
+      "density": "0.918",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [],
+        "HPL": [],
+        "IOCL": [],
+        "OPaL": [],
+        "HMEL": [
+          "F0118LM"
+        ]
+      },
+      "international": [
+        "1018MK",
+        "1018MA",
+        "Dow Elite series",
+        "ExxonMobil Enable series",
+        "Borouge Anteo series"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R9",
+      "polymer": "LLDPE"
+    },
+    "R35A042": {
+      "gail_grade": "R35A042",
+      "section": "ROTOMOULDING",
+      "process": "Sclairtech (Solution)",
+      "application": "Rotomoulding",
+      "characteristic": "C4, Non-UV",
+      "mfi": "~4.2",
+      "density": "0.935",
+      "equivalents": {
+        "BCPL": [
+          "R38A040I"
+        ],
+        "RIL": [
+          "R35042",
+          "LL36RA045"
+        ],
+        "HPL": [
+          "73005T",
+          "73204T"
+        ],
+        "IOCL": [
+          "042R35A"
+        ],
+        "OPaL": [
+          "T3804"
+        ],
+        "HMEL": [
+          "R0536L"
+        ]
+      },
+      "international": [
+        "R50035"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R12",
+      "polymer": "LLDPE"
+    },
+    "R36A050": {
+      "gail_grade": "R36A050",
+      "section": "ROTOMOULDING",
+      "process": "Unipol (Gas)",
+      "application": "Rotomoulding",
+      "characteristic": "C4, Non-UV",
+      "mfi": "~5.0",
+      "density": "0.936",
+      "equivalents": {
+        "BCPL": [
+          "R38A040I"
+        ],
+        "RIL": [
+          "JLL36RA045"
+        ],
+        "HPL": [
+          "73005T",
+          "73204T"
+        ],
+        "IOCL": [
+          "042R35A"
+        ],
+        "OPaL": [
+          "T3804"
+        ],
+        "HMEL": [
+          "R0536L"
+        ]
+      },
+      "international": [
+        "R50035"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R12",
+      "polymer": "LLDPE"
+    },
+    "R35U042": {
+      "gail_grade": "R35U042",
+      "section": "ROTOMOULDING",
+      "process": "Sclairtech (Solution)",
+      "application": "Rotomoulding",
+      "characteristic": "C4, UV stabilised",
+      "mfi": "~4.2",
+      "density": "0.935",
+      "equivalents": {
+        "BCPL": [
+          "R38U040I"
+        ],
+        "RIL": [
+          "LL36RA045UV"
+        ],
+        "HPL": [
+          "73005TU",
+          "73204TU"
+        ],
+        "IOCL": [
+          "042R35U"
+        ],
+        "OPaL": [
+          "T3804U"
+        ],
+        "HMEL": [
+          "R0536LU"
+        ]
+      },
+      "international": [
+        "R50035E"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R13",
+      "polymer": "LLDPE"
+    },
+    "R36U050U": {
+      "gail_grade": "R36U050U",
+      "section": "ROTOMOULDING",
+      "process": "Unipol (Gas)",
+      "application": "Rotomoulding",
+      "characteristic": "C4, UV stabilised",
+      "mfi": "~5.0",
+      "density": "0.936",
+      "equivalents": {
+        "BCPL": [
+          "R38U040I"
+        ],
+        "RIL": [
+          "JLL36RA045UV"
+        ],
+        "HPL": [
+          "73005TU",
+          "73204TU"
+        ],
+        "IOCL": [
+          "042R35U"
+        ],
+        "OPaL": [
+          "T3804U"
+        ],
+        "HMEL": [
+          "R0536LU"
+        ]
+      },
+      "international": [
+        "R50035E"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R13",
+      "polymer": "LLDPE"
+    },
+    "E36A060": {
+      "gail_grade": "E36A060",
+      "section": "EXTRUSION COATING / WIRE & CABLE",
+      "process": "Sclairtech (Solution)",
+      "application": "Extrusion Coating",
+      "characteristic": "Coating / lamination",
+      "mfi": "~6.0",
+      "density": "0.936",
+      "equivalents": {
+        "BCPL": [
+          "E30A060I"
+        ],
+        "RIL": [
+          "E24065"
+        ],
+        "HPL": [
+          "72307E"
+        ],
+        "IOCL": [
+          "065E24A"
+        ],
+        "OPaL": [
+          "E2507"
+        ],
+        "HMEL": [
+          "E0725L"
+        ]
+      },
+      "international": [
+        "NA204000 (LyondellBasell)"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R17",
+      "polymer": "LLDPE"
+    },
+    "E24A070U": {
+      "gail_grade": "E24A070U",
+      "section": "EXTRUSION COATING / WIRE & CABLE",
+      "process": "Unipol (Gas)",
+      "application": "Extrusion Coating / Wire & Cable",
+      "characteristic": "Coating · lamination · W&C XLPE base resin",
+      "mfi": "~7.0",
+      "density": "0.924",
+      "equivalents": {
+        "BCPL": [
+          "E30A060I"
+        ],
+        "RIL": [
+          "JE24065",
+          "X24065",
+          "LL24FA030"
+        ],
+        "HPL": [
+          "72307E"
+        ],
+        "IOCL": [
+          "065E24A"
+        ],
+        "OPaL": [
+          "E2507"
+        ],
+        "HMEL": [
+          "E0725L",
+          "W0426L"
+        ]
+      },
+      "international": [
+        "NA204000",
+        "ll6101XR (LyondellBasell)"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R17, R23",
+      "polymer": "LLDPE"
+    },
+    "I26A500U": {
+      "gail_grade": "I26A500U",
+      "section": "INJECTION MOULDING / MASTERBATCH",
+      "process": "Unipol (Gas)",
+      "application": "Injection / Masterbatch",
+      "characteristic": "50 MFI",
+      "mfi": "~50",
+      "density": "0.926",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "M26500"
+        ],
+        "HPL": [],
+        "IOCL": [
+          "500M24A"
+        ],
+        "OPaL": [
+          "M2550"
+        ],
+        "HMEL": [
+          "M5026L"
+        ]
+      },
+      "international": [
+        "LL6201XR",
+        "M500026",
+        "MG500026",
+        "UI2650"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R18",
+      "polymer": "LLDPE"
+    },
+    "D22S010": {
+      "gail_grade": "D22S010",
+      "section": "PIPE",
+      "process": "Sclairtech (Solution)",
+      "application": "Pipe (Drip irrigation)",
+      "characteristic": "Drip pipe",
+      "mfi": "~1.0",
+      "density": "0.922",
+      "equivalents": {
+        "BCPL": [],
+        "RIL": [
+          "E19010",
+          "JD22010"
+        ],
+        "HPL": [
+          "71601D"
+        ],
+        "IOCL": [
+          "010L22S"
+        ],
+        "OPaL": [],
+        "HMEL": [
+          "D0120L"
+        ]
+      },
+      "international": [
+        "LE 1711",
+        "LE2270 (LyondellBasell)"
+      ],
+      "confidence": "H",
+      "source": "Excel-LLDPE R21",
+      "polymer": "LLDPE"
+    }
+  }
+}
