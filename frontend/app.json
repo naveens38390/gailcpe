@@ -6,12 +6,10 @@
     "scheme": "gcpe",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0B0F17"
@@ -38,13 +36,21 @@
             "backgroundColor": "#0B0F17"
           }
         }
-      ]
+      ],
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
     },
     "icon": "./assets/icon.png",
     "primaryColor": "#D92B38",
-    "backgroundColor": "#0B0F17"
+    "backgroundColor": "#0B0F17",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "4c31bea6-b844-4323-87fa-1e87811c467d"
+      }
+    },
+    "owner": "beingtharur"
   }
 }
