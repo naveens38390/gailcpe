@@ -44,6 +44,10 @@ export default function AdminLayout() {
       <Stack.Screen name="price-book" options={{ title: "Price Book" }} />
       <Stack.Screen name="price-circulars" options={{ title: "Price Circulars" }} />
       <Stack.Screen name="price-circular/[id]" options={{ title: "Circular" }} />
+      <Stack.Screen name="approvals" options={{ title: "Approvals" }} />
+      <Stack.Screen name="approval/[id]" options={{ title: "Approval" }} />
+      <Stack.Screen name="notifications" options={{ title: "Notifications" }} />
+      <Stack.Screen name="audit-log" options={{ title: "Audit Logs" }} />
       </Stack>
 
       {unlocked ? null : <AdminLock />}

@@ -9,7 +9,13 @@
 import { useState, type ReactNode } from "react";
 import { Pressable, Text, View } from "react-native";
 
-import { api, type CorrectionActor, type DiffResult, type Revision } from "../services/api";
+import {
+  api,
+  type CorrectionActor,
+  type CorrectionStatus,
+  type DiffResult,
+  type Revision,
+} from "../services/api";
 import { Field, Input, PrimaryButton } from "./inputs";
 import { theme } from "../theme";
 import { Empty, ErrorNote, Pill } from "./ui";
@@ -23,6 +29,16 @@ export const revisionStatusColor = (c: ThemeColors): Record<string, string> => (
   published: c.success,
   rejected: c.danger,
   superseded: c.textFaint,
+});
+
+/** "applied" is this app's one true "approved" state — the schema's own
+ * "approved" value is never assigned by the backend. */
+export const correctionStatusColor = (c: ThemeColors): Record<CorrectionStatus, string> => ({
+  pending: c.warning,
+  applied: c.success,
+  approved: c.success,
+  rejected: c.danger,
+  changes_requested: c.primary,
 });
 
 /**
@@ -270,7 +286,7 @@ export function RevisionHistory({
   );
 }
 
-function formatDiffValue(v: unknown): string {
+export function formatDiffValue(v: unknown): string {
   if (v === undefined || v === null) return "—";
   if (typeof v === "object") return JSON.stringify(v);
   return String(v);

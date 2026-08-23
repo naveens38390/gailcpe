@@ -38,6 +38,7 @@ const IMPACT_WINDOW_DAYS = 30;
 @Injectable()
 export class GradeAdminService extends MasterDataService {
   protected workflow: RevisionWorkflow;
+  protected entityName = "grade";
 
   constructor(
     @InjectModel(GradeMapping.name) private mappings: Model<GradeMapping>,
@@ -59,7 +60,7 @@ export class GradeAdminService extends MasterDataService {
     const { gailGrade, reason, submit, ...changes } = dto;
     const fields = this.buildFields(undefined, changes);
     const rev = await this.workflow.draft(gailGrade, fields, reason, userId, true);
-    return submit === false ? rev : this.workflow.submit(String(rev._id), userId);
+    return submit === false ? rev : this.submit(String(rev._id), userId);
   }
 
   async draft(gailGrade: string, dto: DraftGradeDto, userId: string) {
@@ -67,7 +68,7 @@ export class GradeAdminService extends MasterDataService {
     const live = await this.mappings.findOne({ gailGrade }).lean();
     const fields = this.buildFields(live ?? undefined, changes);
     const rev = await this.workflow.draft(gailGrade, fields, reason, userId, false);
-    return submit === false ? rev : this.workflow.submit(String(rev._id), userId);
+    return submit === false ? rev : this.submit(String(rev._id), userId);
   }
 
   /**

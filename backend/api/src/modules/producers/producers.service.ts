@@ -11,6 +11,7 @@ import { CreateProducerDto, DraftProducerDto } from "./dto/producer-fields.dto";
 @Injectable()
 export class ProducersService extends MasterDataService {
   protected workflow: RevisionWorkflow;
+  protected entityName = "producer";
 
   constructor(
     @InjectModel(Producer.name) private producers: Model<Producer>,
@@ -29,13 +30,13 @@ export class ProducersService extends MasterDataService {
   async create(dto: CreateProducerDto, userId: string) {
     const { code, reason, submit, ...fields } = dto;
     const rev = await this.workflow.draft(code, fields, reason, userId, true);
-    return submit === false ? rev : this.workflow.submit(String(rev._id), userId);
+    return submit === false ? rev : this.submit(String(rev._id), userId);
   }
 
   async draft(code: string, dto: DraftProducerDto, userId: string) {
     const { reason, submit, ...fields } = dto;
     const clean = Object.fromEntries(Object.entries(fields).filter(([, v]) => v !== undefined));
     const rev = await this.workflow.draft(code, clean, reason, userId, false);
-    return submit === false ? rev : this.workflow.submit(String(rev._id), userId);
+    return submit === false ? rev : this.submit(String(rev._id), userId);
   }
 }

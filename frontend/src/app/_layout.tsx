@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Drawer } from "expo-router/drawer";
 import { StatusBar } from "expo-status-bar";
-import { View } from "react-native";
+import { Text, View, type ColorValue } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -10,6 +10,7 @@ import { LaunchScreen } from "../components/launchScreen";
 import { AuthProvider, useAuth } from "../context/auth";
 import { AdminGateProvider } from "../context/adminGate";
 import { CatalogProvider } from "../context/catalog";
+import { NotificationsBadgeProvider, useNotificationsBadge } from "../context/notifications";
 import { ThemeProvider, useTheme } from "../context/theme";
 
 /**
@@ -27,6 +28,36 @@ function SessionOverlay() {
 }
 
 /** Everything below the providers, so it can read the active theme. */
+function AdminIcon({ color, size }: { color: ColorValue; size: number }) {
+  const { colors } = useTheme();
+  const { unreadCount } = useNotificationsBadge();
+  return (
+    <View>
+      <Ionicons name="construct-outline" color={color} size={size} />
+      {unreadCount > 0 ? (
+        <View
+          style={{
+            position: "absolute",
+            top: -3,
+            right: -6,
+            minWidth: 14,
+            height: 14,
+            borderRadius: 7,
+            paddingHorizontal: 2,
+            backgroundColor: colors.danger,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ color: colors.onPrimary, fontSize: 9, fontWeight: "800" }}>
+            {unreadCount > 9 ? "9+" : unreadCount}
+          </Text>
+        </View>
+      ) : null}
+    </View>
+  );
+}
+
 function AppShell() {
   const { colors, scheme } = useTheme();
 
@@ -59,9 +90,7 @@ function AppShell() {
           name="admin"
           options={{
             title: "Admin Panel",
-            drawerIcon: ({ color, size }) => (
-              <Ionicons name="construct-outline" color={color} size={size} />
-            ),
+            drawerIcon: ({ color, size }) => <AdminIcon color={color} size={size} />,
           }}
         />
       </Drawer>
@@ -78,9 +107,11 @@ export default function RootLayout() {
         <ThemeProvider>
           <AuthProvider>
             <CatalogProvider>
-              <AdminGateProvider>
-                <AppShell />
-              </AdminGateProvider>
+              <NotificationsBadgeProvider>
+                <AdminGateProvider>
+                  <AppShell />
+                </AdminGateProvider>
+              </NotificationsBadgeProvider>
             </CatalogProvider>
           </AuthProvider>
         </ThemeProvider>

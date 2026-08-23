@@ -11,6 +11,8 @@ import { quote } from "../../core/pricing";
 import { PriceCorrection } from "../../database/schemas/correction.schema";
 import { DatasetService } from "../dataset/dataset.service";
 import { requiresSeparateApprover } from "../../core/approval-policy";
+import { AuditLogService } from "../audit-log/audit-log.service";
+import { NotificationsService } from "../notifications/notifications.service";
 
 /**
  * Price Corrections — how GAIL's own price actually gets fixed.
@@ -24,6 +26,8 @@ import { requiresSeparateApprover } from "../../core/approval-policy";
 export class CorrectionsService {
   constructor(
     private dataset: DatasetService,
+    private notifications: NotificationsService,
+    private auditLog: AuditLogService,
     @InjectModel(PriceCorrection.name) private corrections: Model<PriceCorrection>,
   ) {}
 
@@ -44,7 +48,7 @@ export class CorrectionsService {
       );
     }
 
-    return this.corrections.create({
+    const created = await this.corrections.create({
       producer: "GAIL",
       zone: current.zone,
       grade: current.grade,
@@ -53,7 +57,24 @@ export class CorrectionsService {
       reason: input.reason,
       proposedBy: userId,
       status: "pending",
+      events: [{ type: "proposed", by: userId, at: new Date() }],
     });
+
+    await this.notifications.notify(
+      userId,
+      "correction.proposed",
+      "New price correction submitted",
+      `${created.grade} at ${created.zone}: ${current.basic} → ${input.proposedPrice}`,
+      { type: "correction", id: String(created._id) },
+    );
+    await this.auditLog.log(userId, "correction.propose", "correction", String(created._id), {
+      grade: created.grade,
+      zone: created.zone,
+      previous: current.basic,
+      next: input.proposedPrice,
+    });
+
+    return created;
   }
 
   async list(status?: string) {
@@ -63,6 +84,31 @@ export class CorrectionsService {
       .populate("proposedBy", "name email role")
       .populate("decidedBy", "name email role")
       .lean();
+  }
+
+  /** One correction with its full timeline, for the Approval Details screen. */
+  async get(id: string) {
+    const correction = await this.corrections
+      .findById(id)
+      .populate("proposedBy", "name email role")
+      .populate("decidedBy", "name email role")
+      .populate("events.by", "name email role")
+      .lean();
+    if (!correction) throw new NotFoundException("No such correction.");
+    return correction;
+  }
+
+  /** Counts for the Approvals dashboard header. */
+  async summary() {
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+    const [pending, approvedToday, rejected, changesRequested] = await Promise.all([
+      this.corrections.countDocuments({ status: "pending" }),
+      this.corrections.countDocuments({ status: "applied", decidedAt: { $gte: startOfDay } }),
+      this.corrections.countDocuments({ status: "rejected" }),
+      this.corrections.countDocuments({ status: "changes_requested" }),
+    ]);
+    return { pending, approvedToday, rejected, changesRequested };
   }
 
   /**
@@ -84,7 +130,72 @@ export class CorrectionsService {
     correction.decidedBy = new Types.ObjectId(userId);
     correction.decidedAt = new Date();
     correction.decisionNote = note;
+    correction.events.push({
+      type: approve ? "approved" : "rejected",
+      by: new Types.ObjectId(userId),
+      at: correction.decidedAt,
+      note,
+    });
     await correction.save();
+
+    await this.notifications.notify(
+      userId,
+      approve ? "correction.approved" : "correction.rejected",
+      approve ? "Correction approved" : "Correction rejected",
+      `${correction.grade} at ${correction.zone}: ${correction.currentPrice} → ${correction.proposedPrice}`,
+      { type: "correction", id: String(correction._id) },
+    );
+    await this.auditLog.log(
+      userId,
+      approve ? "correction.approve" : "correction.reject",
+      "correction",
+      String(correction._id),
+      { previous: correction.currentPrice, next: correction.proposedPrice, note },
+    );
+
+    return correction;
+  }
+
+  /**
+   * pending -> changes_requested. A third outcome alongside approve/reject: the
+   * proposal isn't rejected outright, it needs a specific fix before it can be
+   * decided again. Reuses decidedBy/decidedAt/decisionNote — the same "who acted
+   * on this pending item" fields decide() already writes — so nothing that reads
+   * those fields needs to know a third outcome exists.
+   */
+  async requestChanges(id: string, userId: string, note: string) {
+    const correction = await this.corrections.findById(id);
+    if (!correction) throw new NotFoundException("No such correction.");
+    if (correction.status !== "pending") {
+      throw new BadRequestException(`This correction is already ${correction.status}.`);
+    }
+    if (requiresSeparateApprover() && String(correction.proposedBy) === userId) {
+      throw new ForbiddenException("You cannot decide on your own proposal.");
+    }
+
+    correction.status = "changes_requested";
+    correction.decidedBy = new Types.ObjectId(userId);
+    correction.decidedAt = new Date();
+    correction.decisionNote = note;
+    correction.events.push({
+      type: "changes_requested",
+      by: new Types.ObjectId(userId),
+      at: correction.decidedAt,
+      note,
+    });
+    await correction.save();
+
+    await this.notifications.notify(
+      userId,
+      "correction.changes_requested",
+      "Changes requested on a correction",
+      `${correction.grade} at ${correction.zone}: ${note}`,
+      { type: "correction", id: String(correction._id) },
+    );
+    await this.auditLog.log(userId, "correction.request_changes", "correction", String(correction._id), {
+      note,
+    });
+
     return correction;
   }
 }

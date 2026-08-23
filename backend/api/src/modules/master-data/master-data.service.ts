@@ -11,10 +11,30 @@
  * real type safety for a few saved lines.
  */
 
+import { Inject } from "@nestjs/common";
+
+import { AuditLogService } from "../audit-log/audit-log.service";
 import { RevisionWorkflow } from "./revision-workflow";
+
+/** What actually changed, from a revision's own baseline/fields already in
+ * memory — no extra query needed to describe a publish. */
+function fieldDelta(baseline: Record<string, unknown> | null | undefined, fields: Record<string, unknown>) {
+  const previous: Record<string, unknown> = {};
+  const next: Record<string, unknown> = {};
+  for (const key of Object.keys(fields)) {
+    previous[key] = baseline?.[key];
+    next[key] = fields[key];
+  }
+  return { previous, next };
+}
 
 export abstract class MasterDataService {
   protected abstract workflow: RevisionWorkflow;
+  /** e.g. "producer" — labels every audit-log entry this base class writes. */
+  protected abstract entityName: string;
+
+  @Inject(AuditLogService)
+  protected auditLog!: AuditLogService;
 
   list() {
     return this.workflow.liveList();
@@ -28,23 +48,43 @@ export abstract class MasterDataService {
     return this.workflow.pending();
   }
 
-  submit(revisionId: string, userId: string) {
-    return this.workflow.submit(revisionId, userId);
+  async submit(revisionId: string, userId: string) {
+    const rev = await this.workflow.submit(revisionId, userId);
+    await this.auditLog.log(userId, `${this.entityName}.submit`, this.entityName, rev.entityId, {
+      version: rev.version,
+    });
+    return rev;
   }
 
-  review(revisionId: string, userId: string, approve: boolean, note?: string) {
-    return this.workflow.review(revisionId, userId, approve, note);
+  async review(revisionId: string, userId: string, approve: boolean, note?: string) {
+    const rev = await this.workflow.review(revisionId, userId, approve, note);
+    await this.auditLog.log(userId, `${this.entityName}.review`, this.entityName, rev.entityId, {
+      version: rev.version,
+      approved: approve,
+      note,
+    });
+    return rev;
   }
 
   async publish(revisionId: string, userId: string) {
     const rev = await this.workflow.publish(revisionId, userId);
     this.invalidate();
+    const { previous, next } = fieldDelta(rev.baseline, rev.fields);
+    await this.auditLog.log(userId, `${this.entityName}.publish`, this.entityName, rev.entityId, {
+      version: rev.version,
+      previous,
+      next,
+    });
     return rev;
   }
 
   async rollback(entityId: string, toVersion: number, userId: string, reason: string) {
     const rev = await this.workflow.rollback(entityId, toVersion, userId, reason);
     this.invalidate();
+    await this.auditLog.log(userId, `${this.entityName}.rollback`, this.entityName, entityId, {
+      restoredToVersion: toVersion,
+      reason,
+    });
     return rev;
   }
 

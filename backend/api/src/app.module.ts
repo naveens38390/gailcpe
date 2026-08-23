@@ -3,7 +3,9 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { APP_GUARD } from "@nestjs/core";
 import { MongooseModule } from "@nestjs/mongoose";
 
+import { AuditLogModule } from "./modules/audit-log/audit-log.module";
 import { CatalogModule } from "./modules/catalog/catalog.module";
+import { DashboardModule } from "./modules/dashboard/dashboard.module";
 import { JwtAuthGuard } from "./modules/auth/jwt-auth.guard";
 import { AuthModule } from "./modules/auth/auth.module";
 import { CircularsModule } from "./modules/circulars/circulars.module";
@@ -17,10 +19,12 @@ import { DealsModule } from "./modules/deals/deals.module";
 import { FreightModule } from "./modules/freight/freight.module";
 import { GradesModule } from "./modules/grades/grades.module";
 import { LocationsModule } from "./modules/locations/locations.module";
+import { NotificationsModule } from "./modules/notifications/notifications.module";
 import { PricingModule } from "./modules/pricing/pricing.module";
 
 @Module({
   imports: [
+    AuditLogModule,
     CatalogModule,
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRootAsync({
@@ -44,11 +48,13 @@ import { PricingModule } from "./modules/pricing/pricing.module";
     DealsModule,
     CircularsModule,
     LocationsModule,
+    NotificationsModule,
     CorrectionsModule,
     DiscountsModule,
     ProducersModule,
     PriceCircularsModule,
     ExportsModule,
+    DashboardModule,
   ],
   // Authenticated by default. A route opens up only by saying so with @Public().
   providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],

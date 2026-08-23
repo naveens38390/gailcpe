@@ -22,8 +22,35 @@ export const CORRECTION_STATUSES = [
   "approved",
   "rejected",
   "applied",
+  "changes_requested",
 ] as const;
 export type CorrectionStatus = (typeof CORRECTION_STATUSES)[number];
+
+export const CORRECTION_EVENT_TYPES = [
+  "proposed",
+  "approved",
+  "rejected",
+  "changes_requested",
+] as const;
+export type CorrectionEventType = (typeof CORRECTION_EVENT_TYPES)[number];
+
+/** One entry in a correction's timeline. Embedded, not a collection of its own:
+ * it is always read together with the correction, never independently. */
+@Schema({ _id: false })
+export class CorrectionEvent {
+  @Prop({ type: String, required: true })
+  type!: CorrectionEventType;
+
+  @Prop({ type: Types.ObjectId, ref: "User", required: true })
+  by!: Types.ObjectId;
+
+  @Prop({ required: true, default: Date.now })
+  at!: Date;
+
+  @Prop() note?: string;
+}
+
+export const CorrectionEventSchema = SchemaFactory.createForClass(CorrectionEvent);
 
 @Schema({ collection: "priceCorrections", timestamps: true })
 export class PriceCorrection {
@@ -59,6 +86,10 @@ export class PriceCorrection {
 
   @Prop() decidedAt?: Date;
   @Prop() decisionNote?: string;
+
+  /** The full timeline: proposed, then whatever decisions followed. */
+  @Prop({ type: [CorrectionEventSchema], default: [] })
+  events!: CorrectionEvent[];
 }
 
 export type PriceCorrectionDocument = HydratedDocument<PriceCorrection>;

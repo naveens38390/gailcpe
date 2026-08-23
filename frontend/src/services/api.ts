@@ -142,6 +142,14 @@ async function request<T>(
   return body as T;
 }
 
+/** Builds a query string from a params object, dropping undefined/empty values. */
+function qs(params: Record<string, string | number | boolean | undefined>): string {
+  const parts = Object.entries(params)
+    .filter(([, v]) => v !== undefined && v !== "")
+    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`);
+  return parts.length ? `?${parts.join("&")}` : "";
+}
+
 export const api = {
   me: () => request<AuthUser>("/auth/me"),
 
@@ -215,6 +223,49 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ approve, note }),
     }),
+
+  correctionSummary: () => request<CorrectionSummary>("/corrections/summary"),
+
+  // ---- Dashboard --------------------------------------------------------
+
+  dashboard: () => request<DashboardResponse>("/admin/dashboard"),
+
+  // ---- Audit Log ----------------------------------------------------------
+
+  auditLogs: (params: AuditLogQuery = {}) =>
+    request<AuditLogListResponse>(`/audit-logs${qs({ ...params })}`),
+
+  correctionDetail: (id: string) =>
+    request<Correction>(`/corrections/${encodeURIComponent(id)}`),
+
+  requestCorrectionChanges: (id: string, note: string) =>
+    request<Correction>(`/corrections/${encodeURIComponent(id)}/request-changes`, {
+      method: "POST",
+      body: JSON.stringify({ note }),
+    }),
+
+  // ---- Notifications --------------------------------------------------------
+
+  notifications: (params: NotificationQuery = {}) =>
+    request<NotificationListResponse>(
+      `/notifications${qs({
+        unread: params.unreadOnly,
+        type: params.type,
+        q: params.q,
+        page: params.page,
+        limit: params.limit,
+      })}`,
+    ),
+
+  unreadNotificationCount: () => request<{ count: number }>("/notifications/unread-count"),
+
+  markNotificationRead: (id: string) =>
+    request<AppNotification>(`/notifications/${encodeURIComponent(id)}/read`, {
+      method: "POST",
+    }),
+
+  markAllNotificationsRead: () =>
+    request<{ acknowledged: boolean }>("/notifications/read-all", { method: "POST" }),
 
   // ---- Producer master data ------------------------------------------------
 
@@ -641,13 +692,25 @@ export interface GailBookRow {
   price: number;
 }
 
-export type CorrectionStatus = "pending" | "approved" | "rejected" | "applied";
+export type CorrectionStatus =
+  | "pending"
+  | "approved"
+  | "rejected"
+  | "applied"
+  | "changes_requested";
 
 export interface CorrectionActor {
   _id: string;
   name: string;
   email: string;
   role: string;
+}
+
+export interface CorrectionEvent {
+  type: "proposed" | "approved" | "rejected" | "changes_requested";
+  by: CorrectionActor | string | null;
+  at: string;
+  note?: string;
 }
 
 export interface Correction {
@@ -664,6 +727,14 @@ export interface Correction {
   decidedAt?: string;
   decisionNote?: string;
   createdAt: string;
+  events?: CorrectionEvent[];
+}
+
+export interface CorrectionSummary {
+  pending: number;
+  approvedToday: number;
+  rejected: number;
+  changesRequested: number;
 }
 
 export interface ProposeCorrectionInput {
@@ -671,6 +742,89 @@ export interface ProposeCorrectionInput {
   location: string;
   proposedPrice: number;
   reason: string;
+}
+
+export type NotificationType =
+  | "correction.proposed"
+  | "correction.approved"
+  | "correction.rejected"
+  | "correction.changes_requested"
+  | "circular.published"
+  | "system.warning";
+
+export interface AppNotification {
+  _id: string;
+  type: NotificationType;
+  title: string;
+  body: string;
+  entityType?: string;
+  entityId?: string;
+  read: boolean;
+  readAt?: string;
+  createdAt: string;
+}
+
+export interface NotificationQuery {
+  unreadOnly?: boolean;
+  type?: NotificationType;
+  q?: string;
+  page?: number;
+  limit?: number;
+}
+
+export interface NotificationListResponse {
+  items: AppNotification[];
+  total: number;
+  page: number;
+  limit: number;
+}
+
+export interface AuditLogQuery {
+  from?: string;
+  to?: string;
+  user?: string;
+  action?: string;
+  entity?: string;
+  q?: string;
+  page?: number;
+  limit?: number;
+}
+
+export interface AuditLogEntry {
+  _id: string;
+  user: CorrectionActor | string | null;
+  action: string;
+  entity: string;
+  detail: Record<string, unknown>;
+  createdAt: string;
+}
+
+export interface AuditLogListResponse {
+  items: AuditLogEntry[];
+  total: number;
+  page: number;
+  limit: number;
+}
+
+export interface ChartPoint {
+  label: string;
+  value: number;
+}
+
+export interface DashboardResponse {
+  kpis: {
+    corrections: CorrectionSummary;
+    circulars: { drafts: number; published: number; scheduled: number };
+    masterData: { producers: number; locations: number; grades: number; priceBookEntries: number };
+    activity: { today: number; thisWeek: number; thisMonth: number };
+  };
+  charts: {
+    correctionsTrend: ChartPoint[];
+    approvalRate: { approved: number; rejected: number };
+    priceUpdates: ChartPoint[];
+    circularActivity: ChartPoint[];
+  };
+  recentActivity: AuditLogEntry[];
 }
 
 export interface QuantitySlab {

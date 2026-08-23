@@ -19,6 +19,8 @@ import {
 } from "../../database/schemas/price-circular-draft.schema";
 import { DatasetService } from "../dataset/dataset.service";
 import { requiresSeparateApprover } from "../../core/approval-policy";
+import { AuditLogService } from "../audit-log/audit-log.service";
+import { NotificationsService } from "../notifications/notifications.service";
 
 export type BulkOp =
   | { type: "set"; value: number }
@@ -56,6 +58,8 @@ export class PriceCircularsService {
     @InjectModel(PriceCircular.name) private circulars: Model<PriceCircular>,
     @InjectModel(PriceEntry.name) private entries: Model<PriceEntry>,
     private dataset: DatasetService,
+    private auditLog: AuditLogService,
+    private notifications: NotificationsService,
   ) {}
 
   async list(status?: string) {
@@ -173,6 +177,9 @@ export class PriceCircularsService {
     draft.status = "review";
     draft.submittedAt = new Date();
     await draft.save();
+    await this.auditLog.log(userId, "price_circular.submit", "price_circular", String(draft._id), {
+      circularNumber: draft.circularNumber,
+    });
     return draft;
   }
 
@@ -184,6 +191,10 @@ export class PriceCircularsService {
     draft.reviewedAt = new Date();
     draft.reviewNote = note;
     await draft.save();
+    await this.auditLog.log(userId, "price_circular.review", "price_circular", String(draft._id), {
+      approved: approve,
+      note,
+    });
     return draft;
   }
 
@@ -228,6 +239,20 @@ export class PriceCircularsService {
     await draft.save();
 
     this.dataset.invalidate();
+
+    await this.auditLog.log(userId, "price_circular.publish", "price_circular", String(draft._id), {
+      circularId: String(circular._id),
+      zones: circular.stats.zones,
+      prices: rows.length,
+    });
+    await this.notifications.notify(
+      userId,
+      "circular.published",
+      "Circular published",
+      `${draft.producer} ${draft.circularNumber}: ${rows.length} prices across ${circular.stats.zones} zones`,
+      { type: "circular", id: String(circular._id) },
+    );
+
     return { draft, circular };
   }
 
@@ -241,6 +266,10 @@ export class PriceCircularsService {
     target.status = "active";
     await target.save();
     this.dataset.invalidate();
+    await this.auditLog.log(userId, "price_circular.rollback", "price_circular", String(target._id), {
+      producer,
+      reason,
+    });
     return { circular: target, reason, rolledBackBy: userId };
   }
 

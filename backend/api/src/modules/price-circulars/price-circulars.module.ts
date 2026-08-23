@@ -13,6 +13,7 @@ import {
   PriceCircularDraftRowSchema,
   PriceCircularDraftSchema,
 } from "../../database/schemas/price-circular-draft.schema";
+import { NotificationsModule } from "../notifications/notifications.module";
 import { PriceCircularsController } from "./price-circulars.controller";
 import { PriceCircularsService } from "./price-circulars.service";
 
@@ -24,6 +25,7 @@ import { PriceCircularsService } from "./price-circulars.service";
       { name: PriceCircular.name, schema: PriceCircularSchema },
       { name: PriceEntry.name, schema: PriceEntrySchema },
     ]),
+    NotificationsModule,
   ],
   controllers: [PriceCircularsController],
   providers: [PriceCircularsService],

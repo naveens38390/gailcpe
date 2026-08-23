@@ -26,6 +26,7 @@ function mergeZoneMap(
 @Injectable()
 export class LocationsService extends MasterDataService {
   protected workflow: RevisionWorkflow;
+  protected entityName = "location";
 
   constructor(
     @InjectModel(Location.name) private locations: Model<Location>,
@@ -58,7 +59,7 @@ export class LocationsService extends MasterDataService {
     const { name, reason, submit, ...changes } = dto;
     const fields = this.buildFields(undefined, changes);
     const rev = await this.workflow.draft(name, fields, reason, userId, true);
-    return submit === false ? rev : this.workflow.submit(String(rev._id), userId);
+    return submit === false ? rev : this.submit(String(rev._id), userId);
   }
 
   async draft(name: string, dto: DraftLocationDto, userId: string) {
@@ -66,7 +67,7 @@ export class LocationsService extends MasterDataService {
     const live = await this.locations.findOne({ name }).lean();
     const fields = this.buildFields(live ?? undefined, changes);
     const rev = await this.workflow.draft(name, fields, reason, userId, false);
-    return submit === false ? rev : this.workflow.submit(String(rev._id), userId);
+    return submit === false ? rev : this.submit(String(rev._id), userId);
   }
 
   private buildFields(

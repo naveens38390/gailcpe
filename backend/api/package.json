@@ -1,7 +1,7 @@
 {
   "name": "gcpe-api",
   "version": "0.1.0",
-  "description": "GAIL PE Competitive Pricing Engine \u2014 backend. All pricing logic lives here; the mobile app is a presentation layer.",
+  "description": "GAIL PE Competitive Pricing Engine — backend. All pricing logic lives here; the mobile app is a presentation layer.",
   "private": true,
   "scripts": {
     "build": "nest build",
@@ -48,5 +48,9 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.7.0"
+  },
+  "allowScripts": {
+    "@scarf/scarf@1.4.0": true,
+    "mongodb-memory-server@10.4.3": true
   }
 }

@@ -26,6 +26,7 @@ const IMPACT_WINDOW_DAYS = 30;
 @Injectable()
 export class DiscountAdminService extends MasterDataService {
   protected workflow: RevisionWorkflow;
+  protected entityName = "discount_terms";
 
   constructor(
     @InjectModel(DiscountTerms.name) private terms: Model<DiscountTerms>,
@@ -46,14 +47,14 @@ export class DiscountAdminService extends MasterDataService {
   async create(dto: CreateDiscountTermsDto, userId: string) {
     const { producer, reason, submit, ...fields } = dto;
     const rev = await this.workflow.draft(producer, fields, reason, userId, true);
-    return submit === false ? rev : this.workflow.submit(String(rev._id), userId);
+    return submit === false ? rev : this.submit(String(rev._id), userId);
   }
 
   async draft(producer: string, dto: DraftDiscountTermsDto, userId: string) {
     const { reason, submit, ...changes } = dto;
     const fields = Object.fromEntries(Object.entries(changes).filter(([, v]) => v !== undefined));
     const rev = await this.workflow.draft(producer, fields, reason, userId, false);
-    return submit === false ? rev : this.workflow.submit(String(rev._id), userId);
+    return submit === false ? rev : this.submit(String(rev._id), userId);
   }
 
   /**
@@ -61,9 +62,13 @@ export class DiscountAdminService extends MasterDataService {
    * effect — the one piece of effective-dating this module adds beyond the
    * shared engine: not a future-scheduled window yet, but a clear, honest
    * record of when "now" happened, since discount terms are read live.
+   *
+   * Routes through the base class's publish() (not this.workflow.publish()
+   * directly) so the shared invalidate()/audit-log behavior still runs —
+   * this override only adds the effectiveFrom stamp on top.
    */
   async publish(revisionId: string, userId: string) {
-    const rev = await this.workflow.publish(revisionId, userId);
+    const rev = await super.publish(revisionId, userId);
     await this.terms.updateOne({ producer: (rev as any).entityId }, { effectiveFrom: new Date() });
     return rev;
   }

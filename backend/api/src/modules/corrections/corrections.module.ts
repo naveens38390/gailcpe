@@ -5,6 +5,7 @@ import {
   PriceCorrection,
   PriceCorrectionSchema,
 } from "../../database/schemas/correction.schema";
+import { NotificationsModule } from "../notifications/notifications.module";
 import { CorrectionsController } from "./corrections.controller";
 import { CorrectionsService } from "./corrections.service";
 
@@ -13,6 +14,7 @@ import { CorrectionsService } from "./corrections.service";
     MongooseModule.forFeature([
       { name: PriceCorrection.name, schema: PriceCorrectionSchema },
     ]),
+    NotificationsModule,
   ],
   controllers: [CorrectionsController],
   providers: [CorrectionsService],
