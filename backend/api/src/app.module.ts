@@ -18,6 +18,7 @@ import { ProducersModule } from "./modules/producers/producers.module";
 import { DealsModule } from "./modules/deals/deals.module";
 import { FreightModule } from "./modules/freight/freight.module";
 import { GradesModule } from "./modules/grades/grades.module";
+import { HealthModule } from "./modules/health/health.module";
 import { LocationsModule } from "./modules/locations/locations.module";
 import { NotificationsModule } from "./modules/notifications/notifications.module";
 import { PricingModule } from "./modules/pricing/pricing.module";
@@ -55,6 +56,7 @@ import { PricingModule } from "./modules/pricing/pricing.module";
     PriceCircularsModule,
     ExportsModule,
     DashboardModule,
+    HealthModule,
   ],
   // Authenticated by default. A route opens up only by saying so with @Public().
   providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],

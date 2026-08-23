@@ -1,0 +1,31 @@
+# Deploys the NestJS pricing API. The mobile app and the Vercel web app both
+# talk to this; all pricing arithmetic lives here, so it has to be reachable
+# over HTTPS from a phone on any network, not just the office Wi-Fi.
+services:
+  - type: web
+    name: gcpe-api
+    runtime: node
+    rootDir: backend/api
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    # Every other route is behind the global JWT guard and would answer a probe
+    # with 401, which the platform reads as "down".
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # MONGODB_URI is set, so the in-memory fallback never loads. Skip the
+      # ~100MB MongoDB binary its postinstall would otherwise download.
+      - key: MONGOMS_DISABLE_POSTINSTALL
+        value: "1"
+      # Secret. Paste the Atlas connection string in the Render dashboard —
+      # it must not live in the repo.
+      - key: MONGODB_URI
+        sync: false
+      # Without this the code falls back to a hardcoded default that is public
+      # in the source, and anyone could mint themselves an admin token.
+      - key: JWT_SECRET
+        generateValue: true
+      - key: REQUIRE_SEPARATE_APPROVER
+        value: "false"

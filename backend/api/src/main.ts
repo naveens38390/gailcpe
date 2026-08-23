@@ -42,8 +42,11 @@ async function bootstrap() {
   SwaggerModule.setup("api/docs", app, SwaggerModule.createDocument(app, config));
 
   const port = Number(process.env.PORT ?? 3000);
-  await app.listen(port);
-  new Logger("bootstrap").log(`GCPE API on http://localhost:${port}/api`);
+  // Hosting platforms route traffic to the container's external interface.
+  // Express would default to all interfaces anyway, but saying so explicitly
+  // is what keeps a platform health check from ever seeing a closed port.
+  await app.listen(port, "0.0.0.0");
+  new Logger("bootstrap").log(`GCPE API listening on port ${port}, base path /api`);
 }
 
 bootstrap();
