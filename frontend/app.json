@@ -15,7 +15,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0B0F17"
-      }
+      },
+      "package": "com.gail.gcpe",
+      "versionCode": 1
     },
     "web": {
       "bundler": "metro",
