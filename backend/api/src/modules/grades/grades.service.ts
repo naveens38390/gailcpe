@@ -6,7 +6,7 @@ import {
   Grade,
   GradeMapping,
 } from "../../database/schemas/catalog.schema";
-import { normaliseGrade } from "../../core/pricing";
+import { additiveBaseOf, normaliseGrade } from "../../core/pricing";
 
 /**
  * Grade Finder.
@@ -97,7 +97,18 @@ export class GradesService {
   async detail(gailGrade: string) {
     const folded = normaliseGrade(gailGrade);
     const all = await this.mappings.find().lean();
-    const mapping = all.find((m) => normaliseGrade(m.gailGrade) === folded);
+    const direct = all.find((m) => normaliseGrade(m.gailGrade) === folded);
+
+    // An additive variant the sheet never wrote a row for is governed by its
+    // base grade's row. Resolved the same way Compare and the quote engine
+    // resolve it, so Grade Finder cannot disagree with the price ladder about
+    // whether a variant has competitors.
+    const base = direct ? null : additiveBaseOf(gailGrade);
+    const inherited = base
+      ? all.find((m) => normaliseGrade(m.gailGrade) === base)
+      : undefined;
+    const mapping = direct ?? inherited;
+
     if (!mapping) {
       throw new NotFoundException(
         `${gailGrade} is not in the cross-reference. Search by application to find a substitute.`,
@@ -110,11 +121,14 @@ export class GradesService {
     );
 
     return {
-      gailGrade: mapping.gailGrade,
+      // Answer about the code that was asked for, not the row governing it.
+      gailGrade: inherited ? gailGrade : mapping.gailGrade,
       polymer: mapping.polymer,
       section: mapping.section,
       application: mapping.application,
-      characteristic: mapping.characteristic,
+      characteristic: inherited
+        ? `${mapping.characteristic} (NA additive)`
+        : mapping.characteristic,
       process: mapping.process,
       mfi: mapping.mfi,
       density: mapping.density,
