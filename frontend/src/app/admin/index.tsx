@@ -22,6 +22,7 @@ const MODULES: Record<string, ModuleCard> = {
   grades: { key: "grades", title: "Grade Mappings", subtitle: "44 grades, equivalents, confidence, status", route: "/admin/grades" },
   discounts: { key: "discounts", title: "Discount Terms", subtitle: "Cash discount, EPI, IFC, quantity slabs", route: "/admin/discounts" },
   priceBook: { key: "priceBook", title: "Price Book", subtitle: "Search GAIL's 16,589-row live price matrix", route: "/admin/price-book" },
+  circulars: { key: "circulars", title: "Circulars", subtitle: "File a circular, attach its reading, hand the draft to review", route: "/admin/circulars" },
   priceCirculars: { key: "priceCirculars", title: "Price Circulars", subtitle: "Create, edit, review, publish — the circular as one revision", route: "/admin/price-circulars" },
   freightCirculars: { key: "freightCirculars", title: "Freight Circulars", subtitle: "Replaces freight spreadsheets" },
   approvals: { key: "approvals", title: "Approvals", subtitle: "Review pending price corrections — approve, reject, or request changes", route: "/admin/approvals" },
@@ -40,7 +41,7 @@ const MODULES: Record<string, ModuleCard> = {
 const NAV_GROUPS: Array<{ title: string; items: ModuleCard[] }> = [
   { title: "Operations", items: [MODULES.approvals!, MODULES.notifications!] },
   { title: "Master Data", items: [MODULES.producers!, MODULES.locations!, MODULES.grades!, MODULES.discounts!] },
-  { title: "Pricing", items: [MODULES.priceBook!, MODULES.priceCirculars!, MODULES.freightCirculars!] },
+  { title: "Pricing", items: [MODULES.priceBook!, MODULES.circulars!, MODULES.priceCirculars!, MODULES.freightCirculars!] },
   { title: "System", items: [MODULES.auditLog!] },
 ];
 
