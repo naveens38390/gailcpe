@@ -123,6 +123,45 @@ export function normaliseGrade(code: string): string {
 }
 
 /**
+ * The base grade an additive variant is a variant of, or null.
+ *
+ * GAIL's book carries a `NA` additive form of eleven grades. Only one of them
+ * — B52A003NA — was given its own cross-reference row; the rest were left out
+ * of the sheet entirely.
+ */
+export function additiveBaseOf(code: string): string | null {
+  const folded = normaliseGrade(code);
+  return folded.endsWith("NA") ? folded.slice(0, -2) : null;
+}
+
+/**
+ * The cross-reference row that governs a grade.
+ *
+ * Where the sheet wrote both a base grade and its additive variant, it
+ * published byte-identical competitor equivalents for the pair — B52A003 and
+ * B52A003NA carry the same six producers and the same codes, as do W52A009
+ * and W52ASR009. The additive changes the material, not which competitor
+ * grade substitutes for it.
+ *
+ * So a variant the sheet never got round to writing inherits its base grade's
+ * row rather than being treated as having no competitors at all, which is what
+ * left ten grades GAIL prices everywhere marked "GAIL only".
+ */
+export function crossRefFor(data: Dataset, gailGrade: string): CrossRefEntry | undefined {
+  const direct = data.crossref.index[gailGrade];
+  if (direct) return direct;
+
+  const folded = normaliseGrade(gailGrade);
+  const exact = Object.keys(data.crossref.index).find((k) => normaliseGrade(k) === folded);
+  if (exact) return data.crossref.index[exact];
+
+  const base = additiveBaseOf(gailGrade);
+  if (!base) return undefined;
+  const key = Object.keys(data.crossref.index).find((k) => normaliseGrade(k) === base);
+  return key ? data.crossref.index[key] : undefined;
+}
+
+/**
  * Fold a free-text location onto GAIL's canonical 313-location list. GAIL's own
  * zone keys *are* that list, so no separate table is needed.
  *
@@ -256,7 +295,7 @@ export function quote(
   paymentMode: PaymentMode,
 ): Quote {
   const gaps: string[] = [];
-  const entry = data.crossref.index[gailGrade];
+  const entry = crossRefFor(data, gailGrade);
   const terms = data.discounts.producers[producer];
   const source = data.priceIndex.producers[producer];
 
@@ -381,7 +420,7 @@ export function compare(
         .join(", ")} — confirm before quoting.`,
     );
   }
-  const entry = data.crossref.index[gailGrade];
+  const entry = crossRefFor(data, gailGrade);
   if (entry && entry.confidence && entry.confidence !== "H") {
     warnings.push(
       `Grade mapping confidence is ${entry.confidence}, not high.`,

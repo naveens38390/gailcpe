@@ -15,7 +15,7 @@
 
 import { Injectable } from "@nestjs/common";
 
-import { normaliseGrade } from "../../core/pricing";
+import { crossRefFor, normaliseGrade } from "../../core/pricing";
 import type { Dataset } from "../../core/pricing";
 import type { Producer } from "../../core/types";
 import { DatasetService } from "../dataset/dataset.service";
@@ -119,7 +119,7 @@ function pricedCodeFor(
   const cells = data.priceIndex.producers[producer]?.zones?.[zone];
   if (!cells) return null;
   if (producer === "GAIL") return gailKeyFor(cells, gailGrade);
-  const candidates = data.crossref.index[gailGrade]?.equivalents?.[producer] ?? [];
+  const candidates = crossRefFor(data, gailGrade)?.equivalents?.[producer] ?? [];
   for (const candidate of candidates) {
     const target = normaliseGrade(candidate);
     const hit = Object.keys(cells).find((k) => normaliseGrade(k) === target);
@@ -222,6 +222,36 @@ export class CatalogService {
       seen.add(folded);
       let locationCount = 0;
       for (const zone of gailLocations) if (gailZones[zone]![code] !== undefined) locationCount++;
+
+      // An additive variant the sheet never wrote a row for still substitutes
+      // for the same competitor grades its base does — where the sheet wrote
+      // both rows it published identical equivalents — so it inherits them and
+      // is comparable, rather than being stranded as GAIL-only.
+      const inherited = crossRefFor(data, code);
+      if (inherited) {
+        const competitors = Object.entries(inherited.equivalents ?? {})
+          .filter(([producer, codes]) => codes.length > 0 && producer in data.priceIndex.producers)
+          .map(([producer]) => producer);
+        out.push({
+          gailGrade: code,
+          polymer: inherited.polymer,
+          section: inherited.section,
+          application: inherited.application,
+          // Same wording the sheet uses on the one variant it did write.
+          characteristic: `${inherited.characteristic} (NA additive)`,
+          process: inherited.process,
+          mfi: inherited.mfi,
+          density: inherited.density,
+          confidence: inherited.confidence,
+          status: inherited.status,
+          availability:
+            locationCount === 0 ? "no_gail_price" : competitors.length ? "comparable" : "gail_only",
+          competitors,
+          locationCount,
+        });
+        continue;
+      }
+
       out.push({
         gailGrade: code,
         polymer: code.startsWith("F") || code.startsWith("R") ? "LLDPE" : "HDPE",
