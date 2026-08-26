@@ -22,6 +22,7 @@ import { HealthModule } from "./modules/health/health.module";
 import { LocationsModule } from "./modules/locations/locations.module";
 import { NotificationsModule } from "./modules/notifications/notifications.module";
 import { PricingModule } from "./modules/pricing/pricing.module";
+import { TimelineModule } from "./modules/timeline/timeline.module";
 
 @Module({
   imports: [
@@ -57,6 +58,7 @@ import { PricingModule } from "./modules/pricing/pricing.module";
     ExportsModule,
     DashboardModule,
     HealthModule,
+    TimelineModule,
   ],
   // Authenticated by default. A route opens up only by saying so with @Public().
   providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],

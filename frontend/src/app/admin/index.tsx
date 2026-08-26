@@ -27,6 +27,7 @@ const MODULES: Record<string, ModuleCard> = {
   freightCirculars: { key: "freightCirculars", title: "Freight Circulars", subtitle: "Replaces freight spreadsheets" },
   approvals: { key: "approvals", title: "Approvals", subtitle: "Review pending price corrections — approve, reject, or request changes", route: "/admin/approvals" },
   notifications: { key: "notifications", title: "Notifications", subtitle: "Every correction submitted, approved, rejected, or sent back", route: "/admin/notifications" },
+  timeline: { key: "timeline", title: "Change History", subtitle: "Every change by the day it happened — who, which circular, before and after", route: "/admin/timeline" },
   auditLog: { key: "auditLog", title: "Audit Logs", subtitle: "Who changed what, and when", route: "/admin/audit-log" },
 };
 
@@ -42,7 +43,7 @@ const NAV_GROUPS: Array<{ title: string; items: ModuleCard[] }> = [
   { title: "Operations", items: [MODULES.approvals!, MODULES.notifications!] },
   { title: "Master Data", items: [MODULES.producers!, MODULES.locations!, MODULES.grades!, MODULES.discounts!] },
   { title: "Pricing", items: [MODULES.priceBook!, MODULES.circulars!, MODULES.priceCirculars!, MODULES.freightCirculars!] },
-  { title: "System", items: [MODULES.auditLog!] },
+  { title: "System", items: [MODULES.timeline!, MODULES.auditLog!] },
 ];
 
 export default function AdminIndexScreen() {

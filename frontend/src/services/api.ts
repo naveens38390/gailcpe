@@ -342,6 +342,10 @@ export const api = {
   circularSourceUrl: (id: string) =>
     `${API_BASE_URL}/circulars/${encodeURIComponent(id)}/source`,
 
+  /** Everything that changed, grouped by the day it changed. */
+  timeline: (params: { from?: string; to?: string; limit?: number } = {}) =>
+    request<Timeline>(`/timeline${qs(params)}`),
+
   rounds: () => request<Round[]>("/circulars/rounds"),
 
   corrections: (status?: string) =>
@@ -689,6 +693,31 @@ export interface AuthUser {
 export interface LoginResponse {
   accessToken: string;
   user: AuthUser & { territories: string[] };
+}
+
+export type TimelineKind =
+  | "circular_published"
+  | "circular_filed"
+  | "master_data"
+  | "correction";
+
+/** One thing that happened, whatever kind of thing it was. */
+export interface TimelineEntry {
+  kind: TimelineKind;
+  at: string;
+  by: string;
+  title: string;
+  detail?: string;
+  /** The circular this traces back to, where one exists. */
+  source?: string;
+  changes?: Array<{ field: string; from: unknown; to: unknown }>;
+  link?: { kind: "draft" | "circular" | "correction"; id: string };
+}
+
+export interface Timeline {
+  total: number;
+  shown: number;
+  days: Array<{ date: string; entries: TimelineEntry[] }>;
 }
 
 /** What comes back when a circular document is filed. */
