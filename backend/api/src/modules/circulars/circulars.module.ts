@@ -3,6 +3,7 @@ import { MongooseModule } from "@nestjs/mongoose";
 
 import { CircularsController } from "./circulars.controller";
 import { CircularsService } from "./circulars.service";
+import { CircularStoreService } from "./circular-store.service";
 import {
   FreightCircular,
   FreightCircularSchema,
@@ -21,7 +22,7 @@ import {
     ]),
   ],
   controllers: [CircularsController],
-  providers: [CircularsService],
-  exports: [CircularsService],
+  providers: [CircularsService, CircularStoreService],
+  exports: [CircularsService, CircularStoreService],
 })
 export class CircularsModule {}

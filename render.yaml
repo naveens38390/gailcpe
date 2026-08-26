@@ -29,3 +29,19 @@ services:
         generateValue: true
       - key: REQUIRE_SEPARATE_APPROVER
         value: "false"
+      # Where uploaded circular documents are kept. Must point at a mounted
+      # disk: without one the filesystem is ephemeral and every uploaded
+      # circular is lost on the next restart. The service warns at boot if
+      # this is unset in production.
+      - key: CIRCULAR_STORE_DIR
+        value: /var/data/circulars
+
+    # Uncomment together with a paid plan above. Render does not allow a disk
+    # on a free instance, so syncing this blueprint while `plan: free` stands
+    # will fail rather than silently ignore it. A round is ~14 documents of a
+    # few megabytes, so 1GB holds years of them.
+    #
+    # disk:
+    #   name: circulars
+    #   mountPath: /var/data
+    #   sizeGB: 1

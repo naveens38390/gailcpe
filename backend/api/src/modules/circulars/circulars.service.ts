@@ -1,13 +1,16 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 
 import {
   FreightCircular,
   PriceCircular,
   PriceEntry,
+  type CircularStatus,
 } from "../../database/schemas/circular.schema";
 import { DatasetService } from "../dataset/dataset.service";
+import { CircularStoreService } from "./circular-store.service";
+import { UploadCircularDto } from "./dto/upload-circular.dto";
 
 /**
  * Circular Repository.
@@ -26,7 +29,75 @@ export class CircularsService {
     @InjectModel(FreightCircular.name) private freight: Model<FreightCircular>,
     @InjectModel(PriceEntry.name) private entries: Model<PriceEntry>,
     private dataset: DatasetService,
+    private store: CircularStoreService,
   ) {}
+
+  /**
+   * Take receipt of a circular document.
+   *
+   * This records the source and nothing else. It deliberately does not touch
+   * prices: extraction still runs outside the application, and a circular that
+   * has been filed is not the same thing as a circular that has been applied.
+   * The record lands with no entries and no status change, so nothing an
+   * officer quotes from moves because a file was uploaded.
+   */
+  async upload(
+    dto: UploadCircularDto,
+    file: { buffer: Buffer; originalname?: string },
+    userId?: string,
+  ) {
+    const effectiveDate = new Date(dto.effectiveDate);
+    if (Number.isNaN(effectiveDate.getTime())) {
+      throw new BadRequestException("That effective date is not a real date.");
+    }
+
+    const round = effectiveDate.toISOString().slice(0, 10);
+    const stored = await this.store.put(file, round);
+
+    const common = {
+      producer: dto.producer.trim(),
+      reference: dto.reference.trim(),
+      effectiveDate,
+      sourceKey: stored.key,
+      sourceFilename: file.originalname,
+      uploadedBy: userId ? new Types.ObjectId(userId) : undefined,
+      uploadedAt: new Date(),
+      // Filed, not live — the existing "draft" state. Publishing stays a
+      // separate, deliberate act.
+      status: "draft" as CircularStatus,
+    };
+
+    const created =
+      dto.kind === "price"
+        ? await this.prices.create({ ...common, basis: "ex_works" })
+        : await this.freight.create(common);
+
+    return {
+      id: String(created._id),
+      kind: dto.kind,
+      producer: common.producer,
+      reference: common.reference,
+      effectiveDate: round,
+      sourceKey: stored.key,
+      sourceFilename: file.originalname ?? null,
+      bytes: stored.bytes,
+      documentType: stored.label,
+      status: common.status,
+    };
+  }
+
+  /** The stored source document, for the "open the circular" link. */
+  async source(id: string) {
+    const record =
+      (await this.prices.findById(id).lean()) ?? (await this.freight.findById(id).lean());
+    if (!record?.sourceKey) {
+      throw new NotFoundException("No source document was stored for that circular.");
+    }
+    return {
+      stream: await this.store.read(record.sourceKey),
+      filename: record.sourceFilename ?? record.sourceKey.split("/").pop()!,
+    };
+  }
 
   async list(kind?: "price" | "freight") {
     const [price, freight] = await Promise.all([
