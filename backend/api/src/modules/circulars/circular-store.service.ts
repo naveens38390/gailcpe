@@ -1,27 +1,32 @@
 /**
  * Where uploaded circulars are kept.
  *
- * The documents themselves never go in MongoDB — a round is ~14 files and
- * several megabytes each, which would bloat every Atlas backup for no benefit.
- * They live on a mounted disk instead, addressed by an opaque key that the
- * circular record stores. The key is deliberately meaningless to the
- * filesystem beyond its round folder, so moving this to object storage later
- * is a change to this file alone.
+ * The documents live in MongoDB, in their own collection, addressed by an
+ * opaque key that the circular record stores. That indirection is the point:
+ * the store is a mounted disk in one deployment and object storage in another,
+ * and swapping it stays a change to this file alone.
+ *
+ * MongoDB is the right backend *here* specifically because this deployment has
+ * no persistent volume. A hosted instance without one comes back from a
+ * restart with an empty filesystem, so anything written to disk would vanish —
+ * silently, leaving circular records pointing at documents that no longer
+ * exist. Atlas is already provisioned and already backed up.
  */
 
 import { BadRequestException, Injectable, Logger, NotFoundException } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
 import { randomUUID } from "node:crypto";
-import { createReadStream, type ReadStream } from "node:fs";
-import { mkdir, stat, writeFile } from "node:fs/promises";
-import { join, resolve, sep } from "node:path";
+
+import { CircularDocument } from "../../database/schemas/circular-document.schema";
 
 /**
  * The kinds of document a circular actually arrives as, recognised by their
  * leading bytes rather than by the name the browser sent.
  *
  * A filename is caller-controlled and proves nothing. Checking the signature
- * is what stops something that is not a document at all being written into the
- * store under a `.pdf` name.
+ * is what stops something that is not a document at all being filed under a
+ * `.pdf` name.
  */
 const SIGNATURES: Array<{ ext: string; magic: number[]; label: string }> = [
   { ext: "pdf", magic: [0x25, 0x50, 0x44, 0x46], label: "PDF" }, // %PDF
@@ -29,11 +34,15 @@ const SIGNATURES: Array<{ ext: string; magic: number[]; label: string }> = [
   { ext: "xls", magic: [0xd0, 0xcf, 0x11, 0xe0], label: "legacy Excel workbook" }, // OLE2
 ];
 
-/** The largest circular in the current round is 1.9MB; this leaves real room. */
-export const MAX_UPLOAD_BYTES = 32 * 1024 * 1024;
+/**
+ * A whole BSON document caps at 16MB and this stores the bytes inline, so the
+ * ceiling is real rather than advisory. The largest circular in the current
+ * round is 1.9MB, which leaves the limit a long way from binding.
+ */
+export const MAX_UPLOAD_BYTES = 12 * 1024 * 1024;
 
 export interface StoredDocument {
-  /** What goes in the circular record's sourceKey. */
+  /** What goes in the circular record's sourceKey or extractKey. */
   key: string;
   bytes: number;
   label: string;
@@ -43,31 +52,13 @@ export interface StoredDocument {
 export class CircularStoreService {
   private readonly logger = new Logger(CircularStoreService.name);
 
-  /**
-   * On Render this is the mount path of the attached disk. Locally it falls
-   * back to a folder beside the project so a developer needs no setup.
-   */
-  private readonly root = resolve(
-    process.env.CIRCULAR_STORE_DIR ?? join(process.cwd(), "var", "circulars"),
-  );
-
-  constructor() {
-    // A hosted instance without a mounted disk has an ephemeral filesystem:
-    // uploads would appear to succeed and then disappear on the next restart,
-    // leaving circular records pointing at files that no longer exist. Better
-    // to say so once at boot than to discover it after a redeploy.
-    if (process.env.NODE_ENV === "production" && !process.env.CIRCULAR_STORE_DIR) {
-      this.logger.warn(
-        `CIRCULAR_STORE_DIR is not set — storing circulars in ${this.root}, ` +
-          "which is not persistent on a hosted instance. Uploaded documents " +
-          "will be lost on the next restart. Attach a disk and point this at it.",
-      );
-    }
-  }
+  constructor(
+    @InjectModel(CircularDocument.name) private documents: Model<CircularDocument>,
+  ) {}
 
   /**
-   * Write one uploaded document and return the key to record against the
-   * circular. Nothing the caller sent is used to build the path.
+   * Store one uploaded document and return the key to record against the
+   * circular. Nothing the caller sent is used to build that key.
    */
   async put(
     file: { buffer: Buffer; originalname?: string },
@@ -85,7 +76,7 @@ export class CircularStoreService {
 
     // An extract is JSON, which has no signature to check. The caller has
     // already parsed it by this point, so its validity is established — this
-    // only decides the extension it is filed under.
+    // only decides what the stored document is called.
     const match = options.allowJson
       ? { ext: "json", label: "extract" }
       : SIGNATURES.find((s) => s.magic.every((byte, i) => file.buffer[i] === byte));
@@ -96,14 +87,17 @@ export class CircularStoreService {
       );
     }
 
-    // The round groups the store so a person can find a file on disk; the UUID
-    // is what makes the name safe, and unguessable.
-    const folder = sanitiseSegment(round);
-    const key = `${folder}/${randomUUID()}.${match.ext}`;
+    // The round prefixes the key so a person reading the collection can see
+    // what belongs together; the UUID is what makes it unique and unguessable.
+    const key = `${sanitiseSegment(round)}/${randomUUID()}.${match.ext}`;
 
-    const destination = this.pathFor(key);
-    await mkdir(join(this.root, folder), { recursive: true });
-    await writeFile(destination, file.buffer);
+    await this.documents.create({
+      key,
+      filename: file.originalname,
+      label: match.label,
+      bytes: file.buffer.length,
+      data: file.buffer,
+    });
 
     this.logger.log(
       `stored ${match.label} ${(file.buffer.length / 1024).toFixed(0)}KB as ${key}` +
@@ -112,34 +106,19 @@ export class CircularStoreService {
     return { key, bytes: file.buffer.length, label: match.label };
   }
 
-  /** Stream a stored document back out, for the "open the source" link. */
-  async read(key: string): Promise<ReadStream> {
-    const path = this.pathFor(key);
-    try {
-      await stat(path);
-    } catch {
+  /** A stored document, for the "open the circular" link. */
+  async read(key: string): Promise<{ data: Buffer; filename?: string; label: string }> {
+    // Not `.lean()`: that hands back Mongo's Binary wrapper, and the point of
+    // this method is to return something the response can be written from.
+    const found = await this.documents.findOne({ key });
+    if (!found) {
       throw new NotFoundException("That source document is no longer in the store.");
     }
-    return createReadStream(path);
-  }
-
-  /**
-   * Resolve a key to a path, refusing anything that climbs out of the store.
-   *
-   * Keys are generated here, so this should never fire — but a stored key is
-   * read back from the database, and treating database content as trusted
-   * input is how a traversal gets in later.
-   */
-  private pathFor(key: string): string {
-    const path = resolve(this.root, key);
-    if (path !== this.root && !path.startsWith(this.root + sep)) {
-      throw new BadRequestException("That document key is not valid.");
-    }
-    return path;
+    return { data: found.data, filename: found.filename, label: found.label };
   }
 }
 
-/** One path segment, reduced to characters that mean the same thing everywhere. */
+/** One key segment, reduced to characters that mean the same thing everywhere. */
 function sanitiseSegment(value: string): string {
   const cleaned = (value ?? "").replace(/[^A-Za-z0-9._-]/g, "-").replace(/^[.-]+/, "");
   return cleaned || "unfiled";

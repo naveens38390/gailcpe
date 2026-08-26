@@ -57,9 +57,9 @@ export class CircularsController {
   @Get(":id/source")
   @ApiOperation({ summary: "Download the stored source document for one circular" })
   async source(@Param("id") id: string, @Res() res: Response) {
-    const { stream, filename } = await this.circulars.source(id);
+    const { data, filename } = await this.circulars.source(id);
     res.setHeader("Content-Disposition", `attachment; filename="${filename.replace(/"/g, "")}"`);
-    stream.pipe(res);
+    res.send(data);
   }
 
   @Get()

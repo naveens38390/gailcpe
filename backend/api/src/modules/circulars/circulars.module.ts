@@ -13,6 +13,10 @@ import {
   PriceEntry,
   PriceEntrySchema,
 } from "../../database/schemas/circular.schema";
+import {
+  CircularDocument,
+  CircularDocumentSchema,
+} from "../../database/schemas/circular-document.schema";
 
 @Module({
   imports: [
@@ -20,6 +24,7 @@ import {
       { name: PriceCircular.name, schema: PriceCircularSchema },
       { name: FreightCircular.name, schema: FreightCircularSchema },
       { name: PriceEntry.name, schema: PriceEntrySchema },
+      { name: CircularDocument.name, schema: CircularDocumentSchema },
     ]),
     PriceCircularsModule,
   ],

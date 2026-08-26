@@ -165,9 +165,10 @@ export class CircularsService {
     if (!record?.sourceKey) {
       throw new NotFoundException("No source document was stored for that circular.");
     }
+    const stored = await this.store.read(record.sourceKey);
     return {
-      stream: await this.store.read(record.sourceKey),
-      filename: record.sourceFilename ?? record.sourceKey.split("/").pop()!,
+      data: stored.data,
+      filename: record.sourceFilename ?? stored.filename ?? record.sourceKey.split("/").pop()!,
     };
   }
 
