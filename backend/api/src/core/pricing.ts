@@ -365,6 +365,34 @@ export function quote(
     gaps.push(`${producer} quantity discount ${terms.quantity_slabs_status}`);
   }
 
+  /**
+   * Terms the dataset carries that this ladder does not model.
+   *
+   * The early-payment incentive and the interest-free credit period are real
+   * money — HMEL's EPI is worth Rs 1,040/MT against RIL's Rs 720 — but turning
+   * either into a number needs a commercial rule nobody has written down yet:
+   * whether the incentive stacks with the cash discount, and what a day of
+   * free credit is worth. Guessing would move quoted prices.
+   *
+   * So they are reported rather than applied. Naming them once per producer
+   * keeps the caveat honest without burying the two gaps that mean a figure is
+   * actually missing.
+   */
+  const unmodelled: string[] = [];
+  if (terms?.early_payment_per_day) {
+    const cap = terms.early_payment_max_days ? ` up to ${terms.early_payment_max_days} days` : "";
+    unmodelled.push(`early payment Rs ${terms.early_payment_per_day}/MT/day${cap}`);
+  }
+  if (terms?.interest_free_credit_days) {
+    unmodelled.push(`${terms.interest_free_credit_days} days interest-free credit`);
+  }
+  if (terms?.dealer_discount) {
+    unmodelled.push(`dealer discount Rs ${terms.dealer_discount}/MT`);
+  }
+  if (unmodelled.length) {
+    gaps.push(`${producer} also offers ${unmodelled.join(" and ")} — on record, not in this ladder`);
+  }
+
   return {
     producer,
     grade,

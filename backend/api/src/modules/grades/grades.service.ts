@@ -120,6 +120,17 @@ export class GradesService {
       priced.map((g) => `${g.producer}|${normaliseGrade(g.code)}`),
     );
 
+    /**
+     * Producers this deployment actually carries prices for.
+     *
+     * The cross-reference lists BCPL equivalents, but no BCPL circular was ever
+     * loaded, so every BCPL code fails the priced check and renders struck
+     * through — permanently, for every grade, saying "renamed or withdrawn"
+     * about a producer that was simply never onboarded. Compare already hides
+     * these; Grade Finder was the one screen still showing them.
+     */
+    const carried = new Set(priced.map((g) => g.producer));
+
     return {
       // Answer about the code that was asked for, not the row governing it.
       gailGrade: inherited ? gailGrade : mapping.gailGrade,
@@ -135,8 +146,9 @@ export class GradesService {
       confidence: mapping.confidence,
       status: mapping.status,
       international: mapping.international,
-      equivalents: Object.entries(mapping.equivalents ?? {}).map(
-        ([producer, codes]) => ({
+      equivalents: Object.entries(mapping.equivalents ?? {})
+        .filter(([producer]) => carried.has(producer))
+        .map(([producer, codes]) => ({
           producer,
           codes: codes.map((code) => ({
             code,
