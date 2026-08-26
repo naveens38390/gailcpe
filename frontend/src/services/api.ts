@@ -94,6 +94,42 @@ export class ApiError extends Error {
   }
 }
 
+/**
+ * How long one attempt may run, and how long to wait before repeating it.
+ *
+ * The API is hosted on an instance that sleeps when idle. A measured cold
+ * start is about 43 seconds; a warm call is under half a second. Two things
+ * followed from having no timeout at all: a sleeping backend left a screen
+ * spinning with nothing to report, and on Android the platform's own socket
+ * timeout fires first and fails the call outright — which is why the first
+ * open of the day so often needed a second try.
+ *
+ * Four attempts spread over these delays outlast a cold start, while no
+ * single attempt hangs long enough to look like a dead screen.
+ */
+const ATTEMPT_TIMEOUT_MS = 25_000;
+const RETRY_DELAYS_MS = [500, 2_000, 5_000];
+
+/** Statuses that mean the request never reached the application. */
+const TRANSIENT_STATUS = new Set([429, 502, 503, 504]);
+
+const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+
+/**
+ * Whether a failed call can be repeated safely.
+ *
+ * A dropped POST may well have reached the server and been applied, so
+ * replaying it risks a second price correction from one tap. Reads carry no
+ * such risk. Login is the deliberate exception: repeating it costs nothing
+ * but an audit row, and it is the first call the app makes — if it cannot
+ * survive a cold start, nothing else ever gets a token.
+ */
+function isReplayable(method: string, path: string): boolean {
+  const verb = method.toUpperCase();
+  if (verb === "GET" || verb === "HEAD") return true;
+  return verb === "POST" && path === "/auth/login";
+}
+
 async function request<T>(
   path: string,
   init: RequestInit & { auth?: boolean; retry?: boolean } = {},
@@ -102,21 +138,56 @@ async function request<T>(
   if (auth) await ensureSession();
   const token = auth ? accessToken : null;
 
-  let response: Response;
-  try {
-    response = await fetch(`${API_BASE_URL}${path}`, {
-      ...rest,
-      headers: {
-        "Content-Type": "application/json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        ...headers,
-      },
-    });
-  } catch {
-    // A dropped request is the normal case in the field, not an edge case.
-    throw new ApiError(
-      `Cannot reach the pricing service at ${API_BASE_URL}. Check the connection and try again.`,
-      0,
+  const method = (rest.method ?? "GET").toString();
+  const attempts = retry && isReplayable(method, path) ? RETRY_DELAYS_MS.length + 1 : 1;
+
+  let response: Response | null = null;
+  let lastError: ApiError | null = null;
+
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    if (attempt > 0) await delay(RETRY_DELAYS_MS[attempt - 1]!);
+
+    // Without this the request inherits the platform's own timeout, which on
+    // Android is shorter than a cold start and on web is effectively never.
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), ATTEMPT_TIMEOUT_MS);
+    try {
+      response = await fetch(`${API_BASE_URL}${path}`, {
+        ...rest,
+        signal: controller.signal,
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          ...headers,
+        },
+      });
+    } catch {
+      // A dropped request is the normal case in the field, not an edge case:
+      // a lost connection, or this attempt outrunning its own timeout.
+      response = null;
+      lastError = new ApiError(
+        `Cannot reach the pricing service at ${API_BASE_URL}. Check the connection and try again.`,
+        0,
+      );
+      continue;
+    } finally {
+      clearTimeout(timer);
+    }
+
+    // The gateway answered but the application did not, so nothing was acted
+    // on and the call can be repeated.
+    if (TRANSIENT_STATUS.has(response.status) && attempt < attempts - 1) {
+      lastError = new ApiError("The pricing service is still starting up.", response.status);
+      response = null;
+      continue;
+    }
+    break;
+  }
+
+  if (!response) {
+    throw (
+      lastError ??
+      new ApiError(`Cannot reach the pricing service at ${API_BASE_URL}.`, 0)
     );
   }
 

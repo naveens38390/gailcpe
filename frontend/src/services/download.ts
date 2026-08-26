@@ -11,12 +11,30 @@ import { Platform } from "react-native";
 
 import { API_BASE_URL, authHeader } from "./api";
 
+/**
+ * Longer than an ordinary API call allows for, because the server is building
+ * a workbook or a PDF rather than reading a row — but still bounded. Without a
+ * limit a stalled export leaves a button spinning with nothing to report.
+ */
+const EXPORT_TIMEOUT_MS = 60_000;
+
 export async function downloadExport(path: string, filename: string): Promise<void> {
   const url = `${API_BASE_URL}${path}`;
   const headers = await authHeader();
 
   if (Platform.OS === "web") {
-    const response = await fetch(url, { headers });
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), EXPORT_TIMEOUT_MS);
+    let response: Response;
+    try {
+      response = await fetch(url, { headers, signal: controller.signal });
+    } catch {
+      throw new Error(
+        "The file did not arrive in time. The pricing service may still be starting up — try again.",
+      );
+    } finally {
+      clearTimeout(timer);
+    }
     if (!response.ok) {
       throw new Error(`Could not generate that file (${response.status}).`);
     }
