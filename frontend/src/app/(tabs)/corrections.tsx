@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { ScrollView, Text, TextInput, View } from "react-native";
 
 import { api, type Correction, type CorrectionActor } from "../../services/api";
 import { Field, Input, PrimaryButton, Suggestions, useSuggestions } from "../../components/inputs";
@@ -13,7 +13,17 @@ const statusColor = (c: ThemeColors): Record<string, string> => ({
   applied: c.success,
   rejected: c.danger,
   approved: c.success,
+  changes_requested: c.primary,
 });
+
+/** The raw status is a database value; "CHANGES_REQUESTED" is not a caption. */
+const STATUS_LABEL: Record<string, string> = {
+  pending: "AWAITING APPROVAL",
+  applied: "APPROVED",
+  rejected: "REJECTED",
+  approved: "APPROVED",
+  changes_requested: "REVISION REQUESTED",
+};
 
 /**
  * Price Corrections — a fast, single-cell fix to one of GAIL's own prices.
@@ -21,15 +31,18 @@ const statusColor = (c: ThemeColors): Record<string, string> => ({
  * Deliberately lighter-weight than the Master Data modules (Producers,
  * Locations, Grades, Discounts): those are structured entities on the full
  * Draft -> Review -> Approved -> Published engine with history and rollback.
- * A price correction is one number with a reason, decided once. The single
- * administrator both proposes and decides.
+ * A price correction is one number with a reason, decided once.
+ *
+ * This screen proposes and tracks; it does not decide. Approving, rejecting
+ * and commenting live in the Admin Panel behind the administrator gate — the
+ * officer raising a correction should not be able to wave it through from the
+ * same screen they raised it on.
  */
 export default function CorrectionsScreen() {
   const styles = useStyles();
   const [items, setItems] = useState<Correction[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [busyId, setBusyId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     try {
@@ -46,20 +59,13 @@ export default function CorrectionsScreen() {
     load();
   }, [load]);
 
-  async function decide(id: string, approve: boolean) {
-    setBusyId(id);
-    try {
-      await api.decideCorrection(id, approve);
-      await load();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Could not record that decision.");
-    } finally {
-      setBusyId(null);
-    }
-  }
-
   const pending = items.filter((c) => c.status === "pending");
-  const decided = items.filter((c) => c.status !== "pending");
+  // Sent back for revision: not decided, and the only state that needs the
+  // proposer to do something, so it does not belong in either other bucket.
+  const revising = items.filter((c) => c.status === "changes_requested");
+  const decided = items.filter(
+    (c) => c.status !== "pending" && c.status !== "changes_requested",
+  );
 
   return (
     <ScrollView
@@ -74,15 +80,26 @@ export default function CorrectionsScreen() {
 
       {!loading && pending.length ? (
         <Card>
-          <SectionTitle>Pending ({pending.length})</SectionTitle>
+          <SectionTitle>Awaiting approval ({pending.length})</SectionTitle>
+          <Text style={styles.readOnlyNote}>
+            An administrator reviews these in the Admin Panel. The outcome and
+            any comment appear here once it is decided.
+          </Text>
           {pending.map((c) => (
-            <CorrectionRow
-              key={c._id}
-              correction={c}
-              canDecide
-              busy={busyId === c._id}
-              onDecide={(approve) => decide(c._id, approve)}
-            />
+            <CorrectionRow key={c._id} correction={c} />
+          ))}
+        </Card>
+      ) : null}
+
+      {!loading && revising.length ? (
+        <Card>
+          <SectionTitle>Revision requested ({revising.length})</SectionTitle>
+          <Text style={styles.readOnlyNote}>
+            Sent back with a comment. Submit a fresh correction with the change
+            the reviewer asked for.
+          </Text>
+          {revising.map((c) => (
+            <CorrectionRow key={c._id} correction={c} />
           ))}
         </Card>
       ) : null}
@@ -91,7 +108,7 @@ export default function CorrectionsScreen() {
         <Card>
           <SectionTitle>Decided</SectionTitle>
           {decided.map((c) => (
-            <CorrectionRow key={c._id} correction={c} canDecide={false} />
+            <CorrectionRow key={c._id} correction={c} />
           ))}
         </Card>
       ) : null}
@@ -197,17 +214,8 @@ function ProposeForm({ onProposed }: { onProposed: () => void }) {
   );
 }
 
-function CorrectionRow({
-  correction,
-  canDecide,
-  busy,
-  onDecide,
-}: {
-  correction: Correction;
-  canDecide: boolean;
-  busy?: boolean;
-  onDecide?: (approve: boolean) => void;
-}) {
+/** Read-only throughout: every decision control lives in the Admin Panel. */
+function CorrectionRow({ correction }: { correction: Correction }) {
   const styles = useStyles();
   const { colors } = useTheme();
   const delta = correction.proposedPrice - correction.currentPrice;
@@ -218,7 +226,7 @@ function CorrectionRow({
           {correction.grade} · {correction.zone}
         </Text>
         <Pill
-          label={correction.status.toUpperCase()}
+          label={STATUS_LABEL[correction.status] ?? correction.status.toUpperCase()}
           color={statusColor(colors)[correction.status] ?? colors.neutral}
         />
       </View>
@@ -243,29 +251,12 @@ function CorrectionRow({
       </Text>
       {correction.decidedBy ? (
         <Text style={styles.meta}>
-          {correction.status} by {actorLabel(correction.decidedBy)}
+          {(STATUS_LABEL[correction.status] ?? correction.status).toLowerCase()} by{" "}
+          {actorLabel(correction.decidedBy)}
           {correction.decisionNote ? ` — ${correction.decisionNote}` : ""}
         </Text>
       ) : null}
 
-      {canDecide && onDecide ? (
-        <View style={styles.actions}>
-          <Pressable
-            style={[styles.actionButton, styles.reject, busy && styles.busy]}
-            onPress={() => onDecide(false)}
-            disabled={busy}
-          >
-            <Text style={styles.rejectText}>Reject</Text>
-          </Pressable>
-          <Pressable
-            style={[styles.actionButton, styles.approve, busy && styles.busy]}
-            onPress={() => onDecide(true)}
-            disabled={busy}
-          >
-            <Text style={styles.approveText}>Approve</Text>
-          </Pressable>
-        </View>
-      ) : null}
     </View>
   );
 }
@@ -304,17 +295,4 @@ const useStyles = makeStyles((c) => ({
   priceDelta: { fontSize: 12, fontWeight: "700" },
   reason: { color: c.textMuted, fontSize: 13, lineHeight: 18, marginTop: theme.space(1) },
   meta: { color: c.textFaint, fontSize: 11, marginTop: 2 },
-  actions: { flexDirection: "row", gap: theme.space(2), marginTop: theme.space(3) },
-  actionButton: {
-    flex: 1,
-    borderRadius: theme.radius.md,
-    paddingVertical: theme.space(2),
-    alignItems: "center",
-    borderWidth: 1,
-  },
-  busy: { opacity: 0.5 },
-  reject: { borderColor: c.danger, backgroundColor: c.surfaceAlt },
-  rejectText: { color: c.danger, fontWeight: "700", fontSize: 13 },
-  approve: { borderColor: c.success, backgroundColor: c.success },
-  approveText: { color: c.onPrimary, fontWeight: "700", fontSize: 13 },
 }));
