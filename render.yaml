@@ -29,3 +29,10 @@ services:
         generateValue: true
       - key: REQUIRE_SEPARATE_APPROVER
         value: "false"
+    # Uploaded circulars are stored in MongoDB rather than on disk. This
+    # instance has no persistent volume — a disk needs a paid plan — and a
+    # free instance spins down when idle and restarts with an empty
+    # filesystem, so anything written there would be gone within minutes while
+    # the circular record still pointed at it. Atlas is already provisioned
+    # and already backed up, and a round is ~14 documents of a few megabytes.
+    # No configuration is needed here; see circular-store.service.ts.

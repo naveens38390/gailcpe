@@ -36,9 +36,34 @@ export class PriceCircular {
   @Prop({ type: String, required: true })
   basis!: PriceBasis;
 
-  /** S3 key for the source PDF. The file itself never goes in MongoDB. */
+  /**
+   * Where the source document is stored, relative to the circular store. The
+   * file itself never goes in MongoDB. Written as an S3 key originally; the
+   * store is a mounted disk today, and the key is opaque either way so moving
+   * to object storage later does not change this field's meaning.
+   */
   @Prop() sourceKey?: string;
+  /** What the uploader called it, kept for display only — never used as a path. */
   @Prop() sourceFilename?: string;
+
+  /** Who put this document into the system, and when it arrived. */
+  @Prop({ type: Types.ObjectId, ref: "User" })
+  uploadedBy?: Types.ObjectId;
+  @Prop() uploadedAt?: Date;
+
+  /**
+   * The extracted reading of this circular, kept beside the source it came
+   * from. Two files, one business event: asked why a price moved on a given
+   * day, someone can open both the circular as published and the numbers that
+   * were read out of it.
+   */
+  @Prop() extractKey?: string;
+  @Prop() extractFilename?: string;
+  @Prop() extractedAt?: Date;
+
+  /** The draft this circular's extract generated, once one exists. */
+  @Prop({ type: Types.ObjectId })
+  draft?: Types.ObjectId;
 
   @Prop({ type: Object, default: {} })
   stats!: Record<string, number>;
@@ -89,8 +114,13 @@ export class FreightCircular {
   @Prop({ type: String, required: true, default: "active", index: true })
   status!: CircularStatus;
 
+  /** See PriceCircular.sourceKey — same store, same meaning. */
   @Prop() sourceKey?: string;
   @Prop() sourceFilename?: string;
+
+  @Prop({ type: Types.ObjectId, ref: "User" })
+  uploadedBy?: Types.ObjectId;
+  @Prop() uploadedAt?: Date;
 
   @Prop({ type: Object, default: {} })
   stats!: Record<string, number>;

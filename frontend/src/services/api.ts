@@ -213,6 +213,50 @@ async function request<T>(
   return body as T;
 }
 
+/**
+ * Send a file.
+ *
+ * Kept apart from `request` for two reasons. The multipart boundary has to be
+ * chosen by the platform, so setting Content-Type here produces a body the
+ * server cannot parse. And an upload is never replayed: it creates a record,
+ * and a dropped one may well have arrived — the same rule that keeps a
+ * correction from being submitted twice.
+ *
+ * The timeout is generous because these carry whole circulars, and the server
+ * reads a 16,000-row extract before it answers.
+ */
+async function upload<T>(path: string, form: FormData, timeoutMs = 120_000): Promise<T> {
+  await ensureSession();
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  let response: Response;
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, {
+      method: "POST",
+      body: form,
+      signal: controller.signal,
+      headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+    });
+  } catch {
+    throw new ApiError(
+      "The upload did not complete. Check the connection and try again — nothing was saved.",
+      0,
+    );
+  } finally {
+    clearTimeout(timer);
+  }
+
+  const body = await response.json().catch(() => null);
+  if (!response.ok) {
+    const message = Array.isArray(body?.message)
+      ? body.message.join(", ")
+      : (body?.message ?? `Upload failed (${response.status}).`);
+    throw new ApiError(message, response.status);
+  }
+  return body as T;
+}
+
 /** Builds a query string from a params object, dropping undefined/empty values. */
 function qs(params: Record<string, string | number | boolean | undefined>): string {
   const parts = Object.entries(params)
@@ -286,6 +330,17 @@ export const api = {
   gailBook: () => request<GailBookRow[]>("/pricing/gail-book"),
 
   circulars: () => request<CircularList>("/circulars"),
+
+  /** File a circular document against a producer and round. */
+  uploadCircular: (form: FormData) => upload<UploadedCircular>("/circulars/upload", form),
+
+  /** Attach its extracted reading, which generates the draft to review. */
+  attachCircularExtract: (id: string, form: FormData) =>
+    upload<CircularExtractResult>(`/circulars/${encodeURIComponent(id)}/extract`, form),
+
+  /** Where the stored source document can be opened from. */
+  circularSourceUrl: (id: string) =>
+    `${API_BASE_URL}/circulars/${encodeURIComponent(id)}/source`,
 
   rounds: () => request<Round[]>("/circulars/rounds"),
 
@@ -636,6 +691,36 @@ export interface LoginResponse {
   user: AuthUser & { territories: string[] };
 }
 
+/** What comes back when a circular document is filed. */
+export interface UploadedCircular {
+  id: string;
+  kind: "price" | "freight";
+  producer: string;
+  reference: string;
+  effectiveDate: string;
+  sourceFilename: string | null;
+  bytes: number;
+  documentType: string;
+  status: string;
+}
+
+/** What comes back when its extracted reading is attached. */
+export interface CircularExtractResult {
+  circularId: string;
+  draftId: string;
+  producer: string;
+  reference: string;
+  effectiveDate: string;
+  rowCount: number;
+  changedRowCount: number;
+  addedCount: number;
+  added: string[];
+  /** Live rows the extract never mentioned — a partial or half-read circular. */
+  removedCount: number;
+  removed: string[];
+  status: string;
+}
+
 export type GradeStatus = "active" | "deprecated" | "retired";
 
 /** One of the grades that can answer a given customer requirement. */
@@ -784,9 +869,24 @@ export interface FreightView {
   notes: string[];
 }
 
+/** One circular as filed, whether or not it has been read yet. */
+export interface CircularRecord extends Record<string, unknown> {
+  _id: string;
+  kind: "price" | "freight";
+  producer: string;
+  reference?: string;
+  effectiveDate: string;
+  status: string;
+  sourceFilename?: string;
+  uploadedAt?: string;
+  extractedAt?: string;
+  /** The draft its extract generated, once one exists. */
+  draft?: string;
+}
+
 export interface CircularList {
-  price: Array<Record<string, unknown>>;
-  freight: Array<Record<string, unknown>>;
+  price: CircularRecord[];
+  freight: CircularRecord[];
 }
 
 export interface Round {

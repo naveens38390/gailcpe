@@ -42,6 +42,7 @@ export default function AdminLayout() {
       <Stack.Screen name="grades" options={{ title: "Grades" }} />
       <Stack.Screen name="discounts" options={{ title: "Discount Terms" }} />
       <Stack.Screen name="price-book" options={{ title: "Price Book" }} />
+      <Stack.Screen name="circulars" options={{ title: "Circulars" }} />
       <Stack.Screen name="price-circulars" options={{ title: "Price Circulars" }} />
       <Stack.Screen name="price-circular/[id]" options={{ title: "Circular" }} />
       <Stack.Screen name="approvals" options={{ title: "Approvals" }} />

@@ -1,12 +1,66 @@
-import { Controller, Get, Param, Post, Query } from "@nestjs/common";
-import { ApiOperation, ApiTags } from "@nestjs/swagger";
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  Req,
+  Res,
+  UploadedFile,
+  UseInterceptors,
+} from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { ApiConsumes, ApiOperation, ApiTags } from "@nestjs/swagger";
+import type { Response } from "express";
 
 import { CircularsService } from "./circulars.service";
+import { MAX_UPLOAD_BYTES } from "./circular-store.service";
+import { UploadCircularDto } from "./dto/upload-circular.dto";
 
 @ApiTags("circulars")
 @Controller("circulars")
 export class CircularsController {
   constructor(private circulars: CircularsService) {}
+
+  @Post("upload")
+  @ApiConsumes("multipart/form-data")
+  @ApiOperation({ summary: "File a circular document against a producer and round" })
+  // Held in memory rather than a temp file: the largest circular in a round is
+  // under 2MB, and the store writes it straight through to disk.
+  @UseInterceptors(FileInterceptor("file", { limits: { fileSize: MAX_UPLOAD_BYTES } }))
+  upload(
+    @UploadedFile() file: { buffer: Buffer; originalname?: string } | undefined,
+    @Body() dto: UploadCircularDto,
+    @Req() req: any,
+  ) {
+    if (!file) throw new BadRequestException("Attach the circular as `file`.");
+    return this.circulars.upload(dto, file, req.user?.id);
+  }
+
+  @Post(":id/extract")
+  @ApiConsumes("multipart/form-data")
+  @ApiOperation({
+    summary: "Attach an extracted reading to a filed circular and draft it for review",
+  })
+  @UseInterceptors(FileInterceptor("file", { limits: { fileSize: MAX_UPLOAD_BYTES } }))
+  extract(
+    @Param("id") id: string,
+    @UploadedFile() file: { buffer: Buffer; originalname?: string } | undefined,
+    @Req() req: any,
+  ) {
+    if (!file) throw new BadRequestException("Attach the extract as `file`.");
+    return this.circulars.attachExtract(id, file, req.user?.id);
+  }
+
+  @Get(":id/source")
+  @ApiOperation({ summary: "Download the stored source document for one circular" })
+  async source(@Param("id") id: string, @Res() res: Response) {
+    const { data, filename } = await this.circulars.source(id);
+    res.setHeader("Content-Disposition", `attachment; filename="${filename.replace(/"/g, "")}"`);
+    res.send(data);
+  }
 
   @Get()
   @ApiOperation({ summary: "All price and freight circulars, newest first" })
