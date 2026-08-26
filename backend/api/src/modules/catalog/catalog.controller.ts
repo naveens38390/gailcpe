@@ -23,4 +23,12 @@ export class CatalogController {
   availability(@Param("grade") grade: string) {
     return this.catalog.availability(grade);
   }
+
+  @Get("grades/:grade/variants")
+  @ApiOperation({
+    summary: "Every grade serving the same application, priced at one location",
+  })
+  variants(@Param("grade") grade: string, @Query("location") location?: string) {
+    return this.catalog.variants(grade, location);
+  }
 }

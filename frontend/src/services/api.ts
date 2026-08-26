@@ -177,6 +177,17 @@ export const api = {
       `/catalog/grades/${encodeURIComponent(gailGrade)}/availability`,
     ),
 
+  /**
+   * Every grade serving the same application as this one. Pass a location and
+   * each comes back with GAIL's price there, which is what the choice between
+   * them turns on.
+   */
+  gradeVariants: (gailGrade: string, location?: string) =>
+    request<ProductVariants>(
+      `/catalog/grades/${encodeURIComponent(gailGrade)}/variants` +
+        (location ? `?location=${encodeURIComponent(location)}` : ""),
+    ),
+
   searchGrades: (q: string) =>
     request<GradeHit[]>(`/grades/search?q=${encodeURIComponent(q)}`),
 
@@ -555,6 +566,32 @@ export interface LoginResponse {
 }
 
 export type GradeStatus = "active" | "deprecated" | "retired";
+
+/** One of the grades that can answer a given customer requirement. */
+export interface GradeVariant {
+  gailGrade: string;
+  polymer: string;
+  /** Full text, additive marker included — "General purpose, <5L (NA additive)". */
+  characteristic: string;
+  process?: string;
+  mfi?: string;
+  density?: string;
+  confidence?: string;
+  status?: GradeStatus;
+  availability: GradeAvailabilityKind;
+  competitors: string[];
+  /** GAIL's basic price at the requested location; null when not priced there. */
+  gailPrice: number | null;
+  /** The code GAIL's book publishes it under — B52A003 is listed as B52A003A. */
+  pricedAs: string | null;
+}
+
+export interface ProductVariants {
+  product: { section: string; application: string; characteristic: string };
+  location: string | null;
+  selected: string;
+  variants: GradeVariant[];
+}
 
 export interface GradeHit {
   gailGrade: string;

@@ -69,6 +69,14 @@ export interface CrossRefEntry {
   equivalents: Record<string, string[]>;
   confidence: string;
   status?: "active" | "deprecated" | "retired";
+  /**
+   * What separates two grades that serve the same application. Three blow
+   * moulding grades can share one characteristic and still differ by process
+   * and density, and that is precisely the choice an officer is making.
+   */
+  process?: string;
+  mfi?: string;
+  density?: string;
 }
 
 /**

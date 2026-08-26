@@ -35,6 +35,7 @@ export interface CatalogGrade {
   section: string;
   application: string;
   characteristic: string;
+  process?: string;
   mfi?: string;
   density?: string;
   confidence?: string;
@@ -44,6 +45,45 @@ export interface CatalogGrade {
   competitors: string[];
   /** How many of GAIL's 313 ex-works locations carry a price for this grade. */
   locationCount: number;
+}
+
+/**
+ * The cross-reference marks an additive package inside the characteristic —
+ * "General purpose, <5L (NA additive)". That is a real difference in the
+ * product and must stay visible, but it does not change what the customer
+ * asked for, so it is stripped when deciding which grades answer one
+ * requirement. Only an additive parenthetical is removed; every other
+ * parenthetical is left alone rather than risk merging unrelated grades.
+ */
+function requirementKey(characteristic: string): string {
+  return characteristic.replace(/\s*\([^)]*additive[^)]*\)\s*$/i, "").trim();
+}
+
+/** One grade a customer could be quoted for a given product need. */
+export interface GradeVariant {
+  gailGrade: string;
+  polymer: string;
+  /** Full text, additive marker included — what makes this one different. */
+  characteristic: string;
+  process?: string;
+  mfi?: string;
+  density?: string;
+  confidence?: string;
+  status?: string;
+  availability: GradeAvailability;
+  competitors: string[];
+  /** GAIL's basic price at the requested location; null if not priced there. */
+  gailPrice: number | null;
+  /** The code GAIL's own book uses — B52A003 is published as B52A003A. */
+  pricedAs: string | null;
+}
+
+export interface ProductVariants {
+  /** What the customer is buying, which is what the grades are variants of. */
+  product: { section: string; application: string; characteristic: string };
+  location: string | null;
+  selected: string;
+  variants: GradeVariant[];
 }
 
 export interface CatalogLocation {
@@ -158,8 +198,9 @@ export class CatalogService {
         section: entry.section,
         application: entry.application,
         characteristic: entry.characteristic,
-        mfi: (entry as { mfi?: string }).mfi,
-        density: (entry as { density?: string }).density,
+        process: entry.process,
+        mfi: entry.mfi,
+        density: entry.density,
         confidence: entry.confidence,
         status: entry.status,
         availability,
@@ -246,6 +287,85 @@ export class CatalogService {
       known: canonical in data.crossref.index || locations.length > 0,
       locations,
       producers: allProducers.filter((p) => producerSet.has(p)),
+    };
+  }
+
+  /**
+   * Every grade that answers the same need as this one.
+   *
+   * A customer asks for a material, not a code — "blow moulding, general
+   * purpose, under five litres" is served by three GAIL grades that differ by
+   * ~Rs 2,500/MT. Selecting one of them should not hide the other two, because
+   * choosing between them is the officer's actual decision.
+   *
+   * Grades are grouped off the cross-reference's own section / application /
+   * characteristic, which is the sheet's existing statement of "these serve
+   * the same purpose". Nothing new is asserted here.
+   */
+  async variants(gailGrade: string, location?: string): Promise<ProductVariants> {
+    const data = await this.dataset.load();
+    const target = normaliseGrade(gailGrade);
+
+    // Derived from the same method that builds the picker, so a variant can
+    // never disagree with the grade row the officer selected it from.
+    const all = this.grades(data);
+    const selected = all.find((g) => normaliseGrade(g.gailGrade) === target);
+
+    const product = {
+      section: selected?.section ?? "UNMAPPED",
+      application: selected?.application ?? "Not in the cross-reference",
+      characteristic: requirementKey(selected?.characteristic ?? ""),
+    };
+
+    // An unmapped code has no published purpose, so it has no siblings — no
+    // grouping every unmapped grade into one meaningless "product".
+    const group =
+      selected && selected.section !== "UNMAPPED"
+        ? all.filter(
+            (g) =>
+              g.section === product.section &&
+              g.application === product.application &&
+              requirementKey(g.characteristic) === requirementKey(product.characteristic),
+          )
+        : selected
+          ? [selected]
+          : [];
+
+    const gailZones = data.priceIndex.producers.GAIL?.zones ?? {};
+    const cells = location ? gailZones[location] : undefined;
+
+    const variants: GradeVariant[] = group.map((g) => {
+      const pricedAs = cells ? gailKeyFor(cells, g.gailGrade) : null;
+      return {
+        gailGrade: g.gailGrade,
+        polymer: g.polymer,
+        characteristic: g.characteristic,
+        process: g.process,
+        mfi: g.mfi,
+        density: g.density,
+        confidence: g.confidence,
+        status: g.status,
+        availability: g.availability,
+        competitors: g.competitors,
+        gailPrice: pricedAs && cells ? (cells[pricedAs] ?? null) : null,
+        pricedAs,
+      };
+    });
+
+    // Cheapest first once a location is known — that is the order the choice
+    // is actually made in. Without a location there is no price to rank by.
+    variants.sort((a, b) => {
+      if (a.gailPrice !== null && b.gailPrice !== null) return a.gailPrice - b.gailPrice;
+      if (a.gailPrice !== null) return -1;
+      if (b.gailPrice !== null) return 1;
+      return a.gailGrade.localeCompare(b.gailGrade);
+    });
+
+    return {
+      product,
+      location: location ?? null,
+      selected: selected?.gailGrade ?? gailGrade,
+      variants,
     };
   }
 }

@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 
 import {
   api,
   type Comparison,
   type GradeAvailability,
   type PaymentMode,
+  type ProductVariants,
   type Quote,
 } from "../../services/api";
 import { Field, Input, PaymentToggle, PrimaryButton } from "../../components/inputs";
@@ -43,6 +44,8 @@ export default function CompareScreen() {
   const [availability, setAvailability] = useState<GradeAvailability | null>(null);
   const [availabilityBusy, setAvailabilityBusy] = useState(false);
 
+  const [variants, setVariants] = useState<ProductVariants | null>(null);
+
   const [result, setResult] = useState<Comparison | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -76,6 +79,27 @@ export default function CompareScreen() {
       cancelled = true;
     };
   }, [grade]);
+
+  // The other grades that answer the same requirement. Re-fetched when the
+  // location changes because the prices they are chosen on are per-location.
+  useEffect(() => {
+    if (!grade) {
+      setVariants(null);
+      return;
+    }
+    let cancelled = false;
+    api
+      .gradeVariants(grade, location || undefined)
+      .then((v) => {
+        if (!cancelled) setVariants(v);
+      })
+      .catch(() => {
+        if (!cancelled) setVariants(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [grade, location]);
 
   const gradeOptions: Option[] = useMemo(() => {
     if (!catalog) return [];
@@ -227,6 +251,8 @@ export default function CompareScreen() {
         <PrimaryButton label="Compare" onPress={run} busy={busy} disabled={!ready} />
       </Card>
 
+      <VariantPicker variants={variants} selected={grade} onSelect={setGrade} />
+
       {error ? <ErrorNote message={error} /> : null}
 
       {result ? (
@@ -270,6 +296,105 @@ export default function CompareScreen() {
         <Empty>Select a grade and a location to compare all six producers.</Empty>
       ) : null}
     </ScrollView>
+  );
+}
+
+/**
+ * The other grades that answer the same requirement.
+ *
+ * A customer asks for a material — "blow moulding, general purpose, under five
+ * litres" — not a code, and GAIL usually has more than one grade that fits. The
+ * cheapest is not automatically the right one: these differ by process and
+ * density, so the officer needs the spread and the specs together, not one
+ * grade at a time.
+ *
+ * Nothing renders when a requirement has only one grade; there is no choice to
+ * present.
+ */
+function VariantPicker({
+  variants,
+  selected,
+  onSelect,
+}: {
+  variants: ProductVariants | null;
+  selected: string;
+  onSelect: (grade: string) => void;
+}) {
+  const styles = useStyles();
+  const { colors } = useTheme();
+  if (!variants || variants.variants.length < 2) return null;
+
+  const priced = variants.variants.filter((v) => v.gailPrice !== null);
+  const cheapest = priced.length ? priced[0]!.gailPrice! : null;
+  const spread = priced.length > 1 ? priced[priced.length - 1]!.gailPrice! - cheapest! : 0;
+
+  return (
+    <Card>
+      <SectionTitle>Grades for this requirement</SectionTitle>
+      <Text style={styles.variantProduct}>
+        {variants.product.application}
+        {variants.product.characteristic ? ` · ${variants.product.characteristic}` : ""}
+      </Text>
+      <Text style={styles.variantCaption}>
+        {variants.variants.length} grades fit
+        {spread > 0
+          ? ` · ${rupees(spread)}/MT between cheapest and dearest here`
+          : variants.location
+            ? ""
+            : " · choose a location to price them"}
+      </Text>
+
+      {variants.variants.map((v) => {
+        const isSelected = v.gailGrade === selected;
+        const delta = v.gailPrice !== null && cheapest !== null ? v.gailPrice - cheapest : null;
+        // The cross-reference hangs the additive package off the end of the
+        // characteristic. It is the whole reason two grades here differ, so it
+        // is shown rather than folded away with the requirement text.
+        const additive = /\(([^)]*additive[^)]*)\)\s*$/i.exec(v.characteristic)?.[1];
+        const specs = [v.process, v.mfi ? `MFI ${v.mfi}` : null, v.density]
+          .filter(Boolean)
+          .join(" · ");
+        return (
+          <Pressable
+            key={v.gailGrade}
+            onPress={() => onSelect(v.gailGrade)}
+            style={[styles.variantRow, isSelected && styles.variantRowOn]}
+            accessibilityRole="button"
+            accessibilityState={{ selected: isSelected }}
+          >
+            <View style={styles.variantMain}>
+              <View style={styles.variantHead}>
+                <Text style={[styles.variantGrade, isSelected && styles.variantGradeOn]}>
+                  {v.gailGrade}
+                </Text>
+                {isSelected ? <Pill label="COMPARING" color={colors.primary} /> : null}
+                {additive ? <Pill label={additive.toUpperCase()} color={colors.warning} /> : null}
+                {v.availability === "no_gail_price" ? (
+                  <Pill label="NO GAIL PRICE" color={colors.danger} />
+                ) : null}
+              </View>
+              {specs ? <Text style={styles.variantSpecs}>{specs}</Text> : null}
+            </View>
+
+            <View style={styles.variantPriceCol}>
+              <Text style={styles.variantPrice}>
+                {v.gailPrice !== null ? rupees(v.gailPrice) : "not priced here"}
+              </Text>
+              {delta !== null && delta > 0 ? (
+                <Text style={styles.variantDelta}>+{rupees(delta)}</Text>
+              ) : delta === 0 ? (
+                <Text style={styles.variantCheapest}>cheapest</Text>
+              ) : null}
+            </View>
+          </Pressable>
+        );
+      })}
+
+      <Text style={styles.variantFootnote}>
+        Prices are GAIL's basic ex-works rate at this location. Tap a grade to
+        compare it against the other producers instead.
+      </Text>
+    </Card>
   );
 }
 
@@ -411,6 +536,32 @@ const useStyles = makeStyles((c) => ({
   producer: { color: c.textPrimary, fontSize: 17, fontWeight: "800" },
   landed: { color: c.textPrimary, fontSize: 17, fontWeight: "700" },
   gradeLine: { color: c.textMuted, fontSize: 12, marginTop: 2 },
+
+  variantProduct: { color: c.textPrimary, fontSize: 14, fontWeight: "700" },
+  variantCaption: { color: c.textFaint, fontSize: 12, marginTop: 2 },
+  variantRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: theme.space(3),
+    paddingVertical: theme.space(3),
+    paddingHorizontal: theme.space(3),
+    marginTop: theme.space(2),
+    borderRadius: theme.radius.md,
+    borderWidth: 1,
+    borderColor: c.border,
+    backgroundColor: c.surfaceAlt,
+  },
+  variantRowOn: { borderColor: c.primary, backgroundColor: c.surfaceCard },
+  variantMain: { flex: 1, gap: 3 },
+  variantHead: { flexDirection: "row", alignItems: "center", gap: theme.space(2), flexWrap: "wrap" },
+  variantGrade: { color: c.textPrimary, fontSize: 15, fontWeight: "700" },
+  variantGradeOn: { color: c.primary },
+  variantSpecs: { color: c.textFaint, fontSize: 11 },
+  variantPriceCol: { alignItems: "flex-end" },
+  variantPrice: { color: c.textPrimary, fontSize: 14, fontWeight: "800" },
+  variantDelta: { color: c.danger, fontSize: 11, fontWeight: "700", marginTop: 1 },
+  variantCheapest: { color: c.success, fontSize: 11, fontWeight: "700", marginTop: 1 },
+  variantFootnote: { color: c.textFaint, fontSize: 11, lineHeight: 16, marginTop: theme.space(3) },
   ladder: {
     marginTop: theme.space(3),
     borderTopWidth: 1,
