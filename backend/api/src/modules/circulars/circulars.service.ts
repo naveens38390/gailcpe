@@ -10,6 +10,8 @@ import {
 } from "../../database/schemas/circular.schema";
 import { DatasetService } from "../dataset/dataset.service";
 import { CircularStoreService } from "./circular-store.service";
+import { parseExtract } from "./extract-format";
+import { PriceCircularsService } from "../price-circulars/price-circulars.service";
 import { UploadCircularDto } from "./dto/upload-circular.dto";
 
 /**
@@ -30,6 +32,7 @@ export class CircularsService {
     @InjectModel(PriceEntry.name) private entries: Model<PriceEntry>,
     private dataset: DatasetService,
     private store: CircularStoreService,
+    private priceCirculars: PriceCircularsService,
   ) {}
 
   /**
@@ -83,6 +86,75 @@ export class CircularsService {
       bytes: stored.bytes,
       documentType: stored.label,
       status: common.status,
+    };
+  }
+
+  /**
+   * Attach the extracted reading of a circular already on file, and turn it
+   * into a draft for review.
+   *
+   * The extract is stored beside the document it came from rather than
+   * standing alone, so the circular record answers both halves of "why did
+   * this price move" — what the producer published, and what was read out of
+   * it. Publishing remains a separate, deliberate act on the draft.
+   */
+  async attachExtract(
+    id: string,
+    file: { buffer: Buffer; originalname?: string },
+    userId?: string,
+  ) {
+    const circular = await this.prices.findById(id);
+    if (!circular) {
+      throw new NotFoundException(
+        "No such price circular. Freight extracts have no draft model yet.",
+      );
+    }
+    if (circular.draft) {
+      throw new BadRequestException(
+        "That circular already has a draft. Discard it before attaching a different reading.",
+      );
+    }
+
+    let parsedJson: unknown;
+    try {
+      parsedJson = JSON.parse(file.buffer.toString("utf8"));
+    } catch {
+      throw new BadRequestException("That file is not valid JSON.");
+    }
+    const extract = parseExtract(parsedJson, circular.producer);
+
+    const round = circular.effectiveDate.toISOString().slice(0, 10);
+    const stored = await this.store.put(file, round, { allowJson: true });
+
+    const result = await this.priceCirculars.createFromExtract({
+      producer: circular.producer,
+      circularNumber: circular.reference,
+      effectiveDate: circular.effectiveDate,
+      reason: `Extracted from ${circular.sourceFilename ?? circular.reference}`,
+      userId: userId ?? "",
+      zones: extract.zones,
+      basis: extract.basis,
+    });
+
+    circular.extractKey = stored.key;
+    circular.extractFilename = file.originalname;
+    circular.extractedAt = new Date();
+    circular.draft = result.draft._id;
+    await circular.save();
+
+    return {
+      circularId: String(circular._id),
+      draftId: String(result.draft._id),
+      producer: circular.producer,
+      reference: circular.reference,
+      effectiveDate: round,
+      rowCount: result.rowCount,
+      changedRowCount: result.changedRowCount,
+      addedCount: result.addedCount,
+      added: result.added,
+      removedCount: result.removedCount,
+      removed: result.removed,
+      status: result.draft.status,
     };
   }
 

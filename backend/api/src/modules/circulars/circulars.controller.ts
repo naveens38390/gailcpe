@@ -39,6 +39,21 @@ export class CircularsController {
     return this.circulars.upload(dto, file, req.user?.id);
   }
 
+  @Post(":id/extract")
+  @ApiConsumes("multipart/form-data")
+  @ApiOperation({
+    summary: "Attach an extracted reading to a filed circular and draft it for review",
+  })
+  @UseInterceptors(FileInterceptor("file", { limits: { fileSize: MAX_UPLOAD_BYTES } }))
+  extract(
+    @Param("id") id: string,
+    @UploadedFile() file: { buffer: Buffer; originalname?: string } | undefined,
+    @Req() req: any,
+  ) {
+    if (!file) throw new BadRequestException("Attach the extract as `file`.");
+    return this.circulars.attachExtract(id, file, req.user?.id);
+  }
+
   @Get(":id/source")
   @ApiOperation({ summary: "Download the stored source document for one circular" })
   async source(@Param("id") id: string, @Res() res: Response) {

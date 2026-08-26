@@ -4,6 +4,7 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { CircularsController } from "./circulars.controller";
 import { CircularsService } from "./circulars.service";
 import { CircularStoreService } from "./circular-store.service";
+import { PriceCircularsModule } from "../price-circulars/price-circulars.module";
 import {
   FreightCircular,
   FreightCircularSchema,
@@ -20,6 +21,7 @@ import {
       { name: FreightCircular.name, schema: FreightCircularSchema },
       { name: PriceEntry.name, schema: PriceEntrySchema },
     ]),
+    PriceCircularsModule,
   ],
   controllers: [CircularsController],
   providers: [CircularsService, CircularStoreService],

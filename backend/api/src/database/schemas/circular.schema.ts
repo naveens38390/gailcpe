@@ -51,6 +51,20 @@ export class PriceCircular {
   uploadedBy?: Types.ObjectId;
   @Prop() uploadedAt?: Date;
 
+  /**
+   * The extracted reading of this circular, kept beside the source it came
+   * from. Two files, one business event: asked why a price moved on a given
+   * day, someone can open both the circular as published and the numbers that
+   * were read out of it.
+   */
+  @Prop() extractKey?: string;
+  @Prop() extractFilename?: string;
+  @Prop() extractedAt?: Date;
+
+  /** The draft this circular's extract generated, once one exists. */
+  @Prop({ type: Types.ObjectId })
+  draft?: Types.ObjectId;
+
   @Prop({ type: Object, default: {} })
   stats!: Record<string, number>;
 }

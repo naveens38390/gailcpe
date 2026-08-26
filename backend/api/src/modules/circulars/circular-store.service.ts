@@ -69,7 +69,11 @@ export class CircularStoreService {
    * Write one uploaded document and return the key to record against the
    * circular. Nothing the caller sent is used to build the path.
    */
-  async put(file: { buffer: Buffer; originalname?: string }, round: string): Promise<StoredDocument> {
+  async put(
+    file: { buffer: Buffer; originalname?: string },
+    round: string,
+    options: { allowJson?: boolean } = {},
+  ): Promise<StoredDocument> {
     if (!file?.buffer?.length) {
       throw new BadRequestException("That upload arrived empty.");
     }
@@ -79,9 +83,13 @@ export class CircularStoreService {
       );
     }
 
-    const match = SIGNATURES.find((s) =>
-      s.magic.every((byte, i) => file.buffer[i] === byte),
-    );
+    // An extract is JSON, which has no signature to check. The caller has
+    // already parsed it by this point, so its validity is established — this
+    // only decides the extension it is filed under.
+    const match = options.allowJson
+      ? { ext: "json", label: "extract" }
+      : SIGNATURES.find((s) => s.magic.every((byte, i) => file.buffer[i] === byte));
+
     if (!match) {
       throw new BadRequestException(
         "That is not a PDF or Excel workbook. Circulars are published as one of those two.",

@@ -125,6 +125,122 @@ export class PriceCircularsService {
     return draft;
   }
 
+  /**
+   * Build a draft from a circular's extracted reading rather than from the
+   * live book.
+   *
+   * `create` clones what is already published and waits for someone to type
+   * changes into it. This starts from what the new circular actually says, and
+   * works out the changes by comparing against the live book — which is the
+   * same diff, arrived at from the other direction, so review and publish are
+   * untouched.
+   *
+   * Grades the extract carries that the live book does not are real: a
+   * circular may introduce a grade. They join the draft as rows, but not as
+   * *changes* — there is no previous price for them to have moved from, and
+   * counting them as a jump from zero would put a false Rs 140,000 swing at
+   * the top of the diff. They are reported separately instead, alongside
+   * anything the live book has that the extract dropped.
+   */
+  async createFromExtract(params: {
+    producer: string;
+    circularNumber: string;
+    effectiveDate: Date;
+    reason: string;
+    userId: string;
+    zones: Record<string, Record<string, number>>;
+    basis?: string;
+  }) {
+    const data = await this.dataset.load();
+    const live =
+      data.priceIndex.producers[params.producer as keyof typeof data.priceIndex.producers];
+    if (!live) {
+      throw new BadRequestException(
+        `${params.producer} has no live price book to compare against.`,
+      );
+    }
+
+    const draft = await this.drafts.create({
+      producer: params.producer,
+      circularNumber: params.circularNumber,
+      effectiveDate: params.effectiveDate,
+      basis: (params.basis ?? live.basis) as PriceBasis,
+      status: "draft",
+      reason: params.reason,
+      createdBy: params.userId,
+      rowCount: 0,
+      changedRowCount: 0,
+    });
+
+    const rows: Array<{
+      draft: Types.ObjectId;
+      zone: string;
+      grade: string;
+      basicPrice: number;
+      previousPrice: number;
+      changed: boolean;
+    }> = [];
+    const added: string[] = [];
+    const seen = new Set<string>();
+
+    for (const [zone, grades] of Object.entries(params.zones)) {
+      for (const [grade, price] of Object.entries(grades)) {
+        seen.add(`${zone}|${grade}`);
+        const previous = live.zones[zone]?.[grade];
+        const isNew = previous === undefined;
+        if (isNew) added.push(`${zone} / ${grade}`);
+        rows.push({
+          draft: draft._id,
+          zone,
+          grade,
+          basicPrice: price,
+          previousPrice: isNew ? price : previous,
+          changed: !isNew && price !== previous,
+        });
+      }
+    }
+
+    const removed: string[] = [];
+    for (const [zone, grades] of Object.entries(live.zones)) {
+      for (const grade of Object.keys(grades)) {
+        if (!seen.has(`${zone}|${grade}`)) removed.push(`${zone} / ${grade}`);
+      }
+    }
+
+    for (let i = 0; i < rows.length; i += 5000) {
+      await this.draftRows.insertMany(rows.slice(i, i + 5000), { ordered: false });
+    }
+    draft.rowCount = rows.length;
+    draft.changedRowCount = rows.filter((r) => r.changed).length;
+    await draft.save();
+
+    await this.auditLog.log(
+      params.userId,
+      "price_circular.extract",
+      "price_circular",
+      String(draft._id),
+      {
+        circularNumber: params.circularNumber,
+        rowCount: rows.length,
+        changedRowCount: draft.changedRowCount,
+        added: added.length,
+        removed: removed.length,
+      },
+    );
+
+    return {
+      draft,
+      rowCount: rows.length,
+      changedRowCount: draft.changedRowCount,
+      // Capped: a mis-parsed circular can make these enormous, and the point
+      // is to show a reviewer the shape of the problem, not to ship all of it.
+      added: added.slice(0, 50),
+      addedCount: added.length,
+      removed: removed.slice(0, 50),
+      removedCount: removed.length,
+    };
+  }
+
   async updateRow(draftId: string, rowId: string, basicPrice: number) {
     const draft = await this.requireStatus(draftId, ["draft"], "edited");
     const row = await this.draftRows.findOne({ _id: oid(rowId), draft: oid(draftId) });
