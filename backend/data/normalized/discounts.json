@@ -49,7 +49,7 @@
    "early_payment_per_day": null,
    "interest_free_credit_days": null,
    "quantity_slabs_source": "GAIL quantity discount schedule supplied by the client, 26 Aug 2026",
-   "quantity_slabs_note": "Applicable to A, B and OG grades only. The application holds no quality classification, so this restriction is recorded but not enforced."
+   "quantity_slabs_note": "Circular states A, B and OG grades only. Confirmed with the client on 26 Aug 2026 that no grade in this catalogue is excluded, so the schedule applies to all 53 GAIL grades. No quality classification is needed."
   },
   "RIL": {
    "cash_discount": 1100,
