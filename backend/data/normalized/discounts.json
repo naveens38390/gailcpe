@@ -3,7 +3,7 @@
  "producers": {
   "GAIL": {
    "cash_discount": 1000,
-   "cash_discount_source": "MZO workbook (no GAIL circular supplied)",
+   "cash_discount_source": "MZO workbook, row \"Less: CD - Cash Discount\" (no GAIL circular supplied). Client confirmed 29 Aug 2026: available on cash payment only.",
    "quantity_slabs": [
     {
      "from_mt": 5,
@@ -50,7 +50,7 @@
    "interest_free_credit_days": 14,
    "quantity_slabs_source": "GAIL quantity discount schedule supplied by the client, 26 Aug 2026",
    "quantity_slabs_note": "Circular states A, B and OG grades only. Confirmed with the client on 26 Aug 2026 that no grade in this catalogue is excluded, so the schedule applies to all 53 GAIL grades. No quality classification is needed.",
-   "interest_free_credit_source": "Client, 27 Aug 2026: GAIL offers Rs 1000/MT for a 14-day interest-free credit period. Recorded so the term shows in Credit mode alongside every competitor. Whether the Rs 1000 is earned by taking that credit, or is a separate cash discount, is unresolved — no calculation applies it in credit mode."
+   "interest_free_credit_source": "Client, confirmed 29 Aug 2026: GAIL offers a 14-day interest-free credit period, as the other producers do. The Rs 1,000/MT is NOT available on credit terms — a credit buyer gets the 14 days and no discount. Implemented that way: the cash discount applies in cash mode only, and this period is reported rather than applied, matching every competitor."
   },
   "RIL": {
    "cash_discount": 1100,
