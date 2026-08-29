@@ -379,16 +379,27 @@ export function quote(
    * actually missing.
    */
   const unmodelled: string[] = [];
-  if (terms?.early_payment_per_day) {
-    const cap = terms.early_payment_max_days ? ` up to ${terms.early_payment_max_days} days` : "";
-    unmodelled.push(`early payment Rs ${terms.early_payment_per_day}/MT/day${cap}`);
+
+  // Early payment and interest-free credit are terms of a *credit* sale. A
+  // buyer paying cash has taken the cash discount instead and is never offered
+  // them, so raising them against a cash quote describes a deal that is not on
+  // the table — which is what the client saw on the Compare screen.
+  if (paymentMode !== "cash") {
+    if (terms?.early_payment_per_day) {
+      const cap = terms.early_payment_max_days ? ` up to ${terms.early_payment_max_days} days` : "";
+      unmodelled.push(`early payment Rs ${terms.early_payment_per_day}/MT/day${cap}`);
+    }
+    if (terms?.interest_free_credit_days) {
+      unmodelled.push(`${terms.interest_free_credit_days} days interest-free credit`);
+    }
   }
-  if (terms?.interest_free_credit_days) {
-    unmodelled.push(`${terms.interest_free_credit_days} days interest-free credit`);
-  }
+
+  // A dealer scheme is a channel term, not a payment term, so it stands on
+  // either footing.
   if (terms?.dealer_discount) {
     unmodelled.push(`dealer discount Rs ${terms.dealer_discount}/MT`);
   }
+
   if (unmodelled.length) {
     gaps.push(`${producer} also offers ${unmodelled.join(" and ")} — on record, not in this ladder`);
   }

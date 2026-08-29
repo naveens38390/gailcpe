@@ -47,9 +47,10 @@
     }
    ],
    "early_payment_per_day": null,
-   "interest_free_credit_days": null,
+   "interest_free_credit_days": 14,
    "quantity_slabs_source": "GAIL quantity discount schedule supplied by the client, 26 Aug 2026",
-   "quantity_slabs_note": "Circular states A, B and OG grades only. Confirmed with the client on 26 Aug 2026 that no grade in this catalogue is excluded, so the schedule applies to all 53 GAIL grades. No quality classification is needed."
+   "quantity_slabs_note": "Circular states A, B and OG grades only. Confirmed with the client on 26 Aug 2026 that no grade in this catalogue is excluded, so the schedule applies to all 53 GAIL grades. No quality classification is needed.",
+   "interest_free_credit_source": "Client, 27 Aug 2026: GAIL offers Rs 1000/MT for a 14-day interest-free credit period. Recorded so the term shows in Credit mode alongside every competitor. Whether the Rs 1000 is earned by taking that credit, or is a separate cash discount, is unresolved — no calculation applies it in credit mode."
   },
   "RIL": {
    "cash_discount": 1100,
