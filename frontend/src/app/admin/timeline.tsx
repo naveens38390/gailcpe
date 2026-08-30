@@ -140,6 +140,7 @@ function Entry({ entry }: { entry: TimelineEntry }) {
         <Pressable onPress={() => open(entry.link!)} hitSlop={8}>
           <Text style={styles.link}>
             {entry.link.kind === "draft" ? "Open the circular draft" : null}
+            {entry.link.kind === "freight_draft" ? "Open the freight circular" : null}
             {entry.link.kind === "circular" ? "Open the source document" : null}
             {entry.link.kind === "correction" ? "Open corrections" : null}
           </Text>
@@ -151,6 +152,7 @@ function Entry({ entry }: { entry: TimelineEntry }) {
 
 function open(link: NonNullable<TimelineEntry["link"]>): void {
   if (link.kind === "draft") router.push(`/admin/price-circular/${link.id}` as never);
+  if (link.kind === "freight_draft") router.push(`/admin/freight-circular/${link.id}` as never);
   if (link.kind === "circular") router.push("/admin/circulars" as never);
   if (link.kind === "correction") router.push("/corrections" as never);
 }

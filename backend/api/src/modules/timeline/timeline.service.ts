@@ -18,8 +18,9 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
 import { PriceCorrection } from "../../database/schemas/correction.schema";
-import { PriceCircular } from "../../database/schemas/circular.schema";
+import { FreightCircular, PriceCircular } from "../../database/schemas/circular.schema";
 import { PriceCircularDraft } from "../../database/schemas/price-circular-draft.schema";
+import { FreightCircularDraft } from "../../database/schemas/freight-circular-draft.schema";
 
 /** One thing that happened, whatever kind of thing it was. */
 export interface TimelineEntry {
@@ -34,7 +35,7 @@ export interface TimelineEntry {
   /** Before and after, for the fields that actually moved. */
   changes?: Array<{ field: string; from: unknown; to: unknown }>;
   /** Where to look for the full picture. */
-  link?: { kind: "draft" | "circular" | "correction"; id: string };
+  link?: { kind: "draft" | "freight_draft" | "circular" | "correction"; id: string };
 }
 
 export interface TimelineDay {
@@ -55,6 +56,9 @@ export class TimelineService {
   constructor(
     @InjectModel(PriceCircularDraft.name) private drafts: Model<PriceCircularDraft>,
     @InjectModel(PriceCircular.name) private circulars: Model<PriceCircular>,
+    @InjectModel(FreightCircularDraft.name)
+    private freightDrafts: Model<FreightCircularDraft>,
+    @InjectModel(FreightCircular.name) private freightCirculars: Model<FreightCircular>,
     @InjectModel(PriceCorrection.name) private corrections: Model<PriceCorrection>,
     @InjectModel("GradeRevision") private gradeRevisions: Model<any>,
     @InjectModel("LocationRevision") private locationRevisions: Model<any>,
@@ -75,13 +79,30 @@ export class TimelineService {
     const inWindow = (field: string) =>
       Object.keys(window).length ? { [field]: window } : {};
 
-    const [published, filed, corrections, ...revisionSets] = await Promise.all([
+    const [
+      published,
+      filed,
+      freightPublished,
+      freightFiled,
+      corrections,
+      ...revisionSets
+    ] = await Promise.all([
       this.drafts
         .find({ status: "published", ...inWindow("publishedAt") })
         .populate("publishedBy", "name email")
         .sort({ publishedAt: -1 })
         .lean(),
       this.circulars
+        .find({ uploadedAt: { $exists: true }, ...inWindow("uploadedAt") })
+        .populate("uploadedBy", "name email")
+        .sort({ uploadedAt: -1 })
+        .lean(),
+      this.freightDrafts
+        .find({ status: "published", ...inWindow("publishedAt") })
+        .populate("publishedBy", "name email")
+        .sort({ publishedAt: -1 })
+        .lean(),
+      this.freightCirculars
         .find({ uploadedAt: { $exists: true }, ...inWindow("uploadedAt") })
         .populate("uploadedBy", "name email")
         .sort({ uploadedAt: -1 })
@@ -104,6 +125,8 @@ export class TimelineService {
     const entries: TimelineEntry[] = [
       ...published.map((d: any) => this.fromCircular(d)),
       ...filed.map((c: any) => this.fromUpload(c)),
+      ...freightPublished.map((d: any) => this.fromFreightCircular(d)),
+      ...freightFiled.map((c: any) => this.fromFreightUpload(c)),
       ...corrections.map((c: any) => this.fromCorrection(c)),
       ...revisionSets.flat().map((r: any) => this.fromRevision(r)),
     ];
@@ -156,6 +179,46 @@ export class TimelineService {
       at: new Date(c.uploadedAt).toISOString(),
       by: actorName(c.uploadedBy),
       title: `${c.producer} circular ${c.reference} filed`,
+      detail: c.sourceFilename ? `Source document: ${c.sourceFilename}` : undefined,
+      source: c.reference,
+      link: { kind: "circular", id: String(c._id) },
+    };
+  }
+
+  /**
+   * A freight circular's headline is not "rows changed" but what happened to
+   * the map: a rate move affects a quote, a destination appearing or vanishing
+   * changes which towns can be quoted at all, and an unmapped destination is a
+   * rate nobody can reach. All three belong in the one line someone reads in a
+   * meeting.
+   */
+  private fromFreightCircular(d: any): TimelineEntry {
+    const parts = [
+      `${d.changedRowCount.toLocaleString("en-IN")} of ${d.rowCount.toLocaleString("en-IN")} rates changed`,
+      d.addedRowCount ? `${d.addedRowCount} destination(s) added` : null,
+      d.removedDestinations?.length
+        ? `${d.removedDestinations.length} dropped`
+        : null,
+      d.unmappedCount ? `${d.unmappedCount} not mapped to any location` : null,
+    ].filter(Boolean);
+
+    return {
+      kind: "circular_published",
+      at: new Date(d.publishedAt).toISOString(),
+      by: actorName(d.publishedBy),
+      title: `${d.producer} freight circular ${d.circularNumber} published`,
+      detail: parts.join(", "),
+      source: d.circularNumber,
+      link: { kind: "freight_draft", id: String(d._id) },
+    };
+  }
+
+  private fromFreightUpload(c: any): TimelineEntry {
+    return {
+      kind: "circular_filed",
+      at: new Date(c.uploadedAt).toISOString(),
+      by: actorName(c.uploadedBy),
+      title: `${c.producer} freight circular ${c.reference ?? ""}`.trim() + " filed",
       detail: c.sourceFilename ? `Source document: ${c.sourceFilename}` : undefined,
       source: c.reference,
       link: { kind: "circular", id: String(c._id) },

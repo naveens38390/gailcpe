@@ -1,7 +1,16 @@
 import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 
-import { PriceCircular, PriceCircularSchema } from "../../database/schemas/circular.schema";
+import {
+  FreightCircular,
+  FreightCircularSchema,
+  PriceCircular,
+  PriceCircularSchema,
+} from "../../database/schemas/circular.schema";
+import {
+  FreightCircularDraft,
+  FreightCircularDraftSchema,
+} from "../../database/schemas/freight-circular-draft.schema";
 import {
   PriceCorrection,
   PriceCorrectionSchema,
@@ -24,6 +33,8 @@ import { TimelineService } from "./timeline.service";
     MongooseModule.forFeature([
       { name: PriceCircularDraft.name, schema: PriceCircularDraftSchema },
       { name: PriceCircular.name, schema: PriceCircularSchema },
+      { name: FreightCircularDraft.name, schema: FreightCircularDraftSchema },
+      { name: FreightCircular.name, schema: FreightCircularSchema },
       { name: PriceCorrection.name, schema: PriceCorrectionSchema },
       { name: "GradeRevision", schema: RevisionSchema, collection: "gradeRevisions" },
       { name: "LocationRevision", schema: RevisionSchema, collection: "locationRevisions" },

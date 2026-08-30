@@ -24,6 +24,15 @@ import { makeStyles, useTheme } from "../../context/theme";
  * one the existing review screen already knows how to approve and publish, so
  * this screen hands off rather than duplicating that workflow.
  */
+/**
+ * A circular sets prices or it sets freight, never both — the producers issue
+ * them separately, on separate calendars, and they land in separate drafts.
+ */
+const KIND_OPTIONS: Option[] = [
+  { value: "price", label: "Prices", detail: "Basic price by zone and grade" },
+  { value: "freight", label: "Freight", detail: "Rate per MT by destination" },
+];
+
 export default function CircularsScreen() {
   const styles = useStyles();
   const [items, setItems] = useState<CircularRecord[]>([]);
@@ -83,6 +92,7 @@ function UploadForm({ onFiled }: { onFiled: () => void }) {
   const [filed, setFiled] = useState<string | null>(null);
   const [detecting, setDetecting] = useState(false);
   const [detectNote, setDetectNote] = useState<string | null>(null);
+  const [kind, setKind] = useState<"price" | "freight">("price");
 
   const producerOptions: Option[] = useMemo(
     () =>
@@ -131,14 +141,19 @@ function UploadForm({ onFiled }: { onFiled: () => void }) {
   async function submit() {
     setError(null);
     if (!picked) return setError("Choose the circular document first.");
-    if (!producer.trim() || !reference.trim() || !effectiveDate.trim()) {
-      return setError("Producer, circular number and effective date are all needed.");
+    if (!producer.trim() || !effectiveDate.trim()) {
+      return setError("Producer and effective date are both needed.");
+    }
+    // Freight schedules from HMEL and OPaL print no reference at all; the API
+    // assigns a descriptive one rather than inviting a made-up number.
+    if (kind === "price" && !reference.trim()) {
+      return setError("A price circular needs its reference number.");
     }
     setBusy(true);
     try {
       const form = new FormData();
       appendFile(form, picked);
-      form.append("kind", "price");
+      form.append("kind", kind);
       form.append("producer", producer.trim().toUpperCase());
       form.append("reference", reference.trim());
       form.append("effectiveDate", effectiveDate.trim());
@@ -148,6 +163,7 @@ function UploadForm({ onFiled }: { onFiled: () => void }) {
       setProducer("");
       setReference("");
       setEffectiveDate("");
+      setDetectNote(null);
       onFiled();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not file that circular.");
@@ -176,7 +192,20 @@ function UploadForm({ onFiled }: { onFiled: () => void }) {
         loading={catalogLoading}
         emptyText="No producers are loaded."
       />
-      <Field label="Circular number"><Input value={reference} onChangeText={setReference} placeholder="PE/2026-27/019" /></Field>
+      <SelectField
+        label="What this circular sets"
+        placeholder="Price or freight"
+        hint="Prices and freight rates move on separate calendars and separate drafts"
+        value={kind}
+        options={KIND_OPTIONS}
+        onChange={(v) => setKind(v as "price" | "freight")}
+      />
+      <Field
+        label="Circular number"
+        hint={kind === "freight" ? "Leave blank if the schedule prints none" : undefined}
+      >
+        <Input value={reference} onChangeText={setReference} placeholder="PE/2026-27/019" />
+      </Field>
       <Field label="Effective date" hint="YYYY-MM-DD — when it takes effect, not today">
         <Input value={effectiveDate} onChangeText={setEffectiveDate} placeholder="2026-10-01" />
       </Field>
@@ -211,6 +240,7 @@ function CircularRow({ circular, onChanged }: { circular: CircularRecord; onChan
   const id = String(circular._id);
   const hasDraft = Boolean(circular.draft);
   const isPrice = circular.kind === "price";
+  const draftRoute = isPrice ? "price-circular" : "freight-circular";
 
   async function attach() {
     setError(null);
@@ -251,7 +281,7 @@ function CircularRow({ circular, onChanged }: { circular: CircularRecord; onChan
           <Text style={styles.link}>Open document</Text>
         </Pressable>
 
-        {isPrice && !hasDraft ? (
+        {!hasDraft ? (
           <Pressable onPress={attach} disabled={busy} hitSlop={8}>
             <Text style={styles.link}>{busy ? "Reading…" : "Attach extract"}</Text>
           </Pressable>
@@ -259,17 +289,13 @@ function CircularRow({ circular, onChanged }: { circular: CircularRecord; onChan
 
         {hasDraft ? (
           <Pressable
-            onPress={() => router.push(`/admin/price-circular/${String(circular.draft)}` as never)}
+            onPress={() => router.push(`/admin/${draftRoute}/${String(circular.draft)}` as never)}
             hitSlop={8}
           >
             <Text style={styles.link}>Review draft</Text>
           </Pressable>
         ) : null}
       </View>
-
-      {!isPrice && !hasDraft ? (
-        <Text style={styles.rowMeta}>Freight circulars have no draft model yet.</Text>
-      ) : null}
 
       {error ? <ErrorNote message={error} /> : null}
       {result ? <ExtractSummary result={result} /> : null}
@@ -287,6 +313,7 @@ function CircularRow({ circular, onChanged }: { circular: CircularRecord; onChan
 function ExtractSummary({ result }: { result: CircularExtractResult }) {
   const styles = useStyles();
   const suspicious = result.removedCount > 0;
+  const unmapped = result.unmappedCount ?? 0;
   return (
     <View style={styles.summary}>
       <View style={styles.counts}>
@@ -294,12 +321,29 @@ function ExtractSummary({ result }: { result: CircularExtractResult }) {
         <Count label="changed" value={result.changedRowCount} />
         <Count label="added" value={result.addedCount} />
         <Count label="unmentioned" value={result.removedCount} warn={suspicious} />
+        {result.kind === "freight" ? (
+          <Count label="unmapped" value={unmapped} warn={unmapped > 0} />
+        ) : null}
       </View>
       {suspicious ? (
         <Caveat>
           {result.removedCount.toLocaleString("en-IN")} rows in the live book are
           not in this reading. Publishing this draft would withdraw them — check
           the extract covers the whole circular before approving.
+        </Caveat>
+      ) : null}
+      {unmapped ? (
+        <Caveat>
+          {unmapped.toLocaleString("en-IN")} destination(s) are not mapped to any location, so
+          nothing will be able to quote them. A reviewer has to acknowledge the list before this
+          draft can publish.
+        </Caveat>
+      ) : null}
+      {result.ambiguousCount ? (
+        <Caveat>
+          {result.ambiguousCount.toLocaleString("en-IN")} destination(s) share a name with another
+          row in this producer's book, so the rate they were compared against is the closest match
+          rather than a certainty: {(result.ambiguous ?? []).slice(0, 6).join(", ")}
         </Caveat>
       ) : null}
       {result.added.length ? (

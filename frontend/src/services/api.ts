@@ -329,7 +329,8 @@ export const api = {
 
   gailBook: () => request<GailBookRow[]>("/pricing/gail-book"),
 
-  circulars: () => request<CircularList>("/circulars"),
+  circulars: (kind?: "price" | "freight") =>
+    request<CircularList>(`/circulars${kind ? `?kind=${kind}` : ""}`),
 
   /** File a circular document against a producer and round. */
   uploadCircular: (form: FormData) => upload<UploadedCircular>("/circulars/upload", form),
@@ -629,6 +630,85 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ circularId, reason }),
     }),
+
+  // ---- Freight Circular Management -----------------------------------------
+
+  freightCirculars: (status?: string) =>
+    request<FreightCircularDraft[]>(
+      `/freight-circulars${status ? `?status=${encodeURIComponent(status)}` : ""}`,
+    ),
+
+  freightCircularProducers: () =>
+    request<Array<{ producer: string; destinations: number }>>(
+      "/freight-circulars/producers",
+    ),
+
+  freightCircularDetail: (id: string) =>
+    request<FreightCircularDraft>(`/freight-circulars/${encodeURIComponent(id)}`),
+
+  freightCircularRows: (id: string) =>
+    request<FreightCircularRow[]>(`/freight-circulars/${encodeURIComponent(id)}/rows`),
+
+  freightCircularDiff: (id: string) =>
+    request<FreightCircularDiff>(`/freight-circulars/${encodeURIComponent(id)}/diff`),
+
+  createFreightCircular: (input: CreateFreightCircularInput) =>
+    request<FreightCircularDraft>("/freight-circulars", {
+      method: "POST",
+      body: JSON.stringify(input),
+    }),
+
+  updateFreightCircularRow: (
+    draftId: string,
+    rowId: string,
+    ratePerMt: number,
+    insurancePerMt?: number,
+  ) =>
+    request<FreightCircularRow>(
+      `/freight-circulars/${encodeURIComponent(draftId)}/rows/${encodeURIComponent(rowId)}`,
+      { method: "POST", body: JSON.stringify({ ratePerMt, insurancePerMt }) },
+    ),
+
+  bulkUpdateFreightCircularRows: (
+    draftId: string,
+    rowIds: string[],
+    type: "set" | "delta" | "percent",
+    value: number,
+  ) =>
+    request<{ updated: number }>(
+      `/freight-circulars/${encodeURIComponent(draftId)}/rows/bulk`,
+      { method: "POST", body: JSON.stringify({ rowIds, type, value }) },
+    ),
+
+  submitFreightCircular: (id: string) =>
+    request<FreightCircularDraft>(`/freight-circulars/${encodeURIComponent(id)}/submit`, {
+      method: "POST",
+    }),
+
+  /** `acknowledgeUnmapped` is required to approve a draft carrying unmapped
+   * destinations — the API refuses the approval without it. */
+  reviewFreightCircular: (
+    id: string,
+    approve: boolean,
+    note?: string,
+    acknowledgeUnmapped?: boolean,
+  ) =>
+    request<FreightCircularDraft>(`/freight-circulars/${encodeURIComponent(id)}/review`, {
+      method: "POST",
+      body: JSON.stringify({ approve, note, acknowledgeUnmapped }),
+    }),
+
+  publishFreightCircular: (id: string) =>
+    request<{ draft: FreightCircularDraft; circular: Record<string, unknown> }>(
+      `/freight-circulars/${encodeURIComponent(id)}/publish`,
+      { method: "POST" },
+    ),
+
+  rollbackFreightCircular: (producer: string, circularId: string, reason: string) =>
+    request<{ circular: Record<string, unknown> }>("/freight-circulars/rollback", {
+      method: "POST",
+      body: JSON.stringify({ producer, circularId, reason }),
+    }),
 };
 
 // ---------------------------------------------------------------------------
@@ -718,7 +798,7 @@ export interface TimelineEntry {
   /** The circular this traces back to, where one exists. */
   source?: string;
   changes?: Array<{ field: string; from: unknown; to: unknown }>;
-  link?: { kind: "draft" | "circular" | "correction"; id: string };
+  link?: { kind: "draft" | "freight_draft" | "circular" | "correction"; id: string };
 }
 
 export interface Timeline {
@@ -763,6 +843,12 @@ export interface CircularExtractResult {
   removedCount: number;
   removed: string[];
   status: string;
+  /** Freight readings only: destinations no location maps to. */
+  kind?: "freight";
+  unmappedCount?: number;
+  unmapped?: string[];
+  ambiguousCount?: number;
+  ambiguous?: string[];
 }
 
 export type GradeStatus = "active" | "deprecated" | "retired";
@@ -1184,6 +1270,87 @@ export interface PriceCircularRowDiff {
 
 export interface CreatePriceCircularInput {
   producer?: string;
+  circularNumber: string;
+  effectiveDate: string;
+  reason: string;
+}
+
+export interface FreightCircularDraft {
+  _id: string;
+  producer: string;
+  circularNumber: string;
+  effectiveDate: string;
+  status: DraftStatus;
+  reason: string;
+  rowCount: number;
+  changedRowCount: number;
+  addedRowCount: number;
+  removedDestinations: string[];
+  /** Destinations no location maps to — publishing is blocked until acknowledged. */
+  unmappedCount: number;
+  unmappedAcknowledgedAt?: string;
+  /** Destinations whose live counterpart had to be guessed — two rows, one name. */
+  ambiguousDestinations: string[];
+  createdBy: CorrectionActor | string | null;
+  submittedAt?: string;
+  reviewedBy?: CorrectionActor | string;
+  reviewedAt?: string;
+  reviewNote?: string;
+  publishedBy?: CorrectionActor | string | null;
+  publishedAt?: string;
+  publishedCircular?: string;
+  createdAt: string;
+}
+
+export interface FreightCircularRow {
+  _id: string;
+  draft: string;
+  destination: string;
+  ratePerMt: number;
+  previousRatePerMt: number;
+  insurancePerMt: number;
+  previousInsurancePerMt: number;
+  changed: boolean;
+  isNew: boolean;
+  mapped: boolean;
+  state?: string;
+  district?: string;
+  cluster?: string;
+  distanceKm?: number;
+  transitDays?: number;
+}
+
+export interface FreightCircularDiff {
+  draftId: string;
+  changedRowCount: number;
+  changes: Array<{
+    destination: string;
+    from: number;
+    to: number;
+    delta: number;
+    insuranceFrom: number;
+    insuranceTo: number;
+  }>;
+  addedCount: number;
+  added: Array<{ destination: string; ratePerMt: number; mapped: boolean }>;
+  removedCount: number;
+  removed: string[];
+  unmappedCount: number;
+  unmapped: Array<{
+    destination: string;
+    ratePerMt: number;
+    state: string | null;
+    district: string | null;
+    isNew: boolean;
+  }>;
+  unmappedAcknowledgedAt: string | null;
+  /** Rows whose live counterpart was matched by name rather than exactly. */
+  ambiguousCount: number;
+  ambiguous: string[];
+}
+
+export interface CreateFreightCircularInput {
+  producer: string;
   circularNumber: string;
   effectiveDate: string;
   reason: string;

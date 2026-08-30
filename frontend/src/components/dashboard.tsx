@@ -16,6 +16,13 @@ const ACTION_LABELS: Record<string, string> = {
   "price_circular.submit": "Circular Submitted",
   "price_circular.review": "Circular Reviewed",
   "price_circular.rollback": "Circular Rolled Back",
+  "price_circular.extract": "Circular Reading Attached",
+  "freight_circular.create": "Freight Circular Drafted",
+  "freight_circular.extract": "Freight Reading Attached",
+  "freight_circular.submit": "Freight Circular Submitted",
+  "freight_circular.review": "Freight Circular Reviewed",
+  "freight_circular.publish": "Freight Circular Published",
+  "freight_circular.rollback": "Freight Circular Rolled Back",
   login: "Signed In",
 };
 

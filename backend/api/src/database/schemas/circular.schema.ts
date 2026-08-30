@@ -122,6 +122,15 @@ export class FreightCircular {
   uploadedBy?: Types.ObjectId;
   @Prop() uploadedAt?: Date;
 
+  /** See PriceCircular's extract fields — same two-files-one-event reasoning. */
+  @Prop() extractKey?: string;
+  @Prop() extractFilename?: string;
+  @Prop() extractedAt?: Date;
+
+  /** The FreightCircularDraft this circular's extract generated, once one exists. */
+  @Prop({ type: Types.ObjectId })
+  draft?: Types.ObjectId;
+
   @Prop({ type: Object, default: {} })
   stats!: Record<string, number>;
 }
