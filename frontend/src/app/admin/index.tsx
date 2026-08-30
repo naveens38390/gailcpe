@@ -122,7 +122,10 @@ export default function AdminIndexScreen() {
       {data ? (
         <Card>
           <SectionTitle>Recent Activity</SectionTitle>
-          <RecentActivityFeed items={data.recentActivity} />
+          <RecentActivityFeed
+            items={data.recentActivity}
+            onViewAll={() => router.push("/admin/audit-log" as never)}
+          />
         </Card>
       ) : null}
 

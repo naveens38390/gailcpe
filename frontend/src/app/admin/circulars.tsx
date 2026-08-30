@@ -1,6 +1,6 @@
 import * as DocumentPicker from "expo-document-picker";
 import { router } from "expo-router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Linking, Platform, Pressable, ScrollView, Text, View } from "react-native";
 
 import {
@@ -9,6 +9,8 @@ import {
   type CircularRecord,
 } from "../../services/api";
 import { Field, Input, PrimaryButton } from "../../components/inputs";
+import { SelectField, type Option } from "../../components/select";
+import { useCatalog } from "../../context/catalog";
 import { theme } from "../../theme";
 import { Card, Caveat, Empty, ErrorNote, Loading, Pill, SectionTitle } from "../../components/ui";
 import { makeStyles, useTheme } from "../../context/theme";
@@ -71,6 +73,7 @@ export default function CircularsScreen() {
 /** Step one: the document itself, recorded against a producer and a round. */
 function UploadForm({ onFiled }: { onFiled: () => void }) {
   const styles = useStyles();
+  const { catalog, loading: catalogLoading } = useCatalog();
   const [producer, setProducer] = useState("");
   const [reference, setReference] = useState("");
   const [effectiveDate, setEffectiveDate] = useState("");
@@ -78,6 +81,17 @@ function UploadForm({ onFiled }: { onFiled: () => void }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [filed, setFiled] = useState<string | null>(null);
+
+  const producerOptions: Option[] = useMemo(
+    () =>
+      (catalog?.producers ?? []).map((p) => ({
+        value: p.code,
+        label: p.code,
+        detail: p.name,
+        badge: p.isSelf ? "US" : undefined,
+      })),
+    [catalog],
+  );
 
   async function pick() {
     setError(null);
@@ -122,7 +136,18 @@ function UploadForm({ onFiled }: { onFiled: () => void }) {
         produces a draft, and publishing that draft stays a separate decision.
       </Text>
 
-      <Field label="Producer"><Input value={producer} onChangeText={setProducer} autoCapitalize="characters" placeholder="IOCL" /></Field>
+      {/* Sourced from the running dataset, not a list in the code: retiring a
+          producer removes it from this form without a release. */}
+      <SelectField
+        label="Producer"
+        placeholder="Choose the producer"
+        hint="Only producers the pricing engine carries"
+        value={producer}
+        options={producerOptions}
+        onChange={setProducer}
+        loading={catalogLoading}
+        emptyText="No producers are loaded."
+      />
       <Field label="Circular number"><Input value={reference} onChangeText={setReference} placeholder="PE/2026-27/019" /></Field>
       <Field label="Effective date" hint="YYYY-MM-DD — when it takes effect, not today">
         <Input value={effectiveDate} onChangeText={setEffectiveDate} placeholder="2026-10-01" />
