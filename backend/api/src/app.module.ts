@@ -17,6 +17,7 @@ import { PriceCircularsModule } from "./modules/price-circulars/price-circulars.
 import { ProducersModule } from "./modules/producers/producers.module";
 import { DealsModule } from "./modules/deals/deals.module";
 import { FreightModule } from "./modules/freight/freight.module";
+import { FreightCircularsModule } from "./modules/freight-circulars/freight-circulars.module";
 import { GradesModule } from "./modules/grades/grades.module";
 import { HealthModule } from "./modules/health/health.module";
 import { LocationsModule } from "./modules/locations/locations.module";
@@ -55,6 +56,7 @@ import { TimelineModule } from "./modules/timeline/timeline.module";
     DiscountsModule,
     ProducersModule,
     PriceCircularsModule,
+    FreightCircularsModule,
     ExportsModule,
     DashboardModule,
     HealthModule,

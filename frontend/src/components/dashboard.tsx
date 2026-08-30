@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 
 import type { AuditLogEntry } from "../services/api";
 import { actorLabel } from "./masterData";
@@ -16,6 +16,13 @@ const ACTION_LABELS: Record<string, string> = {
   "price_circular.submit": "Circular Submitted",
   "price_circular.review": "Circular Reviewed",
   "price_circular.rollback": "Circular Rolled Back",
+  "price_circular.extract": "Circular Reading Attached",
+  "freight_circular.create": "Freight Circular Drafted",
+  "freight_circular.extract": "Freight Reading Attached",
+  "freight_circular.submit": "Freight Circular Submitted",
+  "freight_circular.review": "Freight Circular Reviewed",
+  "freight_circular.publish": "Freight Circular Published",
+  "freight_circular.rollback": "Freight Circular Rolled Back",
   login: "Signed In",
 };
 
@@ -56,12 +63,33 @@ export function KpiGroup({
   );
 }
 
-export function RecentActivityFeed({ items }: { items: AuditLogEntry[] }) {
+/** How many entries the dashboard shows before deferring to the full log. */
+const ACTIVITY_PREVIEW = 5;
+
+/**
+ * The dashboard's glance at what has been happening.
+ *
+ * Deliberately a preview, not a log. Sign-ins alone can fill a screen, and a
+ * page of them pushes the modules an administrator came for below the fold.
+ * The audit trail itself is unchanged and complete — this shows the newest few
+ * and points at it.
+ */
+export function RecentActivityFeed({
+  items,
+  onViewAll,
+}: {
+  items: AuditLogEntry[];
+  onViewAll?: () => void;
+}) {
   const styles = useStyles();
   if (!items.length) return <Empty>No activity yet.</Empty>;
+
+  const shown = items.slice(0, ACTIVITY_PREVIEW);
+  const more = items.length > ACTIVITY_PREVIEW;
+
   return (
     <View>
-      {items.map((entry) => (
+      {shown.map((entry) => (
         <View key={entry._id} style={styles.activityRow}>
           <Text style={styles.activityAction}>{describeAuditAction(entry.action)}</Text>
           <Text style={styles.activityMeta}>
@@ -69,6 +97,14 @@ export function RecentActivityFeed({ items }: { items: AuditLogEntry[] }) {
           </Text>
         </View>
       ))}
+
+      {onViewAll ? (
+        <Pressable onPress={onViewAll} style={styles.activityMore} hitSlop={8}>
+          <Text style={styles.activityMoreText}>
+            {more ? "View all activity" : "Open the audit log"}
+          </Text>
+        </Pressable>
+      ) : null}
     </View>
   );
 }
@@ -90,4 +126,11 @@ const useStyles = makeStyles((c) => ({
   activityRow: { paddingVertical: theme.space(2), borderTopWidth: 1, borderTopColor: c.border },
   activityAction: { color: c.textPrimary, fontSize: 13, fontWeight: "700" },
   activityMeta: { color: c.textFaint, fontSize: 11, marginTop: 2 },
+  activityMore: {
+    paddingTop: theme.space(3),
+    marginTop: theme.space(1),
+    borderTopWidth: 1,
+    borderTopColor: c.border,
+  },
+  activityMoreText: { color: c.primary, fontSize: 13, fontWeight: "700" },
 }));

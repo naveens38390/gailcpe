@@ -24,7 +24,7 @@ const MODULES: Record<string, ModuleCard> = {
   priceBook: { key: "priceBook", title: "Price Book", subtitle: "Search GAIL's 16,589-row live price matrix", route: "/admin/price-book" },
   circulars: { key: "circulars", title: "Circulars", subtitle: "File a circular, attach its reading, hand the draft to review", route: "/admin/circulars" },
   priceCirculars: { key: "priceCirculars", title: "Price Circulars", subtitle: "Create, edit, review, publish — the circular as one revision", route: "/admin/price-circulars" },
-  freightCirculars: { key: "freightCirculars", title: "Freight Circulars", subtitle: "Replaces freight spreadsheets" },
+  freightCirculars: { key: "freightCirculars", title: "Freight Circulars", subtitle: "Draft, review, publish freight rates — the other half of landed cost", route: "/admin/freight-circulars" },
   approvals: { key: "approvals", title: "Approvals", subtitle: "Review pending price corrections — approve, reject, or request changes", route: "/admin/approvals" },
   notifications: { key: "notifications", title: "Notifications", subtitle: "Every correction submitted, approved, rejected, or sent back", route: "/admin/notifications" },
   timeline: { key: "timeline", title: "Change History", subtitle: "Every change by the day it happened — who, which circular, before and after", route: "/admin/timeline" },
@@ -122,7 +122,10 @@ export default function AdminIndexScreen() {
       {data ? (
         <Card>
           <SectionTitle>Recent Activity</SectionTitle>
-          <RecentActivityFeed items={data.recentActivity} />
+          <RecentActivityFeed
+            items={data.recentActivity}
+            onViewAll={() => router.push("/admin/audit-log" as never)}
+          />
         </Card>
       ) : null}
 

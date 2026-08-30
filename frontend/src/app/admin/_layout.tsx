@@ -46,6 +46,8 @@ export default function AdminLayout() {
       <Stack.Screen name="timeline" options={{ title: "Change History" }} />
       <Stack.Screen name="price-circulars" options={{ title: "Price Circulars" }} />
       <Stack.Screen name="price-circular/[id]" options={{ title: "Circular" }} />
+      <Stack.Screen name="freight-circulars" options={{ title: "Freight Circulars" }} />
+      <Stack.Screen name="freight-circular/[id]" options={{ title: "Freight Circular" }} />
       <Stack.Screen name="approvals" options={{ title: "Approvals" }} />
       <Stack.Screen name="approval/[id]" options={{ title: "Approval" }} />
       <Stack.Screen name="notifications" options={{ title: "Notifications" }} />

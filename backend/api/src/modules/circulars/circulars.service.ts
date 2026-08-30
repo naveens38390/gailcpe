@@ -7,11 +7,14 @@ import {
   PriceCircular,
   PriceEntry,
   type CircularStatus,
+  type FreightCircularDocument,
 } from "../../database/schemas/circular.schema";
 import { DatasetService } from "../dataset/dataset.service";
 import { CircularStoreService } from "./circular-store.service";
 import { parseExtract } from "./extract-format";
+import { parseFreightExtract } from "./freight-extract-format";
 import { PriceCircularsService } from "../price-circulars/price-circulars.service";
+import { FreightCircularsService } from "../freight-circulars/freight-circulars.service";
 import { UploadCircularDto } from "./dto/upload-circular.dto";
 
 /**
@@ -33,6 +36,7 @@ export class CircularsService {
     private dataset: DatasetService,
     private store: CircularStoreService,
     private priceCirculars: PriceCircularsService,
+    private freightCirculars: FreightCircularsService,
   ) {}
 
   /**
@@ -55,11 +59,17 @@ export class CircularsService {
     }
 
     const round = effectiveDate.toISOString().slice(0, 10);
+    const reference = dto.reference?.trim();
+    // A price circular always prints a reference; a freight schedule often
+    // does not, and a system-assigned label is more honest than an invented one.
+    if (!reference && dto.kind === "price") {
+      throw new BadRequestException("A price circular needs its reference number.");
+    }
     const stored = await this.store.put(file, round);
 
     const common = {
       producer: dto.producer.trim(),
-      reference: dto.reference.trim(),
+      reference: reference || `${dto.producer.trim()} freight ${round}`,
       effectiveDate,
       sourceKey: stored.key,
       sourceFilename: file.originalname,
@@ -105,9 +115,12 @@ export class CircularsService {
   ) {
     const circular = await this.prices.findById(id);
     if (!circular) {
-      throw new NotFoundException(
-        "No such price circular. Freight extracts have no draft model yet.",
-      );
+      // Freight circulars go through the same two-files-one-event flow, into
+      // their own draft model — the rows are keyed on destination, not on
+      // zone and grade, so the reading is parsed and drafted separately.
+      const freight = await this.freight.findById(id);
+      if (freight) return this.attachFreightExtract(freight, file, userId);
+      throw new NotFoundException("No such circular.");
     }
     if (circular.draft) {
       throw new BadRequestException(
@@ -154,6 +167,69 @@ export class CircularsService {
       added: result.added,
       removedCount: result.removedCount,
       removed: result.removed,
+      status: result.draft.status,
+    };
+  }
+
+  /**
+   * The freight half of `attachExtract`.
+   *
+   * Same contract, same guards, same "publishing stays a separate act" — the
+   * only differences are the shape being parsed and which draft model it
+   * lands in.
+   */
+  private async attachFreightExtract(
+    circular: FreightCircularDocument,
+    file: { buffer: Buffer; originalname?: string },
+    userId?: string,
+  ) {
+    if (circular.draft) {
+      throw new BadRequestException(
+        "That circular already has a draft. Discard it before attaching a different reading.",
+      );
+    }
+
+    let parsedJson: unknown;
+    try {
+      parsedJson = JSON.parse(file.buffer.toString("utf8"));
+    } catch {
+      throw new BadRequestException("That file is not valid JSON.");
+    }
+    const extract = parseFreightExtract(parsedJson, circular.producer);
+
+    const round = circular.effectiveDate.toISOString().slice(0, 10);
+    const stored = await this.store.put(file, round, { allowJson: true });
+
+    const result = await this.freightCirculars.createFromExtract({
+      producer: circular.producer,
+      circularNumber: circular.reference ?? `${circular.producer} freight ${round}`,
+      effectiveDate: circular.effectiveDate,
+      reason: `Extracted from ${circular.sourceFilename ?? circular.reference ?? "the filed circular"}`,
+      userId: userId ?? "",
+      rows: extract.rows,
+    });
+
+    circular.extractKey = stored.key;
+    circular.extractFilename = file.originalname;
+    circular.extractedAt = new Date();
+    circular.draft = result.draft._id;
+    await circular.save();
+
+    return {
+      circularId: String(circular._id),
+      draftId: String(result.draft._id),
+      kind: "freight" as const,
+      producer: circular.producer,
+      reference: circular.reference ?? null,
+      effectiveDate: round,
+      rowCount: result.rowCount,
+      changedRowCount: result.changedRowCount,
+      addedCount: result.addedCount,
+      added: result.added,
+      removedCount: result.removedCount,
+      removed: result.removed,
+      unmappedCount: result.unmappedCount,
+      unmapped: result.unmapped,
       status: result.draft.status,
     };
   }
