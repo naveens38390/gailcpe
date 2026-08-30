@@ -5,8 +5,10 @@ import { Linking, Platform, Pressable, ScrollView, Text, View } from "react-nati
 
 import {
   api,
+  ApiError,
   type CircularExtractResult,
   type CircularRecord,
+  type FreightPdfExtractionRefused,
 } from "../../services/api";
 import { Field, Input, PrimaryButton } from "../../components/inputs";
 import { SelectField, type Option } from "../../components/select";
@@ -236,6 +238,7 @@ function CircularRow({ circular, onChanged }: { circular: CircularRecord; onChan
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<CircularExtractResult | null>(null);
+  const [refused, setRefused] = useState<FreightPdfExtractionRefused | null>(null);
 
   const id = String(circular._id);
   const hasDraft = Boolean(circular.draft);
@@ -244,7 +247,12 @@ function CircularRow({ circular, onChanged }: { circular: CircularRecord; onChan
 
   async function attach() {
     setError(null);
-    const file = await pickFile(["application/json"]);
+    setRefused(null);
+    // Freight readings can come straight from the circular PDF; price still
+    // needs the JSON reading, since there is no in-app price PDF parser yet.
+    const file = await pickFile(
+      isPrice ? ["application/json"] : ["application/json", "application/pdf"],
+    );
     if (!file) return;
     setBusy(true);
     try {
@@ -253,7 +261,11 @@ function CircularRow({ circular, onChanged }: { circular: CircularRecord; onChan
       setResult(await api.attachCircularExtract(id, form));
       onChanged();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Could not read that extract.");
+      if (e instanceof ApiError && isFreightPdfRefusal(e.details)) {
+        setRefused(e.details);
+      } else {
+        setError(e instanceof Error ? e.message : "Could not read that extract.");
+      }
     } finally {
       setBusy(false);
     }
@@ -298,7 +310,47 @@ function CircularRow({ circular, onChanged }: { circular: CircularRecord; onChan
       </View>
 
       {error ? <ErrorNote message={error} /> : null}
+      {refused ? <PdfExtractionRefused refusal={refused} /> : null}
       {result ? <ExtractSummary result={result} /> : null}
+    </View>
+  );
+}
+
+/** The 400 body a low-confidence PDF reading returns instead of a draft. */
+function isFreightPdfRefusal(details: unknown): details is FreightPdfExtractionRefused {
+  return (
+    !!details &&
+    typeof details === "object" &&
+    "extraction" in details &&
+    !!(details as FreightPdfExtractionRefused).extraction &&
+    (details as FreightPdfExtractionRefused).extraction.confidence === "low"
+  );
+}
+
+/**
+ * A PDF read but not trusted enough to build a draft from. Shown instead of a
+ * draft rather than alongside one — this is a stop, not a warning on
+ * something that already happened.
+ */
+function PdfExtractionRefused({ refusal }: { refusal: FreightPdfExtractionRefused }) {
+  const styles = useStyles();
+  const { extraction } = refusal;
+  return (
+    <View style={styles.summary}>
+      <Text style={styles.summaryLine}>{refusal.message}</Text>
+      <View style={styles.counts}>
+        <Count label="rows found" value={extraction.candidateRowCount} />
+        <Count label="rows parsed" value={extraction.parsedRowCount} warn />
+      </View>
+      <Text style={styles.summaryLine}>
+        Producer: {extraction.producer ?? "not recognised"}
+      </Text>
+      {extraction.warnings.map((w, i) => (
+        <Caveat key={i}>{w}</Caveat>
+      ))}
+      <Text style={styles.summaryLine}>
+        Attach a JSON reading instead, or correct the PDF and try again.
+      </Text>
     </View>
   );
 }
@@ -352,6 +404,13 @@ function ExtractSummary({ result }: { result: CircularExtractResult }) {
           {result.addedCount > 6 ? ` +${result.addedCount - 6} more` : ""}
         </Text>
       ) : null}
+      {result.pdfExtraction ? (
+        <Text style={styles.summaryLine}>
+          Read directly from the PDF: {result.pdfExtraction.parsedRowCount.toLocaleString("en-IN")}{" "}
+          of {result.pdfExtraction.candidateRowCount.toLocaleString("en-IN")} rows on the page.
+        </Text>
+      ) : null}
+      {result.pdfExtraction?.notes.map((n, i) => <Caveat key={i}>{n}</Caveat>)}
     </View>
   );
 }
