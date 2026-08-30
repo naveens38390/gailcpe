@@ -17,12 +17,16 @@ import type { Response } from "express";
 
 import { CircularsService } from "./circulars.service";
 import { MAX_UPLOAD_BYTES } from "./circular-store.service";
+import { ReferenceDetectorService } from "./reference-detector.service";
 import { UploadCircularDto } from "./dto/upload-circular.dto";
 
 @ApiTags("circulars")
 @Controller("circulars")
 export class CircularsController {
-  constructor(private circulars: CircularsService) {}
+  constructor(
+    private circulars: CircularsService,
+    private detector: ReferenceDetectorService,
+  ) {}
 
   @Post("upload")
   @ApiConsumes("multipart/form-data")
@@ -37,6 +41,19 @@ export class CircularsController {
   ) {
     if (!file) throw new BadRequestException("Attach the circular as `file`.");
     return this.circulars.upload(dto, file, req.user?.id);
+  }
+
+  @Post("detect-reference")
+  @ApiConsumes("multipart/form-data")
+  @ApiOperation({
+    summary: "Read a circular's own reference number out of the document",
+  })
+  @UseInterceptors(FileInterceptor("file", { limits: { fileSize: MAX_UPLOAD_BYTES } }))
+  async detectReference(@UploadedFile() file: { buffer: Buffer } | undefined) {
+    if (!file) throw new BadRequestException("Attach the circular as `file`.");
+    // Never fails the caller: this only prefills a field, and the person
+    // filing can always type it themselves.
+    return this.detector.detect(file.buffer);
   }
 
   @Post(":id/extract")

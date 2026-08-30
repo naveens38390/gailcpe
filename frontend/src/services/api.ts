@@ -334,6 +334,13 @@ export const api = {
   /** File a circular document against a producer and round. */
   uploadCircular: (form: FormData) => upload<UploadedCircular>("/circulars/upload", form),
 
+  /**
+   * Read the circular's own reference out of the document, to prefill the
+   * form. Advisory only — a miss leaves the field blank and typeable.
+   */
+  detectCircularReference: (form: FormData) =>
+    upload<DetectedReference>("/circulars/detect-reference", form, 60_000),
+
   /** Attach its extracted reading, which generates the draft to review. */
   attachCircularExtract: (id: string, form: FormData) =>
     upload<CircularExtractResult>(`/circulars/${encodeURIComponent(id)}/extract`, form),
@@ -718,6 +725,14 @@ export interface Timeline {
   total: number;
   shown: number;
   days: Array<{ date: string; entries: TimelineEntry[] }>;
+}
+
+/** The circular's own reference, read out of the document it was filed from. */
+export interface DetectedReference {
+  reference: string | null;
+  method: "labelled" | "bare" | "none";
+  /** The line it was read from, so a wrong guess can be understood. */
+  context?: string;
 }
 
 /** What comes back when a circular document is filed. */

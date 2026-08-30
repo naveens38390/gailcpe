@@ -81,6 +81,8 @@ function UploadForm({ onFiled }: { onFiled: () => void }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [filed, setFiled] = useState<string | null>(null);
+  const [detecting, setDetecting] = useState(false);
+  const [detectNote, setDetectNote] = useState<string | null>(null);
 
   const producerOptions: Option[] = useMemo(
     () =>
@@ -93,11 +95,37 @@ function UploadForm({ onFiled }: { onFiled: () => void }) {
     [catalog],
   );
 
+  /**
+   * Choosing the document also reads its reference number out of it, so the
+   * commonest typo — a mistyped circular number — mostly stops happening. The
+   * field stays editable and a failed read says so rather than sitting blank
+   * for no visible reason.
+   */
   async function pick() {
     setError(null);
+    setDetectNote(null);
     const file = await pickFile(["application/pdf", "application/vnd.ms-excel",
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]);
-    if (file) setPicked(file);
+    if (!file) return;
+    setPicked(file);
+
+    setDetecting(true);
+    try {
+      const form = new FormData();
+      appendFile(form, file);
+      const found = await api.detectCircularReference(form);
+      if (found.reference) {
+        setReference(found.reference);
+        setDetectNote(`Read from the document: ${found.reference}`);
+      } else {
+        setDetectNote("Circular number could not be detected automatically.");
+      }
+    } catch {
+      // Detection is a convenience; never let it stop someone filing.
+      setDetectNote("Circular number could not be detected automatically.");
+    } finally {
+      setDetecting(false);
+    }
   }
 
   async function submit() {
@@ -153,11 +181,17 @@ function UploadForm({ onFiled }: { onFiled: () => void }) {
         <Input value={effectiveDate} onChangeText={setEffectiveDate} placeholder="2026-10-01" />
       </Field>
 
-      <Pressable onPress={pick} style={styles.picker}>
+      <Pressable onPress={pick} style={styles.picker} disabled={detecting}>
         <Text style={styles.pickerText}>
-          {picked ? picked.name : "Choose a PDF or Excel circular"}
+          {detecting
+            ? "Reading the document…"
+            : picked
+              ? picked.name
+              : "Choose a PDF or Excel circular"}
         </Text>
       </Pressable>
+
+      {detectNote ? <Text style={styles.detectNote}>{detectNote}</Text> : null}
 
       {error ? <ErrorNote message={error} /> : null}
       {filed ? <Caveat>{filed}</Caveat> : null}
@@ -352,6 +386,7 @@ const useStyles = makeStyles((c) => ({
     backgroundColor: c.surfaceAlt,
   },
   pickerText: { color: c.textMuted, fontSize: 13, fontWeight: "600" },
+  detectNote: { color: c.textFaint, fontSize: 12, marginTop: theme.space(2), lineHeight: 17 },
 
   row: { paddingVertical: theme.space(3), borderTopWidth: 1, borderTopColor: c.border },
   rowHead: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: theme.space(2) },
