@@ -295,7 +295,13 @@ function CircularRow({ circular, onChanged }: { circular: CircularRecord; onChan
 
         {!hasDraft ? (
           <Pressable onPress={attach} disabled={busy} hitSlop={8}>
-            <Text style={styles.link}>{busy ? "Reading…" : "Attach extract"}</Text>
+            <Text style={styles.link}>
+              {busy
+                ? "Reading…"
+                : isPrice
+                  ? "Attach extract (JSON)"
+                  : "Attach reading (PDF or JSON)"}
+            </Text>
           </Pressable>
         ) : null}
 

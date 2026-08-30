@@ -1371,7 +1371,8 @@ export interface FreightCircularDiff {
 
 export interface CreateFreightCircularInput {
   producer: string;
-  circularNumber: string;
+  /** Omitted when the schedule prints none — the API assigns a descriptive label. */
+  circularNumber?: string;
   effectiveDate: string;
   reason: string;
 }

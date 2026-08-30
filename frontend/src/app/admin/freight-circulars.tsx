@@ -82,10 +82,20 @@ export default function FreightCircularsScreen() {
       <Card>
         <View style={styles.cardHead}>
           <SectionTitle>Draft freight circulars</SectionTitle>
-          <Pressable onPress={() => setCreating((c) => !c)}>
-            <Text style={styles.link}>{creating ? "Cancel" : "+ New circular"}</Text>
-          </Pressable>
+          <View style={styles.headActions}>
+            <Pressable onPress={() => router.push("/admin/circulars" as never)}>
+              <Text style={styles.link}>File a PDF circular →</Text>
+            </Pressable>
+            <Pressable onPress={() => setCreating((c) => !c)}>
+              <Text style={styles.link}>{creating ? "Cancel" : "+ New from live book"}</Text>
+            </Pressable>
+          </View>
         </View>
+        <Text style={styles.hint}>
+          Have a circular PDF? File it on the Circulars screen and attach it there — HMEL, HPL and
+          OPaL rates are read straight out of the document. "New from live book" below starts an
+          empty clone instead, for editing rates by hand.
+        </Text>
         {creating ? (
           <CreateForm
             producers={producers}
@@ -191,9 +201,12 @@ function CreateForm({
   );
 
   async function submit() {
-    if (!producer || !circularNumber.trim() || !effectiveDate.trim() || reason.trim().length < 10) {
+    // Circular number is deliberately not required: HMEL and OPaL publish
+    // freight schedules with no reference printed on them, and the API
+    // assigns a descriptive label rather than inviting an invented number.
+    if (!producer || !effectiveDate.trim() || reason.trim().length < 10) {
       setError(
-        "Producer, circular number, effective date, and a reason of at least 10 characters are required.",
+        "Producer, effective date, and a reason of at least 10 characters are required.",
       );
       return;
     }
@@ -202,7 +215,7 @@ function CreateForm({
     try {
       const draft = await api.createFreightCircular({
         producer,
-        circularNumber: circularNumber.trim(),
+        circularNumber: circularNumber.trim() || undefined,
         effectiveDate: effectiveDate.trim(),
         reason: reason.trim(),
       });
@@ -223,7 +236,10 @@ function CreateForm({
         onChange={setProducer}
         placeholder="Which producer's freight book"
       />
-      <Field label="Circular number">
+      <Field
+        label="Circular number"
+        hint="Leave blank if the schedule prints none — HMEL and OPaL usually do not"
+      >
         <Input value={circularNumber} onChangeText={setCircularNumber} placeholder="HPL/PM/26-27/39" />
       </Field>
       <Field label="Effective date" hint="YYYY-MM-DD">
@@ -242,6 +258,8 @@ const useStyles = makeStyles((c) => ({
   root: { flex: 1, backgroundColor: c.bgApp },
   body: { padding: theme.space(4), paddingBottom: theme.space(12) },
   cardHead: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  headActions: { flexDirection: "row", gap: theme.space(4) },
+  hint: { color: c.textFaint, fontSize: 12, marginTop: theme.space(2), lineHeight: 17 },
   link: { color: c.primary, fontSize: 12, fontWeight: "700" },
   row: { paddingVertical: theme.space(3), borderTopWidth: 1, borderTopColor: c.border },
   rowHead: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },

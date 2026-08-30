@@ -3,7 +3,9 @@ import { IsArray, IsBoolean, IsIn, IsNumber, IsOptional, IsString } from "class-
 
 export class CreateFreightDraftDto {
   @IsString() producer!: string;
-  @IsString() circularNumber!: string;
+  /** Optional: HMEL's and OPaL's freight schedules print no reference, and the
+   * service assigns a descriptive one rather than inviting a made-up number. */
+  @IsOptional() @IsString() circularNumber?: string;
   @IsString() effectiveDate!: string;
   @IsString() reason!: string;
 }

@@ -128,7 +128,7 @@ export class FreightCircularsService {
   /** Clones the producer's current live freight book as a starting point. */
   async create(
     producer: string,
-    circularNumber: string,
+    circularNumber: string | undefined,
     effectiveDate: Date,
     reason: string,
     userId: string,
@@ -139,11 +139,17 @@ export class FreightCircularsService {
       throw new BadRequestException(`${producer} has no live freight book to clone.`);
     }
 
+    // HMEL's and OPaL's freight schedules print no reference at all, so a
+    // mandatory field here would only produce invented ones. Same descriptive
+    // label the filing path assigns — see CircularsService.upload.
+    const round = effectiveDate.toISOString().slice(0, 10);
+    const reference = circularNumber?.trim() || `${producer} freight ${round}`;
+
     // The draft itself, not the build summary: this is what the caller
     // navigates to, and every count the summary carries is on the draft.
     const { draft } = await this.build({
       producer,
-      circularNumber,
+      circularNumber: reference,
       effectiveDate,
       reason,
       userId,
