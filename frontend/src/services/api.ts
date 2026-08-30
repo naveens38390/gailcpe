@@ -89,6 +89,8 @@ export class ApiError extends Error {
   constructor(
     message: string,
     readonly status: number,
+    /** The raw error body, for callers that need more than the message — e.g. a refused PDF extraction's row counts and warnings. */
+    readonly details?: unknown,
   ) {
     super(message);
   }
@@ -208,7 +210,7 @@ async function request<T>(
     const message = Array.isArray(body?.message)
       ? body.message.join(", ")
       : (body?.message ?? `Request failed (${response.status}).`);
-    throw new ApiError(message, response.status);
+    throw new ApiError(message, response.status, body);
   }
   return body as T;
 }
@@ -252,7 +254,7 @@ async function upload<T>(path: string, form: FormData, timeoutMs = 120_000): Pro
     const message = Array.isArray(body?.message)
       ? body.message.join(", ")
       : (body?.message ?? `Upload failed (${response.status}).`);
-    throw new ApiError(message, response.status);
+    throw new ApiError(message, response.status, body);
   }
   return body as T;
 }
@@ -849,6 +851,24 @@ export interface CircularExtractResult {
   unmapped?: string[];
   ambiguousCount?: number;
   ambiguous?: string[];
+  /** Present when the reading came from a PDF read directly, rather than a JSON reading. */
+  pdfExtraction?: {
+    candidateRowCount: number;
+    parsedRowCount: number;
+    notes: string[];
+  };
+}
+
+/** The 400 body a low-confidence PDF reading returns instead of a draft. */
+export interface FreightPdfExtractionRefused {
+  message: string;
+  extraction: {
+    producer: string | null;
+    candidateRowCount: number;
+    parsedRowCount: number;
+    confidence: "low";
+    warnings: string[];
+  };
 }
 
 export type GradeStatus = "active" | "deprecated" | "retired";

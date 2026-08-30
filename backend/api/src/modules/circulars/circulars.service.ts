@@ -12,7 +12,8 @@ import {
 import { DatasetService } from "../dataset/dataset.service";
 import { CircularStoreService } from "./circular-store.service";
 import { parseExtract } from "./extract-format";
-import { parseFreightExtract } from "./freight-extract-format";
+import { parseFreightExtract, type ParsedFreightRow } from "./freight-extract-format";
+import { extractFreightPdf, type FreightPdfExtractResult } from "./freight-pdf-extractor";
 import { PriceCircularsService } from "../price-circulars/price-circulars.service";
 import { FreightCircularsService } from "../freight-circulars/freight-circulars.service";
 import { UploadCircularDto } from "./dto/upload-circular.dto";
@@ -189,16 +190,44 @@ export class CircularsService {
       );
     }
 
-    let parsedJson: unknown;
-    try {
-      parsedJson = JSON.parse(file.buffer.toString("utf8"));
-    } catch {
-      throw new BadRequestException("That file is not valid JSON.");
-    }
-    const extract = parseFreightExtract(parsedJson, circular.producer);
-
     const round = circular.effectiveDate.toISOString().slice(0, 10);
-    const stored = await this.store.put(file, round, { allowJson: true });
+    const isPdf = file.buffer.subarray(0, 4).toString("latin1") === "%PDF";
+
+    let rows: ParsedFreightRow[];
+    let pdfMeta: FreightPdfExtractResult | null = null;
+    if (isPdf) {
+      const extract = await extractFreightPdf(file.buffer, circular.producer);
+      if (extract.confidence === "low") {
+        // Stop before a draft is built at all — the caller sees exactly what
+        // was and was not read, and can attach a JSON reading instead rather
+        // than review a draft built on a guess.
+        throw new BadRequestException({
+          message:
+            "This PDF could not be read with enough confidence to build a draft automatically.",
+          extraction: {
+            producer: extract.producer,
+            candidateRowCount: extract.candidateRowCount,
+            parsedRowCount: extract.parsedRowCount,
+            confidence: extract.confidence,
+            warnings: extract.warnings,
+          },
+        });
+      }
+      rows = extract.rows;
+      pdfMeta = extract;
+    } else {
+      let parsedJson: unknown;
+      try {
+        parsedJson = JSON.parse(file.buffer.toString("utf8"));
+      } catch {
+        throw new BadRequestException(
+          "That is not a PDF this can read, and not valid JSON either.",
+        );
+      }
+      rows = parseFreightExtract(parsedJson, circular.producer).rows;
+    }
+
+    const stored = await this.store.put(file, round, { allowJson: !isPdf });
 
     const result = await this.freightCirculars.createFromExtract({
       producer: circular.producer,
@@ -206,7 +235,7 @@ export class CircularsService {
       effectiveDate: circular.effectiveDate,
       reason: `Extracted from ${circular.sourceFilename ?? circular.reference ?? "the filed circular"}`,
       userId: userId ?? "",
-      rows: extract.rows,
+      rows,
     });
 
     circular.extractKey = stored.key;
@@ -214,6 +243,25 @@ export class CircularsService {
     circular.extractedAt = new Date();
     circular.draft = result.draft._id;
     await circular.save();
+
+    // Cross-checks the PDF's own printed date and reference against what the
+    // circular was filed with. Informational only — the filed values are
+    // what the draft is built against, never overwritten by a guess.
+    const notes: string[] = [];
+    if (pdfMeta?.effectiveDate && pdfMeta.effectiveDate !== round) {
+      notes.push(
+        `This PDF reads its effective date as ${pdfMeta.effectiveDate}, but the circular was filed as ${round}.`,
+      );
+    }
+    if (
+      pdfMeta?.circularNumber &&
+      circular.reference &&
+      pdfMeta.circularNumber !== circular.reference
+    ) {
+      notes.push(
+        `This PDF reads its own reference as "${pdfMeta.circularNumber}", but the circular was filed as "${circular.reference}".`,
+      );
+    }
 
     return {
       circularId: String(circular._id),
@@ -230,7 +278,16 @@ export class CircularsService {
       removed: result.removed,
       unmappedCount: result.unmappedCount,
       unmapped: result.unmapped,
+      ambiguousCount: result.ambiguousCount,
+      ambiguous: result.ambiguous,
       status: result.draft.status,
+      pdfExtraction: pdfMeta
+        ? {
+            candidateRowCount: pdfMeta.candidateRowCount,
+            parsedRowCount: pdfMeta.parsedRowCount,
+            notes,
+          }
+        : undefined,
     };
   }
 

@@ -39,39 +39,49 @@ export interface DetectedReference {
   context?: string;
 }
 
+/**
+ * The pure text-matching half of detection, kept apart from the PDF reading
+ * so a caller that has already read the document's text — the freight PDF
+ * extractor, notably — can reuse these exact patterns instead of keeping its
+ * own copy that quietly drifts out of sync with this one.
+ */
+export function detectReferenceInText(text: string): DetectedReference {
+  if (!text) return { reference: null, method: "none" };
+
+  const lines = text
+    .split("\n")
+    .map((l) => l.replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+
+  for (const line of lines) {
+    for (const pattern of LABELLED) {
+      const hit = pattern.exec(line);
+      if (hit?.[1]) {
+        const ref = tidy(hit[1]);
+        if (plausible(ref)) return { reference: ref, method: "labelled", context: line.slice(0, 120) };
+      }
+    }
+  }
+
+  // Nothing labelled; accept a strongly-shaped reference on its own.
+  for (const line of lines) {
+    const hit = BARE.exec(line);
+    if (hit?.[1]) {
+      const ref = tidy(hit[1]);
+      if (plausible(ref)) return { reference: ref, method: "bare", context: line.slice(0, 120) };
+    }
+  }
+
+  return { reference: null, method: "none" };
+}
+
 @Injectable()
 export class ReferenceDetectorService {
   private readonly logger = new Logger(ReferenceDetectorService.name);
 
   async detect(buffer: Buffer): Promise<DetectedReference> {
     const text = await this.readText(buffer);
-    if (!text) return { reference: null, method: "none" };
-
-    const lines = text
-      .split("\n")
-      .map((l) => l.replace(/\s+/g, " ").trim())
-      .filter(Boolean);
-
-    for (const line of lines) {
-      for (const pattern of LABELLED) {
-        const hit = pattern.exec(line);
-        if (hit?.[1]) {
-          const ref = tidy(hit[1]);
-          if (plausible(ref)) return { reference: ref, method: "labelled", context: line.slice(0, 120) };
-        }
-      }
-    }
-
-    // Nothing labelled; accept a strongly-shaped reference on its own.
-    for (const line of lines) {
-      const hit = BARE.exec(line);
-      if (hit?.[1]) {
-        const ref = tidy(hit[1]);
-        if (plausible(ref)) return { reference: ref, method: "bare", context: line.slice(0, 120) };
-      }
-    }
-
-    return { reference: null, method: "none" };
+    return detectReferenceInText(text);
   }
 
   /**
