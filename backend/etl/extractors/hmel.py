@@ -27,6 +27,14 @@ from pdfrows import assign_to_columns, rows  # noqa: E402
 # B0155D, M0252S, P0142SU, F0050D — a letter, four digits, one or two letters.
 GRADE_CODE = re.compile(r"^[A-Z]\d{4}[A-Z]{1,2}$")
 
+# Page furniture that reads as a row label: the circular's title carries a month
+# and the word "Price", neither of which appears in an Indian town name.
+MASTHEAD = re.compile(
+    r"\b(?:January|February|March|April|May|June|July|August|September|October"
+    r"|November|December)\b|\bPrice\b",
+    re.IGNORECASE,
+)
+
 SECTIONS = {
     "Ex-Bathinda Price: HDPE Prime Grades": ("plant", "HDPE", "prime"),
     "Ex-Bathinda Price: HDPE Non-Prime/Off-Spec. Grades": ("plant", "HDPE", "non_prime"),
@@ -88,6 +96,12 @@ def prices(path: str) -> dict:
 
         label, values = row.label_and_values()
         if not values or not label:
+            continue
+        # The circular's own title — "HMEL PE Price 1st August, 2026" — sits on
+        # a row like any other, and the year reads as a locational adjustment.
+        # It reached the dataset as a location called "HMEL PE Price 1st
+        # August," priced for two grades. A town is not dated.
+        if MASTHEAD.search(label):
             continue
         cells = assign_to_columns(values, columns)
         if section[0] == "depot":

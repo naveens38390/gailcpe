@@ -46,10 +46,10 @@
      "rate_per_mt": 1150
     }
    ],
-   "early_payment_per_day": null,
-   "interest_free_credit_days": 14,
    "quantity_slabs_source": "GAIL quantity discount schedule supplied by the client, 26 Aug 2026",
    "quantity_slabs_note": "Circular states A, B and OG grades only. Confirmed with the client on 26 Aug 2026 that no grade in this catalogue is excluded, so the schedule applies to all 53 GAIL grades. No quality classification is needed.",
+   "early_payment_per_day": null,
+   "interest_free_credit_days": 14,
    "interest_free_credit_source": "Client, confirmed 29 Aug 2026: GAIL offers a 14-day interest-free credit period, as the other producers do. The Rs 1,000/MT is NOT available on credit terms — a credit buyer gets the 14 days and no discount. Implemented that way: the cash discount applies in cash mode only, and this period is reported rather than applied, matching every competitor."
   },
   "RIL": {
@@ -108,49 +108,49 @@
    "interest_free_credit_days": 14,
    "quantity_slabs": [
     {
-     "from_mt": 5,
-     "to_mt": 10,
-     "rate_per_mt": 450
+     "from_mt": 5.0,
+     "to_mt": 10.0,
+     "rate_per_mt": 450.0
     },
     {
-     "from_mt": 10,
-     "to_mt": 25,
-     "rate_per_mt": 550
+     "from_mt": 10.0,
+     "to_mt": 25.0,
+     "rate_per_mt": 550.0
     },
     {
-     "from_mt": 25,
-     "to_mt": 50,
-     "rate_per_mt": 650
+     "from_mt": 25.0,
+     "to_mt": 50.0,
+     "rate_per_mt": 650.0
     },
     {
-     "from_mt": 50,
-     "to_mt": 75,
-     "rate_per_mt": 750
+     "from_mt": 50.0,
+     "to_mt": 75.0,
+     "rate_per_mt": 750.0
     },
     {
-     "from_mt": 75,
-     "to_mt": 100,
-     "rate_per_mt": 800
+     "from_mt": 75.0,
+     "to_mt": 100.0,
+     "rate_per_mt": 800.0
     },
     {
-     "from_mt": 100,
-     "to_mt": 200,
-     "rate_per_mt": 850
+     "from_mt": 100.0,
+     "to_mt": 200.0,
+     "rate_per_mt": 850.0
     },
     {
-     "from_mt": 200,
-     "to_mt": 300,
-     "rate_per_mt": 950
+     "from_mt": 200.0,
+     "to_mt": 300.0,
+     "rate_per_mt": 950.0
     },
     {
-     "from_mt": 300,
-     "to_mt": 400,
-     "rate_per_mt": 1050
+     "from_mt": 300.0,
+     "to_mt": 400.0,
+     "rate_per_mt": 1050.0
     },
     {
-     "from_mt": 400,
+     "from_mt": 400.0,
      "to_mt": null,
-     "rate_per_mt": 1150
+     "rate_per_mt": 1150.0
     }
    ]
   },

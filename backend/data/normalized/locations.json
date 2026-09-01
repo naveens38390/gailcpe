@@ -787,7 +787,7 @@
   },
   "RIL": {
    "producer": "RIL",
-   "zones_published": 76,
+   "zones_published": 75,
    "resolved": 135,
    "total": 313,
    "tiers": {
@@ -1254,7 +1254,7 @@
   },
   "HMEL": {
    "producer": "HMEL",
-   "zones_published": 81,
+   "zones_published": 80,
    "resolved": 138,
    "total": 313,
    "tiers": {
