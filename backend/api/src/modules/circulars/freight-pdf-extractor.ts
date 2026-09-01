@@ -107,14 +107,30 @@ function columnEdges(rowWords: Word[][], keep: number): number[] {
     .sort((a, b) => a - b);
 }
 
-/** Bucket a row's words into the columns defined by `edges`. */
+/**
+ * Bucket a row's words into the columns defined by `edges`.
+ *
+ * A word is placed by its midpoint, not its left edge. Rate columns are not
+ * reliably left-aligned: HMEL sets `5410.00` starting at x=499.2 but the wider
+ * `11420.00` at 496.3, because the column is aligned on the other side. Testing
+ * the left edge against the column boundary therefore failed for exactly the
+ * widest numbers — the rate fell back into the destination cell, the row parsed
+ * with no rate, and was discarded. That silently cost HMEL its only five-figure
+ * rate, Shillong at Rs 11,420, and would cost every such rate on any producer.
+ *
+ * A midpoint tolerates alignment drift up to half a cell, which is far more
+ * than the couple of points these documents actually vary by.
+ */
 function cells(words: Word[], edges: number[]): string[] {
   const out: string[][] = edges.map(() => []);
   for (const w of words) {
+    const mid = (w.x0 + w.x1) / 2;
     let slot = -1;
     for (let i = 0; i < edges.length; i++) {
-      if (w.x0 >= edges[i]! - 1.5) slot = i;
+      if (mid >= edges[i]! - 1.5) slot = i;
     }
+    // A word sitting entirely left of the first column still belongs to it.
+    if (slot < 0 && w.x1 >= edges[0]! - 1.5) slot = 0;
     if (slot >= 0) out[slot]!.push(w.text);
   }
   return out.map((c) => c.join(" ").trim());
@@ -197,13 +213,30 @@ const EXTRACTORS: Record<FreightPdfProducer, (rowWords: Word[][]) => ParsedFreig
 /** Column count a fully-formed row of this producer's table should have. */
 const EXPECTED_COLUMNS: Record<FreightPdfProducer, number> = { HMEL: 5, HPL: 9, OPaL: 6 };
 
+/**
+ * Which producer's letterhead this is.
+ *
+ * Matched on whole words. A plain substring test is not safe here: "OPAL" sits
+ * inside "BHOPAL", so any document naming that city — a GAIL price sheet, for
+ * one — was read as an OPaL circular. Attached to an OPaL freight circular it
+ * passed the mix-up guard, drafted, and would have replaced OPaL's entire book
+ * on publish. The town names in these documents are exactly the hazard, so the
+ * boundary check is the point rather than a refinement.
+ */
 function detectProducer(headText: string): FreightPdfProducer | null {
   for (const [code, names] of Object.entries(PRODUCER_NAMES) as Array<
     [FreightPdfProducer, string[]]
   >) {
-    if (names.some((n) => headText.toLowerCase().includes(n.toLowerCase()))) return code;
+    for (const name of names) {
+      const pattern = new RegExp(`(^|[^A-Za-z0-9])${escapeRegExp(name)}([^A-Za-z0-9]|$)`, "i");
+      if (pattern.test(headText)) return code;
+    }
   }
   return null;
+}
+
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 /** "w.e.f. 01.06.2026", "with effect from 1st June 2026", "effective date: 01-06-2026". */
