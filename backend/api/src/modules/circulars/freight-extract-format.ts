@@ -48,6 +48,51 @@ function str(value: unknown): string | undefined {
   return typeof value === "string" && value.trim() ? value.trim() : undefined;
 }
 
+/**
+ * The most any producer in this pack charges to move a tonne, with room to
+ * spare. The dearest real rate on file is HMEL's Rs 11,420 to Shillong; a
+ * basic price is around Rs 130,000. Anything above this is not freight, and
+ * the usual way it happens is a price sheet being read as a freight book.
+ */
+const MAX_PLAUSIBLE_RATE = 50_000;
+
+/**
+ * The rules a reading has to satisfy before it can become a draft, whoever
+ * produced it.
+ *
+ * Applied to PDF readings as well as JSON ones. The PDF path used to skip all
+ * of this — it handed its rows straight to the draft builder — so a document
+ * that parsed into plausible-looking rows could carry a negative rate, an
+ * absurd insurance line, or a page of basic prices, and nothing stopped it.
+ */
+export function validateFreightRows(
+  rows: ParsedFreightRow[],
+  source: string,
+): ParsedFreightRow[] {
+  for (const row of rows) {
+    const at = `${row.destination} (${source})`;
+    if (!row.destination.trim()) {
+      throw new BadRequestException(`${source} produced a row with no destination.`);
+    }
+    if (!Number.isFinite(row.ratePerMt)) {
+      throw new BadRequestException(`${at} has a rate that is not a number.`);
+    }
+    if (row.ratePerMt < 0) throw new BadRequestException(`${at} has a negative rate.`);
+    if (row.ratePerMt > MAX_PLAUSIBLE_RATE) {
+      throw new BadRequestException(
+        `${at} reads Rs ${row.ratePerMt.toLocaleString("en-IN")} per MT. That is far above any real freight rate, which usually means this document is not a freight circular.`,
+      );
+    }
+    if (!Number.isFinite(row.insurancePerMt) || row.insurancePerMt < 0) {
+      throw new BadRequestException(`${at} has an invalid insurance rate.`);
+    }
+    if (row.insurancePerMt > MAX_PLAUSIBLE_RATE) {
+      throw new BadRequestException(`${at} has an implausible insurance rate.`);
+    }
+  }
+  return rows;
+}
+
 /** One row of a producer's freight book, however the reading spelled it. */
 function toRow(raw: unknown, at: string): ParsedFreightRow {
   if (!raw || typeof raw !== "object") {

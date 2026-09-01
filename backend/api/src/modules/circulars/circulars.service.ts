@@ -12,7 +12,11 @@ import {
 import { DatasetService } from "../dataset/dataset.service";
 import { CircularStoreService } from "./circular-store.service";
 import { parseExtract } from "./extract-format";
-import { parseFreightExtract, type ParsedFreightRow } from "./freight-extract-format";
+import {
+  parseFreightExtract,
+  validateFreightRows,
+  type ParsedFreightRow,
+} from "./freight-extract-format";
 import { extractFreightPdf, type FreightPdfExtractResult } from "./freight-pdf-extractor";
 import { PriceCircularsService } from "../price-circulars/price-circulars.service";
 import { FreightCircularsService } from "../freight-circulars/freight-circulars.service";
@@ -213,7 +217,9 @@ export class CircularsService {
           },
         });
       }
-      rows = extract.rows;
+      // The same rules a JSON reading has to pass. Reading a PDF is a less
+      // certain business than being handed numbers, not a more certain one.
+      rows = validateFreightRows(extract.rows, file.originalname ?? "the PDF");
       pdfMeta = extract;
     } else {
       let parsedJson: unknown;
