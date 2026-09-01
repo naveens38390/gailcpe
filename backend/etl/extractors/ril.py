@@ -31,6 +31,11 @@ SERIAL_PREFIX = re.compile(r"^\d+")
 # Two-letter state codes closing the label ("TR", "MH", "DN").
 STATE_SUFFIX = re.compile(r"\s([A-Z]{2})$")
 
+# Below this, a row's numbers are page furniture rather than prices. PE lands
+# around Rs 130,000/MT across every producer in this pack, so the margin here is
+# two orders of magnitude — wide enough that no real price can trip it.
+PRICE_FLOOR = 1000
+
 
 def _describe(page_rows: list) -> str:
     """The annexure's own caption, e.g. 'Domestic Prices for Hazira HDPE'."""
@@ -85,6 +90,12 @@ def prices(path: str) -> dict[str, dict]:
             label = label[: found_state.start()].strip()
         zone = SERIAL_PREFIX.sub("", label).strip()
         if not zone:
+            continue
+        # "Page 6 of 108" is a footer, not a zone, and its numerals sit where a
+        # row's prices sit — so it parsed as a location called "Page" carrying
+        # 65 "prices" of 6, 7, 108. A PE price is a five- or six-figure number;
+        # nothing on this page priced in single digits is a price.
+        if max(value for value, _ in values) < PRICE_FLOOR:
             continue
         entry = out[current]["zones"].setdefault(
             zone, {"state": state_code, "prices": {}}

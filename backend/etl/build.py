@@ -63,18 +63,47 @@ FILES = {
 }
 
 # Discount terms, transcribed from each circular's own policy section. GAIL's
-# are the exception: no GAIL policy circular is in the source pack, so only the
-# cash discount is known — read off the MZO workbook, which uses Rs 1,000 for
-# GAIL against Rs 1,100 for everyone else. Its quantity discount is unknown, and
-# the engine must say so rather than assume parity.
+# are the exception: no GAIL policy circular is in the source pack, so its terms
+# come from the MZO workbook and from what the client has since confirmed
+# directly. They are recorded here rather than edited into data/normalized,
+# because anything only in the output is undone the next time this runs — which
+# is exactly what happened to the quantity schedule below.
 DISCOUNTS = {
     "GAIL": {
         "cash_discount": 1000,
-        "cash_discount_source": "MZO workbook (no GAIL circular supplied)",
-        "quantity_slabs": None,
-        "quantity_slabs_status": "UNKNOWN — not published in the supplied files",
+        "cash_discount_source": (
+            'MZO workbook, row "Less: CD - Cash Discount" (no GAIL circular '
+            "supplied). Client confirmed 29 Aug 2026: available on cash payment only."
+        ),
+        # Supplied by the client after the first build, so it was never in a
+        # source file this script reads.
+        "quantity_slabs": [
+            {"from_mt": 5, "to_mt": 10, "rate_per_mt": 450},
+            {"from_mt": 10, "to_mt": 30, "rate_per_mt": 550},
+            {"from_mt": 30, "to_mt": 50, "rate_per_mt": 650},
+            {"from_mt": 50, "to_mt": 100, "rate_per_mt": 750},
+            {"from_mt": 100, "to_mt": 200, "rate_per_mt": 850},
+            {"from_mt": 200, "to_mt": 300, "rate_per_mt": 950},
+            {"from_mt": 300, "to_mt": 400, "rate_per_mt": 1050},
+            {"from_mt": 400, "to_mt": None, "rate_per_mt": 1150},
+        ],
+        "quantity_slabs_source": (
+            "GAIL quantity discount schedule supplied by the client, 26 Aug 2026"
+        ),
+        "quantity_slabs_note": (
+            "Circular states A, B and OG grades only. Confirmed with the client on "
+            "26 Aug 2026 that no grade in this catalogue is excluded, so the schedule "
+            "applies to all 53 GAIL grades. No quality classification is needed."
+        ),
         "early_payment_per_day": None,
-        "interest_free_credit_days": None,
+        "interest_free_credit_days": 14,
+        "interest_free_credit_source": (
+            "Client, confirmed 29 Aug 2026: GAIL offers a 14-day interest-free credit "
+            "period, as the other producers do. The Rs 1,000/MT is NOT available on "
+            "credit terms — a credit buyer gets the 14 days and no discount. "
+            "Implemented that way: the cash discount applies in cash mode only, and "
+            "this period is reported rather than applied, matching every competitor."
+        ),
     },
     "RIL": {
         "cash_discount": 1100,
