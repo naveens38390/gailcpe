@@ -28,7 +28,13 @@
 
 import { BadRequestException } from "@nestjs/common";
 import type { ParsedFreightRow } from "./freight-extract-format";
-import { joinNumericFragments, readRows, type PdfRow, type Word } from "./pdf-table-reader";
+import {
+  joinNumericFragments,
+  mergeOrphanRows,
+  readRows,
+  type PdfRow,
+  type Word,
+} from "./pdf-table-reader";
 import { detectReferenceInText } from "./reference-detector.service";
 
 export type FreightPdfProducer = "HMEL" | "HPL" | "OPaL";
@@ -65,19 +71,39 @@ function numberedRows(rows: PdfRow[]): Word[][] {
     .map((r) => joinNumericFragments(r.words));
 }
 
-/** The recurring left edges that define this circular's columns. */
+/**
+ * The recurring left edges that define this circular's columns.
+ *
+ * Edges are clustered before they are counted, not bucketed to a fixed
+ * precision. A column's left edge wanders by a fraction of a point between
+ * rows, and OPaL's state column lands on 144.9 as often as 145.0; counting
+ * those separately halves the column's score and drops it below a genuinely
+ * rarer neighbour, which then takes its slot and shifts every cell after it.
+ * Clustering within a tolerance keeps a column whole however its edge jitters.
+ */
+const EDGE_CLUSTER = 2.5;
+
 function columnEdges(rowWords: Word[][], keep: number): number[] {
-  const counts = new Map<number, number>();
-  for (const words of rowWords) {
-    for (const w of words) {
-      const key = Math.round(w.x0 * 10) / 10;
-      counts.set(key, (counts.get(key) ?? 0) + 1);
+  const xs: number[] = [];
+  for (const words of rowWords) for (const w of words) xs.push(w.x0);
+  xs.sort((a, b) => a - b);
+
+  const clusters: Array<{ sum: number; count: number; at: number }> = [];
+  for (const x of xs) {
+    const last = clusters[clusters.length - 1];
+    if (last && x - last.at <= EDGE_CLUSTER) {
+      last.sum += x;
+      last.count += 1;
+      last.at = last.sum / last.count;
+    } else {
+      clusters.push({ sum: x, count: 1, at: x });
     }
   }
-  return [...counts.entries()]
-    .sort((a, b) => b[1] - a[1])
+
+  return clusters
+    .sort((a, b) => b.count - a.count)
     .slice(0, keep)
-    .map(([x]) => x)
+    .map((c) => c.at)
     .sort((a, b) => a - b);
 }
 
@@ -217,7 +243,7 @@ export async function extractFreightPdf(
   buffer: Buffer,
   expectedProducer: string,
 ): Promise<FreightPdfExtractResult> {
-  const rows = await readRows(buffer);
+  const rows = mergeOrphanRows(await readRows(buffer));
   if (!rows.length) {
     throw new BadRequestException(
       "Could not read any text from that PDF. It may be a scanned image with no text layer — attach a JSON reading instead.",

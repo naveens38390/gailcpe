@@ -95,6 +95,65 @@ export async function readRows(buffer: Buffer): Promise<PdfRow[]> {
   }
 }
 
+/**
+ * Rejoin the pieces of a table row that were set on different baselines.
+ *
+ * These circulars do not put one row on one baseline. HPL sets a serial number
+ * or a rate a few points off the rest of its row about one row in ten; OPaL
+ * sets *every* row as two halves 3pt apart — serial, cluster, state and
+ * insurance on the upper, zone code, destination and rate on the lower.
+ * Bucketing by baseline alone therefore splits real rows in two, which drops
+ * rates (a row with no rate is discarded) and invents rows (each half parses
+ * as its own). `pdfrows.py` names the same problem and pairs across it.
+ *
+ * Two adjacent groups are joined when they are close enough vertically to be
+ * one row and occupy no common column. The column test is what keeps two
+ * genuine rows apart: consecutive rows both carry a serial and a rate, so they
+ * always collide and are never welded together. The gap ceiling sits between
+ * the within-row offset and the real row pitch — 3pt against 6pt on HPL, 3pt
+ * against 9pt on OPaL — so it separates the two cases on both.
+ */
+const ORPHAN_MAX_GAP = ROW_TOLERANCE + 1;
+/** How close two words must be horizontally to count as the same column. */
+const COLUMN_COLLISION = 5;
+
+export function mergeOrphanRows(rows: PdfRow[]): PdfRow[] {
+  const out: PdfRow[] = rows.map((r) => ({ ...r, words: [...r.words] }));
+  const absorbed = new Set<number>();
+
+  for (let i = 0; i < out.length; i++) {
+    if (absorbed.has(i)) continue;
+    const fragment = out[i]!;
+
+    let bestIndex = -1;
+    let bestGap = Infinity;
+    for (const j of [i - 1, i + 1]) {
+      const target = out[j];
+      if (!target || absorbed.has(j) || target.page !== fragment.page) continue;
+      const gap = Math.abs(target.top - fragment.top);
+      if (gap > ORPHAN_MAX_GAP || gap >= bestGap) continue;
+      const collides = fragment.words.some((o) =>
+        target.words.some((t) => Math.abs(t.x0 - o.x0) < COLUMN_COLLISION),
+      );
+      if (collides) continue;
+      bestIndex = j;
+      bestGap = gap;
+    }
+
+    if (bestIndex >= 0) {
+      const target = out[bestIndex]!;
+      target.words = [...target.words, ...fragment.words].sort((a, b) => a.x0 - b.x0);
+      target.text = target.words.map((w) => w.text).join(" ");
+      // The joined row keeps the upper baseline, so a row assembled from two
+      // halves still sorts into the position a reader would expect.
+      target.top = Math.min(target.top, fragment.top);
+      absorbed.add(i);
+    }
+  }
+
+  return out.filter((_, i) => !absorbed.has(i));
+}
+
 const NUMBER = /^-?[\d,]*\d(?:\.\d+)?$/;
 
 export function isNumber(token: string): boolean {
