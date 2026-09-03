@@ -160,18 +160,32 @@ export async function readSections(path: string): Promise<Section[]> {
   return sections;
 }
 
+/**
+ * One column, one price, but sometimes two grades.
+ *
+ * HMEL stacks a pair of codes in a single column — "R0150S/R0151D" — meaning
+ * the column serves either grade at that price. Both are real grades and both
+ * should be priced; production carries R0151D from exactly this column, which
+ * is the check that this reading is right.
+ */
+export function expandCodes(code: string): string[] {
+  return code.split("/").map((c) => c.trim()).filter(Boolean);
+}
+
 /** ex-works = ex-Bathinda basic less that location's adjustment. */
 export function buildIndex(sections: Section[]) {
   const basic: Record<string, number> = {};
   const exWorks: Record<string, Record<string, number>> = {};
   for (const s of sections) {
     if (s.place !== "bathinda") continue;
-    for (const c of s.columns) if (c.code) basic[c.code] ??= c.basic;
+    for (const c of s.columns) for (const g of expandCodes(c.code)) basic[g] ??= c.basic;
     for (const [loc, cells] of Object.entries(s.adjustments)) {
       for (const [code, adj] of Object.entries(cells)) {
-        const b = basic[code];
-        if (b === undefined) continue;
-        (exWorks[loc] ??= {})[code] = b - adj;
+        for (const g of expandCodes(code)) {
+          const b = basic[g];
+          if (b === undefined) continue;
+          (exWorks[loc] ??= {})[g] = b - adj;
+        }
       }
     }
   }
