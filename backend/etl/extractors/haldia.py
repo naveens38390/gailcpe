@@ -28,6 +28,74 @@ ANNEXURE = re.compile(r"^Annexure\s*-\s*([IVX]+)")
 GRADE_CODE = re.compile(r"^(?=.*[A-Z])(?=.*\d)[A-Z0-9][A-Z0-9-]{2,9}$")
 BASIS = re.compile(r"^(EX-\s*WORKS|EX-\s*STOCK)\s*:\s*(HDPE|LLDPE)", re.I)
 
+# How far left of the first recognised code the table can still extend. One
+# column pitch is 21pt here, so this reaches the neighbouring column and no
+# further.
+HEADER_MARGIN = 15.0
+
+# Captions that sit inside the table's own columns without naming one: the
+# "PRICE POINTS / BASIC PRICE" strip that closes every header block, and the
+# per-block "Basic Price" captions in Annexure III.
+HEADER_FURNITURE = re.compile(r"^(PRICE|POINTS|BASIC|Price|Points|Basic|Grades|\(Rs)", re.I)
+
+
+def _columns_from(row) -> list[tuple[str, float]]:
+    """Every column in a header row, not only those matching the code shape.
+
+    HDBRE carries no digit and so failed GRADE_CODE. An unrecognised column is
+    not skipped: its price snapped to HDT9C, 22.5pt away and inside the 40pt
+    assignment radius, overwriting HDT9C's own price at all 71 price points.
+
+    The codes that *do* match are still what tells us this row is a header and
+    where the table begins; from there rightwards, every word is a column
+    whatever it spells.
+    """
+    matched = [w for w in row.words if GRADE_CODE.match(w.text)]
+    if len(matched) < 3:
+        return []
+    left = min(w.x0 for w in matched) - HEADER_MARGIN
+    return [(w.text, w.xmid) for w in row.words if w.x0 >= left]
+
+
+def _bands(columns: list[tuple[str, float]]) -> list[tuple[str, float, float]]:
+    """(code, low, high) per column, split at the midpoints between centres."""
+    ordered = sorted(columns, key=lambda c: c[1])
+    out = []
+    for i, (code, x) in enumerate(ordered):
+        low = (ordered[i - 1][1] + x) / 2 if i else x - HEADER_MARGIN
+        high = (x + ordered[i + 1][1]) / 2 if i + 1 < len(ordered) else x + HEADER_MARGIN
+        out.append((code, low, high))
+    return out
+
+
+def _aliases_from(row, columns: list[tuple[str, float]]) -> dict[str, str]:
+    """Alternate names stacked under a column, including multi-word ones.
+
+    The off-grade columns are set as "HD OG (E)" — three tokens with a space
+    and brackets, which no single-token shape can match. Grouping a row's words
+    by the column band they fall in reads them without having to.
+
+    Grouping is by band, not by code: Annexure III repeats the same eight codes
+    for its ex-stock half, so keying on the code would splice the two halves of
+    the page into one name.
+    """
+    bands = _bands(columns)
+    left = bands[0][1]
+    groups: dict[int, list[tuple[float, str]]] = {}
+    for w in row.words:
+        if w.x0 < left or HEADER_FURNITURE.match(w.text):
+            continue
+        for i, (_, low, high) in enumerate(bands):
+            if low <= w.xmid < high:
+                groups.setdefault(i, []).append((w.x0, w.text))
+                break
+    out: dict[str, str] = {}
+    for i, words in groups.items():
+        name = " ".join(t for _, t in sorted(words)).strip()
+        if name and name != bands[i][0]:
+            out[name] = bands[i][0]
+    return out
+
 
 def prices(path: str) -> dict:
     """{annexure: {"basis": str, "polymer": str, "points": {point: {grade: p}},
@@ -78,20 +146,23 @@ def prices(path: str) -> dict:
             out[current]["polymer"] = basis.group(2).upper()
             continue
 
-        codes = [(w.text, w.xmid) for w in row.words if GRADE_CODE.match(w.text)]
-        if codes and not row.label_and_values()[1]:
-            if seen_data or not columns:
+        if not row.label_and_values()[1]:
+            fresh = _columns_from(row)
+            if fresh and (seen_data or not columns):
                 drain()
-                columns = codes
+                columns = fresh
                 seen_data = False
-            else:
-                # A continuation line of the stacked header: each code names an
-                # alternate grade sharing the column it sits under.
-                for code, x in codes:
-                    primary, cx = min(columns, key=lambda c: abs(c[1] - x))
-                    if abs(cx - x) < 40:
-                        out[current]["aliases"][code] = primary
-            continue
+                continue
+            if columns and not seen_data:
+                # A continuation line of the stacked header: each name is an
+                # alternate grade sharing the column it sits under. Read by
+                # band, so a name spanning several words arrives whole.
+                found = _aliases_from(row, columns)
+                if found:
+                    out[current]["aliases"].update(found)
+                    continue
+            # Not part of the header: a price-point name too long for its cell,
+            # which pair_orphans has to see to pair with the row below it.
 
         if row.label_and_values()[1]:
             seen_data = True
@@ -152,19 +223,19 @@ def lldpe_prices(path: str) -> dict:
             continue
         if not active:
             continue
-        codes = [(w.text, w.xmid) for w in row.words if GRADE_CODE.match(w.text)]
-        if codes and not row.label_and_values()[1]:
-            if seen_data or not columns:
+        if not row.label_and_values()[1]:
+            fresh = _columns_from(row)
+            if fresh and (seen_data or not columns):
                 drain()
-                columns = sorted(codes, key=lambda c: c[1])
+                columns = sorted(fresh, key=lambda c: c[1])
                 boundary = _seam(columns)
                 seen_data = False
-            else:
-                for code, x in codes:
-                    primary, cx = min(columns, key=lambda c: abs(c[1] - x))
-                    if abs(cx - x) < 40:
-                        out["aliases"][code] = primary
-            continue
+                continue
+            if columns and not seen_data:
+                found = _aliases_from(row, columns)
+                if found:
+                    out["aliases"].update(found)
+                    continue
         if row.label_and_values()[1]:
             seen_data = True
         buffer.append(row)
