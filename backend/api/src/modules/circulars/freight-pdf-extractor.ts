@@ -239,6 +239,37 @@ function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+/**
+ * Which producer's table this is, read from the table's own headings.
+ *
+ * Not every circular has a letterhead. OPaL's freight circular opens straight
+ * into its table — its own name appears nowhere on the page — so letterhead
+ * detection returns nothing and the filed producer is trusted. Filed as HMEL
+ * by a slip of the dropdown, it parsed: HMEL's five-column reader ran over
+ * OPaL's six-column table, welded the insurance figure onto the end of every
+ * rate, and produced 713 rows at high confidence with no warnings. Destinations
+ * and states were right, rates were wrong in the third decimal, and all 713
+ * insurance values were silently zeroed.
+ *
+ * The headings distinguish the three unambiguously, and unlike a letterhead
+ * every freight circular has them. OPaL is the only one that bills insurance;
+ * HPL is the only one carrying a sector and a transit time; HMEL's header is
+ * the bare five.
+ */
+const LAYOUT_SIGNATURES: Array<[FreightPdfProducer, RegExp]> = [
+  ["OPaL", /Insurance/i],
+  ["HPL", /Transit\s*time|CONSUMPTION\s*POINT|\bSECTOR\b/i],
+  ["HMEL", /S\.\s*No\.?\s+State\s+District\s+Destination\s+Rate/i],
+];
+
+function detectLayout(headText: string): FreightPdfProducer | null {
+  const hits = LAYOUT_SIGNATURES.filter(([, pattern]) => pattern.test(headText));
+  // Only a single unambiguous match counts. Two signatures firing at once means
+  // this is not one of these three tables, and guessing between them is exactly
+  // the failure being closed here.
+  return hits.length === 1 ? hits[0]![0] : null;
+}
+
 /** "w.e.f. 01.06.2026", "with effect from 1st June 2026", "effective date: 01-06-2026". */
 const DATE_PATTERNS = [
   /w\.?\s*e\.?\s*f\.?\s*:?\s*(\d{1,2})[.\-/](\d{1,2})[.\-/](\d{2,4})/i,
@@ -287,14 +318,24 @@ export async function extractFreightPdf(
     .filter((r) => r.page <= 2)
     .map((r) => r.text)
     .join("\n");
-  const detected = detectProducer(headText);
+  const fromLetterhead = detectProducer(headText);
+  const fromLayout = detectLayout(headText);
+  const detected = fromLetterhead ?? fromLayout;
+  const evidence = fromLetterhead ? "letterhead reads" : "table is laid out as";
   const normalisedExpected = (Object.keys(PRODUCER_NAMES) as FreightPdfProducer[]).find(
     (p) => p.toLowerCase() === expectedProducer.toLowerCase(),
   );
 
   if (detected && normalisedExpected && detected !== normalisedExpected) {
     throw new BadRequestException(
-      `This PDF's letterhead reads ${detected}, but the circular it is being attached to is filed as ${expectedProducer}.`,
+      `This PDF's ${evidence} ${detected}, but the circular it is being attached to is filed as ${expectedProducer}.`,
+    );
+  }
+  // A letterhead and a table that disagree is not something to resolve by
+  // preferring one: it means the document is not what either signal says.
+  if (fromLetterhead && fromLayout && fromLetterhead !== fromLayout) {
+    throw new BadRequestException(
+      `This PDF's letterhead reads ${fromLetterhead} but its table is laid out as ${fromLayout}. Attach a JSON reading instead.`,
     );
   }
 

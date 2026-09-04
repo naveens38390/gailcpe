@@ -79,8 +79,18 @@ export function validateFreightRows(
     }
     if (row.ratePerMt < 0) throw new BadRequestException(`${at} has a negative rate.`);
     if (row.ratePerMt > MAX_PLAUSIBLE_RATE) {
+      // A price sheet read as a freight table welds a whole row of figures into
+      // one number. Printed in full that runs to "Rs 1,44,63,01,37,14,01,39,..."
+      // and tells the reader nothing; the digit count tells them everything.
+      // Not String(...).length: past 1e21 that is already exponential notation
+      // and counts the characters of "1.45e+71" rather than the number's digits.
+      const digits = Math.floor(Math.log10(row.ratePerMt)) + 1;
+      const shown =
+        digits > 9
+          ? `${row.ratePerMt.toExponential(2)} — ${digits} digits, which is several columns run together`
+          : `${row.ratePerMt.toLocaleString("en-IN")}`;
       throw new BadRequestException(
-        `${at} reads Rs ${row.ratePerMt.toLocaleString("en-IN")} per MT. That is far above any real freight rate, which usually means this document is not a freight circular.`,
+        `${at} reads Rs ${shown} per MT. That is far above any real freight rate, which usually means this document is not a freight circular.`,
       );
     }
     if (!Number.isFinite(row.insurancePerMt) || row.insurancePerMt < 0) {
