@@ -111,6 +111,41 @@ def _parse(path: str) -> Iterator[Row]:
                 yield Row(index, key * ROW_TOLERANCE, words)
 
 
+_CHAR_CACHE: dict[str, list[Row]] = {}
+
+
+def char_rows(path: str, pages: range | list[int] | None = None) -> Iterator[Row]:
+    """The same rows, but one Word per *character*.
+
+    Word extraction has to decide where a word ends, and in a table header it
+    decides wrongly in both directions: HMEL's LLDPE header arrives as
+    "F0120LMRF0118LMF0116LM...F517LMV", nine column codes fused into a single
+    word, while other cells split a code in two. Either way the word's own
+    extent no longer says which column it belongs to.
+
+    Characters carry their own coordinates and never fuse, so a reader that
+    knows where the columns are can pick out each column's text without having
+    to recognise the code's shape first.
+    """
+    if path not in _CHAR_CACHE:
+        _CHAR_CACHE[path] = list(_parse_chars(path))
+    for row in _CHAR_CACHE[path]:
+        if pages is None or row.page in pages:
+            yield row
+
+
+def _parse_chars(path: str) -> Iterator[Row]:
+    with pdfplumber.open(path) as pdf:
+        for index, page in enumerate(pdf.pages, 1):
+            buckets: dict[int, list[Word]] = collections.defaultdict(list)
+            for c in page.chars:
+                word = Word(c["text"], c["x0"], c["x1"], c["top"])
+                buckets[round(word.top / ROW_TOLERANCE)].append(word)
+            for key in sorted(buckets):
+                words = sorted(buckets[key], key=lambda w: w.x0)
+                yield Row(index, key * ROW_TOLERANCE, words)
+
+
 _NUMBER = re.compile(r"^-?[\d,]*\d(?:\.\d+)?$")
 
 
