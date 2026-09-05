@@ -9,10 +9,15 @@ left in place so the two rounds can be built and compared side by side.
 
 from __future__ import annotations
 
+import os
 import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+
+# Set before build is imported: PRICE_ROUND is read from the environment at
+# import time, and check_round() then requires every circular to state it.
+os.environ.setdefault("GCPE_PRICE_ROUND", "2026-09-01")
 
 import build  # noqa: E402
 
@@ -39,6 +44,4 @@ for key, name in SEPTEMBER.items():
     build.FILES[key] = str(path)
 
 build.OUT = out
-# The price round is a constant in build.py; these circulars are the next one.
-build.PRICE_ROUND = "2026-09-01"
 build.main()

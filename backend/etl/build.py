@@ -17,6 +17,7 @@ and be wrong by the freight amount, twice over.
 from __future__ import annotations
 
 import os
+import re
 import json
 import sys
 from pathlib import Path
@@ -43,8 +44,75 @@ from locations import (  # noqa: E402
 SOURCE = Path("D:/Gail")
 OUT = Path(__file__).resolve().parent.parent / "data" / "normalized"
 
-PRICE_ROUND = "2026-08-01"
+# The round these circulars are for. Not a default: it used to be the literal
+# string "2026-08-01", so a run against September's documents produced correct
+# prices stamped with August's effective date, silently and with everything
+# else passing. Supply it, and check_round() then requires every circular to
+# say the same thing.
+PRICE_ROUND = os.environ.get("GCPE_PRICE_ROUND", "")
 FREIGHT_ROUND = "2026-06-01"
+
+_MONTHS = {m: i for i, m in enumerate(
+    "january february march april may june july august september october "
+    "november december".split(), 1)}
+# 01.09.2026 / 01-09-2026 / 1/9/26
+_NUMERIC_DATE = re.compile(r"\b(\d{1,2})[.\-/](\d{1,2})[.\-/](\d{2,4})\b")
+# "September 1, 2026" and "1 st September, 2026" — HMEL sets the ordinal apart.
+_MONTH_FIRST = re.compile(
+    r"\b(" + "|".join(_MONTHS) + r")\s+(\d{1,2})\s*(?:st|nd|rd|th)?\s*,?\s*(\d{4})\b", re.I)
+_DAY_FIRST = re.compile(
+    r"\b(\d{1,2})\s*(?:st|nd|rd|th)?\s+(" + "|".join(_MONTHS) + r")\s*,?\s*(\d{4})\b", re.I)
+
+
+def _dates_in(text: str) -> set[str]:
+    """Every date the text states, as ISO strings."""
+    found: set[str] = set()
+    for d, m, y in _NUMERIC_DATE.findall(text):
+        year = int(y) + 2000 if len(y) == 2 else int(y)
+        if 1 <= int(m) <= 12 and 1 <= int(d) <= 31:
+            found.add(f"{year:04d}-{int(m):02d}-{int(d):02d}")
+    for month, d, y in _MONTH_FIRST.findall(text):
+        found.add(f"{int(y):04d}-{_MONTHS[month.lower()]:02d}-{int(d):02d}")
+    for d, month, y in _DAY_FIRST.findall(text):
+        found.add(f"{int(y):04d}-{_MONTHS[month.lower()]:02d}-{int(d):02d}")
+    return found
+
+
+def check_round(src: dict, note) -> None:
+    """Require every price circular to agree with the round being built.
+
+    Each of the six states its effective date on its first pages, in six
+    different formats. RIL prints its issue date beside it — "August 31, 2026"
+    next to "September 01, 2026" — so the test is that the declared round is
+    *among* the dates a circular states, not that it is the first one found.
+    """
+    if not PRICE_ROUND:
+        raise SystemExit(
+            "\nNo price round given. Set GCPE_PRICE_ROUND to the effective date of "
+            "these circulars, e.g.\n    GCPE_PRICE_ROUND=2026-09-01 py -3 build.py\n"
+            "\nIt used to be hard-coded, which meant a run against a new month's "
+            "documents\nproduced correct prices stamped with the previous month's date."
+        )
+
+    from pdfrows import rows as _rows  # local: keeps the import graph flat
+
+    disagree: list[str] = []
+    for key in ("gail_ex_works", "iocl", "ril", "hmel", "haldia", "opal_dta"):
+        text = " ".join(r.text for r in _rows(src[key], pages=[1, 2]))
+        stated = _dates_in(text)
+        if PRICE_ROUND in stated:
+            continue
+        near = sorted(d for d in stated if d >= "2020-01-01")
+        disagree.append(f"  {key:<16} states {near[:6] or 'no date this reader could find'}")
+
+    if disagree and not os.environ.get("GCPE_ALLOW_ROUND_MISMATCH"):
+        raise SystemExit(
+            f"\nBuild stopped: {len(disagree)} circular(s) do not state {PRICE_ROUND}.\n"
+            + "\n".join(disagree)
+            + "\n\nEither the wrong round was given, or the wrong documents are in "
+            f"{SOURCE}.\nSet GCPE_ALLOW_ROUND_MISMATCH=1 only if you have checked both."
+        )
+    note(f"round {PRICE_ROUND} confirmed against all six circulars")
 
 FILES = {
     "gail_ex_works": "GAIL EX WORKS.pdf",
@@ -285,6 +353,8 @@ def main() -> None:
     def note(line: str) -> None:
         report.append(line)
         print(line)
+
+    check_round(src, note)
 
     # ---- GAIL -------------------------------------------------------------
     ex_works, gail_grades = gail_x.ex_works(src["gail_ex_works"])
