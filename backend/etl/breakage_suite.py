@@ -58,11 +58,15 @@ SCENARIOS = [
      "                   if GRADE_CODE.match(w.text) and w.text not in ('Zone', 'State')]",
      "F52H04/ rejected by the code shape, F52H02 aliased to a neighbour"),
 
-    ("GAIL — a split grade code the reader has never seen",
+    # The first version made the pattern one character stricter, which every
+    # GAIL code still satisfied. It broke nothing, and the build shipping was
+    # the right answer to a question that had not been asked. This one rejects
+    # seven printed columns, which is the risk actually being tested.
+    ("GAIL — the code shape rejects a printed column",
      "extractors/gail.py",
      'GRADE_CODE = re.compile(r"^[A-Z]{1,2}\\d[0-9A-Z]{3,}$")',
-     'GRADE_CODE = re.compile(r"^[A-Z]{1,2}\\d[0-9A-Z]{4,}$")',
-     "one character stricter — the shape stops matching a real column"),
+     'GRADE_CODE = re.compile(r"^(?!W)[A-Z]{1,2}\\d[0-9A-Z]{3,}$")',
+     "a header word the shape does not admit, as happened to HMEL, HPL and OPaL"),
 ]
 
 
