@@ -276,8 +276,6 @@ def check_complete(flat: dict, note) -> None:
             "\nConfirm which, then re-run with GCPE_ALLOW_RAGGED=1 to accept it."
         )
 
-    check_no_shrink(flat, note)
-
 
 def check_no_shrink(flat: dict, note) -> None:
     """Stop the build if a producer lost whole zones or grades since last round.
@@ -337,6 +335,115 @@ def check_no_shrink(flat: dict, note) -> None:
             encoding="utf-8",
         )
         note(f"recorded {path.name} for round {PRICE_ROUND}")
+
+
+# A cell that moves further than this between rounds is worth a person's eye.
+# The largest genuine August-to-September move across all 55,439 cells was
+# 5.34%; a book with its columns shifted by one moves 15-42% of its cells
+# further than that. Ten per cent sits in the gap between the two.
+DRIFT_LIMIT = 10.0
+# One repriced grade is not a mispairing. A mispairing moves a whole column, so
+# it shows up as a share of the book rather than a handful of cells.
+DRIFT_SHARE = 0.5
+
+
+def drift_report(flat: dict, note) -> dict:
+    """Compare this round's prices to the last one, cell by cell.
+
+    The gates above reason only about shape, and a mispairing that keeps every
+    dimension passes them untouched: rotate a producer's columns by one and
+    nothing objects. Values are what is left to check, and the useful property
+    is that a price list barely moves between rounds while a mispairing moves
+    most of it.
+
+    Reports per producer and stops the build when too much of a book has moved,
+    which is a question for a person rather than an error. GCPE_ALLOW_DRIFT=1
+    accepts it; the report is written either way.
+    """
+    previous_path = Path(os.environ.get("GCPE_PREVIOUS", "") or (OUT / "price_index.json"))
+    if not previous_path.exists():
+        note(f"\nno previous round at {previous_path.name}; drift not checked")
+        return {"compared_against": None, "producers": {}}
+
+    previous = json.loads(previous_path.read_text(encoding="utf-8"))
+    prior = previous.get("producers", {})
+    stats: dict[str, dict] = {}
+    movements: list[tuple[float, str, str, str, float, float]] = []
+
+    for producer, entry in flat.items():
+        was = prior.get(producer, {}).get("zones", {})
+        moves: list[float] = []
+        for zone, cells in entry["zones"].items():
+            before = was.get(zone)
+            if not before:
+                continue
+            for grade, now in cells.items():
+                then = before.get(grade)
+                if not then:
+                    continue
+                pct = abs(now - then) / then * 100.0
+                moves.append(pct)
+                movements.append((pct, producer, zone, grade, then, now))
+        if not moves:
+            stats[producer] = {"compared": 0}
+            continue
+        moves.sort()
+        over5 = sum(1 for m in moves if m > 5.0)
+        over10 = sum(1 for m in moves if m > DRIFT_LIMIT)
+        stats[producer] = {
+            "compared": len(moves),
+            "median_pct": round(moves[len(moves) // 2], 3),
+            "p95_pct": round(moves[int(len(moves) * 0.95)], 3),
+            "max_pct": round(moves[-1], 3),
+            "over_5pct": over5,
+            "over_10pct": over10,
+            "over_10pct_share": round(over10 / len(moves) * 100, 3),
+        }
+
+    movements.sort(reverse=True)
+    top = [
+        {"producer": p, "zone": z, "grade": g, "was": a, "now": b, "pct": round(pct, 3)}
+        for pct, p, z, g, a, b in movements[:20]
+    ]
+
+    note(f"\nprice movement against {previous_path.parent.name}/{previous_path.name}")
+    note(f"  {'producer':<8}{'compared':>10}{'median':>9}{'p95':>9}{'max':>9}"
+         f"{'>5%':>8}{'>10%':>8}{'share':>9}")
+    breached: list[str] = []
+    for producer, s in stats.items():
+        if not s.get("compared"):
+            note(f"  {producer:<8}{'no comparable cells':>39}")
+            continue
+        note(f"  {producer:<8}{s['compared']:>10}{s['median_pct']:>8.2f}%{s['p95_pct']:>8.2f}%"
+             f"{s['max_pct']:>8.2f}%{s['over_5pct']:>8}{s['over_10pct']:>8}"
+             f"{s['over_10pct_share']:>8.2f}%")
+        if s["over_10pct_share"] > DRIFT_SHARE:
+            breached.append(
+                f"DRIFT    {producer:<6} {s['over_10pct']} of {s['compared']} cells moved more "
+                f"than {DRIFT_LIMIT:.0f}% ({s['over_10pct_share']:.2f}%, limit {DRIFT_SHARE}%)")
+
+    if top:
+        note("  largest movements:")
+        for m in top[:5]:
+            note(f"    {m['producer']:<6} {m['zone'][:18]:<18} {m['grade']:<11} "
+                 f"{m['was']:>9,.0f} -> {m['now']:>9,.0f}  {m['pct']:>7.2f}%")
+
+    if breached and not os.environ.get("GCPE_ALLOW_DRIFT"):
+        raise SystemExit(
+            f"\nBuild stopped before writing: {len(breached)} producer(s) moved more than "
+            "a repricing normally does.\n" + "\n".join(breached)
+            + "\n\nA whole column moving at once is what a mispairing looks like; a market"
+            "\nthat genuinely moved looks the same from here."
+            "\nCheck the largest movements above, then re-run with GCPE_ALLOW_DRIFT=1."
+        )
+
+    return {
+        "compared_against": str(previous_path),
+        "limit_pct": DRIFT_LIMIT,
+        "share_limit_pct": DRIFT_SHARE,
+        "producers": stats,
+        "largest_movements": top,
+    }
 
 
 def write(name: str, payload) -> Path:
@@ -460,7 +567,12 @@ def main() -> None:
                 cells.setdefault(alias, cells[primary])
     flat["OPaL"] = {"basis": "ex_works", "zones": opal_zones}
 
+    # Three separate questions, asked in order of how cheaply they are answered:
+    # is each book a rectangle, has one lost whole grades or zones, and have the
+    # values moved further than a repricing normally does.
     check_complete(flat, note)
+    check_no_shrink(flat, note)
+    drift = drift_report(flat, note)
 
     for producer, payload in flat.items():
         cells = sum(len(z) for z in payload["zones"].values())
@@ -590,6 +702,7 @@ def main() -> None:
         },
     )
 
+    write("drift_report", {"generated_for": PRICE_ROUND, **drift})
     write("build_report", {"generated_for": PRICE_ROUND, "lines": report})
     note(f"\nwrote {len(list(OUT.glob('*.json')))} files to {OUT}")
 

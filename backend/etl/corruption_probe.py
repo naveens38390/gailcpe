@@ -28,6 +28,13 @@ os.environ.setdefault("GCPE_PRICE_ROUND", "2026-09-01")
 
 import build  # noqa: E402
 
+# The shrink gate cannot fire here: every mutation below leaves the zone and
+# grade counts exactly as they were, so there is nothing for it to see. It is
+# switched off only so that September's genuine 30-grade RIL withdrawal against
+# an August baseline does not stop the control run and mask what is being
+# tested — which is a different thing from switching off the gate under test.
+os.environ.setdefault("GCPE_ALLOW_SHRINK", "1")
+
 DIR = Path(sys.argv[1] if len(sys.argv) > 1 else "D:/Gail2/staged/sept")
 index = json.loads((DIR / "price_index.json").read_text(encoding="utf-8"))
 FLAT = {p: {"basis": e["basis"], "zones": e["zones"]} for p, e in index["producers"].items()}
@@ -82,6 +89,10 @@ def gates_verdict(flat: dict) -> str:
         build.check_no_shrink(flat, said.append)
     except SystemExit:
         return "shrink gate STOPPED it"
+    try:
+        build.drift_report(flat, said.append)
+    except SystemExit:
+        return "drift gate STOPPED it"
     return "no gate objected"
 
 
