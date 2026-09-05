@@ -41,7 +41,15 @@ from locations import (  # noqa: E402
     derive_freight_aliases,
 )
 
-SOURCE = Path("D:/Gail")
+SOURCE = Path(os.environ.get("GCPE_SOURCE", "D:/Gail"))
+
+# Producers name their files differently every month — September's pack shares
+# not one filename with August's — so the names below are only a default. Point
+# GCPE_SOURCES at a JSON manifest mapping the keys in FILES to paths, absolute
+# or relative to SOURCE, and a round can be built without renaming anything.
+# Keys the manifest omits fall back to the defaults, which is what lets a price
+# round be rebuilt against an unchanged freight book.
+SOURCES_MANIFEST = os.environ.get("GCPE_SOURCES", "")
 OUT = Path(__file__).resolve().parent.parent / "data" / "normalized"
 
 # The round these circulars are for. Not a default: it used to be the literal
@@ -454,7 +462,19 @@ def write(name: str, payload) -> Path:
 
 
 def main() -> None:
-    src = {k: str(SOURCE / v) for k, v in FILES.items()}
+    names = dict(FILES)
+    if SOURCES_MANIFEST:
+        manifest = json.loads(Path(SOURCES_MANIFEST).read_text(encoding="utf-8"))
+        unknown = set(manifest) - set(FILES)
+        if unknown:
+            raise SystemExit(f"\n{SOURCES_MANIFEST} names sources that do not exist: "
+                             f"{', '.join(sorted(unknown))}")
+        names.update(manifest)
+    src = {k: str(SOURCE / v) for k, v in names.items()}
+
+    missing = [f"  {k:<16} {p}" for k, p in src.items() if not Path(p).exists()]
+    if missing:
+        raise SystemExit("\nBuild stopped: source files not found.\n" + "\n".join(missing))
     report: list[str] = []
 
     def note(line: str) -> None:

@@ -126,14 +126,44 @@ Configuration is read from environment variables (an `.env` file in `backend/api
 
 ## 7. Running the Project
 
-### Rebuilding the dataset (optional — only needed when source circulars change)
+### Rebuilding the dataset (only needed when source circulars change)
+
+The round is a required input, not a default. It used to be hard-coded, which
+meant a run against a new month's documents produced correct prices stamped
+with the previous month's date, silently and with everything else passing.
 
 ```bash
+GCPE_PRICE_ROUND=2026-09-01 \
+GCPE_SOURCES=backend/etl/rounds/2026-09-01.json \
 python3 backend/etl/build.py          # parses the source documents into backend/data/normalized/*.json
+
 python3 backend/etl/mzo_export.py     # refreshes acceptance-test expectations
 node backend/engine/validate.ts       # checks the engine reproduces the reference workbook
 node backend/engine/demo.ts B52A003 PUNE 120 credit_ifc   # one comparison from the command line
 ```
+
+`GCPE_SOURCES` names a manifest in `backend/etl/rounds/` mapping each source to
+a path. Producers rename their files every month — September's pack shares not
+one filename with August's — so a round is declared rather than assumed. Keys
+the manifest omits fall back to the defaults, which is what lets a price round
+be rebuilt against an unchanged freight book. Every circular is then checked to
+state `GCPE_PRICE_ROUND` on its own first pages before anything is read.
+
+Four gates run before any file is written, so a build that fails leaves nothing
+behind to be seeded by mistake:
+
+| Gate | Stops the build when | Acknowledge with |
+| --- | --- | --- |
+| Round | a circular does not state the declared date | `GCPE_ALLOW_ROUND_MISMATCH=1` |
+| Rectangle | a producer's book is not zones × grades | `GCPE_ALLOW_RAGGED=1` |
+| Shrink | a producer lost whole grades or zones | `GCPE_ALLOW_SHRINK=1` |
+| Drift | more than 0.5% of a book moved over 10% | `GCPE_ALLOW_DRIFT=1` |
+
+An acknowledgement is a decision, not a formality: a circular can genuinely
+withdraw grades, and a reader that has lost a page of one looks exactly the
+same from here. Check `drift_report.json` and the largest movements it lists
+before setting any of them. `GCPE_RECORD_SHAPE=1` moves the shrink baseline in
+`expected_shape.json` once a round is accepted.
 
 ### Loading data into MongoDB
 
@@ -143,6 +173,32 @@ npm run seed        # loads backend/data/normalized/*.json into MONGODB_URI, or 
 ```
 
 Re-running `seed` replaces the round it is loading; earlier rounds already in the database are left alone, so historical comparisons stay reproducible.
+
+`GCPE_DATA` points the seeder at a different directory, so a staged round can be
+loaded into an isolated database for checking without first copying it over
+`backend/data/normalized`. The routine deletes before it inserts, so confusing
+those two directories is the mistake worth making hard to reach.
+
+### Expected counts after a September 2026 seed
+
+`npm run verify` prints document counts. For the 2026-09-01 round these are:
+
+| Collection | Count | What it is |
+| --- | --- | --- |
+| `priceEntries` | 55,439 | one per zone × grade, all six producers |
+| `grades` | 589 | every code any circular prices, GAIL's and competitors' |
+| `locations` | 313 | GAIL's ex-works locations, the comparison grid |
+| `gradeMappings` | 44 | cross-reference rows |
+| `freightEntries` | 1,962 | GAIL, HMEL, HPL and OPaL freight books |
+| `priceCirculars` | 6 | one per producer for the round |
+| `freightCirculars` | 4 | the four producers that publish a book |
+| `producers` | 6 | |
+| `discountSchemes` | 6 | |
+| `roles` / `users` | 1 / 1 | the seeded administrator |
+
+`priceEntries` is the one to check first: it is the sum of each producer's
+matrix, and the build prints those on the way through —
+313×53 + 69×40 + 75×256 + 80×114 + 71×60 + 90×39.
 
 ### Starting the API
 
