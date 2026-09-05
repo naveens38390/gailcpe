@@ -1,0 +1,224 @@
+{
+ "generated_for": "2026-09-01",
+ "compared_against": "D:\\Gail2\\gailcpe\\backend\\data\\normalized\\price_index.json",
+ "limit_pct": 10.0,
+ "share_limit_pct": 0.5,
+ "producers": {
+  "GAIL": {
+   "compared": 16589,
+   "median_pct": 0.0,
+   "p95_pct": 1.494,
+   "max_pct": 1.535,
+   "over_5pct": 0,
+   "over_10pct": 0,
+   "over_10pct_share": 0.0
+  },
+  "IOCL": {
+   "compared": 2721,
+   "median_pct": 0.062,
+   "p95_pct": 1.487,
+   "max_pct": 3.027,
+   "over_5pct": 0,
+   "over_10pct": 0,
+   "over_10pct_share": 0.0
+  },
+  "RIL": {
+   "compared": 19050,
+   "median_pct": 0.635,
+   "p95_pct": 3.3,
+   "max_pct": 5.337,
+   "over_5pct": 148,
+   "over_10pct": 0,
+   "over_10pct_share": 0.0
+  },
+  "HMEL": {
+   "compared": 3920,
+   "median_pct": 0.0,
+   "p95_pct": 3.683,
+   "max_pct": 10.134,
+   "over_5pct": 133,
+   "over_10pct": 1,
+   "over_10pct_share": 0.026
+  },
+  "HPL": {
+   "compared": 3763,
+   "median_pct": 0.732,
+   "p95_pct": 0.795,
+   "max_pct": 1.826,
+   "over_5pct": 0,
+   "over_10pct": 0,
+   "over_10pct_share": 0.0
+  },
+  "OPaL": {
+   "compared": 3420,
+   "median_pct": 0.0,
+   "p95_pct": 1.522,
+   "max_pct": 1.653,
+   "over_5pct": 0,
+   "over_10pct": 0,
+   "over_10pct_share": 0.0
+  }
+ },
+ "largest_movements": [
+  {
+   "producer": "HMEL",
+   "zone": "Guwahati",
+   "grade": "N0320L",
+   "was": 143580.0,
+   "now": 129030.0,
+   "pct": 10.134
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Bilaspur",
+   "grade": "N0320L",
+   "was": 146800.0,
+   "now": 134480.0,
+   "pct": 8.392
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Raipur",
+   "grade": "N0320L",
+   "was": 146850.0,
+   "now": 134530.0,
+   "pct": 8.39
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Bargarh",
+   "grade": "N0320L",
+   "was": 141750.0,
+   "now": 130050.0,
+   "pct": 8.254
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Siliguri",
+   "grade": "N0153S",
+   "was": 129960.0,
+   "now": 140360.0,
+   "pct": 8.002
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Cuttack",
+   "grade": "N0320L",
+   "was": 140570.0,
+   "now": 129870.0,
+   "pct": 7.612
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Balasore",
+   "grade": "N0320L",
+   "was": 140610.0,
+   "now": 129920.0,
+   "pct": 7.603
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Jamshedpur",
+   "grade": "N0320L",
+   "was": 140800.0,
+   "now": 130250.0,
+   "pct": 7.493
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Ranchi",
+   "grade": "N0320L",
+   "was": 140930.0,
+   "now": 130380.0,
+   "pct": 7.486
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Purulia",
+   "grade": "N0320L",
+   "was": 141190.0,
+   "now": 130920.0,
+   "pct": 7.274
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Guwahati",
+   "grade": "N0153S",
+   "was": 131200.0,
+   "now": 140710.0,
+   "pct": 7.248
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Rudrapur",
+   "grade": "N0153S",
+   "was": 133190.0,
+   "now": 142690.0,
+   "pct": 7.133
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Patna",
+   "grade": "N0320L",
+   "was": 141560.0,
+   "now": 131610.0,
+   "pct": 7.029
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Siliguri",
+   "grade": "N0320L",
+   "was": 141960.0,
+   "now": 132080.0,
+   "pct": 6.96
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Kolkata",
+   "grade": "N0320L",
+   "was": 140620.0,
+   "now": 130870.0,
+   "pct": 6.934
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Purulia",
+   "grade": "N0153S",
+   "was": 129390.0,
+   "now": 138340.0,
+   "pct": 6.917
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Patna",
+   "grade": "N0153S",
+   "was": 130410.0,
+   "now": 139270.0,
+   "pct": 6.794
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Jamshedpur",
+   "grade": "N0153S",
+   "was": 129180.0,
+   "now": 137930.0,
+   "pct": 6.773
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Cuttack",
+   "grade": "N0153S",
+   "was": 129220.0,
+   "now": 137910.0,
+   "pct": 6.725
+  },
+  {
+   "producer": "HMEL",
+   "zone": "Baddi",
+   "grade": "N0320L",
+   "was": 147010.0,
+   "now": 137140.0,
+   "pct": 6.714
+  }
+ ]
+}

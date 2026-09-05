@@ -1,5 +1,5 @@
 {
- "effective_date": "2026-08-01",
+ "effective_date": "2026-09-01",
  "producers": {
   "GAIL": {
    "cash_discount": 1000,
@@ -111,11 +111,6 @@
      "from_mt": 5.0,
      "to_mt": 10.0,
      "rate_per_mt": 450.0
-    },
-    {
-     "from_mt": 10.0,
-     "to_mt": 25.0,
-     "rate_per_mt": 550.0
     },
     {
      "from_mt": 25.0,
