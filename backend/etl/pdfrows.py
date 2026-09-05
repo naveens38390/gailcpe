@@ -111,6 +111,41 @@ def _parse(path: str) -> Iterator[Row]:
                 yield Row(index, key * ROW_TOLERANCE, words)
 
 
+_CHAR_CACHE: dict[str, list[Row]] = {}
+
+
+def char_rows(path: str, pages: range | list[int] | None = None) -> Iterator[Row]:
+    """The same rows, but one Word per *character*.
+
+    Word extraction has to decide where a word ends, and in a table header it
+    decides wrongly in both directions: HMEL's LLDPE header arrives as
+    "F0120LMRF0118LMF0116LM...F517LMV", nine column codes fused into a single
+    word, while other cells split a code in two. Either way the word's own
+    extent no longer says which column it belongs to.
+
+    Characters carry their own coordinates and never fuse, so a reader that
+    knows where the columns are can pick out each column's text without having
+    to recognise the code's shape first.
+    """
+    if path not in _CHAR_CACHE:
+        _CHAR_CACHE[path] = list(_parse_chars(path))
+    for row in _CHAR_CACHE[path]:
+        if pages is None or row.page in pages:
+            yield row
+
+
+def _parse_chars(path: str) -> Iterator[Row]:
+    with pdfplumber.open(path) as pdf:
+        for index, page in enumerate(pdf.pages, 1):
+            buckets: dict[int, list[Word]] = collections.defaultdict(list)
+            for c in page.chars:
+                word = Word(c["text"], c["x0"], c["x1"], c["top"])
+                buckets[round(word.top / ROW_TOLERANCE)].append(word)
+            for key in sorted(buckets):
+                words = sorted(buckets[key], key=lambda w: w.x0)
+                yield Row(index, key * ROW_TOLERANCE, words)
+
+
 _NUMBER = re.compile(r"^-?[\d,]*\d(?:\.\d+)?$")
 
 
@@ -177,6 +212,36 @@ def join_numeric_fragments(words: list[Word], max_gap: float = 2.0) -> list[Word
             and re.fullmatch(r"[\d,.]+", w.text)
             and re.fullmatch(r"[\d,.]+", out[-1].text)
         ):
+            previous = out.pop()
+            out.append(Word(previous.text + w.text, previous.x0, w.x1, previous.top))
+        else:
+            out.append(w)
+    return out
+
+
+def repair_shredded(words: list[Word], max_gap: float = 2.0) -> list[Word]:
+    """Rebuild a row the PDF drew one character at a time.
+
+    HMEL's September circular sets two rows of its LLDPE non-prime table with
+    character-level positioning, so Kolhapur's line arrives as
+    "K o lh apur 6 6 1 0 6 6 1 0 ..." — the name in four pieces and every
+    four-figure adjustment as four separate words. Read literally that is 128
+    single-digit values for 32 columns; each column keeps whichever digit
+    landed in it last, usually the trailing zero, and the location then prices
+    at its basic rate with no locational adjustment subtracted at all.
+
+    Only rows that are actually shredded are touched, and only fragments that
+    are physically touching are joined, so an ordinary row — where words are
+    separated by a real space — passes through unchanged. Letters are never
+    joined to digits, which is what keeps a name off the front of its first
+    price.
+    """
+    singles = sum(1 for w in words if len(w.text) == 1)
+    if len(words) < 8 or singles < len(words) * 0.5:
+        return words
+    out: list[Word] = []
+    for w in words:
+        if out and w.x0 - out[-1].x1 <= max_gap and out[-1].text[-1].isdigit() == w.text[0].isdigit():
             previous = out.pop()
             out.append(Word(previous.text + w.text, previous.x0, w.x1, previous.top))
         else:

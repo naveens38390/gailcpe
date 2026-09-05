@@ -29,6 +29,11 @@ UTILITY_CODE = re.compile(r"^[A-Z]{2,5}(?:-Al)?$")
 DELIVERED_PAGES = [2, 3, 4]
 DEPOT_PAGES = [5, 6]
 
+# A zone's prices can be split across two baselines. How far apart the two
+# halves may sit and still be one row: the table's own pitch is 3pt, and no
+# two zones are closer than that.
+ORPHAN_GAP = 6.0
+
 _SECTIONS = {
     "Delivered Price": "delivered",
     "Ex DOPW Price": "ex_dopw",
@@ -64,16 +69,26 @@ def prices(path: str) -> dict[str, dict[str, dict[str, float]]]:
     columns: list[tuple[str, float]] = []
     basis = None
     pending = ""
+    last_zone: str | None = None
+    last_top = 0.0
 
     for row in rows(path, pages=DELIVERED_PAGES + DEPOT_PAGES):
         text = row.text
         if text.startswith("Grades"):
             columns = _columns(row)
             basis = "delivered" if row.page in DELIVERED_PAGES else None
+            # A held-over name cannot belong to a table that has not started.
+            # The September list carries a caption above this header — "HM Film
+            # Pipe MBM Utility" — which reads exactly like a zone standing on
+            # its own line, so it was held and then claimed by the first
+            # orphaned price row on the page. That row was Gautam Budh nagar's,
+            # and its thirteen prices became a zone of that name.
+            pending = ""
             continue
         matched = next((v for k, v in _SECTIONS.items() if text.startswith(k)), None)
         if matched:
             basis = matched
+            pending = ""
             continue
         if basis is None or not columns:
             continue
@@ -86,9 +101,25 @@ def prices(path: str) -> dict[str, dict[str, dict[str, float]]]:
             continue
         if not zone:
             zone, pending = pending, ""
+        if not zone and last_zone is not None and abs(row.top - last_top) <= ORPHAN_GAP:
+            # The split can also run the other way: the zone keeps its name and
+            # the last of its prices, and the rest are set on the line below
+            # with no name at all. Udaipur, Visak and Bareilly are all printed
+            # this way, and holding a name forward cannot reach them — the name
+            # has already been used. Look back instead, but only across a gap
+            # small enough to be the same row, and only where the two halves do
+            # not both claim a column, which would mean it is a different zone.
+            claimed = out[basis].get(last_zone, {})
+            proposed = assign_to_columns(values, columns)
+            if not any(
+                grade in claimed and claimed[grade] != price
+                for grade, price in proposed.items()
+            ):
+                zone = last_zone
         if not zone:
             continue
         out[basis].setdefault(zone, {}).update(assign_to_columns(values, columns))
+        last_zone, last_top = zone, row.top
     return {k: v for k, v in out.items() if v}
 
 

@@ -23,10 +23,10 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { readRows, mergeOrphanRows, isNumber, parseNumber, joinNumericFragments, type PdfRow, type Word } from "../modules/circulars/pdf-table-reader";
 
-const EX_WORKS = "D:/Gail/GAIL EX WORKS.pdf";
-const STOCK_POINT = "D:/Gail/GAIL STOCK POINT.pdf";
-const INDEX = "D:/Gail2/gailcpe/backend/data/normalized/price_index.json";
-const REPORT = "D:/Gail2/gail-extraction-audit.txt";
+const EX_WORKS = process.argv[2] ?? "D:/Gail/GAIL EX WORKS.pdf";
+const STOCK_POINT = process.argv[3] ?? "D:/Gail/GAIL STOCK POINT.pdf";
+const INDEX = process.argv[4] ?? "D:/Gail2/gailcpe/backend/data/normalized/price_index.json";
+const REPORT = process.argv[5] ?? "D:/Gail2/gail-extraction-audit.txt";
 
 const HEADER = /^Sl\.\s*No\.?\s+SAP\s+(CODE|Code)\s+(LOCATION\/GRADE|STOCKPOINT)/i;
 const LABEL_HEAD = /^(LOCATION\/GRADE|STOCKPOINT\s+LOCATION|STOCKPOINT)$/i;

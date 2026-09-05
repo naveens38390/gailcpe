@@ -25,7 +25,7 @@ import { readRows, mergeOrphanRows, isNumber, parseNumber, type PdfRow, type Wor
 
 const DTA = process.argv[2] ?? "D:/Gail/OPaL Polymers DTA price circular_PE wef 1st August 2026.pdf";
 const CSA = process.argv[3] ?? "D:/Gail/OPaL Polymers CSA price circular_PE wef 1st August 2026.pdf";
-const INDEX = "D:/Gail2/gailcpe/backend/data/normalized/price_index.json";
+const INDEX = process.argv[4] ?? "D:/Gail2/gailcpe/backend/data/normalized/price_index.json";
 const REPORT = "D:/Gail2/opal-extraction-audit.txt";
 
 const HEADER = /^Zone\s+Pricing\s*Zone\s+State/i;
@@ -65,7 +65,9 @@ function bandsFrom(words: Word[]): Band[] {
     const prev = sorted[i - 1], next = sorted[i + 1];
     const x = mid(w);
     return {
-      code: w.text.trim(), x,
+      // September stacks a pair of codes in one column, "F52H04/" over
+      // "F52H02"; the slash belongs to the pairing, not to the grade's name.
+      code: w.text.trim().replace(/\/+$/, ""), x,
       lo: prev ? (mid(prev) + x) / 2 : x - 24,
       hi: next ? (x + mid(next)) / 2 : x + 24,
     };

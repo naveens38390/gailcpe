@@ -16,6 +16,8 @@ and be wrong by the freight amount, twice over.
 
 from __future__ import annotations
 
+import os
+import re
 import json
 import sys
 from pathlib import Path
@@ -39,11 +41,89 @@ from locations import (  # noqa: E402
     derive_freight_aliases,
 )
 
-SOURCE = Path("D:/Gail")
-OUT = Path(__file__).resolve().parent.parent / "data" / "normalized"
+SOURCE = Path(os.environ.get("GCPE_SOURCE", "D:/Gail"))
 
-PRICE_ROUND = "2026-08-01"
+# Producers name their files differently every month — September's pack shares
+# not one filename with August's — so the names below are only a default. Point
+# GCPE_SOURCES at a JSON manifest mapping the keys in FILES to paths, absolute
+# or relative to SOURCE, and a round can be built without renaming anything.
+# Keys the manifest omits fall back to the defaults, which is what lets a price
+# round be rebuilt against an unchanged freight book.
+SOURCES_MANIFEST = os.environ.get("GCPE_SOURCES", "")
+# Where the round is written. Overridable so a rehearsal can build somewhere
+# harmless and be seeded from there, rather than over the round in service.
+OUT = Path(os.environ.get("GCPE_OUT", "")
+           or Path(__file__).resolve().parent.parent / "data" / "normalized")
+
+# The round these circulars are for. Not a default: it used to be the literal
+# string "2026-08-01", so a run against September's documents produced correct
+# prices stamped with August's effective date, silently and with everything
+# else passing. Supply it, and check_round() then requires every circular to
+# say the same thing.
+PRICE_ROUND = os.environ.get("GCPE_PRICE_ROUND", "")
 FREIGHT_ROUND = "2026-06-01"
+
+_MONTHS = {m: i for i, m in enumerate(
+    "january february march april may june july august september october "
+    "november december".split(), 1)}
+# 01.09.2026 / 01-09-2026 / 1/9/26
+_NUMERIC_DATE = re.compile(r"\b(\d{1,2})[.\-/](\d{1,2})[.\-/](\d{2,4})\b")
+# "September 1, 2026" and "1 st September, 2026" — HMEL sets the ordinal apart.
+_MONTH_FIRST = re.compile(
+    r"\b(" + "|".join(_MONTHS) + r")\s+(\d{1,2})\s*(?:st|nd|rd|th)?\s*,?\s*(\d{4})\b", re.I)
+_DAY_FIRST = re.compile(
+    r"\b(\d{1,2})\s*(?:st|nd|rd|th)?\s+(" + "|".join(_MONTHS) + r")\s*,?\s*(\d{4})\b", re.I)
+
+
+def _dates_in(text: str) -> set[str]:
+    """Every date the text states, as ISO strings."""
+    found: set[str] = set()
+    for d, m, y in _NUMERIC_DATE.findall(text):
+        year = int(y) + 2000 if len(y) == 2 else int(y)
+        if 1 <= int(m) <= 12 and 1 <= int(d) <= 31:
+            found.add(f"{year:04d}-{int(m):02d}-{int(d):02d}")
+    for month, d, y in _MONTH_FIRST.findall(text):
+        found.add(f"{int(y):04d}-{_MONTHS[month.lower()]:02d}-{int(d):02d}")
+    for d, month, y in _DAY_FIRST.findall(text):
+        found.add(f"{int(y):04d}-{_MONTHS[month.lower()]:02d}-{int(d):02d}")
+    return found
+
+
+def check_round(src: dict, note) -> None:
+    """Require every price circular to agree with the round being built.
+
+    Each of the six states its effective date on its first pages, in six
+    different formats. RIL prints its issue date beside it — "August 31, 2026"
+    next to "September 01, 2026" — so the test is that the declared round is
+    *among* the dates a circular states, not that it is the first one found.
+    """
+    if not PRICE_ROUND:
+        raise SystemExit(
+            "\nNo price round given. Set GCPE_PRICE_ROUND to the effective date of "
+            "these circulars, e.g.\n    GCPE_PRICE_ROUND=2026-09-01 py -3 build.py\n"
+            "\nIt used to be hard-coded, which meant a run against a new month's "
+            "documents\nproduced correct prices stamped with the previous month's date."
+        )
+
+    from pdfrows import rows as _rows  # local: keeps the import graph flat
+
+    disagree: list[str] = []
+    for key in ("gail_ex_works", "iocl", "ril", "hmel", "haldia", "opal_dta"):
+        text = " ".join(r.text for r in _rows(src[key], pages=[1, 2]))
+        stated = _dates_in(text)
+        if PRICE_ROUND in stated:
+            continue
+        near = sorted(d for d in stated if d >= "2020-01-01")
+        disagree.append(f"  {key:<16} states {near[:6] or 'no date this reader could find'}")
+
+    if disagree and not os.environ.get("GCPE_ALLOW_ROUND_MISMATCH"):
+        raise SystemExit(
+            f"\nBuild stopped: {len(disagree)} circular(s) do not state {PRICE_ROUND}.\n"
+            + "\n".join(disagree)
+            + "\n\nEither the wrong round was given, or the wrong documents are in "
+            f"{SOURCE}.\nSet GCPE_ALLOW_ROUND_MISMATCH=1 only if you have checked both."
+        )
+    note(f"round {PRICE_ROUND} confirmed against all six circulars")
 
 FILES = {
     "gail_ex_works": "GAIL EX WORKS.pdf",
@@ -153,6 +233,230 @@ DISCOUNTS = {
 }
 
 
+def check_complete(flat: dict, note) -> None:
+    """Stop the build if a producer's book is not a rectangle.
+
+    Every defect this pipeline has shipped produced a *successful* build: 720
+    mispaired HMEL prices, 90 OPaL, 71 HPL, 39 dropped IOCL rows, 5,040 HMEL
+    prices that never arrived. None of them raised anything, because nothing
+    here ever checked the shape of what was built — each was found weeks later
+    by reading the circular again.
+
+    They share one symptom. A producer's book stops being a rectangle: a grade
+    the circular prices everywhere is suddenly priced at all but one location,
+    or a caption becomes a zone carrying a third of a row. That is cheap to
+    check and catches the whole family, including the next one, which will not
+    look like any of these.
+
+    A circular that genuinely does not price a grade everywhere trips this too,
+    and that is the point — it is a fact about the round for a person to
+    confirm, not something to find in an audit six weeks later. Set
+    GCPE_ALLOW_RAGGED=1 to record it and continue.
+
+    Runs before anything is written, so a build that fails leaves no output to
+    be seeded by mistake.
+    """
+    ragged: list[str] = []
+    note("")
+    for producer, entry in flat.items():
+        zones = entry["zones"]
+        grades = {g for cells in zones.values() for g in cells}
+        expected = len(zones) * len(grades)
+        actual = sum(len(cells) for cells in zones.values())
+        shape = f"{len(zones)}x{len(grades)}"
+        if actual == expected:
+            note(f"complete {producer:<6} {shape:>9}  {actual:>6} cells")
+            continue
+        short = sorted(
+            ((z, len(grades) - len(cells)) for z, cells in zones.items() if len(cells) < len(grades)),
+            key=lambda pair: -pair[1],
+        )
+        detail = ", ".join(f"{z} (-{n})" for z, n in short[:5])
+        line = (f"RAGGED   {producer:<6} {shape:>9}  {actual} of {expected} cells, "
+                f"{len(short)} zone(s) short: {detail}")
+        note(line)
+        ragged.append(line)
+
+    if ragged and not os.environ.get("GCPE_ALLOW_RAGGED"):
+        raise SystemExit(
+            f"\nBuild stopped before writing: {len(ragged)} producer(s) did not "
+            "form a complete matrix.\n"
+            + "\n".join(ragged)
+            + "\n\nEither the circular changed shape and the reader has not kept up,"
+            "\nor this round genuinely does not price every grade everywhere."
+            "\nConfirm which, then re-run with GCPE_ALLOW_RAGGED=1 to accept it."
+        )
+
+
+def check_no_shrink(flat: dict, note) -> None:
+    """Stop the build if a producer lost whole zones or grades since last round.
+
+    A rectangle is not enough. Every extractor here addresses part of its
+    document by page number, and a document that gains a page slides out from
+    under those constants — quietly, because what comes back is a smaller
+    rectangle, not a ragged one. Shifting HPL's LLDPE table by a single page
+    reads 71 zones x 42 grades instead of 71 x 60: a complete matrix, 1,278
+    prices gone, and the completeness gate above says nothing.
+
+    So the shape is also compared against the last round that was accepted.
+    Growth is fine and happens most months. A fall is not necessarily wrong —
+    RIL withdrew 32 grades between August and September — but it is always
+    worth a person's eye, which is the whole point.
+
+    GCPE_ALLOW_SHRINK=1 accepts it for this run; GCPE_RECORD_SHAPE=1 writes the
+    new shape as the baseline, so moving the line is always deliberate.
+    """
+    path = Path(__file__).resolve().parent / "expected_shape.json"
+    shape = {
+        p: {"zones": len(e["zones"]),
+            "grades": len({g for cells in e["zones"].values() for g in cells})}
+        for p, e in flat.items()
+    }
+
+    if path.exists():
+        baseline = json.loads(path.read_text(encoding="utf-8"))
+        shrunk = []
+        for producer, now in shape.items():
+            was = baseline.get("producers", {}).get(producer)
+            if not was:
+                continue
+            for axis in ("zones", "grades"):
+                if now[axis] < was[axis]:
+                    shrunk.append(
+                        f"SHRUNK   {producer:<6} {axis}: {was[axis]} -> {now[axis]}"
+                        f"  ({was[axis] - now[axis]} fewer)")
+        for line in shrunk:
+            note(line)
+        if shrunk and not os.environ.get("GCPE_ALLOW_SHRINK"):
+            raise SystemExit(
+                f"\nBuild stopped before writing: {len(shrunk)} producer axis/axes "
+                f"fell below the accepted baseline in {path.name}.\n"
+                + "\n".join(shrunk)
+                + "\n\nA circular can genuinely withdraw grades or zones. A reader that"
+                "\nhas lost a page of one reads exactly the same way."
+                "\nConfirm which, then re-run with GCPE_ALLOW_SHRINK=1,"
+                "\nand GCPE_RECORD_SHAPE=1 to move the baseline."
+            )
+    else:
+        note(f"no baseline at {path.name}; run with GCPE_RECORD_SHAPE=1 to set one")
+
+    if os.environ.get("GCPE_RECORD_SHAPE"):
+        path.write_text(
+            json.dumps({"round": PRICE_ROUND, "producers": shape}, indent=1),
+            encoding="utf-8",
+        )
+        note(f"recorded {path.name} for round {PRICE_ROUND}")
+
+
+# A cell that moves further than this between rounds is worth a person's eye.
+# The largest genuine August-to-September move across all 55,439 cells was
+# 5.34%; a book with its columns shifted by one moves 15-42% of its cells
+# further than that. Ten per cent sits in the gap between the two.
+DRIFT_LIMIT = 10.0
+# One repriced grade is not a mispairing. A mispairing moves a whole column, so
+# it shows up as a share of the book rather than a handful of cells.
+DRIFT_SHARE = 0.5
+
+
+def drift_report(flat: dict, note) -> dict:
+    """Compare this round's prices to the last one, cell by cell.
+
+    The gates above reason only about shape, and a mispairing that keeps every
+    dimension passes them untouched: rotate a producer's columns by one and
+    nothing objects. Values are what is left to check, and the useful property
+    is that a price list barely moves between rounds while a mispairing moves
+    most of it.
+
+    Reports per producer and stops the build when too much of a book has moved,
+    which is a question for a person rather than an error. GCPE_ALLOW_DRIFT=1
+    accepts it; the report is written either way.
+    """
+    previous_path = Path(os.environ.get("GCPE_PREVIOUS", "") or (OUT / "price_index.json"))
+    if not previous_path.exists():
+        note(f"\nno previous round at {previous_path.name}; drift not checked")
+        return {"compared_against": None, "producers": {}}
+
+    previous = json.loads(previous_path.read_text(encoding="utf-8"))
+    prior = previous.get("producers", {})
+    stats: dict[str, dict] = {}
+    movements: list[tuple[float, str, str, str, float, float]] = []
+
+    for producer, entry in flat.items():
+        was = prior.get(producer, {}).get("zones", {})
+        moves: list[float] = []
+        for zone, cells in entry["zones"].items():
+            before = was.get(zone)
+            if not before:
+                continue
+            for grade, now in cells.items():
+                then = before.get(grade)
+                if not then:
+                    continue
+                pct = abs(now - then) / then * 100.0
+                moves.append(pct)
+                movements.append((pct, producer, zone, grade, then, now))
+        if not moves:
+            stats[producer] = {"compared": 0}
+            continue
+        moves.sort()
+        over5 = sum(1 for m in moves if m > 5.0)
+        over10 = sum(1 for m in moves if m > DRIFT_LIMIT)
+        stats[producer] = {
+            "compared": len(moves),
+            "median_pct": round(moves[len(moves) // 2], 3),
+            "p95_pct": round(moves[int(len(moves) * 0.95)], 3),
+            "max_pct": round(moves[-1], 3),
+            "over_5pct": over5,
+            "over_10pct": over10,
+            "over_10pct_share": round(over10 / len(moves) * 100, 3),
+        }
+
+    movements.sort(reverse=True)
+    top = [
+        {"producer": p, "zone": z, "grade": g, "was": a, "now": b, "pct": round(pct, 3)}
+        for pct, p, z, g, a, b in movements[:20]
+    ]
+
+    note(f"\nprice movement against {previous_path.parent.name}/{previous_path.name}")
+    note(f"  {'producer':<8}{'compared':>10}{'median':>9}{'p95':>9}{'max':>9}"
+         f"{'>5%':>8}{'>10%':>8}{'share':>9}")
+    breached: list[str] = []
+    for producer, s in stats.items():
+        if not s.get("compared"):
+            note(f"  {producer:<8}{'no comparable cells':>39}")
+            continue
+        note(f"  {producer:<8}{s['compared']:>10}{s['median_pct']:>8.2f}%{s['p95_pct']:>8.2f}%"
+             f"{s['max_pct']:>8.2f}%{s['over_5pct']:>8}{s['over_10pct']:>8}"
+             f"{s['over_10pct_share']:>8.2f}%")
+        if s["over_10pct_share"] > DRIFT_SHARE:
+            breached.append(
+                f"DRIFT    {producer:<6} {s['over_10pct']} of {s['compared']} cells moved more "
+                f"than {DRIFT_LIMIT:.0f}% ({s['over_10pct_share']:.2f}%, limit {DRIFT_SHARE}%)")
+
+    if top:
+        note("  largest movements:")
+        for m in top[:5]:
+            note(f"    {m['producer']:<6} {m['zone'][:18]:<18} {m['grade']:<11} "
+                 f"{m['was']:>9,.0f} -> {m['now']:>9,.0f}  {m['pct']:>7.2f}%")
+
+    if breached and not os.environ.get("GCPE_ALLOW_DRIFT"):
+        raise SystemExit(
+            f"\nBuild stopped before writing: {len(breached)} producer(s) moved more than "
+            "a repricing normally does.\n" + "\n".join(breached)
+            + "\n\nA whole column moving at once is what a mispairing looks like; a market"
+            "\nthat genuinely moved looks the same from here."
+            "\nCheck the largest movements above, then re-run with GCPE_ALLOW_DRIFT=1."
+        )
+
+    return {
+        "compared_against": str(previous_path),
+        "limit_pct": DRIFT_LIMIT,
+        "share_limit_pct": DRIFT_SHARE,
+        "producers": stats,
+        "largest_movements": top,
+    }
+
+
 def write(name: str, payload) -> Path:
     OUT.mkdir(parents=True, exist_ok=True)
     path = OUT / f"{name}.json"
@@ -161,12 +465,26 @@ def write(name: str, payload) -> Path:
 
 
 def main() -> None:
-    src = {k: str(SOURCE / v) for k, v in FILES.items()}
+    names = dict(FILES)
+    if SOURCES_MANIFEST:
+        manifest = json.loads(Path(SOURCES_MANIFEST).read_text(encoding="utf-8"))
+        unknown = set(manifest) - set(FILES)
+        if unknown:
+            raise SystemExit(f"\n{SOURCES_MANIFEST} names sources that do not exist: "
+                             f"{', '.join(sorted(unknown))}")
+        names.update(manifest)
+    src = {k: str(SOURCE / v) for k, v in names.items()}
+
+    missing = [f"  {k:<16} {p}" for k, p in src.items() if not Path(p).exists()]
+    if missing:
+        raise SystemExit("\nBuild stopped: source files not found.\n" + "\n".join(missing))
     report: list[str] = []
 
     def note(line: str) -> None:
         report.append(line)
         print(line)
+
+    check_round(src, note)
 
     # ---- GAIL -------------------------------------------------------------
     ex_works, gail_grades = gail_x.ex_works(src["gail_ex_works"])
@@ -271,6 +589,13 @@ def main() -> None:
             if primary in cells:
                 cells.setdefault(alias, cells[primary])
     flat["OPaL"] = {"basis": "ex_works", "zones": opal_zones}
+
+    # Three separate questions, asked in order of how cheaply they are answered:
+    # is each book a rectangle, has one lost whole grades or zones, and have the
+    # values moved further than a repricing normally does.
+    check_complete(flat, note)
+    check_no_shrink(flat, note)
+    drift = drift_report(flat, note)
 
     for producer, payload in flat.items():
         cells = sum(len(z) for z in payload["zones"].values())
@@ -400,6 +725,7 @@ def main() -> None:
         },
     )
 
+    write("drift_report", {"generated_for": PRICE_ROUND, **drift})
     write("build_report", {"generated_for": PRICE_ROUND, "lines": report})
     note(f"\nwrote {len(list(OUT.glob('*.json')))} files to {OUT}")
 

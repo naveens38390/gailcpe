@@ -135,6 +135,24 @@ export function additiveBaseOf(code: string): string | null {
 }
 
 /**
+ * The base grade behind a trailing form letter, or null.
+ *
+ * GAIL's price sheet names a grade with the form letter it ships as —
+ * B52A003A — while the cross-reference master names the grade itself,
+ * B52A003. `gailGradeKey` already reconciles the two when looking up a price
+ * from a cross-reference row; this is the same rule for the other direction,
+ * finding the row that governs a code read off the sheet.
+ *
+ * `NA` is left to `additiveBaseOf`: there the last two characters are the
+ * additive, not a form letter, and stripping one would leave a stray N.
+ */
+export function formBaseOf(code: string): string | null {
+  const folded = normaliseGrade(code);
+  if (!folded.endsWith("A") || folded.endsWith("NA")) return null;
+  return folded.slice(0, -1);
+}
+
+/**
  * The cross-reference row that governs a grade.
  *
  * Where the sheet wrote both a base grade and its additive variant, it
@@ -155,10 +173,16 @@ export function crossRefFor(data: Dataset, gailGrade: string): CrossRefEntry | u
   const exact = Object.keys(data.crossref.index).find((k) => normaliseGrade(k) === folded);
   if (exact) return data.crossref.index[exact];
 
-  const base = additiveBaseOf(gailGrade);
-  if (!base) return undefined;
-  const key = Object.keys(data.crossref.index).find((k) => normaliseGrade(k) === base);
-  return key ? data.crossref.index[key] : undefined;
+  // Both fallbacks run only once an exact match has failed, so neither can
+  // change a grade that already resolves — they can only give a row to one
+  // that had none. The additive rule goes first: for a code ending NA those
+  // two characters are the additive, and the form-letter rule declines it.
+  for (const base of [additiveBaseOf(gailGrade), formBaseOf(gailGrade)]) {
+    if (!base) continue;
+    const key = Object.keys(data.crossref.index).find((k) => normaliseGrade(k) === base);
+    if (key) return data.crossref.index[key];
+  }
+  return undefined;
 }
 
 /**
