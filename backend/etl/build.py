@@ -208,6 +208,68 @@ def check_complete(flat: dict, note) -> None:
             "\nConfirm which, then re-run with GCPE_ALLOW_RAGGED=1 to accept it."
         )
 
+    check_no_shrink(flat, note)
+
+
+def check_no_shrink(flat: dict, note) -> None:
+    """Stop the build if a producer lost whole zones or grades since last round.
+
+    A rectangle is not enough. Every extractor here addresses part of its
+    document by page number, and a document that gains a page slides out from
+    under those constants — quietly, because what comes back is a smaller
+    rectangle, not a ragged one. Shifting HPL's LLDPE table by a single page
+    reads 71 zones x 42 grades instead of 71 x 60: a complete matrix, 1,278
+    prices gone, and the completeness gate above says nothing.
+
+    So the shape is also compared against the last round that was accepted.
+    Growth is fine and happens most months. A fall is not necessarily wrong —
+    RIL withdrew 32 grades between August and September — but it is always
+    worth a person's eye, which is the whole point.
+
+    GCPE_ALLOW_SHRINK=1 accepts it for this run; GCPE_RECORD_SHAPE=1 writes the
+    new shape as the baseline, so moving the line is always deliberate.
+    """
+    path = Path(__file__).resolve().parent / "expected_shape.json"
+    shape = {
+        p: {"zones": len(e["zones"]),
+            "grades": len({g for cells in e["zones"].values() for g in cells})}
+        for p, e in flat.items()
+    }
+
+    if path.exists():
+        baseline = json.loads(path.read_text(encoding="utf-8"))
+        shrunk = []
+        for producer, now in shape.items():
+            was = baseline.get("producers", {}).get(producer)
+            if not was:
+                continue
+            for axis in ("zones", "grades"):
+                if now[axis] < was[axis]:
+                    shrunk.append(
+                        f"SHRUNK   {producer:<6} {axis}: {was[axis]} -> {now[axis]}"
+                        f"  ({was[axis] - now[axis]} fewer)")
+        for line in shrunk:
+            note(line)
+        if shrunk and not os.environ.get("GCPE_ALLOW_SHRINK"):
+            raise SystemExit(
+                f"\nBuild stopped before writing: {len(shrunk)} producer axis/axes "
+                f"fell below the accepted baseline in {path.name}.\n"
+                + "\n".join(shrunk)
+                + "\n\nA circular can genuinely withdraw grades or zones. A reader that"
+                "\nhas lost a page of one reads exactly the same way."
+                "\nConfirm which, then re-run with GCPE_ALLOW_SHRINK=1,"
+                "\nand GCPE_RECORD_SHAPE=1 to move the baseline."
+            )
+    else:
+        note(f"no baseline at {path.name}; run with GCPE_RECORD_SHAPE=1 to set one")
+
+    if os.environ.get("GCPE_RECORD_SHAPE"):
+        path.write_text(
+            json.dumps({"round": PRICE_ROUND, "producers": shape}, indent=1),
+            encoding="utf-8",
+        )
+        note(f"recorded {path.name} for round {PRICE_ROUND}")
+
 
 def write(name: str, payload) -> Path:
     OUT.mkdir(parents=True, exist_ok=True)

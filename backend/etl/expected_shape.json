@@ -1,0 +1,29 @@
+{
+ "round": "2026-08-01",
+ "producers": {
+  "GAIL": {
+   "zones": 313,
+   "grades": 53
+  },
+  "IOCL": {
+   "zones": 69,
+   "grades": 40
+  },
+  "RIL": {
+   "zones": 75,
+   "grades": 286
+  },
+  "HMEL": {
+   "zones": 80,
+   "grades": 112
+  },
+  "HPL": {
+   "zones": 71,
+   "grades": 60
+  },
+  "OPaL": {
+   "zones": 90,
+   "grades": 38
+  }
+ }
+}
