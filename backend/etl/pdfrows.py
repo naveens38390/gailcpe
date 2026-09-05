@@ -219,6 +219,36 @@ def join_numeric_fragments(words: list[Word], max_gap: float = 2.0) -> list[Word
     return out
 
 
+def repair_shredded(words: list[Word], max_gap: float = 2.0) -> list[Word]:
+    """Rebuild a row the PDF drew one character at a time.
+
+    HMEL's September circular sets two rows of its LLDPE non-prime table with
+    character-level positioning, so Kolhapur's line arrives as
+    "K o lh apur 6 6 1 0 6 6 1 0 ..." — the name in four pieces and every
+    four-figure adjustment as four separate words. Read literally that is 128
+    single-digit values for 32 columns; each column keeps whichever digit
+    landed in it last, usually the trailing zero, and the location then prices
+    at its basic rate with no locational adjustment subtracted at all.
+
+    Only rows that are actually shredded are touched, and only fragments that
+    are physically touching are joined, so an ordinary row — where words are
+    separated by a real space — passes through unchanged. Letters are never
+    joined to digits, which is what keeps a name off the front of its first
+    price.
+    """
+    singles = sum(1 for w in words if len(w.text) == 1)
+    if len(words) < 8 or singles < len(words) * 0.5:
+        return words
+    out: list[Word] = []
+    for w in words:
+        if out and w.x0 - out[-1].x1 <= max_gap and out[-1].text[-1].isdigit() == w.text[0].isdigit():
+            previous = out.pop()
+            out.append(Word(previous.text + w.text, previous.x0, w.x1, previous.top))
+        else:
+            out.append(w)
+    return out
+
+
 def pair_orphans(
     rows_in: list[Row], max_gap: float = 2 * ROW_TOLERANCE
 ) -> Iterator[tuple[str, list[tuple[float, float]], Row]]:

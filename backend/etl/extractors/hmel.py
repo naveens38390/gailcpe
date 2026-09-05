@@ -34,7 +34,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from pdfrows import char_rows, is_number, parse_number, rows  # noqa: E402
+from pdfrows import char_rows, is_number, parse_number, repair_shredded, rows  # noqa: E402
 
 # A basic price is five or six figures; a locational adjustment is smaller.
 BASIC_MIN = 50_000
@@ -164,6 +164,9 @@ def prices(path: str) -> dict:
         by_page_chars.setdefault(row.page, []).append(row)
 
     for row in rows(path, pages=range(3, 15)):
+        # Two rows of the September circular are drawn one character at a time;
+        # rebuild those before reading a label or a price off them.
+        row.words = repair_shredded(row.words)
         text = row.text.strip()
 
         found = next((v for k, v in SECTIONS.items() if text.startswith(k)), None)

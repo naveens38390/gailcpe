@@ -54,6 +54,31 @@ def _blocks(body: list) -> list[tuple[str, list]]:
     return out
 
 
+def _columns(header) -> list[tuple[str, float]]:
+    """Every grade column in the header row, whatever its text spells.
+
+    The header reads "Zone | Pricing Zone | State | <grades...>", so the table
+    begins where "State" ends and everything to its right is a column. Testing
+    each word against a code shape instead loses any column the shape does not
+    admit — and its prices do not go missing with it, they snap to whichever
+    column was recognised nearest.
+
+    September's DTA circular is the case in point. It stacks a pair of codes in
+    one column, "F52H04/" over "F52H02", the way HMEL sets R0150S/R0151D. The
+    trailing slash failed the shape, so that column vanished, nineteen prices
+    crowded onto eighteen columns, and F52H02 — which did match — was recorded
+    as an alias of a neighbour and carried its price at all ninety zones.
+    """
+    state = next((w for w in header.words if w.text.strip() == "State"), None)
+    if state is None:
+        return []
+    return [
+        (w.text.rstrip("/"), w.xmid)
+        for w in header.words
+        if w.x0 > state.x1 and w.text.strip()
+    ]
+
+
 def _label_edges(block: list) -> list[float]:
     """The three recurring left edges of the label columns in this block."""
     edges: collections.Counter = collections.Counter()
@@ -76,11 +101,7 @@ def prices(path: str) -> dict:
 
     for sheet, block in _blocks(body):
         edges = _label_edges(block)
-        columns = [
-            (w.text, w.xmid)
-            for w in block[0].words
-            if GRADE_CODE.match(w.text) and w.text not in ("Zone", "State")
-        ]
+        columns = _columns(block[0])
         if len(edges) < 3 or not columns:
             continue
         zones = sheets.setdefault(sheet, {})

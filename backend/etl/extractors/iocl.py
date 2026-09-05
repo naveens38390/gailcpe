@@ -77,10 +77,18 @@ def prices(path: str) -> dict[str, dict[str, dict[str, float]]]:
         if text.startswith("Grades"):
             columns = _columns(row)
             basis = "delivered" if row.page in DELIVERED_PAGES else None
+            # A held-over name cannot belong to a table that has not started.
+            # The September list carries a caption above this header — "HM Film
+            # Pipe MBM Utility" — which reads exactly like a zone standing on
+            # its own line, so it was held and then claimed by the first
+            # orphaned price row on the page. That row was Gautam Budh nagar's,
+            # and its thirteen prices became a zone of that name.
+            pending = ""
             continue
         matched = next((v for k, v in _SECTIONS.items() if text.startswith(k)), None)
         if matched:
             basis = matched
+            pending = ""
             continue
         if basis is None or not columns:
             continue
