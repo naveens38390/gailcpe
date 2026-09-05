@@ -16,6 +16,7 @@ and be wrong by the freight amount, twice over.
 
 from __future__ import annotations
 
+import os
 import json
 import sys
 from pathlib import Path
@@ -153,6 +154,61 @@ DISCOUNTS = {
 }
 
 
+def check_complete(flat: dict, note) -> None:
+    """Stop the build if a producer's book is not a rectangle.
+
+    Every defect this pipeline has shipped produced a *successful* build: 720
+    mispaired HMEL prices, 90 OPaL, 71 HPL, 39 dropped IOCL rows, 5,040 HMEL
+    prices that never arrived. None of them raised anything, because nothing
+    here ever checked the shape of what was built — each was found weeks later
+    by reading the circular again.
+
+    They share one symptom. A producer's book stops being a rectangle: a grade
+    the circular prices everywhere is suddenly priced at all but one location,
+    or a caption becomes a zone carrying a third of a row. That is cheap to
+    check and catches the whole family, including the next one, which will not
+    look like any of these.
+
+    A circular that genuinely does not price a grade everywhere trips this too,
+    and that is the point — it is a fact about the round for a person to
+    confirm, not something to find in an audit six weeks later. Set
+    GCPE_ALLOW_RAGGED=1 to record it and continue.
+
+    Runs before anything is written, so a build that fails leaves no output to
+    be seeded by mistake.
+    """
+    ragged: list[str] = []
+    note("")
+    for producer, entry in flat.items():
+        zones = entry["zones"]
+        grades = {g for cells in zones.values() for g in cells}
+        expected = len(zones) * len(grades)
+        actual = sum(len(cells) for cells in zones.values())
+        shape = f"{len(zones)}x{len(grades)}"
+        if actual == expected:
+            note(f"complete {producer:<6} {shape:>9}  {actual:>6} cells")
+            continue
+        short = sorted(
+            ((z, len(grades) - len(cells)) for z, cells in zones.items() if len(cells) < len(grades)),
+            key=lambda pair: -pair[1],
+        )
+        detail = ", ".join(f"{z} (-{n})" for z, n in short[:5])
+        line = (f"RAGGED   {producer:<6} {shape:>9}  {actual} of {expected} cells, "
+                f"{len(short)} zone(s) short: {detail}")
+        note(line)
+        ragged.append(line)
+
+    if ragged and not os.environ.get("GCPE_ALLOW_RAGGED"):
+        raise SystemExit(
+            f"\nBuild stopped before writing: {len(ragged)} producer(s) did not "
+            "form a complete matrix.\n"
+            + "\n".join(ragged)
+            + "\n\nEither the circular changed shape and the reader has not kept up,"
+            "\nor this round genuinely does not price every grade everywhere."
+            "\nConfirm which, then re-run with GCPE_ALLOW_RAGGED=1 to accept it."
+        )
+
+
 def write(name: str, payload) -> Path:
     OUT.mkdir(parents=True, exist_ok=True)
     path = OUT / f"{name}.json"
@@ -271,6 +327,8 @@ def main() -> None:
             if primary in cells:
                 cells.setdefault(alias, cells[primary])
     flat["OPaL"] = {"basis": "ex_works", "zones": opal_zones}
+
+    check_complete(flat, note)
 
     for producer, payload in flat.items():
         cells = sum(len(z) for z in payload["zones"].values())
