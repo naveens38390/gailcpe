@@ -37,7 +37,11 @@ import {
 } from "./schemas/circular.schema";
 import { RoleSchema, UserSchema } from "./schemas/activity.schema";
 
-const DATA = join(__dirname, "..", "..", "..", "data", "normalized");
+// Overridable so a staged round can be seeded into an isolated database for
+// verification, without first copying it over data/normalized. This routine
+// deletes before it inserts, so pointing it at the wrong pair of those two is
+// exactly the mistake worth making impossible to do by accident.
+const DATA = process.env.GCPE_DATA ?? join(__dirname, "..", "..", "..", "data", "normalized");
 const read = (name: string) =>
   JSON.parse(readFileSync(join(DATA, `${name}.json`), "utf8"));
 
