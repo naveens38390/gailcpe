@@ -50,7 +50,10 @@ SOURCE = Path(os.environ.get("GCPE_SOURCE", "D:/Gail"))
 # Keys the manifest omits fall back to the defaults, which is what lets a price
 # round be rebuilt against an unchanged freight book.
 SOURCES_MANIFEST = os.environ.get("GCPE_SOURCES", "")
-OUT = Path(__file__).resolve().parent.parent / "data" / "normalized"
+# Where the round is written. Overridable so a rehearsal can build somewhere
+# harmless and be seeded from there, rather than over the round in service.
+OUT = Path(os.environ.get("GCPE_OUT", "")
+           or Path(__file__).resolve().parent.parent / "data" / "normalized")
 
 # The round these circulars are for. Not a default: it used to be the literal
 # string "2026-08-01", so a run against September's documents produced correct

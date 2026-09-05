@@ -165,6 +165,9 @@ same from here. Check `drift_report.json` and the largest movements it lists
 before setting any of them. `GCPE_RECORD_SHAPE=1` moves the shrink baseline in
 `expected_shape.json` once a round is accepted.
 
+A step-by-step release procedure, with the counts to expect and what each gate
+means when it stops the build, is in [docs/release-checklist.md](../docs/release-checklist.md).
+
 ### Loading data into MongoDB
 
 ```bash
