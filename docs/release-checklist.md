@@ -123,9 +123,17 @@ npm run verify
 
 Expected counts for 2026-09-01:
 
+> `npm run verify` prints **collection totals**, and `priceEntries` accumulates
+> across rounds — the seeder replaces only the round it is loading and leaves
+> earlier ones alone, so historical comparisons stay reproducible. After
+> seeding September onto a database that already held August, the collection
+> reads 107,369: 51,930 for 2026-08-01 and 55,439 for 2026-09-01. Check the
+> round, not the total. Everything else in this table is replaced outright and
+> so is an exact count.
+
 | Collection | Count |
 | --- | --- |
-| `priceEntries` | **55,439** |
+| `priceEntries` | **55,439 for the round** (collection total is cumulative) |
 | `grades` | 589 |
 | `locations` | 313 |
 | `gradeMappings` | 44 |
@@ -138,8 +146,19 @@ Expected counts for 2026-09-01:
 | `users` | 1 |
 
 - [ ] `npm run build` exits 0
-- [ ] seed reports `priceEntries 55,439`
-- [ ] `npm run verify` matches the table above
+- [ ] seed reports `priceEntries 55,439` — that figure is the round
+- [ ] `npm run verify` matches the table above, allowing for the cumulative total
+- [ ] the round's own count is right, per producer:
+
+```js
+db.priceEntries.aggregate([
+  { $match: { effectiveDate: ISODate("2026-09-01") } },
+  { $group: { _id: "$producer", n: { $sum: 1 } } }, { $sort: { _id: 1 } }
+])
+// GAIL 16589  HMEL 9120  HPL 4260  IOCL 2760  OPaL 3510  RIL 19200
+```
+
+- [ ] earlier rounds are still present and unchanged
 
 `priceEntries` is the number to check first. It is the sum of the six matrices
 the build printed: 313×53 + 69×40 + 75×256 + 80×114 + 71×60 + 90×39. If it
