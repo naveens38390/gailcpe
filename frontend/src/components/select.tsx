@@ -82,12 +82,15 @@ export function SelectField({
   const [query, setQuery] = useState("");
   const keyboard = useKeyboardInset();
   const { height: screenHeight } = useWindowDimensions();
-  // The sheet sits above the keyboard rather than behind it, and is measured
-  // against what is left of the screen. Against the whole screen — which is
-  // what a percentage height does — the list ends up under the keyboard, and
-  // the one matching row a user typed four characters to find is the row they
-  // cannot see.
-  const sheetMaxHeight = Math.max(MIN_SHEET_HEIGHT, (screenHeight - keyboard) * 0.85);
+  const keyboardOpen = keyboard > 0;
+  // With a keyboard up the sheet is given a height, not a ceiling. maxHeight
+  // only caps a height the sheet still has to get from somewhere, and its
+  // height comes from its content — so a list told to fill the remainder has
+  // no remainder to fill and collapses to nothing, leaving a sheet that is all
+  // search box and no results. Which is what shipped.
+  const sheetStyle = keyboardOpen
+    ? { height: Math.max(MIN_SHEET_HEIGHT, (screenHeight - keyboard) * 0.92) }
+    : { maxHeight: screenHeight * 0.85 };
 
   const selected = options.find((o) => o.value === value);
   const filtered = useMemo(() => {
@@ -144,7 +147,7 @@ export function SelectField({
         onRequestClose={() => setOpen(false)}
       >
         <View style={[styles.backdrop, { paddingBottom: keyboard }]}>
-          <View style={[styles.sheet, { maxHeight: sheetMaxHeight }]}>
+          <View style={[styles.sheet, sheetStyle]}>
             <View style={styles.sheetHead}>
               <Text style={styles.sheetTitle}>{label}</Text>
               <Pressable onPress={() => setOpen(false)} hitSlop={12}>
@@ -172,7 +175,7 @@ export function SelectField({
 
             <FlatList
               data={filtered}
-              style={styles.list}
+              style={keyboardOpen ? styles.listFill : styles.listShrink}
               keyExtractor={(o) => o.value}
               keyboardShouldPersistTaps="handled"
               ListEmptyComponent={<Text style={styles.empty}>{emptyText}</Text>}
@@ -342,9 +345,12 @@ const useStyles = makeStyles((c) => ({
     paddingBottom: theme.space(3),
   },
   sheetTitle: { color: c.textPrimary, fontSize: 17, fontWeight: "800" },
-  // Lets the list give up height to the search box and header rather than
-  // overflowing the sheet it is capped inside.
-  list: { flexShrink: 1 },
+  // With the sheet given a definite height, the list takes what the header and
+  // search box leave. Without one it sizes to its content under the sheet's cap
+  // — flex: 1 there would resolve against a parent whose height depends on this
+  // child, and collapse.
+  listFill: { flex: 1 },
+  listShrink: { flexShrink: 1 },
   searchRow: {
     flexDirection: "row",
     alignItems: "center",
