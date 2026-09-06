@@ -10,10 +10,22 @@
 
 import { Ionicons } from "@expo/vector-icons";
 import { useMemo, useState, type ReactNode } from "react";
-import { FlatList, Modal, Pressable, Text, TextInput, View } from "react-native";
+import {
+  FlatList,
+  Modal,
+  Pressable,
+  Text,
+  TextInput,
+  useWindowDimensions,
+  View,
+} from "react-native";
 
 import { makeStyles, useTheme } from "../context/theme";
 import { theme } from "../theme";
+import { useKeyboardInset } from "./keyboard";
+
+/** Leave at least this much sheet on screen, however little room there is. */
+const MIN_SHEET_HEIGHT = 240;
 
 export interface Option {
   /** The value submitted to the API. */
@@ -68,6 +80,14 @@ export function SelectField({
   const { colors } = useTheme();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const keyboard = useKeyboardInset();
+  const { height: screenHeight } = useWindowDimensions();
+  // The sheet sits above the keyboard rather than behind it, and is measured
+  // against what is left of the screen. Against the whole screen — which is
+  // what a percentage height does — the list ends up under the keyboard, and
+  // the one matching row a user typed four characters to find is the row they
+  // cannot see.
+  const sheetMaxHeight = Math.max(MIN_SHEET_HEIGHT, (screenHeight - keyboard) * 0.85);
 
   const selected = options.find((o) => o.value === value);
   const filtered = useMemo(() => {
@@ -116,9 +136,15 @@ export function SelectField({
 
       {hint ? <Text style={styles.hint}>{hint}</Text> : null}
 
-      <Modal visible={open} animationType="slide" transparent onRequestClose={() => setOpen(false)}>
-        <View style={styles.backdrop}>
-          <View style={styles.sheet}>
+      <Modal
+        visible={open}
+        animationType="slide"
+        transparent
+        statusBarTranslucent
+        onRequestClose={() => setOpen(false)}
+      >
+        <View style={[styles.backdrop, { paddingBottom: keyboard }]}>
+          <View style={[styles.sheet, { maxHeight: sheetMaxHeight }]}>
             <View style={styles.sheetHead}>
               <Text style={styles.sheetTitle}>{label}</Text>
               <Pressable onPress={() => setOpen(false)} hitSlop={12}>
@@ -136,11 +162,17 @@ export function SelectField({
                 placeholderTextColor={colors.textFaint}
                 autoCapitalize="characters"
                 autoCorrect={false}
+                // Long lists are opened to be searched — 313 locations is not a
+                // list anyone scrolls. Short ones are opened to be read, and
+                // raising the keyboard over them only takes room away.
+                autoFocus={options.length > 12}
+                returnKeyType="search"
               />
             </View>
 
             <FlatList
               data={filtered}
+              style={styles.list}
               keyExtractor={(o) => o.value}
               keyboardShouldPersistTaps="handled"
               ListEmptyComponent={<Text style={styles.empty}>{emptyText}</Text>}
@@ -298,7 +330,8 @@ const useStyles = makeStyles((c) => ({
     backgroundColor: c.surfaceCard,
     borderTopLeftRadius: theme.radius.lg,
     borderTopRightRadius: theme.radius.lg,
-    maxHeight: "85%",
+    // Height comes from the component, which knows how much of the screen the
+    // keyboard has taken. A percentage here would measure the whole screen.
     paddingTop: theme.space(4),
   },
   sheetHead: {
@@ -309,6 +342,9 @@ const useStyles = makeStyles((c) => ({
     paddingBottom: theme.space(3),
   },
   sheetTitle: { color: c.textPrimary, fontSize: 17, fontWeight: "800" },
+  // Lets the list give up height to the search box and header rather than
+  // overflowing the sheet it is capped inside.
+  list: { flexShrink: 1 },
   searchRow: {
     flexDirection: "row",
     alignItems: "center",

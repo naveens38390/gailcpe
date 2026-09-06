@@ -15,10 +15,19 @@
 
 import { FlashList } from "@shopify/flash-list";
 import { useMemo, useState, type ReactNode } from "react";
-import { Modal, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import {
+  Modal,
+  Pressable,
+  ScrollView,
+  Text,
+  TextInput,
+  useWindowDimensions,
+  View,
+} from "react-native";
 
 import { theme } from "../theme";
 import { makeStyles, useTheme } from "../context/theme";
+import { useKeyboardInset } from "./keyboard";
 
 export interface DataGridFilter<T> {
   key: string;
@@ -149,10 +158,22 @@ export function EditDrawer({
   children: ReactNode;
 }) {
   const styles = useStyles();
+  const keyboard = useKeyboardInset();
+  const { height: screenHeight } = useWindowDimensions();
+  // This drawer takes typed input too, so it has the same problem the select
+  // sheet had: anchored to the bottom, sized against the whole screen, and so
+  // partly underneath the keyboard the moment a field is focused.
+  const drawerMaxHeight = Math.max(240, (screenHeight - keyboard) * 0.85);
   return (
-    <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
-      <View style={styles.backdrop}>
-        <View style={styles.drawer}>
+    <Modal
+      visible={visible}
+      animationType="slide"
+      transparent
+      statusBarTranslucent
+      onRequestClose={onClose}
+    >
+      <View style={[styles.backdrop, { paddingBottom: keyboard }]}>
+        <View style={[styles.drawer, { maxHeight: drawerMaxHeight }]}>
           <View style={styles.drawerHead}>
             <Text style={styles.drawerTitle}>{title}</Text>
             <Pressable onPress={onClose} hitSlop={12}>
@@ -246,8 +267,9 @@ const useStyles = makeStyles((c) => ({
     backgroundColor: c.bgApp,
     borderTopLeftRadius: theme.radius.lg,
     borderTopRightRadius: theme.radius.lg,
-    maxHeight: "85%",
-    minHeight: "40%",
+    // maxHeight comes from the component, which knows what the keyboard has
+    // taken; a percentage here would measure the whole screen.
+    minHeight: 240,
   },
   drawerHead: {
     flexDirection: "row",
