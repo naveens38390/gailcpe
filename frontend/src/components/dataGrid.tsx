@@ -27,6 +27,8 @@ import {
 
 import { theme } from "../theme";
 import { makeStyles, useTheme } from "../context/theme";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 import { useKeyboardInset } from "./keyboard";
 
 export interface DataGridFilter<T> {
@@ -159,11 +161,15 @@ export function EditDrawer({
 }) {
   const styles = useStyles();
   const keyboard = useKeyboardInset();
+  const insets = useSafeAreaInsets();
   const { height: screenHeight } = useWindowDimensions();
+  // Whichever is taking the bottom of the screen: the keyboard, or Android's
+  // navigation bar when there is none.
+  const bottomInset = Math.max(keyboard, insets.bottom);
   // This drawer takes typed input too, so it has the same problem the select
   // sheet had: anchored to the bottom, sized against the whole screen, and so
   // partly underneath the keyboard the moment a field is focused.
-  const drawerMaxHeight = Math.max(240, (screenHeight - keyboard) * 0.85);
+  const drawerMaxHeight = Math.max(240, (screenHeight - bottomInset) * 0.85);
   return (
     <Modal
       visible={visible}
@@ -172,7 +178,7 @@ export function EditDrawer({
       statusBarTranslucent
       onRequestClose={onClose}
     >
-      <View style={[styles.backdrop, { paddingBottom: keyboard }]}>
+      <View style={[styles.backdrop, { paddingBottom: bottomInset }]}>
         <View style={[styles.drawer, { maxHeight: drawerMaxHeight }]}>
           <View style={styles.drawerHead}>
             <Text style={styles.drawerTitle}>{title}</Text>

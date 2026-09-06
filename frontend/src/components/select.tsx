@@ -20,12 +20,22 @@ import {
   View,
 } from "react-native";
 
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 import { makeStyles, useTheme } from "../context/theme";
 import { theme } from "../theme";
 import { useKeyboardInset } from "./keyboard";
 
 /** Leave at least this much sheet on screen, however little room there is. */
 const MIN_SHEET_HEIGHT = 240;
+/**
+ * Room for about four rows, kept whatever the search matched.
+ *
+ * A sheet sized to one result is a sheet that changes height on every
+ * keystroke, and in the moment between opening and the keyboard arriving it
+ * collapses onto the navigation bar with the single match tucked behind it.
+ */
+const MIN_RESULTS_HEIGHT = 240;
 
 export interface Option {
   /** The value submitted to the API. */
@@ -81,16 +91,22 @@ export function SelectField({
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const keyboard = useKeyboardInset();
+  const insets = useSafeAreaInsets();
   const { height: screenHeight } = useWindowDimensions();
   const keyboardOpen = keyboard > 0;
+  // Whichever is currently taking the bottom of the screen. With no keyboard
+  // that is Android's navigation bar, which a sheet flush to the bottom edge
+  // otherwise hides its last row behind.
+  const bottomInset = Math.max(keyboard, insets.bottom);
+  const available = screenHeight - bottomInset;
   // With a keyboard up the sheet is given a height, not a ceiling. maxHeight
   // only caps a height the sheet still has to get from somewhere, and its
   // height comes from its content — so a list told to fill the remainder has
   // no remainder to fill and collapses to nothing, leaving a sheet that is all
   // search box and no results. Which is what shipped.
   const sheetStyle = keyboardOpen
-    ? { height: Math.max(MIN_SHEET_HEIGHT, (screenHeight - keyboard) * 0.92) }
-    : { maxHeight: screenHeight * 0.85 };
+    ? { height: Math.max(MIN_SHEET_HEIGHT, available * 0.92) }
+    : { maxHeight: Math.max(MIN_SHEET_HEIGHT, available * 0.85) };
 
   const selected = options.find((o) => o.value === value);
   const filtered = useMemo(() => {
@@ -146,7 +162,7 @@ export function SelectField({
         statusBarTranslucent
         onRequestClose={() => setOpen(false)}
       >
-        <View style={[styles.backdrop, { paddingBottom: keyboard }]}>
+        <View style={[styles.backdrop, { paddingBottom: bottomInset }]}>
           <View style={[styles.sheet, sheetStyle]}>
             <View style={styles.sheetHead}>
               <Text style={styles.sheetTitle}>{label}</Text>
@@ -349,8 +365,8 @@ const useStyles = makeStyles((c) => ({
   // search box leave. Without one it sizes to its content under the sheet's cap
   // — flex: 1 there would resolve against a parent whose height depends on this
   // child, and collapse.
-  listFill: { flex: 1 },
-  listShrink: { flexShrink: 1 },
+  listFill: { flex: 1, minHeight: MIN_RESULTS_HEIGHT },
+  listShrink: { flexShrink: 1, minHeight: MIN_RESULTS_HEIGHT },
   searchRow: {
     flexDirection: "row",
     alignItems: "center",
