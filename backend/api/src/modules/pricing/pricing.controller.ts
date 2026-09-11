@@ -22,8 +22,17 @@ export class PricingController {
       {
         asOf: dto.asOf ? new Date(dto.asOf) : undefined,
         userId: req.user?.id,
+        gradeOverrides: dto.gradeOverrides as any,
       },
     );
+  }
+
+  @Get("grade-options")
+  @ApiOperation({
+    summary: "Every equivalent competitor grade for this GAIL grade, priced at this location",
+  })
+  gradeOptions(@Query("grade") grade: string, @Query("location") location: string) {
+    return this.pricing.gradeOptions(grade, location);
   }
 
   @Get("history")

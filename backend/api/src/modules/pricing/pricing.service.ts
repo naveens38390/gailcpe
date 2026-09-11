@@ -2,8 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
-import { compare } from "../../core/pricing";
-import type { Comparison, PaymentMode } from "../../core/types";
+import { compare, equivalentOptions, type GradeOption } from "../../core/pricing";
+import type { Comparison, PaymentMode, Producer } from "../../core/types";
 import { DatasetService } from "../dataset/dataset.service";
 import { ComparisonHistory } from "../../database/schemas/activity.schema";
 
@@ -27,10 +27,21 @@ export class PricingService {
     location: string,
     quantityMt: number,
     paymentMode: PaymentMode,
-    options: { asOf?: Date; userId?: string } = {},
+    options: {
+      asOf?: Date;
+      userId?: string;
+      gradeOverrides?: Partial<Record<Producer, string>>;
+    } = {},
   ): Promise<Comparison & { effectiveDate: string; freightDate: string }> {
     const data = await this.dataset.load(options.asOf);
-    const result = compare(data, grade, location, quantityMt, paymentMode);
+    const result = compare(
+      data,
+      grade,
+      location,
+      quantityMt,
+      paymentMode,
+      options.gradeOverrides,
+    );
 
     // Stored with the result embedded: re-running this next month would give a
     // different answer, and the record exists to show what the officer was told.
@@ -49,6 +60,19 @@ export class PricingService {
       effectiveDate: data.priceIndex.effective_date,
       freightDate: data.freight.effective_date,
     };
+  }
+
+  /**
+   * Every competitor code an officer could substitute in for this grade at
+   * this location, priced where available — what fills the grade dropdown on
+   * each producer's card in Compare.
+   */
+  async gradeOptions(
+    grade: string,
+    location: string,
+  ): Promise<Partial<Record<Producer, GradeOption[]>>> {
+    const data = await this.dataset.load();
+    return equivalentOptions(data, grade, location);
   }
 
   async recent(userId?: string, limit = 20) {

@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsIn, IsNumber, IsOptional, IsString, Min } from "class-validator";
+import { IsIn, IsNumber, IsObject, IsOptional, IsString, Min } from "class-validator";
 
 export class CompareDto {
   @IsString()
@@ -20,4 +20,12 @@ export class CompareDto {
   @IsOptional()
   @IsString()
   asOf?: string;
+
+  /**
+   * Producer -> the specific equivalent grade to quote instead of the
+   * cheapest one Compare would otherwise pick for that producer.
+   */
+  @IsOptional()
+  @IsObject()
+  gradeOverrides?: Record<string, string>;
 }

@@ -1,10 +1,13 @@
+import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useMemo, useState } from "react";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { Modal, Pressable, ScrollView, Text, View } from "react-native";
 
 import {
   api,
   type Comparison,
   type GradeAvailability,
+  type GradeOption,
+  type GradeOptionsResponse,
   type PaymentMode,
   type ProductVariants,
   type Quote,
@@ -45,6 +48,12 @@ export default function CompareScreen() {
   const [availabilityBusy, setAvailabilityBusy] = useState(false);
 
   const [variants, setVariants] = useState<ProductVariants | null>(null);
+
+  // Per-producer substitution: which competitor grade to quote instead of the
+  // cheapest one Compare would otherwise pick for that producer. Keyed by
+  // producer code; a producer with no entry here gets the auto-picked grade.
+  const [gradeOptions, setGradeOptions] = useState<GradeOptionsResponse | null>(null);
+  const [gradeOverrides, setGradeOverrides] = useState<Record<string, string>>({});
 
   const [result, setResult] = useState<Comparison | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -101,7 +110,29 @@ export default function CompareScreen() {
     };
   }, [grade, location]);
 
-  const gradeOptions: Option[] = useMemo(() => {
+  // A substitution chosen at one grade/location no longer means anything once
+  // either changes, and the options list itself is priced per-location.
+  useEffect(() => {
+    setGradeOverrides({});
+    if (!grade || !location) {
+      setGradeOptions(null);
+      return;
+    }
+    let cancelled = false;
+    api
+      .gradeOptions(grade, location)
+      .then((o) => {
+        if (!cancelled) setGradeOptions(o);
+      })
+      .catch(() => {
+        if (!cancelled) setGradeOptions(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [grade, location]);
+
+  const gradeOptionsList: Option[] = useMemo(() => {
     if (!catalog) return [];
     return catalog.grades.map((g) => {
       const badge = AVAILABILITY_BADGE[g.availability]!;
@@ -144,7 +175,7 @@ export default function CompareScreen() {
   const selectedGrade = catalog?.grades.find((g) => g.gailGrade === grade);
   const ready = Boolean(grade && location && Number(quantity) > 0);
 
-  async function run() {
+  async function run(overrides: Record<string, string> = gradeOverrides) {
     setError(null);
     setBusy(true);
     try {
@@ -154,6 +185,7 @@ export default function CompareScreen() {
           location,
           quantityMt: Number(quantity) || 0,
           paymentMode,
+          gradeOverrides: Object.keys(overrides).length ? overrides : undefined,
         }),
       );
     } catch (e) {
@@ -162,6 +194,19 @@ export default function CompareScreen() {
     } finally {
       setBusy(false);
     }
+  }
+
+  /**
+   * Substitute one producer's grade and recalculate immediately — everything
+   * else about the comparison (location, quantity, payment terms, every other
+   * producer's own choice) stays exactly as it was.
+   */
+  function selectGrade(producer: string, code: string | null) {
+    const next = { ...gradeOverrides };
+    if (code) next[producer] = code;
+    else delete next[producer];
+    setGradeOverrides(next);
+    if (result) run(next);
   }
 
   const shown = result ? result.quotes.filter((q) => !hidden.includes(q.producer)) : [];
@@ -195,7 +240,7 @@ export default function CompareScreen() {
               : "Search by GAIL code, application, or a competitor code"
           }
           value={grade}
-          options={gradeOptions}
+          options={gradeOptionsList}
           onChange={setGrade}
           loading={catalogLoading}
         />
@@ -248,7 +293,7 @@ export default function CompareScreen() {
           </Field>
         ) : null}
 
-        <PrimaryButton label="Compare" onPress={run} busy={busy} disabled={!ready} />
+        <PrimaryButton label="Compare" onPress={() => run()} busy={busy} disabled={!ready} />
       </Card>
 
       <VariantPicker variants={variants} selected={grade} onSelect={setGrade} />
@@ -274,6 +319,9 @@ export default function CompareScreen() {
               key={quote.producer}
               quote={quote}
               isLeader={quote.producer === result.leader?.producer}
+              options={gradeOptions?.[quote.producer]}
+              overridden={gradeOverrides[quote.producer] !== undefined}
+              onChangeGrade={(code) => selectGrade(quote.producer, code)}
             />
           ))}
 
@@ -432,11 +480,26 @@ function Verdict({ result }: { result: Comparison }) {
   );
 }
 
-function QuoteRow({ quote, isLeader }: { quote: Quote; isLeader: boolean }) {
+function QuoteRow({
+  quote,
+  isLeader,
+  options,
+  overridden,
+  onChangeGrade,
+}: {
+  quote: Quote;
+  isLeader: boolean;
+  /** This producer's other codes for the same requirement, priced where available — omitted for GAIL. */
+  options?: GradeOption[];
+  /** Whether the current grade was picked by the officer rather than auto-selected as cheapest. */
+  overridden?: boolean;
+  onChangeGrade?: (code: string | null) => void;
+}) {
   const styles = useStyles();
   const { colors } = useTheme();
   const isGail = quote.producer === "GAIL";
   const unpriced = quote.invoiceLanded === null;
+  const priced = options?.filter((o) => o.price !== null) ?? [];
 
   return (
     <Card
@@ -455,11 +518,23 @@ function QuoteRow({ quote, isLeader }: { quote: Quote; isLeader: boolean }) {
         <Text style={styles.landed}>{rupees(quote.invoiceLanded)}</Text>
       </View>
 
-      <Text style={styles.gradeLine}>
-        {quote.grade ?? "no equivalent"}
-        {quote.zone ? ` · ${quote.zone}` : ""}
-        {quote.basis ? ` · ${quote.basis.replace("_", "-")}` : ""}
-      </Text>
+      <View style={styles.gradeLineRow}>
+        {!isGail && priced.length && onChangeGrade ? (
+          <GradeSelector
+            producer={quote.producer}
+            grade={quote.grade}
+            options={priced}
+            overridden={Boolean(overridden)}
+            onSelect={onChangeGrade}
+          />
+        ) : (
+          <Text style={styles.gradeCode}>{quote.grade ?? "no equivalent"}</Text>
+        )}
+        <Text style={styles.gradeLine}>
+          {quote.zone ? ` · ${quote.zone}` : ""}
+          {quote.basis ? ` · ${quote.basis.replace("_", "-")}` : ""}
+        </Text>
+      </View>
 
       {!unpriced ? (
         <View style={styles.ladder}>
@@ -503,6 +578,94 @@ function QuoteRow({ quote, isLeader }: { quote: Quote; isLeader: boolean }) {
   );
 }
 
+/**
+ * The competitor grade Compare is quoting for one producer, tap to substitute
+ * a different one it also makes for the same requirement.
+ *
+ * Compare auto-picks the cheapest priced equivalent, which understates a
+ * competitor when the market is actually quoting a dearer grade in a given
+ * city. This is what lets an officer override that pick, one producer at a
+ * time, to match what is actually on the table.
+ */
+function GradeSelector({
+  producer,
+  grade,
+  options,
+  overridden,
+  onSelect,
+}: {
+  producer: string;
+  grade: string | null;
+  /** Priced-only candidates for this producer at the current location. */
+  options: GradeOption[];
+  overridden: boolean;
+  onSelect: (code: string | null) => void;
+}) {
+  const styles = useStyles();
+  const { colors } = useTheme();
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Pressable
+        style={styles.gradePicker}
+        onPress={() => setOpen(true)}
+        hitSlop={6}
+        accessibilityRole="button"
+        accessibilityLabel={`Change the ${producer} grade being compared`}
+      >
+        <Text style={styles.gradeCode}>{grade ?? "no equivalent"}</Text>
+        {options.length > 1 ? (
+          <Text style={styles.gradeCount}>{options.length}</Text>
+        ) : null}
+        <Ionicons name="chevron-down" size={12} color={colors.textFaint} />
+      </Pressable>
+
+      <Modal
+        visible={open}
+        animationType="fade"
+        transparent
+        onRequestClose={() => setOpen(false)}
+      >
+        <Pressable style={styles.pickerBackdrop} onPress={() => setOpen(false)}>
+          <View style={styles.pickerSheet}>
+            <Text style={styles.pickerTitle}>{producer} · equivalent grades</Text>
+            {overridden ? (
+              <Pressable
+                style={styles.pickerRow}
+                onPress={() => {
+                  onSelect(null);
+                  setOpen(false);
+                }}
+              >
+                <Text style={styles.pickerAuto}>Auto (cheapest priced)</Text>
+              </Pressable>
+            ) : null}
+            {options.map((o) => {
+              const isSelected = o.code === grade;
+              return (
+                <Pressable
+                  key={o.code}
+                  style={[styles.pickerRow, isSelected && styles.pickerRowOn]}
+                  onPress={() => {
+                    onSelect(o.code);
+                    setOpen(false);
+                  }}
+                >
+                  <Text style={[styles.pickerCode, isSelected && { color: colors.primary }]}>
+                    {o.code}
+                  </Text>
+                  <Text style={styles.pickerPrice}>{rupees(o.price)}</Text>
+                </Pressable>
+              );
+            })}
+          </View>
+        </Pressable>
+      </Modal>
+    </>
+  );
+}
+
 function LadderRow({
   label,
   value,
@@ -535,7 +698,64 @@ const useStyles = makeStyles((c) => ({
   quoteName: { flexDirection: "row", alignItems: "center", gap: theme.space(2) },
   producer: { color: c.textPrimary, fontSize: 17, fontWeight: "800" },
   landed: { color: c.textPrimary, fontSize: 17, fontWeight: "700" },
-  gradeLine: { color: c.textMuted, fontSize: 12, marginTop: 2 },
+  gradeLineRow: { flexDirection: "row", alignItems: "center", flexWrap: "wrap", marginTop: 2 },
+  gradeLine: { color: c.textMuted, fontSize: 12 },
+  gradeCode: { color: c.textMuted, fontSize: 12, fontWeight: "700" },
+  gradePicker: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 3,
+    paddingVertical: 2,
+    paddingHorizontal: 6,
+    marginLeft: -6,
+    borderRadius: theme.radius.sm,
+    backgroundColor: c.surfaceAlt,
+  },
+  gradeCount: {
+    color: c.textFaint,
+    fontSize: 10,
+    fontWeight: "700",
+    backgroundColor: c.border,
+    borderRadius: 8,
+    paddingHorizontal: 5,
+    overflow: "hidden",
+  },
+  pickerBackdrop: {
+    flex: 1,
+    backgroundColor: c.scrim,
+    justifyContent: "center",
+    padding: theme.space(6),
+  },
+  pickerSheet: {
+    backgroundColor: c.surfaceCard,
+    borderRadius: theme.radius.lg,
+    borderWidth: 1,
+    borderColor: c.border,
+    paddingVertical: theme.space(2),
+  },
+  pickerTitle: {
+    color: c.textFaint,
+    fontSize: 11,
+    fontWeight: "700",
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
+    paddingHorizontal: theme.space(4),
+    paddingTop: theme.space(2),
+    paddingBottom: theme.space(3),
+  },
+  pickerRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: theme.space(4),
+    paddingVertical: theme.space(3),
+    borderTopWidth: 1,
+    borderTopColor: c.border,
+  },
+  pickerRowOn: { backgroundColor: c.surfaceAlt },
+  pickerAuto: { color: c.textMuted, fontSize: 13, fontStyle: "italic" },
+  pickerCode: { color: c.textPrimary, fontSize: 14, fontWeight: "700" },
+  pickerPrice: { color: c.textMuted, fontSize: 13, fontVariant: ["tabular-nums"] },
 
   variantProduct: { color: c.textPrimary, fontSize: 14, fontWeight: "700" },
   variantCaption: { color: c.textFaint, fontSize: 12, marginTop: 2 },

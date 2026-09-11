@@ -291,6 +291,41 @@ function equivalentGrade(
   return available.reduce((best, g) => (priced[g] < priced[best] ? g : best));
 }
 
+export interface GradeOption {
+  code: string;
+  /** Null when the cross-reference lists this code but it is not priced here. */
+  price: number | null;
+}
+
+/**
+ * Every competitor code the cross-reference lists for this GAIL grade, priced
+ * at each producer's zone for this location — the full set `equivalentGrade`
+ * picks its cheapest-priced entry from, exposed so an officer can override
+ * that choice one producer at a time instead of always getting the cheapest.
+ */
+export function equivalentOptions(
+  data: Dataset,
+  gailGrade: string,
+  location: string,
+): Partial<Record<Producer, GradeOption[]>> {
+  const entry = crossRefFor(data, gailGrade);
+  const canonical = canonicalLocation(data, location);
+  const result: Partial<Record<Producer, GradeOption[]>> = {};
+  for (const producer of Object.keys(data.priceIndex.producers) as Producer[]) {
+    if (producer === "GAIL") continue;
+    const candidates = entry?.equivalents?.[producer] ?? [];
+    if (!candidates.length) continue;
+    const source = data.priceIndex.producers[producer];
+    const zone = data.priceIndex.location_map[producer]?.[canonical] ?? null;
+    const priced = zone ? source?.zones[zone] : undefined;
+    result[producer] = candidates.map((code) => {
+      const key = findGrade(priced, code);
+      return { code, price: key && priced ? (priced[key] ?? null) : null };
+    });
+  }
+  return result;
+}
+
 /**
  * GAIL's ex-works sheet lists grades with a trailing form letter (B52A003A)
  * while the cross-reference names the base grade (B52A003). Try the exact code
@@ -317,6 +352,8 @@ export function quote(
   location: string,
   quantityMt: number,
   paymentMode: PaymentMode,
+  /** Quote this exact competitor code instead of the auto-picked cheapest equivalent. Ignored for GAIL. */
+  overrideGrade?: string,
 ): Quote {
   const gaps: string[] = [];
   const entry = crossRefFor(data, gailGrade);
@@ -341,7 +378,9 @@ export function quote(
   const grade =
     producer === "GAIL"
       ? gailGradeKey(priced, gailGrade)
-      : equivalentGrade(producer, entry, gailGrade, priced);
+      : overrideGrade
+        ? (findGrade(priced, overrideGrade) ?? overrideGrade)
+        : equivalentGrade(producer, entry, gailGrade, priced);
 
   if (!grade) {
     gaps.push(
@@ -454,12 +493,14 @@ export function compare(
   location: string,
   quantityMt: number,
   paymentMode: PaymentMode,
+  /** Per-producer override of which equivalent competitor grade to quote. */
+  gradeOverrides?: Partial<Record<Producer, string>>,
 ): Comparison {
   const activeProducers = (Object.keys(data.priceIndex.producers) as Producer[]).length
     ? (Object.keys(data.priceIndex.producers) as Producer[])
     : PRODUCERS;
   const quotes = activeProducers.map((p) =>
-    quote(data, p, gailGrade, location, quantityMt, paymentMode),
+    quote(data, p, gailGrade, location, quantityMt, paymentMode, gradeOverrides?.[p]),
   );
   const priced = quotes.filter((q) => q.invoiceLanded !== null);
   priced.sort((a, b) => a.invoiceLanded! - b.invoiceLanded!);

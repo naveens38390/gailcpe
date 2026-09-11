@@ -320,6 +320,12 @@ export const api = {
       body: JSON.stringify(input),
     }),
 
+  /** Every competitor code that could substitute for this grade at this location, priced where available. */
+  gradeOptions: (grade: string, location: string) =>
+    request<GradeOptionsResponse>(
+      `/pricing/grade-options?grade=${encodeURIComponent(grade)}&location=${encodeURIComponent(location)}`,
+    ),
+
   simulate: (input: SimulateInput) =>
     request<DealSimulation>("/deals/simulate", {
       method: "POST",
@@ -941,7 +947,18 @@ export interface CompareInput {
   location: string;
   quantityMt: number;
   paymentMode: PaymentMode;
+  /** Producer -> the specific equivalent grade to quote instead of the cheapest one Compare would otherwise pick. */
+  gradeOverrides?: Record<string, string>;
 }
+
+export interface GradeOption {
+  code: string;
+  /** Null when this code is not priced at this producer's zone for this location. */
+  price: number | null;
+}
+
+/** Producer -> the competitor codes that could substitute for the compared grade. */
+export type GradeOptionsResponse = Record<string, GradeOption[]>;
 
 export interface SimulateInput extends CompareInput {
   customer?: string;
