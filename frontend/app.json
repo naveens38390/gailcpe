@@ -2,7 +2,7 @@
   "expo": {
     "name": "GCPE",
     "slug": "gcpe",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "scheme": "gcpe",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
@@ -15,7 +15,7 @@
         "backgroundColor": "#0B0F17"
       },
       "package": "com.gail.gcpe",
-      "versionCode": 6
+      "versionCode": 7
     },
     "web": {
       "bundler": "metro",
