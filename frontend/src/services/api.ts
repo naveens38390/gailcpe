@@ -970,6 +970,8 @@ export interface Quote {
   basis: string | null;
   basic: number | null;
   cashDiscount: number;
+  /** basic less cash discount — the ex-works price, before freight. */
+  netBasic: number | null;
   freight: number | null;
   insurance: number;
   invoiceLanded: number | null;

@@ -538,14 +538,36 @@ function QuoteRow({
 
       {!unpriced ? (
         <View style={styles.ladder}>
-          <LadderRow label="Basic" value={rupees(quote.basic)} />
-          {quote.cashDiscount > 0 ? (
-            <LadderRow label="Less cash discount" value={`- ${rupees(quote.cashDiscount)}`} />
-          ) : null}
+          <LadderRow
+            label="Ex-Works Price"
+            value={rupees(quote.netBasic)}
+            caption={
+              quote.cashDiscount > 0
+                ? `after ${rupees(quote.cashDiscount)} cash discount`
+                : undefined
+            }
+          />
           {quote.basis === "ex_works" ? (
-            <LadderRow label="Plus freight" value={`+ ${rupees(quote.freight)}`} />
-          ) : null}
-          <LadderRow label="Landed (pre-GST)" value={rupees(quote.invoiceLanded)} strong />
+            <LadderRow label="Freight" value={`+ ${rupees(quote.freight)}`} />
+          ) : (
+            <LadderRow
+              label="Freight"
+              value={rupees(0)}
+              caption={`${quote.producer} publishes a delivered price — already included above`}
+            />
+          )}
+          <View style={styles.ladderDivider} />
+          <View style={styles.deliveredRow}>
+            <Text style={styles.ladderStrong}>Delivered / Landed</Text>
+            <View style={styles.deliveredValueCol}>
+              <Text style={styles.ladderStrong}>{rupees(quote.invoiceLanded)}</Text>
+              {quote.freight ? (
+                <Text style={[styles.freightImpact, { color: colors.warning }]}>
+                  +{rupees(quote.freight)} freight
+                </Text>
+              ) : null}
+            </View>
+          </View>
           {quote.quantityDiscount > 0 ? (
             <LadderRow
               label="Less quantity credit"
@@ -670,16 +692,22 @@ function LadderRow({
   label,
   value,
   strong,
+  caption,
 }: {
   label: string;
   value: string;
   strong?: boolean;
+  /** A short explanatory line under the row — why this number is what it is. */
+  caption?: string;
 }) {
   const styles = useStyles();
   return (
-    <View style={styles.ladderRow}>
-      <Text style={[styles.ladderLabel, strong && styles.ladderStrong]}>{label}</Text>
-      <Text style={[styles.ladderValue, strong && styles.ladderStrong]}>{value}</Text>
+    <View>
+      <View style={styles.ladderRow}>
+        <Text style={[styles.ladderLabel, strong && styles.ladderStrong]}>{label}</Text>
+        <Text style={[styles.ladderValue, strong && styles.ladderStrong]}>{value}</Text>
+      </View>
+      {caption ? <Text style={styles.ladderCaption}>{caption}</Text> : null}
     </View>
   );
 }
@@ -791,6 +819,16 @@ const useStyles = makeStyles((c) => ({
   ladderRow: { flexDirection: "row", justifyContent: "space-between", paddingVertical: 3 },
   ladderLabel: { color: c.textMuted, fontSize: 12 },
   ladderValue: { color: c.textMuted, fontSize: 12, fontVariant: ["tabular-nums"] },
-  ladderStrong: { color: c.textPrimary, fontWeight: "700" },
+  ladderStrong: { color: c.textPrimary, fontWeight: "700", fontSize: 13 },
+  ladderCaption: { color: c.textFaint, fontSize: 10, marginTop: -1, marginBottom: 2 },
+  ladderDivider: { height: 1, backgroundColor: c.border, marginVertical: theme.space(1) },
+  deliveredRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    paddingVertical: 3,
+  },
+  deliveredValueCol: { alignItems: "flex-end" },
+  freightImpact: { fontSize: 10, fontWeight: "700", marginTop: 1 },
   note: { color: c.textMuted, fontSize: 12, lineHeight: 18, marginBottom: theme.space(2) },
 }));
