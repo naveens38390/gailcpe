@@ -3,7 +3,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
 import { simulate } from "../../core/deal";
-import type { DealSimulation, PaymentMode } from "../../core/types";
+import type { DealSimulation, PaymentMode, PricingBasis } from "../../core/types";
 import { DatasetService } from "../dataset/dataset.service";
 import { DealSimulationDoc } from "../../database/schemas/activity.schema";
 
@@ -30,6 +30,7 @@ export class DealsService {
       location: string;
       quantityMt: number;
       paymentMode: PaymentMode;
+      pricingBasis?: PricingBasis;
       asOf?: Date;
     },
     userId?: string,
@@ -42,6 +43,7 @@ export class DealsService {
       input.quantityMt,
       input.paymentMode,
       input.customer ?? null,
+      input.pricingBasis ?? "ex_works",
     );
 
     const saved = await this.simulations.create({
@@ -51,6 +53,7 @@ export class DealsService {
       location: input.location,
       quantityMt: input.quantityMt,
       paymentMode: input.paymentMode,
+      pricingBasis: input.pricingBasis ?? "ex_works",
       effectiveDate: new Date(data.priceIndex.effective_date),
       result: result as unknown as Record<string, unknown>,
       outcome: "pending",

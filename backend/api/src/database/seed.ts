@@ -206,6 +206,16 @@ export async function seed(
           .map(([producer, map]) => [producer, map?.[name]])
           .filter(([, dest]) => dest),
       ),
+      producerDepotZone: Object.fromEntries(
+        Object.entries<any>(priceIndex.depot_location_map ?? {})
+          .map(([producer, map]) => [producer, map?.[name]])
+          .filter(([, zone]) => zone),
+      ),
+      producerDepotZoneTier: Object.fromEntries(
+        Object.entries<any>(priceIndex.depot_location_tier ?? {})
+          .map(([producer, map]) => [producer, map?.[name]])
+          .filter(([, tier]) => tier),
+      ),
     })),
   );
   counts.locations = canonical.length;
@@ -243,6 +253,23 @@ export async function seed(
           price,
           basis: payload.basis,
           supplyPoint: payload.supply_point?.[zone]?.[grade],
+        });
+      }
+    }
+    // The producer's ex-depot list rides on the same circular record, tagged by
+    // basis. It is a second price list in the same document, not a second round.
+    const depotBook = priceIndex.depot?.[producer];
+    for (const [zone, cells] of Object.entries<any>(depotBook?.zones ?? {})) {
+      for (const [grade, price] of Object.entries<any>(cells)) {
+        rows.push({
+          circular: circular._id,
+          producer,
+          effectiveDate: priceDate,
+          zone,
+          grade,
+          price,
+          basis: "ex_depot",
+          supplyPoint: depotBook.supply_point?.[zone]?.[grade],
         });
       }
     }
@@ -293,6 +320,7 @@ export async function seed(
     cashDiscountLdpe: t.cash_discount_ldpe,
     cashDiscountSource: t.cash_discount_source,
     cashDiscountNote: t.cash_discount_note,
+    cashDiscountDepot: t.cash_discount_depot,
     earlyPaymentPerDay: t.early_payment_per_day ?? undefined,
     earlyPaymentMaxDays: t.early_payment_max_days,
     interestFreeCreditDays: t.interest_free_credit_days ?? undefined,

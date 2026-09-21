@@ -14,6 +14,15 @@ export type PriceBasis = "delivered" | "ex_works" | "ex_depot";
 
 export type PaymentMode = "cash" | "credit_ifc";
 
+/**
+ * Which of a producer's two price lists a quote is read from. Not the same
+ * thing as `PriceBasis`: that says whether a published price already carries
+ * freight, this says whether the customer is buying at the works or from a
+ * depot. RIL and IOCL's "ex works" column is their delivered price, which is how
+ * the zonal comparison workbook treats it.
+ */
+export type PricingBasis = "ex_works" | "ex_depot";
+
 /** How confidently a customer location was matched to a producer's zone. */
 export type LocationTier =
   | "exact"
@@ -30,6 +39,8 @@ export interface QuantitySlab {
 
 export interface DiscountTerms {
   cash_discount: number | null;
+  /** Cash discount on a depot sale, where it differs — GAIL and OPaL give none. */
+  cash_discount_depot?: number | null;
   cash_discount_ldpe?: number;
   cash_discount_source?: string;
   early_payment_per_day: number | null;
@@ -48,10 +59,22 @@ export interface Quote {
   grade: string | null;
   basis: PriceBasis | null;
 
+  /** Which price list this quote was read from. */
+  pricingBasis: PricingBasis;
+  /** Whether this producer has a price for this grade at this location on each list. */
+  basisAvailability: Record<PricingBasis, boolean>;
+
   basic: number | null;
   cashDiscount: number;
+  /** No producer publishes either in this round; the zonal workbook carries them at zero. */
+  tradeDiscount: number;
+  preSaleDiscount: number;
+  /** RIL's Rs 350/MT, taken off ex-depot prices only. Zero on every ex-works quote. */
+  dealerDiscount: number;
   netBasic: number | null;
+  /** Ex-works only. A depot price has no freight step. */
   freight: number | null;
+  basicPlusFreight: number | null;
   /**
    * A separate per-MT insurance charge, where the producer bills one (OPaL
    * only). Excluded from `invoiceLanded` — the zonal workbook usually leaves it
@@ -60,6 +83,13 @@ export interface Quote {
   insurance: number;
   /** Comparable pre-GST landed cost. This is what the MZO workbook compares. */
   invoiceLanded: number | null;
+  /** The workbook's "PRICE NET OF GST" — the same figure as `invoiceLanded`. */
+  priceNetOfGst: number | null;
+  /**
+   * GAIL's price net of GST less this producer's, per MT. Positive means GAIL is
+   * dearer. Null on GAIL's own quote, and where either side could not be priced.
+   */
+  priceDelta: number | null;
   /** Post-sale quantity discount, settled by credit note the following month. */
   quantityDiscount: number;
   /** invoiceLanded less the post-sale credit note. */
@@ -116,6 +146,8 @@ export interface DealSimulation {
   location: string;
   quantityMt: number;
   paymentMode: PaymentMode;
+  /** Which price list every producer in this simulation was read from. */
+  pricingBasis: PricingBasis;
 
   comparison: Comparison;
   /** Where GAIL sits today, before any correction. */

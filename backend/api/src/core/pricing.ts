@@ -27,6 +27,7 @@ import type {
   LocationTier,
   PaymentMode,
   PriceBasis,
+  PricingBasis,
   Producer,
   QuantitySlab,
   Quote,
@@ -41,6 +42,14 @@ export interface Dataset {
     >;
     location_map: Record<Producer, Record<string, string>>;
     location_tier: Record<Producer, Record<string, LocationTier>>;
+    /**
+     * Each producer's second price list, for stock the customer collects from a
+     * depot or warehouse. Absent for a producer whose list is not loaded for
+     * the round, which reads as "not available", never as zero.
+     */
+    depot?: Partial<Record<Producer, { zones: Record<string, Record<string, number>> }>>;
+    depot_location_map?: Partial<Record<Producer, Record<string, string>>>;
+    depot_location_tier?: Partial<Record<Producer, Record<string, LocationTier>>>;
   };
   freight: {
     effective_date: string;
@@ -293,8 +302,10 @@ function equivalentGrade(
 
 export interface GradeOption {
   code: string;
-  /** Null when the cross-reference lists this code but it is not priced here. */
+  /** Ex-works basic price; null when the cross-reference lists this code but it is not priced here. */
   price: number | null;
+  /** The same code's ex-depot basic price at this location, null where the depot list does not carry it. */
+  depotPrice: number | null;
 }
 
 /**
@@ -318,9 +329,16 @@ export function equivalentOptions(
     const source = data.priceIndex.producers[producer];
     const zone = data.priceIndex.location_map[producer]?.[canonical] ?? null;
     const priced = zone ? source?.zones[zone] : undefined;
+    const depotZone = data.priceIndex.depot_location_map?.[producer]?.[canonical] ?? null;
+    const depotPriced = depotZone ? data.priceIndex.depot?.[producer]?.zones[depotZone] : undefined;
     result[producer] = candidates.map((code) => {
       const key = findGrade(priced, code);
-      return { code, price: key && priced ? (priced[key] ?? null) : null };
+      const depotKey = findGrade(depotPriced, code);
+      return {
+        code,
+        price: key && priced ? (priced[key] ?? null) : null,
+        depotPrice: depotKey && depotPriced ? (depotPriced[depotKey] ?? null) : null,
+      };
     });
   }
   return result;
@@ -345,36 +363,60 @@ function gailGradeKey(
   return match ?? null;
 }
 
-export function quote(
+/**
+ * Where a producer's price for one grade sits on one of its two price lists:
+ * which zone serves the location, which of its grades applies, and the basic
+ * price. Everything downstream — the ladder, and whether the other list is
+ * worth offering — reads from this.
+ */
+function priceLookup(
   data: Dataset,
   producer: Producer,
+  entry: CrossRefEntry | undefined,
   gailGrade: string,
+  canonical: string,
   location: string,
-  quantityMt: number,
-  paymentMode: PaymentMode,
-  /** Quote this exact competitor code instead of the auto-picked cheapest equivalent. Ignored for GAIL. */
-  overrideGrade?: string,
-): Quote {
+  overrideGrade: string | undefined,
+  pricingBasis: PricingBasis,
+): {
+  zone: string | null;
+  tier: LocationTier;
+  grade: string | null;
+  basic: number | null;
+  gaps: string[];
+} {
   const gaps: string[] = [];
-  const entry = crossRefFor(data, gailGrade);
-  const terms = data.discounts.producers[producer];
-  const source = data.priceIndex.producers[producer];
+  const depot = pricingBasis === "ex_depot";
+  const zones = depot
+    ? data.priceIndex.depot?.[producer]?.zones
+    : data.priceIndex.producers[producer]?.zones;
 
-  const canonical = canonicalLocation(data, location);
-  const zone =
-    producer === "GAIL"
-      ? (source?.zones[canonical] ? canonical : null)
+  const zone = depot
+    ? (data.priceIndex.depot_location_map?.[producer]?.[canonical] ?? null)
+    : producer === "GAIL"
+      ? (zones?.[canonical] ? canonical : null)
       : (data.priceIndex.location_map[producer]?.[canonical] ?? null);
-  const tier: LocationTier =
-    producer === "GAIL"
+  const tier: LocationTier = depot
+    ? zone
+      ? (data.priceIndex.depot_location_tier?.[producer]?.[canonical] ?? "unresolved")
+      : "unresolved"
+    : producer === "GAIL"
       ? zone
         ? "exact"
         : "unresolved"
       : (data.priceIndex.location_tier[producer]?.[canonical] ?? "unresolved");
 
-  if (!zone) gaps.push(`${producer} publishes no price point covering ${location}`);
+  if (!zone) {
+    gaps.push(
+      depot
+        ? zones
+          ? `${producer} has no depot price covering ${location}`
+          : `${producer}'s ex-depot price list is not loaded for this round`
+        : `${producer} publishes no price point covering ${location}`,
+    );
+  }
 
-  const priced = zone ? source?.zones[zone] : undefined;
+  const priced = zone ? zones?.[zone] : undefined;
   const grade =
     producer === "GAIL"
       ? gailGradeKey(priced, gailGrade)
@@ -385,28 +427,70 @@ export function quote(
   if (!grade) {
     gaps.push(
       producer === "GAIL"
-        ? `${gailGrade} is not on GAIL's price sheet`
+        ? `${gailGrade} is not on GAIL's ${depot ? "stock-point" : "ex-works"} price sheet`
         : `no ${producer} equivalent recorded for ${gailGrade}`,
     );
   }
 
   const basic = grade && priced ? (priced[findGrade(priced, grade) ?? grade] ?? null) : null;
   if (grade && zone && basic === null) {
-    gaps.push(`${producer} does not price ${grade} at ${zone}`);
+    gaps.push(`${producer} does not price ${grade} ${depot ? "ex-depot " : ""}at ${zone}`);
   }
+  return { zone, tier, grade, basic, gaps };
+}
 
-  const cashDiscount =
-    paymentMode === "cash" ? (terms?.cash_discount ?? 0) : 0;
-  if (paymentMode === "cash" && terms?.cash_discount == null) {
+export function quote(
+  data: Dataset,
+  producer: Producer,
+  gailGrade: string,
+  location: string,
+  quantityMt: number,
+  paymentMode: PaymentMode,
+  /** Quote this exact competitor code instead of the auto-picked cheapest equivalent. Ignored for GAIL. */
+  overrideGrade?: string,
+  /** Which of the producer's two price lists to read. Ex works unless asked otherwise. */
+  pricingBasis: PricingBasis = "ex_works",
+): Quote {
+  const entry = crossRefFor(data, gailGrade);
+  const terms = data.discounts.producers[producer];
+  const source = data.priceIndex.producers[producer];
+  const canonical = canonicalLocation(data, location);
+  const depot = pricingBasis === "ex_depot";
+
+  const chosen = priceLookup(
+    data, producer, entry, gailGrade, canonical, location, overrideGrade, pricingBasis,
+  );
+  const other = priceLookup(
+    data, producer, entry, gailGrade, canonical, location, overrideGrade,
+    depot ? "ex_works" : "ex_depot",
+  );
+  const basisAvailability: Record<PricingBasis, boolean> = {
+    ex_works: (depot ? other : chosen).basic !== null,
+    ex_depot: (depot ? chosen : other).basic !== null,
+  };
+  const { zone, tier, grade, basic } = chosen;
+  const gaps = [...chosen.gaps];
+
+  // A depot sale carries its own cash-discount rate where the producer prints
+  // one (GAIL and OPaL give none); otherwise it is the ordinary rate.
+  const rate = depot
+    ? (terms?.cash_discount_depot !== undefined ? terms.cash_discount_depot : terms?.cash_discount)
+    : terms?.cash_discount;
+  const cashDiscount = paymentMode === "cash" ? (rate ?? 0) : 0;
+  if (paymentMode === "cash" && rate == null) {
     gaps.push(`${producer} cash discount unknown`);
   }
 
-  const netBasic = basic === null ? null : basic - cashDiscount;
+  // RIL's dealer discount is a term of its depot sales, and it comes off the
+  // price on cash and credit alike. An ex-works quote never carries it.
+  const dealerDiscount = depot ? (terms?.dealer_discount ?? 0) : 0;
+  const netBasic = basic === null ? null : basic - cashDiscount - dealerDiscount;
 
+  // A depot price is collected from the depot, so there is no carriage step.
   const basis = source?.basis ?? null;
   let freight: number | null = 0;
   let insurance = 0;
-  if (basis === "ex_works") {
+  if (!depot && basis === "ex_works") {
     const carriage = freightFor(data, producer, canonical);
     if (carriage === null) {
       freight = null;
@@ -457,12 +541,6 @@ export function quote(
     }
   }
 
-  // A dealer scheme is a channel term, not a payment term, so it stands on
-  // either footing.
-  if (terms?.dealer_discount) {
-    unmodelled.push(`dealer discount Rs ${terms.dealer_discount}/MT`);
-  }
-
   if (unmodelled.length) {
     gaps.push(`${producer} also offers ${unmodelled.join(" and ")} — on record, not in this ladder`);
   }
@@ -471,12 +549,20 @@ export function quote(
     producer,
     grade,
     basis,
+    pricingBasis,
+    basisAvailability,
     basic,
     cashDiscount,
+    tradeDiscount: 0,
+    preSaleDiscount: 0,
+    dealerDiscount,
     netBasic,
     freight,
+    basicPlusFreight: depot || netBasic === null || freight === null ? null : netBasic + freight,
     insurance,
     invoiceLanded,
+    priceNetOfGst: invoiceLanded,
+    priceDelta: null,
     quantityDiscount,
     effectiveNet:
       invoiceLanded === null ? null : invoiceLanded - quantityDiscount,
@@ -495,13 +581,30 @@ export function compare(
   paymentMode: PaymentMode,
   /** Per-producer override of which equivalent competitor grade to quote. */
   gradeOverrides?: Partial<Record<Producer, string>>,
+  /** Which price list each producer is read from; the default applies where a producer is not named. */
+  basisOverrides?: Partial<Record<Producer, PricingBasis>>,
+  /** The list every producer starts on before `basisOverrides` is applied. */
+  defaultBasis: PricingBasis = "ex_works",
 ): Comparison {
   const activeProducers = (Object.keys(data.priceIndex.producers) as Producer[]).length
     ? (Object.keys(data.priceIndex.producers) as Producer[])
     : PRODUCERS;
   const quotes = activeProducers.map((p) =>
-    quote(data, p, gailGrade, location, quantityMt, paymentMode, gradeOverrides?.[p]),
+    quote(
+      data, p, gailGrade, location, quantityMt, paymentMode, gradeOverrides?.[p],
+      basisOverrides?.[p] ?? defaultBasis,
+    ),
   );
+  // The zonal workbook's "PRICE DELTA (@ 1 MT) (GAIL - Competitor)": both sides
+  // net of GST, before any quantity credit, measured against GAIL as it is
+  // currently shown — whichever price list that is.
+  const gailNet = quotes.find((q) => q.producer === "GAIL")?.priceNetOfGst ?? null;
+  for (const q of quotes) {
+    q.priceDelta =
+      q.producer !== "GAIL" && gailNet !== null && q.priceNetOfGst !== null
+        ? gailNet - q.priceNetOfGst
+        : null;
+  }
   const priced = quotes.filter((q) => q.invoiceLanded !== null);
   priced.sort((a, b) => a.invoiceLanded! - b.invoiceLanded!);
 
@@ -511,9 +614,20 @@ export function compare(
 
   const warnings: string[] = [];
   const unpriced = quotes.filter((q) => q.invoiceLanded === null);
-  if (unpriced.length) {
+  // A producer with no depot list for this grade and town has published nothing
+  // — different from a price that could not be worked out.
+  const unpublished = unpriced.filter(
+    (q) => q.pricingBasis === "ex_depot" && !q.basisAvailability.ex_depot,
+  );
+  const unresolved = unpriced.filter((q) => !unpublished.includes(q));
+  if (unpublished.length) {
     warnings.push(
-      `Not compared: ${unpriced.map((q) => q.producer).join(", ")} — see each quote's gaps.`,
+      `Not published ex depot: ${unpublished.map((q) => q.producer).join(", ")}.`,
+    );
+  }
+  if (unresolved.length) {
+    warnings.push(
+      `Not compared: ${unresolved.map((q) => q.producer).join(", ")} — see each quote's gaps.`,
     );
   }
   const inferred = priced.filter((q) => q.locationTier === "inferred_via_hpl");

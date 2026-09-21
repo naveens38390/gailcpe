@@ -92,7 +92,7 @@ export class ExcelExportService {
     const circular = await this.priceCirculars.findById(circularId).lean();
     if (!circular) throw new NotFoundException("No such price circular.");
     const rows = await this.priceEntries
-      .find({ circular: new Types.ObjectId(circularId) })
+      .find({ circular: new Types.ObjectId(circularId), basis: { $ne: "ex_depot" } })
       .sort({ zone: 1, grade: 1 })
       .lean();
 

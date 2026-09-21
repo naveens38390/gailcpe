@@ -20,6 +20,11 @@ export class SimulateDto {
   @IsIn(["cash", "credit_ifc"])
   paymentMode!: "cash" | "credit_ifc";
 
+  /** The price list every producer is read from; ex works when omitted. */
+  @IsOptional()
+  @IsIn(["ex_works", "ex_depot"])
+  pricingBasis?: "ex_works" | "ex_depot";
+
   @IsOptional()
   @IsString()
   asOf?: string;

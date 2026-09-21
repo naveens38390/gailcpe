@@ -337,7 +337,7 @@ export class CircularsService {
     const circular = await this.prices.findById(id).lean();
     if (!circular) throw new NotFoundException("No such circular.");
     const sample = await this.entries
-      .find({ circular: circular._id })
+      .find({ circular: circular._id, basis: { $ne: "ex_depot" } })
       .limit(50)
       .lean();
     return { circular, sample };
@@ -349,8 +349,10 @@ export class CircularsService {
    */
   async diff(producer: string, from: Date, to: Date) {
     const [before, after] = await Promise.all([
-      this.entries.find({ producer, effectiveDate: from }).lean(),
-      this.entries.find({ producer, effectiveDate: to }).lean(),
+      // The works list only: a depot row shares its zone name and grade with the
+      // works row, so the two would read as one price that changed.
+      this.entries.find({ producer, effectiveDate: from, basis: { $ne: "ex_depot" } }).lean(),
+      this.entries.find({ producer, effectiveDate: to, basis: { $ne: "ex_depot" } }).lean(),
     ]);
     const key = (e: { zone: string; grade: string }) => `${e.zone}|${e.grade}`;
     const beforeMap = new Map(before.map((e) => [key(e), e.price]));

@@ -162,8 +162,15 @@ export class DatasetService {
     const priceRows = priceRowBatches.flat();
 
     const producers: Dataset["priceIndex"]["producers"] = {} as any;
+    const depot: Record<string, { zones: Record<string, Record<string, number>> }> = {};
     const supplyPoint: Record<string, Record<string, Record<string, string>>> = {};
     for (const row of priceRows) {
+      // The ex-depot list shares the circular but is its own price book: a row
+      // tagged that way must never create or alter the producer's works book.
+      if (row.basis === "ex_depot") {
+        ((depot[row.producer] ??= { zones: {} }).zones[row.zone] ??= {})[row.grade] = row.price;
+        continue;
+      }
       const producer = (producers as any)[row.producer] ??= {
         basis: row.basis,
         zones: {},
@@ -177,6 +184,8 @@ export class DatasetService {
 
     const location_map: Record<string, Record<string, string>> = {};
     const location_tier: Record<string, Record<string, string>> = {};
+    const depot_location_map: Record<string, Record<string, string>> = {};
+    const depot_location_tier: Record<string, Record<string, string>> = {};
     const destination_map: Record<string, Record<string, string>> = {};
     for (const row of locationRows) {
       for (const [producer, zone] of Object.entries(row.producerZone ?? {})) {
@@ -184,6 +193,12 @@ export class DatasetService {
       }
       for (const [producer, tier] of Object.entries(row.producerZoneTier ?? {})) {
         (location_tier[producer] ??= {})[row.name] = tier as string;
+      }
+      for (const [producer, zone] of Object.entries(row.producerDepotZone ?? {})) {
+        (depot_location_map[producer] ??= {})[row.name] = zone as string;
+      }
+      for (const [producer, tier] of Object.entries(row.producerDepotZoneTier ?? {})) {
+        (depot_location_tier[producer] ??= {})[row.name] = tier as string;
       }
       for (const [producer, dest] of Object.entries(row.freightDestination ?? {})) {
         (destination_map[producer] ??= {})[row.name] = dest as string;
@@ -216,6 +231,9 @@ export class DatasetService {
         producers,
         location_map: location_map as any,
         location_tier: location_tier as any,
+        depot: depot as any,
+        depot_location_map: depot_location_map as any,
+        depot_location_tier: depot_location_tier as any,
       },
       freight: {
         effective_date:
@@ -235,6 +253,7 @@ export class DatasetService {
               cash_discount_ldpe: d.cashDiscountLdpe,
               cash_discount_source: d.cashDiscountSource,
               cash_discount_note: d.cashDiscountNote,
+              cash_discount_depot: d.cashDiscountDepot,
               early_payment_per_day: d.earlyPaymentPerDay ?? null,
               early_payment_max_days: d.earlyPaymentMaxDays,
               interest_free_credit_days: d.interestFreeCreditDays ?? null,

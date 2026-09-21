@@ -3,7 +3,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
 import { compare, equivalentOptions, type GradeOption } from "../../core/pricing";
-import type { Comparison, PaymentMode, Producer } from "../../core/types";
+import type { Comparison, PaymentMode, PricingBasis, Producer } from "../../core/types";
 import { DatasetService } from "../dataset/dataset.service";
 import { ComparisonHistory } from "../../database/schemas/activity.schema";
 
@@ -31,6 +31,8 @@ export class PricingService {
       asOf?: Date;
       userId?: string;
       gradeOverrides?: Partial<Record<Producer, string>>;
+      basisOverrides?: Partial<Record<Producer, PricingBasis>>;
+      defaultBasis?: PricingBasis;
     } = {},
   ): Promise<Comparison & { effectiveDate: string; freightDate: string }> {
     const data = await this.dataset.load(options.asOf);
@@ -41,6 +43,8 @@ export class PricingService {
       quantityMt,
       paymentMode,
       options.gradeOverrides,
+      options.basisOverrides,
+      options.defaultBasis,
     );
 
     // Stored with the result embedded: re-running this next month would give a

@@ -180,6 +180,8 @@ export class DiscountScheme {
   @Prop() cashDiscountLdpe?: number;
   @Prop() cashDiscountSource?: string;
   @Prop() cashDiscountNote?: string;
+  /** Cash discount on a depot (stock-point) sale, where it differs from the works rate. */
+  @Prop() cashDiscountDepot?: number;
   @Prop() earlyPaymentPerDay?: number;
   @Prop() earlyPaymentMaxDays?: number;
   @Prop() interestFreeCreditDays?: number;

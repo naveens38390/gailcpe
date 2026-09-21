@@ -21,6 +21,7 @@ export class DealsController {
         location: dto.location,
         quantityMt: dto.quantityMt,
         paymentMode: dto.paymentMode,
+        pricingBasis: dto.pricingBasis,
         asOf: dto.asOf ? new Date(dto.asOf) : undefined,
       },
       req.user?.id,

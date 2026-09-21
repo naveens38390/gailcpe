@@ -28,4 +28,14 @@ export class CompareDto {
   @IsOptional()
   @IsObject()
   gradeOverrides?: Record<string, string>;
+
+  /** The price list every producer is read from unless `basisOverrides` names it. */
+  @IsOptional()
+  @IsIn(["ex_works", "ex_depot"])
+  pricingBasis?: "ex_works" | "ex_depot";
+
+  /** Producer -> "ex_works" | "ex_depot": switch one producer's card to its other price list. */
+  @IsOptional()
+  @IsObject()
+  basisOverrides?: Record<string, string>;
 }

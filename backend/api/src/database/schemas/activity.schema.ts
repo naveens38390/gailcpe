@@ -82,6 +82,8 @@ export class DealSimulationDoc {
   @Prop({ required: true, index: true }) location!: string;
   @Prop({ required: true }) quantityMt!: number;
   @Prop({ required: true }) paymentMode!: string;
+  /** Which price list the simulation ran on; absent on older records, which were all ex works. */
+  @Prop() pricingBasis?: string;
 
   @Prop({ required: true, index: true })
   effectiveDate!: Date;

@@ -140,6 +140,13 @@ export class Location {
   /** { HMEL: "Panaji", HPL: "PANAJI", ... } — freight is billed by its own name. */
   @Prop({ type: Object, default: {} })
   freightDestination!: Record<string, string>;
+
+  /** The depot each producer's ex-depot price for this town comes from — a different list, so a different zone name. */
+  @Prop({ type: Object, default: {} })
+  producerDepotZone!: Record<string, string>;
+
+  @Prop({ type: Object, default: {} })
+  producerDepotZoneTier!: Record<string, LocationTier>;
 }
 
 export type ProducerDocument = HydratedDocument<Producer>;

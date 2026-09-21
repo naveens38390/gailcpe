@@ -17,6 +17,7 @@ import type {
   DealSimulation,
   PaymentMode,
   Quote,
+  PricingBasis,
 } from "./types";
 import { compare, type Dataset } from "./pricing";
 
@@ -71,6 +72,8 @@ export function simulate(
   quantityMt: number,
   paymentMode: PaymentMode,
   customer: string | null = null,
+  /** Every ranking, gap and correction below is read from this price list. */
+  pricingBasis: PricingBasis = "ex_works",
 ): DealSimulation {
   const comparison: Comparison = compare(
     data,
@@ -78,7 +81,11 @@ export function simulate(
     location,
     quantityMt,
     paymentMode,
+    undefined,
+    undefined,
+    pricingBasis,
   );
+  const depot = pricingBasis === "ex_depot";
 
   const gail = comparison.gail;
   const leader = comparison.leader;
@@ -88,9 +95,17 @@ export function simulate(
   const caveats: string[] = [...comparison.warnings];
   let options: DealOption[] = [];
 
+  if (depot) {
+    narrative.push(
+      "Ex-depot comparison: every price is the producer's depot list, collected from the depot, so freight does not apply.",
+    );
+  }
+
   if (!gail || gail.invoiceLanded === null) {
     narrative.push(
-      `GAIL cannot be priced for ${grade} at ${location} from the current circular.`,
+      depot && gail && !gail.basisAvailability.ex_depot
+        ? `GAIL has no ex-depot (stock point) price for ${grade} at ${location} — not published.`
+        : `GAIL cannot be priced for ${grade} at ${location} from the current circular.`,
     );
     for (const gapText of gail?.gaps ?? []) narrative.push(gapText);
   } else if (!leader || gap === null) {
@@ -145,9 +160,13 @@ export function simulate(
   // probability" from a price list would be invention; saying "this zone was
   // inferred" is a fact the officer can act on.
   const unpriced = comparison.quotes.filter((q) => q.invoiceLanded === null);
-  if (unpriced.length) {
+  // Producers with nothing published are already named by the comparison's own
+  // warning, which seeds `caveats`; only the ones that could not be worked out
+  // are added here.
+  const unresolved = unpriced.filter((q) => !(depot && !q.basisAvailability.ex_depot));
+  if (unresolved.length) {
     caveats.push(
-      `${unpriced.map((q) => q.producer).join(", ")} could not be priced here.`,
+      `${unresolved.map((q) => q.producer).join(", ")} could not be priced here.`,
     );
   }
   if (gail && gail.quantityDiscount === 0) {
@@ -174,6 +193,7 @@ export function simulate(
     location,
     quantityMt,
     paymentMode,
+    pricingBasis,
     comparison,
     outcome: outcomeOf(gap),
     options,
