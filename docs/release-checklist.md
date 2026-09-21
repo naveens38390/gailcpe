@@ -194,6 +194,24 @@ price entry of the round as an ordinary price, so depot rows would be merged int
 the ex-works prices. Load the depot rows only once the new API is serving, then
 restart it: the dataset is cached in memory per round.
 
+**Run the loader from a clean checkout of the release commit, never from a working folder.**
+`load-depot` and `seed` read `backend/data/normalized` from disk, so any uncommitted edit there
+(another person's unfinished ETL work, say) would be loaded into production.
+
+```bash
+git clone <repo> release && cd release && git checkout <release-commit>
+git status --short            # must print nothing
+cd backend/api && npm ci
+```
+
+Before `--apply`, check that the target host the loader prints is the production cluster.
+
+**Free Atlas space first (done by the owner in the Atlas UI; nothing here deletes anything).** Export,
+then drop only these seven test copies (about 135 MB): `gailcpe-e2e-run2`, `gailcpe-e2e-final`,
+`gailcpe-e2e-full`, `gailcpe-uat-freight`, `gailcpe-uat-freight2`, `gailcpe-uat-pdfextract`, `gcpe_uat`.
+Leave `test`, `sample_mflix`, `newsdesk_db` and production `gailcpe` until after the release. The depot
+load itself measured about 4 MB (10 MB kept as the upper bound).
+
 After the restart, verify Bhiwandi Ex Depot (GAIL 1,40,420 · IOCL 1,39,296 · RIL 1,38,870 · HMEL 1,39,290 · OPaL 1,39,836) on Compare, then the Deal page on both bases (IOCL leads Ex Works, RIL leads Ex Depot). Depot matching is exact/alias/evidence only, so most towns show "Not published" for some producers; that is expected. Build the APK only after this.
 
 ---

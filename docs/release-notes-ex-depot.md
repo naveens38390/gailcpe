@@ -19,6 +19,9 @@
 - **Haldia (HPL) now has a price for Bhiwandi** on both bases. It was missing before.
 - **Depot prices exist only where the producer publishes a depot for that town.** Of 313 towns: GAIL 57, IOCL 57, RIL 39, HMEL 56, HPL 155, OPaL 41. The rest show "Not published". We never borrow a nearby town's price.
 
+- **Ties are settled the same way every time.** If two producers land at exactly the same price, the leader is chosen in a fixed order (IOCL, HMEL, HPL, OPaL, RIL), and GAIL ranks ahead of a competitor it ties with. Before, the pick could change after a restart.
+- **A short note under Price Basis** explains that Ex Depot prices appear only where a producer publishes depot pricing for that location.
+
 ## What did not change
 
 - Ex Works pricing, freight, discounts and rankings are unchanged for anyone who stays on Ex Works, which remains the default, apart from Haldia now being priced at Bhiwandi (above).
