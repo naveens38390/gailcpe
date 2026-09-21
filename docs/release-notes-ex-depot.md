@@ -4,8 +4,9 @@
 
 ## What you can now do
 
-- **Choose a Price Basis on the Compare page.** Pick Ex Works or Ex Depot under Location. All six producers switch together and use the matching price ladder.
+- **Choose a Price Basis on the Compare page.** Pick Ex Works or Ex Depot under Location. All six producers switch together (unless you override a card, below) and use the matching price ladder.
 - **Choose a Price Basis on the Deal page.** The same selector sits directly under Location. Rankings, gaps, recommendations and price-correction options all follow your choice, and a saved simulation remembers which basis it was run on.
+- **Override one producer's basis on Compare.** Each card has its own Ex Works / Ex Depot selector, so you can compare, say, GAIL on Ex Works against HMEL on Ex Depot. Overridden cards are marked CUSTOM BASIS, a "Mixed Basis Comparison" banner lists them, and "Reset All Cards" (or Reset on a card) puts them back. Changing the global basis keeps your overrides. Deal uses one basis only.
 - **Compare depot prices.** Ex Depot shows each producer's depot or stock-point price, collected from the depot, so there is no freight line.
 
 ## What you will notice

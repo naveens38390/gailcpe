@@ -20,10 +20,9 @@ const OPTIONS: Option[] = [
 ];
 
 /**
- * Which of every producer's two price lists a comparison is read from. One
- * choice for all of them: the zonal sheets compare a whole works block or a whole
- * depot block, and a delta between one producer's works price and another's
- * depot price answers no question anyone asks.
+ * Which of every producer's two price lists a comparison is read from. The
+ * default for every producer. Compare lets a single card override it; Deal uses
+ * this one choice for the whole simulation.
  */
 export function PriceBasisField({
   value,

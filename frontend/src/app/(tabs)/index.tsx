@@ -38,6 +38,7 @@ const AVAILABILITY_BADGE: Record<string, { text: string; tone: Option["badgeTone
 
 export default function CompareScreen() {
   const styles = useStyles();
+  const { colors } = useTheme();
   const { catalog, loading: catalogLoading, error: catalogError } = useCatalog();
 
   const [grade, setGrade] = useState("");
@@ -59,6 +60,9 @@ export default function CompareScreen() {
   // One price list for every card. It is a setting of the whole comparison, so
   // it is not cleared when the grade or location changes.
   const [pricingBasis, setPricingBasis] = useState<PricingBasis>("ex_works");
+  // A producer's own price list where the officer wants it to differ from the
+  // rest. Kept when the global basis changes; only a reset removes an entry.
+  const [basisOverrides, setBasisOverrides] = useState<Record<string, PricingBasis>>({});
 
   const [result, setResult] = useState<Comparison | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -183,6 +187,7 @@ export default function CompareScreen() {
   async function run(
     overrides: Record<string, string> = gradeOverrides,
     basis: PricingBasis = pricingBasis,
+    bases: Record<string, PricingBasis> = basisOverrides,
   ) {
     setError(null);
     setBusy(true);
@@ -195,6 +200,7 @@ export default function CompareScreen() {
           paymentMode,
           gradeOverrides: Object.keys(overrides).length ? overrides : undefined,
           pricingBasis: basis,
+          basisOverrides: Object.keys(bases).length ? bases : undefined,
         }),
       );
     } catch (e) {
@@ -217,6 +223,28 @@ export default function CompareScreen() {
     setGradeOverrides(next);
     if (result) run(next);
   }
+
+  /**
+   * Give one producer its own price list, or (null) put it back on the global
+   * one. Choosing the global basis is the same as resetting, so it never leaves
+   * a "custom" marker on a card that matches everything else.
+   */
+  function selectBasis(producer: string, basis: PricingBasis | null) {
+    const next = { ...basisOverrides };
+    if (basis && basis !== pricingBasis) next[producer] = basis;
+    else delete next[producer];
+    setBasisOverrides(next);
+    if (result) run(gradeOverrides, pricingBasis, next);
+  }
+
+  function resetAllBases() {
+    setBasisOverrides({});
+    if (result) run(gradeOverrides, pricingBasis, {});
+  }
+
+  // Cards whose list differs from the global one — what the banner reports.
+  const customCards = Object.entries(basisOverrides).filter(([, b]) => b !== pricingBasis);
+  const mixed = customCards.length > 0;
 
   const shown = result ? result.quotes.filter((q) => !hidden.includes(q.producer)) : [];
   const ordered = [...shown].sort((a, b) => {
@@ -276,9 +304,20 @@ export default function CompareScreen() {
             setPricingBasis(basis);
             // Every card below describes one price list, so an answer already on
             // screen has to follow the choice.
-            if (result) run(gradeOverrides, basis);
+            if (result) run(gradeOverrides, basis, basisOverrides);
           }}
         />
+        {Object.keys(basisOverrides).length ? (
+          <Pressable
+            style={styles.resetAll}
+            onPress={resetAllBases}
+            accessibilityRole="button"
+            accessibilityLabel="Reset all cards to the global basis"
+          >
+            <Ionicons name="refresh" size={13} color={colors.primary} />
+            <Text style={[styles.resetText, { color: colors.primary }]}>Reset All Cards</Text>
+          </Pressable>
+        ) : null}
 
         <Field label="Quantity (MT)">
           <Input
@@ -321,13 +360,31 @@ export default function CompareScreen() {
 
       {result ? (
         <>
+          {mixed ? (
+            <Card style={{ borderColor: colors.warning }}>
+              <Text style={[styles.mixedTitle, { color: colors.warning }]}>
+                Mixed Basis Comparison Active
+              </Text>
+              <Text style={styles.mixedLine}>Global Basis: {BASIS_LABEL[pricingBasis]}</Text>
+              <Text style={styles.mixedLine}>Custom Cards:</Text>
+              {customCards.map(([producer, basis]) => (
+                <Text key={producer} style={styles.mixedLine}>
+                  • {producer} → {BASIS_LABEL[basis]}
+                </Text>
+              ))}
+              <Text style={styles.mixedNote}>
+                Prices and Price Delta below mix different price lists; they are not like-for-like.
+              </Text>
+            </Card>
+          ) : null}
+
           <Verdict result={result} />
 
           <Card>
             <PriceLadder
               quotes={shown}
-              title={`${pricingBasis === "ex_depot" ? "Price net of GST" : "Landed cost"} · ${result.grade} at ${result.location}`}
-              caption={`${BASIS_LABEL[pricingBasis]} · ${result.quantityMt} MT · ${
+              title={`${mixed ? "Price comparison" : pricingBasis === "ex_depot" ? "Price net of GST" : "Landed cost"} · ${result.grade} at ${result.location}`}
+              caption={`${mixed ? `Mixed basis (global ${BASIS_LABEL[pricingBasis]})` : BASIS_LABEL[pricingBasis]} · ${result.quantityMt} MT · ${
                 result.paymentMode === "cash" ? "cash" : "14-day credit"
               }`}
             />
@@ -341,6 +398,8 @@ export default function CompareScreen() {
               options={gradeOptions?.[quote.producer]}
               overridden={gradeOverrides[quote.producer] !== undefined}
               onChangeGrade={(code) => selectGrade(quote.producer, code)}
+              basisOverridden={basisOverrides[quote.producer] !== undefined}
+              onChangeBasis={(basis) => selectBasis(quote.producer, basis)}
             />
           ))}
 
@@ -510,8 +569,13 @@ function QuoteRow({
   options,
   overridden,
   onChangeGrade,
+  basisOverridden,
+  onChangeBasis,
 }: {
   quote: Quote;
+  /** This card's price list was chosen on the card rather than inherited from the global one. */
+  basisOverridden?: boolean;
+  onChangeBasis?: (basis: PricingBasis | null) => void;
   isLeader: boolean;
   /** This producer's other codes for the same requirement, priced where available — omitted for GAIL. */
   options?: GradeOption[];
@@ -570,6 +634,30 @@ function QuoteRow({
           {depot ? " · depot" : quote.basis ? ` · ${quote.basis.replace("_", "-")}` : ""}
         </Text>
       </View>
+
+      {onChangeBasis ? (
+        <View style={styles.basisRow}>
+          <BasisSelector
+            producer={quote.producer}
+            basis={quote.pricingBasis}
+            overridden={Boolean(basisOverridden)}
+            onSelect={onChangeBasis}
+          />
+          {basisOverridden ? (
+            <>
+              <Pill label="CUSTOM BASIS" color={colors.warning} />
+              <Pressable
+                onPress={() => onChangeBasis(null)}
+                hitSlop={6}
+                accessibilityRole="button"
+                accessibilityLabel={`Reset ${quote.producer} to the global basis`}
+              >
+                <Text style={[styles.resetText, { color: colors.primary }]}>Reset</Text>
+              </Pressable>
+            </>
+          ) : null}
+        </View>
+      ) : null}
 
       {!unpriced ? (
         <View style={styles.ladder}>
@@ -756,6 +844,61 @@ function GradeSelector({
   );
 }
 
+/** One producer's own Ex Works / Ex Depot choice, tap to change it for this card only. */
+function BasisSelector({
+  producer,
+  basis,
+  overridden,
+  onSelect,
+}: {
+  producer: string;
+  basis: PricingBasis;
+  overridden: boolean;
+  onSelect: (basis: PricingBasis | null) => void;
+}) {
+  const styles = useStyles();
+  const { colors } = useTheme();
+  const [open, setOpen] = useState(false);
+  const choices: PricingBasis[] = ["ex_works", "ex_depot"];
+
+  return (
+    <>
+      <Pressable
+        style={[styles.gradePicker, overridden && { borderWidth: 1, borderColor: colors.warning }]}
+        onPress={() => setOpen(true)}
+        hitSlop={6}
+        accessibilityRole="button"
+        accessibilityLabel={`Change the ${producer} price basis`}
+      >
+        <Text style={styles.gradeCode}>{BASIS_LABEL[basis]}</Text>
+        <Ionicons name="chevron-down" size={12} color={colors.textFaint} />
+      </Pressable>
+
+      <Modal visible={open} animationType="fade" transparent onRequestClose={() => setOpen(false)}>
+        <Pressable style={styles.pickerBackdrop} onPress={() => setOpen(false)}>
+          <View style={styles.pickerSheet}>
+            <Text style={styles.pickerTitle}>{producer} · price basis</Text>
+            {choices.map((b) => (
+              <Pressable
+                key={b}
+                style={[styles.pickerRow, b === basis && styles.pickerRowOn]}
+                onPress={() => {
+                  onSelect(b);
+                  setOpen(false);
+                }}
+              >
+                <Text style={[styles.pickerCode, b === basis && { color: colors.primary }]}>
+                  {BASIS_LABEL[b]}
+                </Text>
+              </Pressable>
+            ))}
+          </View>
+        </Pressable>
+      </Modal>
+    </>
+  );
+}
+
 function LadderRow({
   label,
   value,
@@ -823,6 +966,25 @@ const useStyles = makeStyles((c) => ({
     borderRadius: theme.radius.sm,
     backgroundColor: c.surfaceAlt,
   },
+  basisRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    flexWrap: "wrap",
+    columnGap: theme.space(2),
+    rowGap: theme.space(1),
+    marginTop: theme.space(2),
+  },
+  resetAll: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    alignSelf: "flex-start",
+    marginBottom: theme.space(3),
+  },
+  resetText: { fontSize: 12, fontWeight: "700" },
+  mixedTitle: { fontSize: 14, fontWeight: "800", marginBottom: theme.space(1) },
+  mixedLine: { color: c.textPrimary, fontSize: 13, lineHeight: 19 },
+  mixedNote: { color: c.textFaint, fontSize: 11, lineHeight: 16, marginTop: theme.space(2) },
   gradeCount: {
     color: c.textFaint,
     fontSize: 10,
