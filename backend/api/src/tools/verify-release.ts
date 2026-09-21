@@ -17,10 +17,20 @@
  * /deals/simulate, which stores each simulation (3 records). Nothing is deleted
  * or edited. The credentials are read from the environment and never printed.
  *
- * THE EXPECTED FIGURES BELONG TO THE SEPTEMBER 2026 ROUND (grade B52A003, 1 MT,
- * cash). When a new round is published, update the tables below from the client's
- * sheet; a failing check then means "re-derive the figure", not necessarily a bug.
+ * THE EXPECTED FIGURES BELONG TO ONE ROUND (EXPECTED_ROUND below; grade B52A003,
+ * 1 MT, cash). The script reads the round the API is serving before anything else
+ * and stops with exit code 3 if it differs, so a new round is reported as "update
+ * the figures", never as a failing price. Update the tables from the client's sheet
+ * and bump EXPECTED_ROUND when a new round is published.
+ *
+ * Section "cross-grade" needs no typed figures: it compares the API, grade by
+ * grade and town by town, with the price_index.json of the checkout it is run
+ * from (so run it from a clean clone of the release commit). It also fails if that
+ * file is a different round from the one the API serves.
  */
+
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 
 const API = (process.env.API_URL ?? "http://localhost:3000/api").replace(/\/$/, "");
 const EMAIL = process.env.VERIFY_EMAIL;
@@ -39,6 +49,10 @@ if (STAGE !== "pre-load" && STAGE !== "post-load") {
   process.exit(2);
 }
 
+// ---- the round these figures belong to; checked FIRST so a new round is never mistaken for a bug
+const EXPECTED_ROUND = "2026-09-01";
+const DATA_DIR = process.env.GCPE_DATA ?? join(__dirname, "..", "..", "..", "data", "normalized");
+
 // ---- expected figures: grade B52A003 at BHIWANDI, 1 MT, cash --------------------------
 const GRADE = "B52A003";
 const LOCATION = "BHIWANDI";
@@ -51,6 +65,9 @@ const TIE_ORDER = ["GAIL", "IOCL", "HMEL", "HPL", "OPaL", "RIL"];
 
 type Q = {
   producer: string;
+  grade?: string;
+  zone?: string;
+  basic?: number | null;
   invoiceLanded: number | null;
   pricingBasis?: string;
   dealerDiscount?: number;
@@ -100,7 +117,19 @@ async function main() {
   check(Boolean(token), "login succeeds", `HTTP ${login.status}`);
   if (!token) return;
 
-  console.log("\n2. Ex Works at Bhiwandi (no basis requested — what every existing client sends)");
+  console.log("\nDataset round");
+  const probe = (await compare()) as Cmp & { effectiveDate?: string };
+  const apiRound = probe.effectiveDate ?? "unknown";
+  if (apiRound !== EXPECTED_ROUND) {
+    console.log(`  STOP the API is serving the price round ${apiRound}; this script's figures are for ${EXPECTED_ROUND}.`);
+    console.log("       This is not a pricing failure. Update EXPECTED_ROUND and the figure tables in src/tools/verify-release.ts");
+    console.log("       from the client's sheet for the new round, then run again.");
+    process.exitCode = 3;
+    return;
+  }
+  check(true, `API serves the expected round ${EXPECTED_ROUND}`);
+
+  console.log("\nEx Works at Bhiwandi (no basis requested — what every existing client sends)");
   const works = await compare();
   check(works.quotes?.length === 6, "six producers returned");
   check(works.quotes.every((x) => x.pricingBasis === "ex_works"), "new API is live (each quote reports pricingBasis ex_works)");
@@ -115,7 +144,7 @@ async function main() {
   if (STAGE === "post-load") check(near(q(works, "HPL").invoiceLanded, HPL_WORKS_AFTER_LOAD), `HPL now priced at Bhiwandi ${inr(HPL_WORKS_AFTER_LOAD)}`, inr(q(works, "HPL").invoiceLanded));
   else check(q(works, "HPL").invoiceLanded === null, "HPL still unpriced at Bhiwandi (loader not run yet)", inr(q(works, "HPL").invoiceLanded));
 
-  console.log("\n3. Ex Depot at Bhiwandi");
+  console.log("\nEx Depot at Bhiwandi");
   const depot = await compare({ pricingBasis: "ex_depot" });
   if (STAGE === "pre-load") {
     check(depot.quotes.every((x) => x.invoiceLanded === null), "no producer is priced (no depot rows loaded)");
@@ -133,7 +162,7 @@ async function main() {
   check(bad.status === 400, "an unknown basis is rejected with 400", `HTTP ${bad.status}`);
 
   if (STAGE === "post-load") {
-    console.log("\n4. Mixed basis (global selector plus per-card overrides)");
+    console.log("\nMixed basis (global selector plus per-card overrides)");
     const m1 = await compare({ basisOverrides: { HMEL: "ex_depot", RIL: "ex_depot" } });
     check(near(q(m1, "RIL").invoiceLanded, DEPOT.RIL) && near(q(m1, "HMEL").invoiceLanded, DEPOT.HMEL), "HMEL and RIL on depot prices");
     check(near(q(m1, "IOCL").invoiceLanded, WORKS.IOCL) && near(q(m1, "GAIL").invoiceLanded, WORKS.GAIL), "GAIL and IOCL stay on Ex Works");
@@ -147,7 +176,7 @@ async function main() {
     const m4 = await compare({ pricingBasis: "ex_depot", basisOverrides: { HMEL: "ex_works" } });
     check(near(q(m4, "HMEL").invoiceLanded, WORKS.HMEL) && near(q(m4, "IOCL").invoiceLanded, DEPOT.IOCL), "global Ex Depot with HMEL on Ex Works");
 
-    console.log("\n5. Not Published (Agra, Ex Depot)");
+    console.log("\nNot Published (Agra, Ex Depot)");
     const agra = await compare({ pricingBasis: "ex_depot" }, "AGRA");
     const np = agra.quotes.filter((x) => x.invoiceLanded === null && x.basisAvailability?.ex_depot === false).map((x) => x.producer);
     check(["IOCL", "HMEL", "OPaL", "RIL"].every((p) => np.includes(p)), "IOCL, HMEL, OPaL, RIL read Not Published", `not published: ${np.join(",")}`);
@@ -155,8 +184,10 @@ async function main() {
     check(/Not published ex depot/.test(agra.warnings.join(" ")), "comparison warning names them");
   }
 
+  await crossGrade(apiRound);
+
   if (WITH_DEAL) {
-    console.log("\n6. Deal (stores 3 simulations)");
+    console.log("\nDeal (stores 3 simulations)");
     const sim = async (extra: Record<string, unknown>, location = LOCATION) =>
       (await call("/deals/simulate", { grade: GRADE, location, quantityMt: 250, paymentMode: "cash", ...extra })).json;
     const dw = await sim({});
@@ -176,6 +207,68 @@ async function main() {
       const dd = await sim({ pricingBasis: "ex_depot" });
       check(dd.outcome === "not_priced", "Deal Ex Depot before the load: not_priced (no error)", String(dd.outcome));
     }
+  }
+}
+
+// ---- cross-grade: the API against the release's own data files, no typed figures --------
+const GRADES = ["B52A003", "E36A060", "F18A020U", "B55HM0003"];
+const TOWNS = ["BHIWANDI", "AGRA", "DELHI", "ABU ROAD"];
+
+async function crossGrade(apiRound: string) {
+  console.log("\nCross-grade (API vs this checkout's price_index.json)");
+  const file = join(DATA_DIR, "price_index.json");
+  if (!existsSync(file)) {
+    console.log(`  skip ${file} not found - run from a checkout of the release commit`);
+    return;
+  }
+  const idx = JSON.parse(readFileSync(file, "utf8"));
+  check(idx.effective_date === apiRound, `data files are round ${idx.effective_date}, API serves ${apiRound}`, "wrong release commit, or the API has not loaded this round");
+  if (idx.effective_date !== apiRound) return;
+
+  const lookup = (basis: "ex_works" | "ex_depot", producer: string, town: string) => {
+    const zoneMap = (basis === "ex_depot" ? idx.depot_location_map : idx.location_map)?.[producer];
+    const zone: string | undefined = zoneMap?.[town] ?? (producer === "GAIL" && basis === "ex_works" ? town : undefined);
+    const book = (basis === "ex_depot" ? idx.depot?.[producer] : idx.producers?.[producer])?.zones;
+    return { zone, book: zone ? book?.[zone] : undefined };
+  };
+  type QQ = Q & { grade?: string; zone?: string; basic?: number | null };
+  let cells = 0, priced = 0, unpublished = 0;
+  const bad: string[] = [];
+  for (const grade of GRADES) {
+    for (const town of TOWNS) {
+      for (const basis of ["ex_works", "ex_depot"] as const) {
+        const c = (await call("/pricing/compare", { grade, location: town, quantityMt: 1, paymentMode: "cash", ...(basis === "ex_depot" ? { pricingBasis: basis } : {}) })).json as Cmp & { quotes: QQ[] };
+        for (const x of c.quotes) {
+          cells++;
+          const { zone, book } = lookup(basis, x.producer, town);
+          if (x.invoiceLanded === null) {
+            if (basis === "ex_depot" && !zone) {
+              unpublished++;
+              if (x.basisAvailability?.ex_depot !== false) bad.push(`${grade} ${town} ${x.producer}: no depot in the data but the API does not say Not Published`);
+            }
+            continue;
+          }
+          priced++;
+          if (x.zone !== zone) bad.push(`${grade} ${town} ${x.producer} ${basis}: API zone ${x.zone}, data says ${zone}`);
+          else if (!book || x.grade === undefined || book[x.grade] === undefined) bad.push(`${grade} ${town} ${x.producer} ${basis}: grade ${x.grade} not in the data's zone ${zone}`);
+          else if (x.basic !== book[x.grade]) bad.push(`${grade} ${town} ${x.producer} ${basis}: basic ${x.basic}, data ${book[x.grade]}`);
+        }
+      }
+    }
+  }
+  check(bad.length === 0, `${cells} producer quotes (${GRADES.length} grades x ${TOWNS.length} towns x 2 bases): every priced basic and zone equals the data file`, bad.slice(0, 3).join(" | "));
+  check(priced > 0 && unpublished > 0, `both outcomes were exercised (${priced} priced, ${unpublished} Not Published ex depot)`);
+
+  // a producer's own grade code (HPL E5201, the equivalent of B52A003) on both price lists
+  for (const basis of ["ex_works", "ex_depot"] as const) {
+    const c = (await call("/pricing/compare", { grade: GRADE, location: LOCATION, quantityMt: 1, paymentMode: "cash", gradeOverrides: { HPL: "E5201" }, ...(basis === "ex_depot" ? { pricingBasis: basis } : {}) })).json as Cmp & { quotes: QQ[] };
+    const h = c.quotes.find((x) => x.producer === "HPL")!;
+    const { book } = lookup(basis, "HPL", LOCATION);
+    check(
+      h.grade === "E5201" && book !== undefined && h.basic === book["E5201"],
+      `HPL E5201 override on ${basis}: quoted grade and basic equal the data file`,
+      `${h.grade} basic ${h.basic}, data ${book?.["E5201"]}`,
+    );
   }
 }
 

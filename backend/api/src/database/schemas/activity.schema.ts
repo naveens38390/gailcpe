@@ -63,6 +63,17 @@ export class ComparisonHistory {
   @Prop({ required: true }) quantityMt!: number;
   @Prop({ required: true }) paymentMode!: string;
 
+  /**
+   * The price list the request started every producer on (the global selector),
+   * and the producers it moved to the other list (per-card selectors). Kept at
+   * the top level so history, reports and audits never have to read the quote
+   * array to know how a comparison was configured. A record saved before this
+   * field existed has neither; read it as ex_works with no overrides.
+   */
+  @Prop() pricingBasis?: string;
+
+  @Prop({ type: Object }) basisOverrides?: Record<string, string>;
+
   /** The circular round the answer came from. */
   @Prop({ required: true, index: true })
   effectiveDate!: Date;

@@ -55,6 +55,11 @@ export class PricingService {
       location,
       quantityMt,
       paymentMode,
+      pricingBasis: options.defaultBasis ?? "ex_works",
+      basisOverrides:
+        options.basisOverrides && Object.keys(options.basisOverrides).length
+          ? options.basisOverrides
+          : undefined,
       effectiveDate: new Date(data.priceIndex.effective_date),
       result: result as unknown as Record<string, unknown>,
     });
