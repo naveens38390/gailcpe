@@ -97,6 +97,19 @@ export interface CrossRefEntry {
 export const PRODUCERS: Producer[] = ["GAIL", "RIL", "IOCL", "HMEL", "OPaL", "HPL"];
 
 /**
+ * Who comes first when two producers land at exactly the same price. Fixed and
+ * documented so the same grade, town and prices always name the same leader and
+ * rank; without it the tie fell to the order rows happened to load in, which
+ * changed between restarts. GAIL first means GAIL ranks ahead of a competitor it
+ * ties with. (Owner-approved order, 2026-09-22.)
+ */
+export const TIE_BREAK_ORDER: Producer[] = ["GAIL", "IOCL", "HMEL", "HPL", "OPaL", "RIL"];
+const tieRank = (p: Producer) => {
+  const i = TIE_BREAK_ORDER.indexOf(p);
+  return i === -1 ? TIE_BREAK_ORDER.length : i;
+};
+
+/**
  * Spelling variants, loaded from the dataset rather than duplicated here.
  * GAIL spells Silvassa two ways across its own two files; keeping a second copy
  * of that table in TypeScript is how a lookup starts silently missing.
@@ -586,9 +599,11 @@ export function compare(
   /** The list every producer starts on before `basisOverrides` is applied. */
   defaultBasis: PricingBasis = "ex_works",
 ): Comparison {
-  const activeProducers = (Object.keys(data.priceIndex.producers) as Producer[]).length
-    ? (Object.keys(data.priceIndex.producers) as Producer[])
-    : PRODUCERS;
+  const activeProducers = [
+    ...((Object.keys(data.priceIndex.producers) as Producer[]).length
+      ? (Object.keys(data.priceIndex.producers) as Producer[])
+      : PRODUCERS),
+  ].sort((a, b) => tieRank(a) - tieRank(b));
   const quotes = activeProducers.map((p) =>
     quote(
       data, p, gailGrade, location, quantityMt, paymentMode, gradeOverrides?.[p],
@@ -606,7 +621,9 @@ export function compare(
         : null;
   }
   const priced = quotes.filter((q) => q.invoiceLanded !== null);
-  priced.sort((a, b) => a.invoiceLanded! - b.invoiceLanded!);
+  priced.sort(
+    (a, b) => a.invoiceLanded! - b.invoiceLanded! || tieRank(a.producer) - tieRank(b.producer),
+  );
 
   const gail = quotes.find((q) => q.producer === "GAIL") ?? null;
   const competitors = priced.filter((q) => q.producer !== "GAIL");

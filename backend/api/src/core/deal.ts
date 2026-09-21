@@ -102,12 +102,18 @@ export function simulate(
   }
 
   if (!gail || gail.invoiceLanded === null) {
-    narrative.push(
-      depot && gail && !gail.basisAvailability.ex_depot
-        ? `GAIL has no ex-depot (stock point) price for ${grade} at ${location} — not published.`
-        : `GAIL cannot be priced for ${grade} at ${location} from the current circular.`,
-    );
-    for (const gapText of gail?.gaps ?? []) narrative.push(gapText);
+    if (depot && gail && !gail.basisAvailability.ex_depot) {
+      // Nothing is wrong with the data: GAIL simply has no stock-point price
+      // here. One plain sentence; the card carries the detail.
+      narrative.push(
+        "No published Ex Depot pricing is available from GAIL for this grade and location.",
+      );
+    } else {
+      narrative.push(
+        `GAIL cannot be priced for ${grade} at ${location} from the current circular.`,
+      );
+      for (const gapText of gail?.gaps ?? []) narrative.push(gapText);
+    }
   } else if (!leader || gap === null) {
     narrative.push(
       `No competitor can be priced for ${grade} at ${location}, so there is no gap to close.`,
