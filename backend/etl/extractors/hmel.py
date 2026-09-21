@@ -34,7 +34,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from pdfrows import char_rows, is_number, parse_number, repair_shredded, rows  # noqa: E402
+from pdfrows import Word, char_rows, is_number, parse_number, repair_shredded, rows  # noqa: E402
 
 # A basic price is five or six figures; a locational adjustment is smaller.
 BASIC_MIN = 50_000
@@ -42,7 +42,7 @@ BASIC_MIN = 50_000
 BASIC_ROW = re.compile(r"^(?:Price\s*\(Rs/MT\)|Ex\s*Bathinda\s*Basic)")
 # Page furniture between the codes and the prices, and the stub column.
 FURNITURE = re.compile(
-    r"HPCL|Mittal|Ex-?\s*Bathinda|Ex-?\s*Depot|Basic|Price|Grades|Locational|Location",
+    r"HPCL|Mittal|Ex-?\s*Bathinda|Ex-?\s*Depot|Basic|Price|Grades|Warehouse|Locational|Location",
     re.IGNORECASE,
 )
 # Two lines of a stacked code are one cell; more than that is a different row.
@@ -141,6 +141,24 @@ def _codes_for(
     return out
 
 
+def _unglue_label(words: list) -> list:
+    """Split a price fused onto the end of a location name.
+
+    Kanpur-style rows are fine, but "Noida/Ghaziabad138340" arrives as one word
+    on the LLDPE non-prime page. The digits are the first column's price.
+    """
+    out = []
+    for w in words:
+        m = re.fullmatch(r"(.*[A-Za-z)/])(\d{5,6})", w.text)
+        if not m:
+            out.append(w)
+            continue
+        cut = w.x0 + (w.x1 - w.x0) * len(m.group(1)) / len(w.text)
+        out.append(Word(m.group(1), w.x0, cut, w.top))
+        out.append(Word(m.group(2), cut, w.x1, w.top))
+    return out
+
+
 def prices(path: str) -> dict:
     """Return basic prices, locational adjustments, and derived ex-works prices.
 
@@ -158,6 +176,7 @@ def prices(path: str) -> dict:
     columns: list[tuple[str, float]] = []
     section = ("plant", "", "")
     in_adjustment = False
+    depot_header = False
 
     by_page_chars: dict[int, list] = {}
     for row in char_rows(path, pages=range(3, 15)):
@@ -168,6 +187,9 @@ def prices(path: str) -> dict:
         # rebuild those before reading a label or a price off them.
         row.words = repair_shredded(row.words)
         text = row.text.strip()
+        if section[0] == "depot":
+            row.words = _unglue_label(row.words)
+            text = row.text.strip()
 
         found = next((v for k, v in SECTIONS.items() if text.startswith(k)), None)
         if found:
@@ -203,6 +225,23 @@ def prices(path: str) -> dict:
                         {"price": price, "polymer": section[1], "quality": section[2]},
                     )
             continue
+        # Depot pages have no basic-price row: a "HMEL Grade" header row sits
+        # over the code cells and the first location's prices define the columns.
+        if section[0] == "depot" and text.startswith("HMEL Grade"):
+            depot_header = True
+            continue
+        if depot_header:
+            values = [
+                (parse_number(w.text), w.xmid)
+                for w in row.words
+                if is_number(w.text) and parse_number(w.text) >= BASIC_MIN
+            ]
+            if values:
+                bands = _bands(values)
+                codes = _codes_for(by_page_chars.get(row.page, []), row.top, bands)
+                columns = [(c, low, high) for c, (_, _, low, high) in zip(codes, bands)]
+                depot_header = False
+                in_adjustment = False
         if not columns:
             continue
 

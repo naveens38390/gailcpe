@@ -60,7 +60,13 @@ ALIASES: dict[str, dict[str, str]] = {
         "KOLKATA": "KOLKATA",
         "MEHSANA": "KALOL (MEHSANA)",
     },
-    "HPL": {},  # resolved through the published district map instead
+    # HPL lists districts, and Bhiwandi (in Thane) is not one of them. The zonal
+    # workbook's Haldia figures for Bhiwandi — ex works 140,210, ex depot 143,596 —
+    # are exactly Rs 1,000 above the September Maharashtra_Mumbai prices (139,210,
+    # 142,596), the same Rs 1,000 HPL took off every price in this round. The
+    # price-matching that used to derive this alias (see derive_aliases) cannot
+    # while a whole round has moved.
+    "HPL": {"BHIWANDI": "Maharashtra_Mumbai"},
 }
 
 
@@ -103,13 +109,15 @@ def normalise(name: str) -> str:
 class Resolver:
     """Maps a canonical GAIL location onto one producer's own place names."""
 
-    def __init__(self, producer: str, names: list[str]):
+    def __init__(self, producer: str, names: list[str],
+                 aliases: dict[str, str] | None = None):
         self.producer = producer
         self.names = names
         self._by_key: dict[str, str] = {}
         for name in names:
             self._by_key.setdefault(normalise(name), name)
-        self._aliases = {normalise(k): v for k, v in ALIASES.get(producer, {}).items()}
+        chosen = ALIASES.get(producer, {}) if aliases is None else aliases
+        self._aliases = {normalise(k): v for k, v in chosen.items()}
         self._district_map: dict[str, str] = {}
         self._inferred: dict[str, str] = {}
         self._evidence: dict[str, str] = {}
@@ -190,7 +198,7 @@ class Resolver:
 
 
 def derive_aliases(
-    price_index: dict[str, dict], mzo_rows: list[dict]
+    price_index: dict[str, dict], mzo_rows: list[dict], section: str = "ex_works"
 ) -> dict[str, dict[str, str]]:
     """Prove location aliases from the zonal workbook instead of guessing them.
 
@@ -217,7 +225,7 @@ def derive_aliases(
     votes: dict[tuple[str, str], dict[str, int]] = {}
 
     for row in mzo_rows:
-        if row.get("section") != "ex_works":
+        if row.get("section") != section:
             continue
         basic = row.get("basic")
         if not isinstance(basic, (int, float)):

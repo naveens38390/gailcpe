@@ -4,6 +4,7 @@
   "GAIL": {
    "cash_discount": 1000,
    "cash_discount_source": "MZO workbook, row \"Less: CD - Cash Discount\" (no GAIL circular supplied). Client confirmed 29 Aug 2026: available on cash payment only.",
+   "cash_discount_depot": 0,
    "quantity_slabs": [
     {
      "from_mt": 5,
@@ -216,6 +217,7 @@
   "OPaL": {
    "cash_discount": 1100,
    "cash_discount_note": "not available on ex-CSA warehouse sales",
+   "cash_discount_depot": 0,
    "early_payment_per_day": 75,
    "interest_free_credit_days": 14,
    "quantity_slabs": [

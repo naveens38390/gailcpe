@@ -26,6 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent / "extractors"))
 
 import crossref  # noqa: E402
+import depot as depot_x  # noqa: E402
 import freight as freight_x  # noqa: E402
 import gail as gail_x  # noqa: E402
 import haldia as haldia_x  # noqa: E402
@@ -155,6 +156,10 @@ DISCOUNTS = {
             'MZO workbook, row "Less: CD - Cash Discount" (no GAIL circular '
             "supplied). Client confirmed 29 Aug 2026: available on cash payment only."
         ),
+        # The MZO workbook's Ex Depot block leaves GAIL's cash-discount row
+        # empty, so a stock-point price is quoted without one. Read from the
+        # workbook, not from a circular — to be confirmed with the client.
+        "cash_discount_depot": 0,
         # Supplied by the client after the first build, so it was never in a
         # source file this script reads.
         "quantity_slabs": [
@@ -220,6 +225,7 @@ DISCOUNTS = {
     "OPaL": {
         "cash_discount": 1100,
         "cash_discount_note": "not available on ex-CSA warehouse sales",
+        "cash_discount_depot": 0,
         "early_payment_per_day": 75,
         "interest_free_credit_days": 14,
         "quantity_slabs": None,
@@ -601,6 +607,19 @@ def main() -> None:
         cells = sum(len(z) for z in payload["zones"].values())
         note(f"index {producer:<5} {len(payload['zones']):>3} zones, {cells:>6} prices ({payload['basis']})")
 
+    # ---- ex-depot books ---------------------------------------------------
+    depot_flat: dict[str, dict] = {
+        "GAIL": depot_x.gail(stock),
+        "IOCL": depot_x.iocl(iocl_prices),
+        "RIL": depot_x.ril(ril_prices),
+        "HMEL": depot_x.hmel(hmel_prices),
+        "HPL": depot_x.hpl(haldia_hdpe, haldia_lldpe),
+        "OPaL": depot_x.opal(opal_csa),
+    }
+    for producer, payload in depot_flat.items():
+        cells = sum(len(z) for z in payload["zones"].values())
+        note(f"depot {producer:<5} {len(payload['zones']):>3} zones, {cells:>6} prices (ex_depot)")
+
 
     # ---- location resolution ---------------------------------------------
     resolvers = {
@@ -651,6 +670,32 @@ def main() -> None:
     )
 
     coverage = {p: r.coverage(gail_locations) for p, r in resolvers.items()}
+
+    # Depot zones are named differently from a producer's ex-works zones, so
+    # they are resolved on their own. RIL's ex-works alias table would send
+    # Daman to its Silvassa zone, which is right for a delivered price and wrong
+    # for a depot that stands in Daman itself.
+    depot_aliases = {"RIL": {"BHIWANDI": "MUMBAI", "VIJAYAWADA": "VIJAY"}}
+    depot_resolvers = {
+        p: Resolver(p, sorted(d["zones"]), depot_aliases.get(p))
+        for p, d in depot_flat.items()
+    }
+    depot_resolvers["HPL"].add_district_map(haldia_territory)
+    depot_evidence = derive_aliases(depot_flat, mzo.expectations(src["mzo"]), "ex_depot")
+    for producer, mapping in depot_evidence.items():
+        if producer in depot_resolvers:
+            depot_resolvers[producer].add_evidence(mapping)
+    # No add_cluster_hubs here, unlike the works lists. That step places a town on
+    # a nearby producer's zone through HPL's district map — an inference, not a
+    # published fact. A depot is where the customer collects, so a town the
+    # producer has not published a depot for is reported as not published rather
+    # than placed on another town's depot.
+    depot_coverage = {p: r.coverage(gail_locations) for p, r in depot_resolvers.items()}
+    note("")
+    note("depot coverage against GAIL's 313 ex-works locations:")
+    for producer, cov in depot_coverage.items():
+        pct = cov["resolved"] / cov["total"] * 100
+        note(f"  {producer:<5} {cov['resolved']:>3}/{cov['total']} ({pct:4.1f}%)  from {cov['zones_published']} depot zones")
     note("")
     note("location coverage against GAIL's 313 ex-works locations:")
     for producer, cov in coverage.items():
@@ -722,6 +767,9 @@ def main() -> None:
             "producers": flat,
             "location_map": {p: c["map"] for p, c in coverage.items()},
             "location_tier": {p: c["tier_of"] for p, c in coverage.items()},
+            "depot": depot_flat,
+            "depot_location_map": {p: c["map"] for p, c in depot_coverage.items()},
+            "depot_location_tier": {p: c["tier_of"] for p, c in depot_coverage.items()},
         },
     )
 
