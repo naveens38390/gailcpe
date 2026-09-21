@@ -91,7 +91,7 @@ const q = (c: Cmp, p: string) => c.quotes.find((x) => x.producer === p)!;
 async function main() {
   console.log(`Target ${API}   stage ${STAGE}${WITH_DEAL ? "   with Deal" : ""}\n`);
 
-  console.log("1. API health and login");
+  console.log("API health and login");
   const health = await call("/health");
   check(health.status === 200 && health.json?.status === "ok", "GET /health is ok", JSON.stringify(health.json));
   check(health.json?.database === "up", "database is up", JSON.stringify(health.json));
@@ -182,9 +182,10 @@ async function main() {
 main()
   .then(() => {
     console.log(`\n${failures ? "RELEASE CHECK FAILED" : "RELEASE CHECK PASSED"}: ${passes} ok, ${failures} failed`);
-    process.exit(failures ? 1 : 0);
+    // exitCode, not exit(): exiting while fetch sockets are still closing trips a libuv assertion on Windows.
+    process.exitCode = failures ? 1 : 0;
   })
   .catch((e) => {
     console.error("\nRELEASE CHECK ERROR:", (e as Error).message.replace(/mongodb(\+srv)?:\/\/\S+/g, "<uri>"));
-    process.exit(2);
+    process.exitCode = 2;
   });
