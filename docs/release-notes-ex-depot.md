@@ -16,7 +16,7 @@
   - *Example, Bhiwandi, B52 blow moulding:* RIL Rs 1,40,320 − cash discount Rs 1,100 − dealer discount Rs 350 = **Rs 1,38,870**. GAIL is Rs 1,40,420, so the Price Delta is **Rs 1,550** (the sheet shows Rs 1,200 because it leaves the dealer discount out).
 - **Price Delta always comes from the price you see** on each card: GAIL's price net of GST minus the competitor's.
 - **Rankings can change with the basis.** In our test runs the leader or the outcome differed between Ex Works and Ex Depot in 623 of 1,252 simulated deals, partly because some producers publish no depot price at some towns. At Bhiwandi, IOCL leads Ex Works but RIL leads Ex Depot.
-- **Haldia (HPL) now has a price for Bhiwandi** on both bases. It was missing before.
+- **Haldia (HPL) now appears at Bhiwandi, on Ex Works as well as Ex Depot. This is expected.** HPL has no Bhiwandi price point of its own; it publishes one for Mumbai. We corrected the town mapping so Bhiwandi reads from HPL's Mumbai price point: the Haldia figures your workbook shows for Bhiwandi are exactly Rs 1,000 above HPL's September Mumbai prices, the same Rs 1,000 HPL took off this round. Before this release HPL showed "not compared" at Bhiwandi. If you see an HPL price at Bhiwandi that was not there last month, this is why. HPL's figure is its published Mumbai price for the grade, not an estimate.
 - **Depot prices exist only where the producer publishes a depot for that town.** Of 313 towns: GAIL 57, IOCL 57, RIL 39, HMEL 56, HPL 155, OPaL 41. The rest show "Not published". We never borrow a nearby town's price.
 
 - **Ties are settled the same way every time.** If two producers land at exactly the same price, the leader is chosen in a fixed order (IOCL, HMEL, HPL, OPaL, RIL), and GAIL ranks ahead of a competitor it ties with. Before, the pick could change after a restart.
@@ -24,7 +24,7 @@
 
 ## What did not change
 
-- Ex Works pricing, freight, discounts and rankings are unchanged for anyone who stays on Ex Works, which remains the default, apart from Haldia now being priced at Bhiwandi (above).
+- Ex Works pricing, freight, discounts and rankings are unchanged for anyone who stays on Ex Works, which remains the default, apart from Haldia (HPL) now being priced at Bhiwandi through the mapping correction described above.
 - Excel and PDF exports do not include depot prices.
 
 ## Two things we would like you to confirm
