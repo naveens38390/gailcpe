@@ -191,6 +191,7 @@ export default function CompareScreen() {
   ) {
     setError(null);
     setBusy(true);
+    const sent = Object.fromEntries(Object.entries(bases).filter(([, b]) => b !== basis));
     try {
       setResult(
         await api.compare({
@@ -199,8 +200,12 @@ export default function CompareScreen() {
           quantityMt: Number(quantity) || 0,
           paymentMode,
           gradeOverrides: Object.keys(overrides).length ? overrides : undefined,
-          pricingBasis: basis,
-          basisOverrides: Object.keys(bases).length ? bases : undefined,
+          // Only what differs from the defaults goes on the wire: Ex Works is what
+          // the API assumes, and an override equal to the global basis changes
+          // nothing. That keeps a plain Compare valid against an API that predates
+          // these fields (a deploy overlap).
+          pricingBasis: basis === "ex_depot" ? basis : undefined,
+          basisOverrides: Object.keys(sent).length ? sent : undefined,
         }),
       );
     } catch (e) {
@@ -587,7 +592,8 @@ function QuoteRow({
   const { colors } = useTheme();
   const isGail = quote.producer === "GAIL";
   const unpriced = quote.invoiceLanded === null;
-  const depot = quote.pricingBasis === "ex_depot";
+  const shownBasis: PricingBasis = quote.pricingBasis ?? "ex_works";
+  const depot = shownBasis === "ex_depot";
   const delivered = quote.basis === "delivered";
   // The candidates are listed with both price lists; the card offers the ones
   // its own list actually carries.
@@ -639,7 +645,7 @@ function QuoteRow({
         <View style={styles.basisRow}>
           <BasisSelector
             producer={quote.producer}
-            basis={quote.pricingBasis}
+            basis={shownBasis}
             overridden={Boolean(basisOverridden)}
             onSelect={onChangeBasis}
           />
@@ -689,13 +695,17 @@ function QuoteRow({
               <LadderRow label="Basic + Freight" value={rupees(quote.basicPlusFreight)} />
             </>
           ) : null}
-          <LadderRow label="Price Net of GST" value={rupees(quote.priceNetOfGst)} strong />
+          <LadderRow
+            label="Price Net of GST"
+            value={rupees(quote.priceNetOfGst ?? quote.invoiceLanded)}
+            strong
+          />
           {!isGail ? (
             <LadderRow
               label="Price Delta (@ 1 MT) (GAIL - Competitor)"
-              value={delta === null ? "—" : `${delta > 0 ? "+" : delta < 0 ? "- " : ""}${rupees(Math.abs(delta))}`}
+              value={delta == null ? "—" : `${delta > 0 ? "+" : delta < 0 ? "- " : ""}${rupees(Math.abs(delta))}`}
               valueColor={
-                delta === null || delta === 0
+                delta == null || delta === 0
                   ? undefined
                   : delta > 0
                     ? colors.danger

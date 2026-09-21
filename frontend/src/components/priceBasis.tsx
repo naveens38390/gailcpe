@@ -38,6 +38,7 @@ export function PriceBasisField({
       label="Price Basis"
       placeholder="Select a basis"
       value={value}
+      hint="Ex Depot prices are shown only where the producer publishes depot pricing for that location."
       options={OPTIONS}
       onChange={(v) => onChange(v as PricingBasis)}
       disabled={disabled}

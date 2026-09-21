@@ -132,7 +132,9 @@ export default function DealScreen() {
           location,
           quantityMt: Number(quantity) || 0,
           paymentMode,
-          pricingBasis: basis,
+          // Ex Works is what the API assumes; leaving it out keeps this request
+          // valid against an API that predates the field (a deploy overlap).
+          pricingBasis: basis === "ex_depot" ? basis : undefined,
         }),
       );
     } catch (e) {
