@@ -40,6 +40,11 @@ export function PriceLadder({
     .sort((a, b) => a.v - b.v);
 
   const unpriced = quotes.filter((q) => typeof q[metric] !== "number");
+  // Nothing published is a different fact from a price that could not be worked out.
+  const unpublished = unpriced.filter(
+    (q) => q.pricingBasis === "ex_depot" && q.basisAvailability && !q.basisAvailability.ex_depot,
+  );
+  const unresolved = unpriced.filter((q) => !unpublished.includes(q));
 
   if (priced.length < 2) {
     return (
@@ -120,9 +125,14 @@ export function PriceLadder({
         <Text style={styles.legendText}>
           Cheapest {rupees(min)} · dearest {rupees(max)} · spread {rupees(max - min)}/MT
         </Text>
-        {unpriced.length ? (
+        {unpublished.length ? (
           <Text style={styles.legendMuted}>
-            Not priced here: {unpriced.map((q) => q.producer).join(", ")}
+            Not published ex depot: {unpublished.map((q) => q.producer).join(", ")}
+          </Text>
+        ) : null}
+        {unresolved.length ? (
+          <Text style={styles.legendMuted}>
+            Not priced here: {unresolved.map((q) => q.producer).join(", ")}
           </Text>
         ) : null}
         {caption ? <Text style={styles.legendMuted}>{caption}</Text> : null}

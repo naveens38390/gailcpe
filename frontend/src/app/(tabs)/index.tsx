@@ -9,10 +9,12 @@ import {
   type GradeOption,
   type GradeOptionsResponse,
   type PaymentMode,
+  type PricingBasis,
   type ProductVariants,
   type Quote,
 } from "../../services/api";
 import { Field, Input, PaymentToggle, PrimaryButton } from "../../components/inputs";
+import { PriceBasisField, BASIS_LABEL } from "../../components/priceBasis";
 import { PriceLadder } from "../../components/priceLadder";
 import { ChipMulti, SelectField, type Option } from "../../components/select";
 import { seriesColor } from "../../constants/colors";
@@ -54,6 +56,9 @@ export default function CompareScreen() {
   // producer code; a producer with no entry here gets the auto-picked grade.
   const [gradeOptions, setGradeOptions] = useState<GradeOptionsResponse | null>(null);
   const [gradeOverrides, setGradeOverrides] = useState<Record<string, string>>({});
+  // One price list for every card. It is a setting of the whole comparison, so
+  // it is not cleared when the grade or location changes.
+  const [pricingBasis, setPricingBasis] = useState<PricingBasis>("ex_works");
 
   const [result, setResult] = useState<Comparison | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -175,7 +180,10 @@ export default function CompareScreen() {
   const selectedGrade = catalog?.grades.find((g) => g.gailGrade === grade);
   const ready = Boolean(grade && location && Number(quantity) > 0);
 
-  async function run(overrides: Record<string, string> = gradeOverrides) {
+  async function run(
+    overrides: Record<string, string> = gradeOverrides,
+    basis: PricingBasis = pricingBasis,
+  ) {
     setError(null);
     setBusy(true);
     try {
@@ -186,6 +194,7 @@ export default function CompareScreen() {
           quantityMt: Number(quantity) || 0,
           paymentMode,
           gradeOverrides: Object.keys(overrides).length ? overrides : undefined,
+          pricingBasis: basis,
         }),
       );
     } catch (e) {
@@ -261,6 +270,16 @@ export default function CompareScreen() {
           emptyText="No location publishes a price for this grade."
         />
 
+        <PriceBasisField
+          value={pricingBasis}
+          onChange={(basis) => {
+            setPricingBasis(basis);
+            // Every card below describes one price list, so an answer already on
+            // screen has to follow the choice.
+            if (result) run(gradeOverrides, basis);
+          }}
+        />
+
         <Field label="Quantity (MT)">
           <Input
             value={quantity}
@@ -307,8 +326,8 @@ export default function CompareScreen() {
           <Card>
             <PriceLadder
               quotes={shown}
-              title={`Landed cost · ${result.grade} at ${result.location}`}
-              caption={`${result.quantityMt} MT · ${
+              title={`${pricingBasis === "ex_depot" ? "Price net of GST" : "Landed cost"} · ${result.grade} at ${result.location}`}
+              caption={`${BASIS_LABEL[pricingBasis]} · ${result.quantityMt} MT · ${
                 result.paymentMode === "cash" ? "cash" : "14-day credit"
               }`}
             />
@@ -453,11 +472,16 @@ function Verdict({ result }: { result: Comparison }) {
   const colour = gapColor(gap, colors);
 
   if (gap === null || !result.leader) {
+    const gail = result.quotes.find((q) => q.producer === "GAIL");
+    const gailUnpublished =
+      gail && gail.invoiceLanded === null && gail.pricingBasis === "ex_depot" && !gail.basisAvailability?.ex_depot;
     return (
       <Card style={{ borderColor: colors.neutral }}>
         <SectionTitle>Verdict</SectionTitle>
         <Text style={styles.verdictText}>
-          No competitor could be priced here, so there is no gap to close.
+          {gailUnpublished
+            ? "GAIL has no ex-depot price for this grade here, so there is nothing to compare."
+            : "No competitor could be priced here, so there is no gap to close."}
         </Text>
       </Card>
     );
@@ -499,7 +523,16 @@ function QuoteRow({
   const { colors } = useTheme();
   const isGail = quote.producer === "GAIL";
   const unpriced = quote.invoiceLanded === null;
-  const priced = options?.filter((o) => o.price !== null) ?? [];
+  const depot = quote.pricingBasis === "ex_depot";
+  const delivered = quote.basis === "delivered";
+  // The candidates are listed with both price lists; the card offers the ones
+  // its own list actually carries.
+  const priced = options?.filter((o) => (depot ? o.depotPrice : o.price) !== null) ?? [];
+  const delta = quote.priceDelta;
+  // No depot list for this grade and town: published nothing, which is not the
+  // same as a price that could not be worked out.
+  const notPublished =
+    unpriced && depot && quote.basisAvailability && !quote.basisAvailability.ex_depot;
 
   return (
     <Card
@@ -514,8 +547,9 @@ function QuoteRow({
             {quote.producer}
           </Text>
           {isLeader ? <Pill label="CHEAPEST" color={colors.success} /> : null}
+          {notPublished ? <Pill label="NOT PUBLISHED" color={colors.warning} /> : null}
         </View>
-        <Text style={styles.landed}>{rupees(quote.invoiceLanded)}</Text>
+        <Text style={styles.landed}>{notPublished ? "—" : rupees(quote.invoiceLanded)}</Text>
       </View>
 
       <View style={styles.gradeLineRow}>
@@ -524,6 +558,7 @@ function QuoteRow({
             producer={quote.producer}
             grade={quote.grade}
             options={priced}
+            priceOf={(o) => (depot ? o.depotPrice : o.price)}
             overridden={Boolean(overridden)}
             onSelect={onChangeGrade}
           />
@@ -532,42 +567,54 @@ function QuoteRow({
         )}
         <Text style={styles.gradeLine}>
           {quote.zone ? ` · ${quote.zone}` : ""}
-          {quote.basis ? ` · ${quote.basis.replace("_", "-")}` : ""}
+          {depot ? " · depot" : quote.basis ? ` · ${quote.basis.replace("_", "-")}` : ""}
         </Text>
       </View>
 
       {!unpriced ? (
         <View style={styles.ladder}>
-          <LadderRow
-            label="Ex-Works Price"
-            value={rupees(quote.netBasic)}
-            caption={
-              quote.cashDiscount > 0
-                ? `after ${rupees(quote.cashDiscount)} cash discount`
-                : undefined
-            }
-          />
-          {quote.basis === "ex_works" ? (
-            <LadderRow label="Freight" value={`+ ${rupees(quote.freight)}`} />
-          ) : (
+          <LadderRow label="Basic" value={rupees(quote.basic)} />
+          <LadderRow label="Less: CD - Cash Discount" value={deduction(quote.cashDiscount)} />
+          {depot && quote.dealerDiscount > 0 ? (
             <LadderRow
-              label="Freight"
-              value={rupees(0)}
-              caption={`${quote.producer} publishes a delivered price — already included above`}
+              label="Less: Dealer Discount"
+              value={deduction(quote.dealerDiscount)}
             />
-          )}
-          <View style={styles.ladderDivider} />
-          <View style={styles.deliveredRow}>
-            <Text style={styles.ladderStrong}>Delivered / Landed</Text>
-            <View style={styles.deliveredValueCol}>
-              <Text style={styles.ladderStrong}>{rupees(quote.invoiceLanded)}</Text>
-              {quote.freight ? (
-                <Text style={[styles.freightImpact, { color: colors.warning }]}>
-                  +{rupees(quote.freight)} freight
-                </Text>
-              ) : null}
-            </View>
-          </View>
+          ) : null}
+          {!depot ? (
+            <>
+              <LadderRow label="Less: TD - Trade Discount" value={deduction(quote.tradeDiscount)} />
+              <LadderRow
+                label="Pre Sale Discount (Any Other)"
+                value={deduction(quote.preSaleDiscount)}
+              />
+              <LadderRow label="Net Basic" value={rupees(quote.netBasic)} />
+              <LadderRow
+                label="Freight"
+                value={delivered ? "—" : `+ ${rupees(quote.freight)}`}
+                caption={
+                  delivered
+                    ? `${quote.producer} publishes a delivered price — freight is already inside`
+                    : undefined
+                }
+              />
+              <LadderRow label="Basic + Freight" value={rupees(quote.basicPlusFreight)} />
+            </>
+          ) : null}
+          <LadderRow label="Price Net of GST" value={rupees(quote.priceNetOfGst)} strong />
+          {!isGail ? (
+            <LadderRow
+              label="Price Delta (@ 1 MT) (GAIL - Competitor)"
+              value={delta === null ? "—" : `${delta > 0 ? "+" : delta < 0 ? "- " : ""}${rupees(Math.abs(delta))}`}
+              valueColor={
+                delta === null || delta === 0
+                  ? undefined
+                  : delta > 0
+                    ? colors.danger
+                    : colors.success
+              }
+            />
+          ) : null}
           {quote.quantityDiscount > 0 ? (
             <LadderRow
               label="Less quantity credit"
@@ -575,13 +622,20 @@ function QuoteRow({
             />
           ) : null}
           <LadderRow label="Effective net" value={rupees(quote.effectiveNet)} strong />
-          {quote.insurance > 0 ? (
+          {!depot && quote.insurance > 0 ? (
             <LadderRow
               label="Insurance (billed separately)"
               value={rupees(quote.insurance)}
             />
           ) : null}
         </View>
+      ) : null}
+
+      {notPublished ? (
+        <Text style={styles.notPublished}>
+          This producer has not published an Ex Depot price for this grade at this
+          location.
+        </Text>
       ) : null}
 
       {quote.locationTier === "inferred_via_hpl" ? (
@@ -593,11 +647,22 @@ function QuoteRow({
           substitution before quoting.
         </Caveat>
       ) : null}
-      {quote.gaps.map((gap) => (
-        <Caveat key={gap}>{gap}</Caveat>
-      ))}
+      {quote.gaps
+        .filter((gap) => !(notPublished && /has no depot price covering|not loaded for this round/.test(gap)))
+        .map((gap) => (
+          <Caveat key={gap}>{gap}</Caveat>
+        ))}
     </Card>
   );
+}
+
+/**
+ * A discount as it reads on the zonal sheet: the figure taken off, or Rs 0 where
+ * the row exists and nothing comes off. A dash is kept for a value that is
+ * genuinely unavailable, which a discount row never is.
+ */
+function deduction(amount: number): string {
+  return amount > 0 ? `- ${rupees(amount)}` : rupees(0);
 }
 
 /**
@@ -613,6 +678,7 @@ function GradeSelector({
   producer,
   grade,
   options,
+  priceOf,
   overridden,
   onSelect,
 }: {
@@ -620,6 +686,8 @@ function GradeSelector({
   grade: string | null;
   /** Priced-only candidates for this producer at the current location. */
   options: GradeOption[];
+  /** The price to show beside a candidate — ex works or ex depot, matching the card. */
+  priceOf: (option: GradeOption) => number | null;
   overridden: boolean;
   onSelect: (code: string | null) => void;
 }) {
@@ -677,7 +745,7 @@ function GradeSelector({
                   <Text style={[styles.pickerCode, isSelected && { color: colors.primary }]}>
                     {o.code}
                   </Text>
-                  <Text style={styles.pickerPrice}>{rupees(o.price)}</Text>
+                  <Text style={styles.pickerPrice}>{rupees(priceOf(o))}</Text>
                 </Pressable>
               );
             })}
@@ -693,19 +761,29 @@ function LadderRow({
   value,
   strong,
   caption,
+  valueColor,
 }: {
   label: string;
   value: string;
   strong?: boolean;
   /** A short explanatory line under the row — why this number is what it is. */
   caption?: string;
+  valueColor?: string;
 }) {
   const styles = useStyles();
   return (
     <View>
       <View style={styles.ladderRow}>
         <Text style={[styles.ladderLabel, strong && styles.ladderStrong]}>{label}</Text>
-        <Text style={[styles.ladderValue, strong && styles.ladderStrong]}>{value}</Text>
+        <Text
+          style={[
+            styles.ladderValue,
+            strong && styles.ladderStrong,
+            valueColor ? { color: valueColor, fontWeight: "700" } : null,
+          ]}
+        >
+          {value}
+        </Text>
       </View>
       {caption ? <Text style={styles.ladderCaption}>{caption}</Text> : null}
     </View>
@@ -726,7 +804,14 @@ const useStyles = makeStyles((c) => ({
   quoteName: { flexDirection: "row", alignItems: "center", gap: theme.space(2) },
   producer: { color: c.textPrimary, fontSize: 17, fontWeight: "800" },
   landed: { color: c.textPrimary, fontSize: 17, fontWeight: "700" },
-  gradeLineRow: { flexDirection: "row", alignItems: "center", flexWrap: "wrap", marginTop: 2 },
+  gradeLineRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    flexWrap: "wrap",
+    columnGap: theme.space(2),
+    rowGap: theme.space(1),
+    marginTop: theme.space(1),
+  },
   gradeLine: { color: c.textMuted, fontSize: 12 },
   gradeCode: { color: c.textMuted, fontSize: 12, fontWeight: "700" },
   gradePicker: {
@@ -735,7 +820,6 @@ const useStyles = makeStyles((c) => ({
     gap: 3,
     paddingVertical: 2,
     paddingHorizontal: 6,
-    marginLeft: -6,
     borderRadius: theme.radius.sm,
     backgroundColor: c.surfaceAlt,
   },
@@ -821,14 +905,18 @@ const useStyles = makeStyles((c) => ({
   ladderValue: { color: c.textMuted, fontSize: 12, fontVariant: ["tabular-nums"] },
   ladderStrong: { color: c.textPrimary, fontWeight: "700", fontSize: 13 },
   ladderCaption: { color: c.textFaint, fontSize: 10, marginTop: -1, marginBottom: 2 },
-  ladderDivider: { height: 1, backgroundColor: c.border, marginVertical: theme.space(1) },
-  deliveredRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    paddingVertical: 3,
+  notPublished: {
+    color: c.textMuted,
+    fontSize: 12,
+    marginTop: theme.space(3),
+    lineHeight: 17,
   },
-  deliveredValueCol: { alignItems: "flex-end" },
-  freightImpact: { fontSize: 10, fontWeight: "700", marginTop: 1 },
+  pickerNote: {
+    color: c.textFaint,
+    fontSize: 11,
+    paddingHorizontal: theme.space(4),
+    paddingTop: theme.space(2),
+    paddingBottom: theme.space(1),
+  },
   note: { color: c.textMuted, fontSize: 12, lineHeight: 18, marginBottom: theme.space(2) },
 }));

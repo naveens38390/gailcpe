@@ -133,7 +133,7 @@ Expected counts for 2026-09-01:
 
 | Collection | Count |
 | --- | --- |
-| `priceEntries` | **55,439 for the round** (collection total is cumulative) |
+| `priceEntries` | **82,872 for the round**: 55,439 ex-works + 27,433 ex-depot (collection total is cumulative) |
 | `grades` | 589 |
 | `locations` | 313 |
 | `gradeMappings` | 44 |
@@ -146,7 +146,7 @@ Expected counts for 2026-09-01:
 | `users` | 1 |
 
 - [ ] `npm run build` exits 0
-- [ ] seed reports `priceEntries 55,439` — that figure is the round
+- [ ] seed reports `priceEntries 82,872` — that figure is the round, works and depot together
 - [ ] `npm run verify` matches the table above, allowing for the cumulative total
 - [ ] the round's own count is right, per producer:
 
@@ -158,11 +158,43 @@ db.priceEntries.aggregate([
 // GAIL 16589  HMEL 9120  HPL 4260  IOCL 2760  OPaL 3510  RIL 19200
 ```
 
+Those are the ex-works books. Each producer's ex-depot book rides on the same
+circular, tagged `basis: "ex_depot"`:
+
+```js
+db.priceEntries.aggregate([
+  { $match: { effectiveDate: ISODate("2026-09-01"), basis: "ex_depot" } },
+  { $group: { _id: "$producer", n: { $sum: 1 } } }, { $sort: { _id: 1 } }
+])
+// GAIL 3127  HMEL 8094  HPL 4260  IOCL 2477  OPaL 1683  RIL 7792
+```
+
 - [ ] earlier rounds are still present and unchanged
 
-`priceEntries` is the number to check first. It is the sum of the six matrices
-the build printed: 313×53 + 69×40 + 75×256 + 80×114 + 71×60 + 90×39. If it
+`priceEntries` is the number to check first. Its ex-works part is the sum of the
+six matrices the build printed: 313×53 + 69×40 + 75×256 + 80×114 + 71×60 +
+90×39; the ex-depot part is the six `depot` lines the build printed. If it
 disagrees, the seed and the build are looking at different data.
+
+### Upgrading a database that is already in service
+
+`npm run seed` replaces a whole round and clears several collections first. To
+add the ex-depot books to a database that is already live, use the additive
+loader instead. It writes nothing unless given `--apply`, replaces only
+`ex_depot` rows, and never overwrites a zone that has been corrected by hand:
+
+```bash
+cd backend/api
+MONGODB_URI=<...> GCPE_DATA=<dir with the new price_index.json> npm run load-depot
+MONGODB_URI=<...> GCPE_DATA=<dir with the new price_index.json> npm run load-depot -- --apply
+```
+
+**Deploy the API first.** A build that predates the ex-depot list reads every
+price entry of the round as an ordinary price, so depot rows would be merged into
+the ex-works prices. Load the depot rows only once the new API is serving, then
+restart it: the dataset is cached in memory per round.
+
+After the restart, verify Bhiwandi Ex Depot (GAIL 1,40,420 · IOCL 1,39,296 · RIL 1,38,870 · HMEL 1,39,290 · OPaL 1,39,836) on Compare, then the Deal page on both bases (IOCL leads Ex Works, RIL leads Ex Depot). Depot matching is exact/alias/evidence only, so most towns show "Not published" for some producers; that is expected. Build the APK only after this.
 
 ---
 
@@ -226,6 +258,15 @@ MONGODB_URI=<...>/gailcpe_rehearsal npm run verify
 `GCPE_OUT` sends the build to staging. `GCPE_PREVIOUS` keeps the drift check
 comparing against the round in service — without it the staging directory is
 empty, drift has nothing to compare, and the gate silently does nothing.
+
+> **Mind the storage quota.** The Atlas cluster is the 512 MB free tier and sits
+> close to it. On 2026-09-21 two rehearsal databases of 27 MB and 13 MB were enough
+> to push it over: Atlas then blocks *every* write on the cluster, which includes
+> the production API's per-comparison history insert and every login, so Compare
+> and sign-in fail with a 500 until space is freed. Prefer the local in-memory
+> instance — leave `MONGODB_URI` empty (`MONGODB_URI= npm run seed`) — and if an
+> Atlas rehearsal is unavoidable, check `listDatabases` first and drop it the
+> moment it has served.
 
 Afterwards, drop the rehearsal database and check it is gone by listing
 collections rather than trusting the call. `build.py` writing to

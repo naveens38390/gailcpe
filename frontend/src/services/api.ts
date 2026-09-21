@@ -725,6 +725,9 @@ export const api = {
 
 export type PaymentMode = "cash" | "credit_ifc";
 
+/** Which of a producer's two price lists a quote is read from. */
+export type PricingBasis = "ex_works" | "ex_depot";
+
 export type LocationTier =
   | "exact"
   | "alias"
@@ -949,12 +952,18 @@ export interface CompareInput {
   paymentMode: PaymentMode;
   /** Producer -> the specific equivalent grade to quote instead of the cheapest one Compare would otherwise pick. */
   gradeOverrides?: Record<string, string>;
+  /** Producer -> which price list its card is read from; ex works where a producer is not named. */
+  basisOverrides?: Record<string, PricingBasis>;
+  /** The price list every producer starts on before `basisOverrides`. */
+  pricingBasis?: PricingBasis;
 }
 
 export interface GradeOption {
   code: string;
-  /** Null when this code is not priced at this producer's zone for this location. */
+  /** Ex-works basic price; null when this code is not priced at this producer's zone for this location. */
   price: number | null;
+  /** The same code's ex-depot basic price here; null where the depot list does not carry it. */
+  depotPrice: number | null;
 }
 
 /** Producer -> the competitor codes that could substitute for the compared grade. */
@@ -968,13 +977,26 @@ export interface Quote {
   producer: string;
   grade: string | null;
   basis: string | null;
+  /** Which price list this quote was read from. */
+  pricingBasis: PricingBasis;
+  /** Whether the producer has a price for this grade at this location on each list. */
+  basisAvailability: Record<PricingBasis, boolean>;
   basic: number | null;
   cashDiscount: number;
+  tradeDiscount: number;
+  preSaleDiscount: number;
+  /** RIL's Rs 350/MT, taken off ex-depot prices only; zero everywhere else. */
+  dealerDiscount: number;
   /** basic less cash discount — the ex-works price, before freight. */
   netBasic: number | null;
   freight: number | null;
+  basicPlusFreight: number | null;
   insurance: number;
   invoiceLanded: number | null;
+  /** The workbook's "PRICE NET OF GST" — the same figure as `invoiceLanded`. */
+  priceNetOfGst: number | null;
+  /** GAIL's price net of GST less this producer's, per MT; positive means GAIL is dearer. Null on GAIL's own quote. */
+  priceDelta: number | null;
   quantityDiscount: number;
   effectiveNet: number | null;
   zone: string | null;
@@ -1014,6 +1036,8 @@ export interface DealSimulation {
   grade: string;
   location: string;
   quantityMt: number;
+  /** Which price list every producer in this simulation was read from. */
+  pricingBasis: PricingBasis;
   comparison: Comparison;
   outcome: "leading" | "matched" | "behind" | "not_priced";
   options: DealOption[];

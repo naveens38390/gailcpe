@@ -7,8 +7,10 @@ import {
   type DealSimulation,
   type GradeAvailability,
   type PaymentMode,
+  type PricingBasis,
 } from "../../services/api";
 import { Field, Input, PaymentToggle, PrimaryButton } from "../../components/inputs";
+import { PriceBasisField, BASIS_LABEL } from "../../components/priceBasis";
 import { PriceLadder } from "../../components/priceLadder";
 import { SelectField, type Option } from "../../components/select";
 import { useCatalog } from "../../context/catalog";
@@ -46,6 +48,7 @@ export default function DealScreen() {
   const [location, setLocation] = useState("");
   const [quantity, setQuantity] = useState("250");
   const [paymentMode, setPaymentMode] = useState<PaymentMode>("cash");
+  const [pricingBasis, setPricingBasis] = useState<PricingBasis>("ex_works");
   const [result, setResult] = useState<DealSimulation | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -118,7 +121,7 @@ export default function DealScreen() {
 
   const ready = Boolean(grade && location && Number(quantity) > 0);
 
-  async function run() {
+  async function run(basis: PricingBasis = pricingBasis) {
     setError(null);
     setBusy(true);
     try {
@@ -129,6 +132,7 @@ export default function DealScreen() {
           location,
           quantityMt: Number(quantity) || 0,
           paymentMode,
+          pricingBasis: basis,
         }),
       );
     } catch (e) {
@@ -173,6 +177,16 @@ export default function DealScreen() {
           emptyText="No location publishes a price for this grade."
         />
 
+        <PriceBasisField
+          value={pricingBasis}
+          onChange={(basis) => {
+            setPricingBasis(basis);
+            // Every ranking and correction below is basis-specific, so an answer
+            // already on screen would be describing the other price list.
+            if (result) run(basis);
+          }}
+        />
+
         <Field label="Volume (MT)">
           <Input value={quantity} onChangeText={setQuantity} keyboardType="numeric" />
         </Field>
@@ -181,7 +195,7 @@ export default function DealScreen() {
           <PaymentToggle value={paymentMode} onChange={setPaymentMode} />
         </Field>
 
-        <PrimaryButton label="Run simulation" onPress={run} busy={busy} disabled={!ready} />
+        <PrimaryButton label="Run simulation" onPress={() => run()} busy={busy} disabled={!ready} />
       </Card>
 
       {error ? <ErrorNote message={error} /> : null}
@@ -215,8 +229,8 @@ export default function DealScreen() {
           <Card>
             <PriceLadder
               quotes={result.comparison.quotes}
-              title={`Landed cost · ${result.grade} at ${result.location}`}
-              caption={`${result.quantityMt} MT · ${
+              title={`${result.pricingBasis === "ex_depot" ? "Price net of GST" : "Landed cost"} · ${result.grade} at ${result.location}`}
+              caption={`${BASIS_LABEL[result.pricingBasis ?? "ex_works"]} · ${result.quantityMt} MT · ${
                 result.comparison.paymentMode === "cash" ? "cash" : "14-day credit"
               }`}
             />
@@ -229,8 +243,9 @@ export default function DealScreen() {
                 <OptionRow key={option.label} option={option} />
               ))}
               <Text style={styles.footnote}>
-                Correction is per MT off GAIL&apos;s landed cost. Total is that
-                correction across {result.quantityMt} MT.
+                Correction is per MT off GAIL&apos;s{" "}
+                {result.pricingBasis === "ex_depot" ? "ex-depot price" : "landed cost"}.
+                Total is that correction across {result.quantityMt} MT.
               </Text>
             </Card>
           ) : null}
