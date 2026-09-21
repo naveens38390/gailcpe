@@ -212,6 +212,21 @@ then drop only these seven test copies (about 135 MB): `gailcpe-e2e-run2`, `gail
 Leave `test`, `sample_mflix`, `newsdesk_db` and production `gailcpe` until after the release. The depot
 load itself measured about 4 MB (10 MB kept as the upper bound).
 
+**Automated release check.** `npm run verify-release` (from `backend/api`, in the clean clone) tests a live API and exits
+non-zero on any failure. It needs an existing account and never prints it.
+
+```bash
+export API_URL=https://gcpe-api.onrender.com/api VERIFY_EMAIL=<account> VERIFY_PASSWORD=<password>
+npm run verify-release -- --stage pre-load               # after the new API is live, BEFORE load-depot
+npm run verify-release -- --stage post-load --with-deal  # after load-depot --apply and the API restart
+```
+
+`pre-load` checks Ex Works is unchanged (Bhiwandi figures), the tie-break order, and that Ex Depot reads "Not published" for
+all six. `post-load` adds the Bhiwandi Ex Depot figures, RIL's 350 dealer discount and 1,550 delta, four mixed-basis
+scenarios, Agra "Not published", and (with `--with-deal`) Deal on both bases. Side effects: about 15 comparison-history
+records, and 3 stored simulations with `--with-deal`. The expected figures are the September 2026 round's; update them in
+`src/tools/verify-release.ts` when a new round is published. Passing does not replace looking at the screens.
+
 After the restart, verify Bhiwandi Ex Depot (GAIL 1,40,420 · IOCL 1,39,296 · RIL 1,38,870 · HMEL 1,39,290 · OPaL 1,39,836) on Compare, then the Deal page on both bases (IOCL leads Ex Works, RIL leads Ex Depot). Depot matching is exact/alias/evidence only, so most towns show "Not published" for some producers; that is expected. Build the APK only after this.
 
 ---
