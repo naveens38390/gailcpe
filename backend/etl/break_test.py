@@ -21,9 +21,9 @@ import extractors.haldia as haldia  # noqa: E402
 import extractors.iocl as iocl  # noqa: E402
 
 SEPT = {
-    "haldia": r"C:/Users/DELL/Downloads/HPL PE PRICE LIST 01st SEPT 2026.pdf",
-    "iocl": r"C:/Users/DELL/Downloads/IOC PE Price List 01 Sept 2026.pdf",
-    "hmel": r"C:/Users/DELL/Downloads/PE Price Circular 01.09.2026.pdf",
+    "haldia": r"D:/Gail2/Documents/HPL PE PRICE LIST 01st SEPT 2026.pdf",
+    "iocl": r"D:/Gail2/Documents/IOC PE Price List 01 Sept 2026.pdf",
+    "hmel": r"D:/Gail2/Documents/PE Price Circular 01.09.2026.pdf",
 }
 
 
@@ -131,3 +131,45 @@ print(f"  BILASPUR, unguarded: {zone_u!r:28} {tier_u:<14} (shows what the guard 
 sample = next(t for t in gail_state if guarded.resolve_detailed(t)[1] == "published_map")
 same = guarded.resolve_detailed(sample) == unguarded.resolve_detailed(sample)
 print(f"  {sample}, guarded == unguarded: {same}   {'OK' if same else 'SILENT: guard changed an agreeing match'}")
+
+# ---- Ex-Works fallback build gates (WP2c, decision 0010) -----------------
+# Four ways a corrupted or stale location_equivalence.json could ship a wrong price; each one
+# must stop the build, not just log a warning. Probes equivalence._row_problems() directly (not
+# a full build), against synthetic rows, so a single bad row does not need a 1,076-row table to
+# test in isolation.
+print("\nEx-Works fallback build gates (equivalence.py, WP2c)")
+import equivalence  # noqa: E402
+
+good_row = {
+    "producer": "HMEL", "town": "ABU ROAD", "zone": "Udaipur", "tier": "inferred_location",
+    "distance_km": 95, "crosses_state": False, "corroborated_by_hpl": True,
+    "evidence": "probe", "round": "2026-09-01",
+}
+fake_resolvers = {"HMEL": type("R", (), {"names": ["Udaipur", "Jaipur"]})()}
+fake_canonical = {"ABU ROAD", "AGRA"}
+fake_coverage = {"HMEL": {"map": {"AGRA": "Jaipur"}, "tier_of": {"AGRA": "exact"}}}
+
+
+def probe(name: str, row: dict, held_pairs=frozenset(), want_problem: bool = True) -> None:
+    problems = equivalence._row_problems(row, set(held_pairs), fake_canonical, fake_resolvers, fake_coverage)
+    fired = bool(problems)
+    verdict = "OK" if fired == want_problem else (
+        "SILENT: gate did not fire" if want_problem else "SILENT: gate fired on a clean row"
+    )
+    print(f"  {name:<28}: {verdict}" + (f"  [{problems[0]}]" if problems else ""))
+
+
+probe("clean row (control)", good_row, want_problem=False)
+probe("missing zone", {**good_row, "zone": "Nowhere"})
+probe("ex-depot row", {**good_row, "basis": "ex_depot"})
+probe("held row", good_row, held_pairs=[("HMEL", "ABU ROAD")])
+# A retained-live row is exempt from the held-pair check: "keep the existing live price" and
+# "held as a candidate for a NEW fallback mapping" are independent decisions, and 59 of the 60
+# retained towns are genuinely also held in the new analysis.
+probe("held pair, but a retained-live row", {**good_row, "evidence": "retained_live_hpl_hub"},
+      held_pairs=[("HMEL", "ABU ROAD")], want_problem=False)
+probe("overwrite (disagrees with direct match)", {**good_row, "town": "AGRA"})
+# A row that names the SAME zone a direct match already gives (HPL's rule H: the town's own
+# name is itself an Annexure V district, so add_district_map finds it with no merge needed) is
+# not an overwrite -- it is one of the ~97 documented no-op rows and must pass quietly.
+probe("agreeing row (no-op, not an overwrite)", {**good_row, "town": "AGRA", "zone": "Jaipur"}, want_problem=False)

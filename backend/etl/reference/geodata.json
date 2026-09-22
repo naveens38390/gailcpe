@@ -1,0 +1,8298 @@
+{
+ "_source": "GeoNames.org (https://www.geonames.org/), licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Coordinates only; no GeoNames text is reproduced.",
+ "_note": "Coordinate subset backing location_equivalence.json's distance_km and crosses_state figures. 'towns' are GAIL's 313 canonical locations; 'zones' are producers' priced points/hubs, keyed 'PRODUCER|ZONE'. Checked by equivalence_build.py.",
+ "round": "2026-09-01",
+ "towns": {
+  "ABU ROAD": {
+   "lat": 24.48012,
+   "lon": 72.78186,
+   "state": "Rajasthan",
+   "district": "Sirohi",
+   "uncertain": false
+  },
+  "AGARTALA": {
+   "lat": 23.83605,
+   "lon": 91.27939,
+   "state": "Tripura",
+   "district": "West Tripura",
+   "uncertain": false
+  },
+  "AGRA": {
+   "lat": 27.18333,
+   "lon": 78.01667,
+   "state": "Uttar Pradesh",
+   "district": "Āgra",
+   "uncertain": false
+  },
+  "AHMEDABAD": {
+   "lat": 23.02579,
+   "lon": 72.58727,
+   "state": "Gujarat",
+   "district": "Ahmadābād",
+   "uncertain": false
+  },
+  "AHMEDNAGAR": {
+   "lat": 19.09457,
+   "lon": 74.73843,
+   "state": "Maharashtra",
+   "district": "Ahmadnagar",
+   "uncertain": false
+  },
+  "AJMER": {
+   "lat": 26.4521,
+   "lon": 74.63867,
+   "state": "Rajasthan",
+   "district": "Ajmer",
+   "uncertain": false
+  },
+  "AKOLA": {
+   "lat": 20.70957,
+   "lon": 76.9981,
+   "state": "Maharashtra",
+   "district": "Akola",
+   "uncertain": false
+  },
+  "ALAPPUZHA": {
+   "lat": 9.49004,
+   "lon": 76.3264,
+   "state": "Kerala",
+   "district": "Alappuzha",
+   "uncertain": false
+  },
+  "ALIGARH": {
+   "lat": 27.88145,
+   "lon": 78.07464,
+   "state": "Uttar Pradesh",
+   "district": "Alīgarh",
+   "uncertain": false
+  },
+  "ALLAHABAD": {
+   "lat": 25.44478,
+   "lon": 81.84322,
+   "state": "Uttar Pradesh",
+   "district": "Prayagraj",
+   "uncertain": false
+  },
+  "ALWAR": {
+   "lat": 27.56246,
+   "lon": 76.625,
+   "state": "Rajasthan",
+   "district": "Alwar",
+   "uncertain": false
+  },
+  "AMBALA": {
+   "lat": 30.36099,
+   "lon": 76.79782,
+   "state": "Haryana",
+   "district": "Ambāla",
+   "uncertain": false
+  },
+  "AMRAWATI": {
+   "lat": 20.93333,
+   "lon": 77.75,
+   "state": "Maharashtra",
+   "district": "Amravati Division",
+   "uncertain": false
+  },
+  "AMRITSAR": {
+   "lat": 31.62234,
+   "lon": 74.87534,
+   "state": "Punjab",
+   "district": "Amritsar",
+   "uncertain": false
+  },
+  "ANANTAPUR": {
+   "lat": 14.67784,
+   "lon": 77.60813,
+   "state": "Andhra Pradesh",
+   "district": "Anantapur",
+   "uncertain": false
+  },
+  "ANKLESHWAR": {
+   "lat": 21.63236,
+   "lon": 72.99001,
+   "state": "Gujarat",
+   "district": "Bharūch",
+   "uncertain": false
+  },
+  "ANNAND": {
+   "lat": 22.55251,
+   "lon": 72.9552,
+   "state": "Gujarat",
+   "district": "Anand",
+   "uncertain": false
+  },
+  "ASANGAON": {
+   "lat": 19.43866,
+   "lon": 73.30594,
+   "state": "Maharashtra",
+   "district": "Thane",
+   "uncertain": false
+  },
+  "AURANGABAD": {
+   "lat": 19.87757,
+   "lon": 75.34226,
+   "state": "Maharashtra",
+   "district": "Aurangabad",
+   "uncertain": false
+  },
+  "BADDI": {
+   "lat": 30.95783,
+   "lon": 76.79136,
+   "state": "Himachal Pradesh",
+   "district": "Solan",
+   "uncertain": false
+  },
+  "BAHADURGARH": {
+   "lat": 28.69287,
+   "lon": 76.93555,
+   "state": "Haryana",
+   "district": "Jhajjar",
+   "uncertain": false
+  },
+  "BALASORE": {
+   "lat": 21.49266,
+   "lon": 86.93348,
+   "state": "Odisha",
+   "district": "Bāleshwar",
+   "uncertain": false
+  },
+  "BANGALORE": {
+   "lat": 12.97194,
+   "lon": 77.59369,
+   "state": "Karnataka",
+   "district": "Bangalore Urban",
+   "uncertain": false
+  },
+  "BARAMATI": {
+   "lat": 18.15174,
+   "lon": 74.57767,
+   "state": "Maharashtra",
+   "district": "Pune Division",
+   "uncertain": false
+  },
+  "BAREILLY": {
+   "lat": 28.36678,
+   "lon": 79.43167,
+   "state": "Uttar Pradesh",
+   "district": "Bareilly",
+   "uncertain": false
+  },
+  "BARJORA": {
+   "lat": 23.42754,
+   "lon": 87.29037,
+   "state": "West Bengal",
+   "district": "Bankura",
+   "uncertain": false
+  },
+  "BARMER": {
+   "lat": 25.74572,
+   "lon": 71.39211,
+   "state": "Rajasthan",
+   "district": "Barmer",
+   "uncertain": false
+  },
+  "BARSI": {
+   "lat": 18.23454,
+   "lon": 75.69275,
+   "state": "Maharashtra",
+   "district": "Solapur",
+   "uncertain": false
+  },
+  "BAWAL": {
+   "lat": 28.07184,
+   "lon": 76.58312,
+   "state": "Haryana",
+   "district": "Rewari",
+   "uncertain": false
+  },
+  "BEAWAR": {
+   "lat": 26.10119,
+   "lon": 74.32028,
+   "state": "Rajasthan",
+   "district": "Ajmer",
+   "uncertain": false
+  },
+  "BEED": {
+   "lat": 18.98921,
+   "lon": 75.75634,
+   "state": "Maharashtra",
+   "district": "Bid",
+   "uncertain": false
+  },
+  "BEHROR": {
+   "lat": 27.88832,
+   "lon": 76.28108,
+   "state": "Rajasthan",
+   "district": "Alwar",
+   "uncertain": false
+  },
+  "BELGAUM": {
+   "lat": 15.85212,
+   "lon": 74.50447,
+   "state": "Karnataka",
+   "district": "Belgaum",
+   "uncertain": false
+  },
+  "BELLARY": {
+   "lat": 15.14205,
+   "lon": 76.92398,
+   "state": "Karnataka",
+   "district": "Ballari",
+   "uncertain": false
+  },
+  "BERHAMPUR": {
+   "lat": 19.31151,
+   "lon": 84.7929,
+   "state": "Odisha",
+   "district": "Ganjām",
+   "uncertain": false
+  },
+  "BHADOHI": {
+   "lat": 25.39526,
+   "lon": 82.5703,
+   "state": "Uttar Pradesh",
+   "district": "Bhadohi",
+   "uncertain": false
+  },
+  "BHARATPUR": {
+   "lat": 27.21731,
+   "lon": 77.49009,
+   "state": "Rajasthan",
+   "district": "Bharatpur",
+   "uncertain": false
+  },
+  "BHARUCH": {
+   "lat": 21.69482,
+   "lon": 72.9805,
+   "state": "Gujarat",
+   "district": "Bharūch",
+   "uncertain": false
+  },
+  "BHATINDA": {
+   "lat": 30.20747,
+   "lon": 74.93893,
+   "state": "Punjab",
+   "district": "Bathinda",
+   "uncertain": false
+  },
+  "BHAVNAGAR": {
+   "lat": 21.76287,
+   "lon": 72.15331,
+   "state": "Gujarat",
+   "district": "Bhāvnagar",
+   "uncertain": false
+  },
+  "BHILWARA": {
+   "lat": 25.34707,
+   "lon": 74.64081,
+   "state": "Rajasthan",
+   "district": "Bhilwara",
+   "uncertain": false
+  },
+  "BHIND": {
+   "lat": 26.56671,
+   "lon": 78.78728,
+   "state": "Madhya Pradesh",
+   "district": "Bhind",
+   "uncertain": false
+  },
+  "BHINMAL": {
+   "lat": 24.99944,
+   "lon": 72.27141,
+   "state": "Rajasthan",
+   "district": "Jalore",
+   "uncertain": false
+  },
+  "BHIWADI": {
+   "lat": 28.21024,
+   "lon": 76.86056,
+   "state": "Rajasthan",
+   "district": "Alwar",
+   "uncertain": false
+  },
+  "BHIWANDI": {
+   "lat": 19.30023,
+   "lon": 73.05881,
+   "state": "Maharashtra",
+   "district": "Thane",
+   "uncertain": false
+  },
+  "BHIWANI": {
+   "lat": 28.79304,
+   "lon": 76.13968,
+   "state": "Haryana",
+   "district": "Bhiwani",
+   "uncertain": false
+  },
+  "BHOPAL": {
+   "lat": 23.25469,
+   "lon": 77.40289,
+   "state": "Madhya Pradesh",
+   "district": "Bhopāl",
+   "uncertain": false
+  },
+  "BHUBANESWAR": {
+   "lat": 20.27241,
+   "lon": 85.83385,
+   "state": "Odisha",
+   "district": "Khordha",
+   "uncertain": false
+  },
+  "BIDAR": {
+   "lat": 17.90802,
+   "lon": 77.51524,
+   "state": "Karnataka",
+   "district": "Bīdar",
+   "uncertain": false
+  },
+  "BIKANER": {
+   "lat": 28.01762,
+   "lon": 73.31495,
+   "state": "Rajasthan",
+   "district": "Bikaner",
+   "uncertain": false
+  },
+  "BILASPUR": {
+   "lat": 22.08005,
+   "lon": 82.15543,
+   "state": "Chhattisgarh",
+   "district": "Bilāspur",
+   "uncertain": false
+  },
+  "BORIVALLI": {
+   "lat": 19.23496,
+   "lon": 72.85976,
+   "state": "Maharashtra",
+   "district": "Mumbai Suburban",
+   "uncertain": false
+  },
+  "BUNDHI": {
+   "lat": 25.43855,
+   "lon": 75.63735,
+   "state": "Rajasthan",
+   "district": "Bundi",
+   "uncertain": true
+  },
+  "BURHANPUR": {
+   "lat": 21.30868,
+   "lon": 76.23026,
+   "state": "Madhya Pradesh",
+   "district": "Burhanpur",
+   "uncertain": false
+  },
+  "BYRNIHAT": {
+   "lat": 26.04264,
+   "lon": 91.86599,
+   "state": "Meghalaya",
+   "district": "Ri-Bhoi",
+   "uncertain": false
+  },
+  "CALICUT": {
+   "lat": 11.24802,
+   "lon": 75.7804,
+   "state": "Kerala",
+   "district": "Kozhikode",
+   "uncertain": false
+  },
+  "CHALISGAON": {
+   "lat": 20.45781,
+   "lon": 75.01596,
+   "state": "Maharashtra",
+   "district": "Jalgaon",
+   "uncertain": false
+  },
+  "CHANDIGARH": {
+   "lat": 30.73629,
+   "lon": 76.7884,
+   "state": "Chandigarh",
+   "district": "Chandigarh",
+   "uncertain": false
+  },
+  "CHENNAI": {
+   "lat": 13.08784,
+   "lon": 80.27847,
+   "state": "Tamil Nadu",
+   "district": "Chennai",
+   "uncertain": false
+  },
+  "CHINDWARA": {
+   "lat": 22.05697,
+   "lon": 78.93958,
+   "state": "Madhya Pradesh",
+   "district": "Chhindwāra",
+   "uncertain": false
+  },
+  "CHITTOOR": {
+   "lat": 13.21055,
+   "lon": 79.0956,
+   "state": "Andhra Pradesh",
+   "district": "Chittoor",
+   "uncertain": false
+  },
+  "CHITTOREGARH": {
+   "lat": 24.88963,
+   "lon": 74.62403,
+   "state": "Rajasthan",
+   "district": "Chittaurgarh",
+   "uncertain": false
+  },
+  "COCHIN": {
+   "lat": 9.93988,
+   "lon": 76.26022,
+   "state": "Kerala",
+   "district": "Ernākulam",
+   "uncertain": false
+  },
+  "COIMBATORE": {
+   "lat": 11.00555,
+   "lon": 76.96612,
+   "state": "Tamil Nadu",
+   "district": "Coimbatore",
+   "uncertain": false
+  },
+  "CUDDAPAH": {
+   "lat": 14.47995,
+   "lon": 78.82346,
+   "state": "Andhra Pradesh",
+   "district": "YSR",
+   "uncertain": false
+  },
+  "CUTTACK": {
+   "lat": 20.46497,
+   "lon": 85.87927,
+   "state": "Odisha",
+   "district": "Cuttack",
+   "uncertain": false
+  },
+  "DAMAN": {
+   "lat": 20.41431,
+   "lon": 72.83236,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "district": "Daman",
+   "uncertain": false
+  },
+  "DAMTAL": {
+   "lat": 32.22664,
+   "lon": 75.66323,
+   "state": "Himachal Pradesh",
+   "district": "Kāngra",
+   "uncertain": true
+  },
+  "DEGLOOR": {
+   "lat": 18.54829,
+   "lon": 77.57695,
+   "state": "Maharashtra",
+   "district": "Nanded",
+   "uncertain": false
+  },
+  "DEHRADUN": {
+   "lat": 30.32443,
+   "lon": 78.03392,
+   "state": "Uttarakhand",
+   "district": "Dehradun",
+   "uncertain": false
+  },
+  "DELHI": {
+   "lat": 28.65195,
+   "lon": 77.23149,
+   "state": "Delhi",
+   "district": null,
+   "uncertain": false
+  },
+  "DHANBAD": {
+   "lat": 23.79759,
+   "lon": 86.42992,
+   "state": "Jharkhand",
+   "district": "Dhānbād",
+   "uncertain": false
+  },
+  "DHAR": {
+   "lat": 22.59373,
+   "lon": 75.29774,
+   "state": "Madhya Pradesh",
+   "district": "Dhār",
+   "uncertain": false
+  },
+  "DHARUHERA": {
+   "lat": 28.20553,
+   "lon": 76.79691,
+   "state": "Haryana",
+   "district": "Rewari",
+   "uncertain": false
+  },
+  "DHOLPUR": {
+   "lat": 26.69286,
+   "lon": 77.87968,
+   "state": "Rajasthan",
+   "district": "Dhaulpur",
+   "uncertain": false
+  },
+  "DHORAJI": {
+   "lat": 21.73359,
+   "lon": 70.45004,
+   "state": "Gujarat",
+   "district": "Rājkot",
+   "uncertain": false
+  },
+  "DHULE": {
+   "lat": 20.9013,
+   "lon": 74.77737,
+   "state": "Maharashtra",
+   "district": "Dhule",
+   "uncertain": false
+  },
+  "DIBIYAPUR": {
+   "lat": 26.63178,
+   "lon": 79.55048,
+   "state": "Uttar Pradesh",
+   "district": "Auraiya",
+   "uncertain": true
+  },
+  "DIBRUGARH": {
+   "lat": 27.47989,
+   "lon": 94.90837,
+   "state": "Assam",
+   "district": "Dibrugarh",
+   "uncertain": false
+  },
+  "DIMAPUR": {
+   "lat": 25.91174,
+   "lon": 93.7217,
+   "state": "Nagaland",
+   "district": "Dimapur",
+   "uncertain": false
+  },
+  "DISPUR": {
+   "lat": 26.13564,
+   "lon": 91.80069,
+   "state": "Assam",
+   "district": "Kamrup Metropolitan",
+   "uncertain": false
+  },
+  "DIU": {
+   "lat": 20.71405,
+   "lon": 70.98224,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "district": "Diu",
+   "uncertain": false
+  },
+  "DURG": {
+   "lat": 21.19147,
+   "lon": 81.27619,
+   "state": "Chhattisgarh",
+   "district": "Durg",
+   "uncertain": false
+  },
+  "DURGAPUR": {
+   "lat": 23.51583,
+   "lon": 87.30801,
+   "state": "West Bengal",
+   "district": "Paschim Bardhaman",
+   "uncertain": false
+  },
+  "ELURU": {
+   "lat": 16.71311,
+   "lon": 81.10437,
+   "state": "Andhra Pradesh",
+   "district": "Eluru",
+   "uncertain": false
+  },
+  "ERODE": {
+   "lat": 11.3428,
+   "lon": 77.72741,
+   "state": "Tamil Nadu",
+   "district": "Erode",
+   "uncertain": false
+  },
+  "ETAWAH": {
+   "lat": 26.77615,
+   "lon": 79.02133,
+   "state": "Uttar Pradesh",
+   "district": "District Etawah",
+   "uncertain": false
+  },
+  "FARIDABAD": {
+   "lat": 28.41124,
+   "lon": 77.31316,
+   "state": "Haryana",
+   "district": "Faridabad",
+   "uncertain": false
+  },
+  "FATEHPUR": {
+   "lat": 25.92774,
+   "lon": 80.81266,
+   "state": "Uttar Pradesh",
+   "district": "Fatehpur",
+   "uncertain": false
+  },
+  "FAZILKA": {
+   "lat": 30.40207,
+   "lon": 74.02836,
+   "state": "Punjab",
+   "district": "Fazilka",
+   "uncertain": false
+  },
+  "FIROZPUR": {
+   "lat": 30.92574,
+   "lon": 74.61311,
+   "state": "Punjab",
+   "district": "Firozpur",
+   "uncertain": false
+  },
+  "GADARWARA": {
+   "lat": 22.9235,
+   "lon": 78.7849,
+   "state": "Madhya Pradesh",
+   "district": "Narsimhapur",
+   "uncertain": false
+  },
+  "GADCHIROLI": {
+   "lat": 20.18061,
+   "lon": 80.00522,
+   "state": "Maharashtra",
+   "district": "Gadchiroli",
+   "uncertain": false
+  },
+  "GANDHIDHAM": {
+   "lat": 23.08333,
+   "lon": 70.13333,
+   "state": "Gujarat",
+   "district": "Kutch",
+   "uncertain": false
+  },
+  "GANGTOK (SIKKIM)": {
+   "lat": 27.32574,
+   "lon": 88.61216,
+   "state": "Sikkim",
+   "district": "Gangtok",
+   "uncertain": false
+  },
+  "GAYA": {
+   "lat": 24.79686,
+   "lon": 85.00385,
+   "state": "Bihar",
+   "district": "Gayā",
+   "uncertain": false
+  },
+  "GAZIABAD/NOIDA": {
+   "lat": 28.58,
+   "lon": 77.33,
+   "state": "Uttar Pradesh",
+   "district": "Gautam Buddha Nagar",
+   "uncertain": false
+  },
+  "GHAZIPUR": {
+   "lat": 25.58333,
+   "lon": 83.58526,
+   "state": "Uttar Pradesh",
+   "district": "Ghazipur",
+   "uncertain": false
+  },
+  "GOA": {
+   "lat": 15.38914,
+   "lon": 73.81491,
+   "state": "Goa",
+   "district": "South Goa",
+   "uncertain": false
+  },
+  "GODHRA": {
+   "lat": 22.77547,
+   "lon": 73.61488,
+   "state": "Gujarat",
+   "district": "Pānch Mahāls",
+   "uncertain": false
+  },
+  "GONDIA": {
+   "lat": 21.46026,
+   "lon": 80.19205,
+   "state": "Maharashtra",
+   "district": "Gondiya",
+   "uncertain": false
+  },
+  "GORAKHPUR": {
+   "lat": 26.76628,
+   "lon": 83.36889,
+   "state": "Uttar Pradesh",
+   "district": "Gorakhpur",
+   "uncertain": false
+  },
+  "GUNA": {
+   "lat": 24.64691,
+   "lon": 77.3113,
+   "state": "Madhya Pradesh",
+   "district": "Guna",
+   "uncertain": false
+  },
+  "GUNTUR": {
+   "lat": 16.29974,
+   "lon": 80.45729,
+   "state": "Andhra Pradesh",
+   "district": "Guntūr",
+   "uncertain": false
+  },
+  "GURGAON": {
+   "lat": 28.4601,
+   "lon": 77.02635,
+   "state": "Haryana",
+   "district": "Gurugram",
+   "uncertain": false
+  },
+  "GUWAHATI": {
+   "lat": 26.1844,
+   "lon": 91.7458,
+   "state": "Assam",
+   "district": "Kamrup Metropolitan",
+   "uncertain": false
+  },
+  "GWALIOR": {
+   "lat": 26.22983,
+   "lon": 78.17337,
+   "state": "Madhya Pradesh",
+   "district": "Gwalior",
+   "uncertain": false
+  },
+  "HALDAWANI": {
+   "lat": 29.22254,
+   "lon": 79.5286,
+   "state": "Uttarakhand",
+   "district": "Nainital",
+   "uncertain": false
+  },
+  "HALDIA": {
+   "lat": 22.06046,
+   "lon": 88.10975,
+   "state": "West Bengal",
+   "district": "Purba Medinipur",
+   "uncertain": false
+  },
+  "HALOL": {
+   "lat": 22.50321,
+   "lon": 73.47242,
+   "state": "Gujarat",
+   "district": "Pānch Mahāls",
+   "uncertain": false
+  },
+  "HALVAD": {
+   "lat": 23.01516,
+   "lon": 71.18029,
+   "state": "Gujarat",
+   "district": "Morbi",
+   "uncertain": false
+  },
+  "HARIDWAR": {
+   "lat": 29.94791,
+   "lon": 78.16025,
+   "state": "Uttarakhand",
+   "district": "Haridwar",
+   "uncertain": false
+  },
+  "HATHRAS": {
+   "lat": 27.59551,
+   "lon": 78.05201,
+   "state": "Uttar Pradesh",
+   "district": "Hathras",
+   "uncertain": false
+  },
+  "HIMMATNAGAR": {
+   "lat": 23.59893,
+   "lon": 72.96602,
+   "state": "Gujarat",
+   "district": "Sabarkantha",
+   "uncertain": false
+  },
+  "HINGANGHAT": {
+   "lat": 20.54875,
+   "lon": 78.83978,
+   "state": "Maharashtra",
+   "district": "Wardha",
+   "uncertain": false
+  },
+  "HISSAR": {
+   "lat": 29.15394,
+   "lon": 75.72294,
+   "state": "Haryana",
+   "district": "Hisār",
+   "uncertain": false
+  },
+  "HOSUR": {
+   "lat": 12.73647,
+   "lon": 77.83264,
+   "state": "Tamil Nadu",
+   "district": "Krishnagiri",
+   "uncertain": false
+  },
+  "HUBLI": {
+   "lat": 15.34776,
+   "lon": 75.13378,
+   "state": "Karnataka",
+   "district": "Dharwad",
+   "uncertain": false
+  },
+  "HYDERABAD": {
+   "lat": 17.38405,
+   "lon": 78.45636,
+   "state": "Telangana",
+   "district": "Hyderābād",
+   "uncertain": false
+  },
+  "IDUKKI": {
+   "lat": 9.85,
+   "lon": 76.96667,
+   "state": "Kerala",
+   "district": "Idukki",
+   "uncertain": false
+  },
+  "IMPHAL": {
+   "lat": 24.80805,
+   "lon": 93.9442,
+   "state": "Manipur",
+   "district": "Imphal East",
+   "uncertain": false
+  },
+  "INDORE": {
+   "lat": 22.71792,
+   "lon": 75.8333,
+   "state": "Madhya Pradesh",
+   "district": "Indore",
+   "uncertain": false
+  },
+  "JABALPUR": {
+   "lat": 23.16697,
+   "lon": 79.95006,
+   "state": "Madhya Pradesh",
+   "district": "Jabalpur",
+   "uncertain": false
+  },
+  "JAGADHARI": {
+   "lat": 30.16719,
+   "lon": 77.30367,
+   "state": "Haryana",
+   "district": "Yamunanagar",
+   "uncertain": false
+  },
+  "JAGDISHPUR": {
+   "lat": 26.74967,
+   "lon": 80.5451,
+   "state": "Uttar Pradesh",
+   "district": "District Unnao",
+   "uncertain": true
+  },
+  "JAIPUR": {
+   "lat": 26.91962,
+   "lon": 75.78781,
+   "state": "Rajasthan",
+   "district": "Jaipur",
+   "uncertain": false
+  },
+  "JALANDHAR": {
+   "lat": 31.32556,
+   "lon": 75.57917,
+   "state": "Punjab",
+   "district": "Jalandhar",
+   "uncertain": false
+  },
+  "JALGAON": {
+   "lat": 21.00292,
+   "lon": 75.56602,
+   "state": "Maharashtra",
+   "district": "Jalgaon",
+   "uncertain": false
+  },
+  "JALNA": {
+   "lat": 19.84102,
+   "lon": 75.88636,
+   "state": "Maharashtra",
+   "district": "Jalna",
+   "uncertain": false
+  },
+  "JAM KHAMBH": {
+   "lat": 22.20685,
+   "lon": 69.65031,
+   "state": "Gujarat",
+   "district": "Devbhumi Dwarka",
+   "uncertain": false
+  },
+  "JAMMU": {
+   "lat": 32.73528,
+   "lon": 74.86167,
+   "state": "Jammu and Kashmir",
+   "district": "Jammu",
+   "uncertain": false
+  },
+  "JAMNAGAR": {
+   "lat": 22.47292,
+   "lon": 70.06673,
+   "state": "Gujarat",
+   "district": "Jāmnagar",
+   "uncertain": false
+  },
+  "JAMSHEDPUR": {
+   "lat": 22.80278,
+   "lon": 86.18545,
+   "state": "Jharkhand",
+   "district": "Purba Singhbhum",
+   "uncertain": false
+  },
+  "JETPUR": {
+   "lat": 21.75482,
+   "lon": 70.62347,
+   "state": "Gujarat",
+   "district": "Rājkot",
+   "uncertain": false
+  },
+  "JEYPORE": {
+   "lat": 18.8563,
+   "lon": 82.5716,
+   "state": "Odisha",
+   "district": "Koraput",
+   "uncertain": false
+  },
+  "JODHPUR": {
+   "lat": 26.26841,
+   "lon": 73.00594,
+   "state": "Rajasthan",
+   "district": "Jodhpur",
+   "uncertain": false
+  },
+  "JUNAGADH": {
+   "lat": 21.51966,
+   "lon": 70.45981,
+   "state": "Gujarat",
+   "district": "Jūnāgadh",
+   "uncertain": false
+  },
+  "KADI": {
+   "lat": 23.29908,
+   "lon": 72.33362,
+   "state": "Gujarat",
+   "district": "Mahesāna",
+   "uncertain": false
+  },
+  "KAIMUR": {
+   "lat": 25.04049,
+   "lon": 83.60749,
+   "state": "Bihar",
+   "district": "Kaimur",
+   "uncertain": false
+  },
+  "KAITHAL": {
+   "lat": 29.80153,
+   "lon": 76.39959,
+   "state": "Haryana",
+   "district": "Kaithal",
+   "uncertain": false
+  },
+  "KAKINADA": {
+   "lat": 16.96036,
+   "lon": 82.23809,
+   "state": "Andhra Pradesh",
+   "district": "Kakinada",
+   "uncertain": false
+  },
+  "KALA AMB": {
+   "lat": 30.49721,
+   "lon": 77.21358,
+   "state": "Himachal Pradesh",
+   "district": "Sirmaur",
+   "uncertain": false
+  },
+  "KALOL": {
+   "lat": 23.24656,
+   "lon": 72.49508,
+   "state": "Gujarat",
+   "district": "Gāndhīnagar",
+   "uncertain": true
+  },
+  "KANHANGAD": {
+   "lat": 12.30814,
+   "lon": 75.10632,
+   "state": "Kerala",
+   "district": "Kāsaragod",
+   "uncertain": false
+  },
+  "KANNUR": {
+   "lat": 11.86752,
+   "lon": 75.35763,
+   "state": "Kerala",
+   "district": "Kannur",
+   "uncertain": false
+  },
+  "KANPUR": {
+   "lat": 26.46523,
+   "lon": 80.34975,
+   "state": "Uttar Pradesh",
+   "district": "Kānpur",
+   "uncertain": false
+  },
+  "KARAIKAL": {
+   "lat": 10.91667,
+   "lon": 79.83333,
+   "state": "Puducherry",
+   "district": "Kāraikāl",
+   "uncertain": false
+  },
+  "KARNAL": {
+   "lat": 29.69197,
+   "lon": 76.98448,
+   "state": "Haryana",
+   "district": "Karnāl",
+   "uncertain": false
+  },
+  "KARUR": {
+   "lat": 10.95771,
+   "lon": 78.08095,
+   "state": "Tamil Nadu",
+   "district": "Karur",
+   "uncertain": false
+  },
+  "KASHIPUR": {
+   "lat": 29.21399,
+   "lon": 78.95693,
+   "state": "Uttarakhand",
+   "district": "Udham Singh Nagar",
+   "uncertain": false
+  },
+  "KASORGOD": {
+   "lat": 12.49838,
+   "lon": 74.98959,
+   "state": "Kerala",
+   "district": "Kāsaragod",
+   "uncertain": false
+  },
+  "KATHUA": {
+   "lat": 32.36941,
+   "lon": 75.52539,
+   "state": "Jammu and Kashmir",
+   "district": "Kathua",
+   "uncertain": false
+  },
+  "KATIHAR": {
+   "lat": 25.53852,
+   "lon": 87.57044,
+   "state": "Bihar",
+   "district": "Katihar",
+   "uncertain": false
+  },
+  "KATNI": {
+   "lat": 23.83776,
+   "lon": 80.39405,
+   "state": "Madhya Pradesh",
+   "district": "Katni",
+   "uncertain": false
+  },
+  "KHAMGAON": {
+   "lat": 20.70738,
+   "lon": 76.56827,
+   "state": "Maharashtra",
+   "district": "Buldhana",
+   "uncertain": false
+  },
+  "KHAMMAM": {
+   "lat": 17.24767,
+   "lon": 80.14368,
+   "state": "Telangana",
+   "district": "Khammam",
+   "uncertain": false
+  },
+  "KHANDWA": {
+   "lat": 21.82427,
+   "lon": 76.35086,
+   "state": "Madhya Pradesh",
+   "district": "Khandwa",
+   "uncertain": false
+  },
+  "KHARGONE": {
+   "lat": 21.82292,
+   "lon": 75.61394,
+   "state": "Madhya Pradesh",
+   "district": "Khargone",
+   "uncertain": false
+  },
+  "KHEDA": {
+   "lat": 22.75218,
+   "lon": 72.68533,
+   "state": "Gujarat",
+   "district": "Kheda",
+   "uncertain": false
+  },
+  "KHOPOLI": {
+   "lat": 18.78562,
+   "lon": 73.34589,
+   "state": "Maharashtra",
+   "district": "Raigarh",
+   "uncertain": false
+  },
+  "KOLAR": {
+   "lat": 13.13768,
+   "lon": 78.12999,
+   "state": "Karnataka",
+   "district": "Kolar",
+   "uncertain": false
+  },
+  "KOLHAPUR": {
+   "lat": 16.69563,
+   "lon": 74.23167,
+   "state": "Maharashtra",
+   "district": "Kolhapur",
+   "uncertain": false
+  },
+  "KOLKATA": {
+   "lat": 22.56263,
+   "lon": 88.36304,
+   "state": "West Bengal",
+   "district": "Kolkata",
+   "uncertain": false
+  },
+  "KOLLAM": {
+   "lat": 8.88113,
+   "lon": 76.58469,
+   "state": "Kerala",
+   "district": "Kollam",
+   "uncertain": false
+  },
+  "KOTA": {
+   "lat": 25.18254,
+   "lon": 75.83907,
+   "state": "Rajasthan",
+   "district": "Kota",
+   "uncertain": false
+  },
+  "KOTTAYAM": {
+   "lat": 9.58692,
+   "lon": 76.52132,
+   "state": "Kerala",
+   "district": "Kottayam",
+   "uncertain": false
+  },
+  "KUDAL": {
+   "lat": 16.01148,
+   "lon": 73.68867,
+   "state": "Maharashtra",
+   "district": "Sindhudurg",
+   "uncertain": false
+  },
+  "KUNDLI": {
+   "lat": 28.86913,
+   "lon": 77.12061,
+   "state": "Haryana",
+   "district": "Sonīpat",
+   "uncertain": false
+  },
+  "KURNOOL": {
+   "lat": 15.82887,
+   "lon": 78.03602,
+   "state": "Andhra Pradesh",
+   "district": "Kurnool",
+   "uncertain": false
+  },
+  "KURUKSHETRA": {
+   "lat": 29.9657,
+   "lon": 76.837,
+   "state": "Haryana",
+   "district": "Kurukshetra",
+   "uncertain": false
+  },
+  "LASALGAON/CHALISGAON": {
+   "lat": 20.1427,
+   "lon": 74.23946,
+   "state": "Maharashtra",
+   "district": "Nashik Division",
+   "uncertain": false
+  },
+  "LATUR": {
+   "lat": 18.39721,
+   "lon": 76.56784,
+   "state": "Maharashtra",
+   "district": "Latur",
+   "uncertain": false
+  },
+  "LONAWALA": {
+   "lat": 18.75275,
+   "lon": 73.40575,
+   "state": "Maharashtra",
+   "district": "Pune Division",
+   "uncertain": false
+  },
+  "LOTE": {
+   "lat": null,
+   "lon": null,
+   "state": "Maharashtra",
+   "district": null,
+   "uncertain": true
+  },
+  "LUCKNOW": {
+   "lat": 26.83928,
+   "lon": 80.92313,
+   "state": "Uttar Pradesh",
+   "district": "Lucknow",
+   "uncertain": false
+  },
+  "LUDHIANA": {
+   "lat": 30.91204,
+   "lon": 75.85379,
+   "state": "Punjab",
+   "district": "Ludhiāna",
+   "uncertain": false
+  },
+  "MADURAI": {
+   "lat": 9.919,
+   "lon": 78.11953,
+   "state": "Tamil Nadu",
+   "district": "Madurai",
+   "uncertain": false
+  },
+  "MAHBOOBNAGAR": {
+   "lat": 16.74385,
+   "lon": 77.98597,
+   "state": "Telangana",
+   "district": "Mahbūbnagar",
+   "uncertain": false
+  },
+  "MAHUVA": {
+   "lat": 21.09007,
+   "lon": 71.76904,
+   "state": "Gujarat",
+   "district": "Bhāvnagar",
+   "uncertain": false
+  },
+  "MANDSAUR": {
+   "lat": 24.07184,
+   "lon": 75.06986,
+   "state": "Madhya Pradesh",
+   "district": "Mandsaur",
+   "uncertain": false
+  },
+  "MATHURA": {
+   "lat": 27.5035,
+   "lon": 77.67215,
+   "state": "Uttar Pradesh",
+   "district": "Mathura",
+   "uncertain": false
+  },
+  "MEDAK": {
+   "lat": 18.04531,
+   "lon": 78.26078,
+   "state": "Telangana",
+   "district": "Medak",
+   "uncertain": false
+  },
+  "MEERUT": {
+   "lat": 28.98002,
+   "lon": 77.70636,
+   "state": "Uttar Pradesh",
+   "district": "Meerut",
+   "uncertain": false
+  },
+  "MEHSANA": {
+   "lat": 23.59864,
+   "lon": 72.38472,
+   "state": "Gujarat",
+   "district": "Mahesāna",
+   "uncertain": false
+  },
+  "MODINAGAR": {
+   "lat": 28.83059,
+   "lon": 77.57295,
+   "state": "Uttar Pradesh",
+   "district": "Ghāziābād",
+   "uncertain": false
+  },
+  "MORADABAD": {
+   "lat": 28.83893,
+   "lon": 78.77684,
+   "state": "Uttar Pradesh",
+   "district": "Morādābād",
+   "uncertain": false
+  },
+  "MORBI": {
+   "lat": 22.81731,
+   "lon": 70.8377,
+   "state": "Gujarat",
+   "district": "Morbi",
+   "uncertain": false
+  },
+  "MUDHOL": {
+   "lat": 16.33354,
+   "lon": 75.28305,
+   "state": "Karnataka",
+   "district": "Bagalkot",
+   "uncertain": false
+  },
+  "MUMBAI": {
+   "lat": 19.07283,
+   "lon": 72.88261,
+   "state": "Maharashtra",
+   "district": null,
+   "uncertain": false
+  },
+  "MUNDRA": {
+   "lat": 22.83918,
+   "lon": 69.7219,
+   "state": "Gujarat",
+   "district": "Kutch",
+   "uncertain": false
+  },
+  "MUZAFFARNAGAR": {
+   "lat": 29.47091,
+   "lon": 77.70332,
+   "state": "Uttar Pradesh",
+   "district": "Muzaffarnagar",
+   "uncertain": false
+  },
+  "MYSORE": {
+   "lat": 12.29791,
+   "lon": 76.63925,
+   "state": "Karnataka",
+   "district": "Mysore",
+   "uncertain": false
+  },
+  "Machlipatnam": {
+   "lat": 16.18747,
+   "lon": 81.13888,
+   "state": "Andhra Pradesh",
+   "district": "Krishna",
+   "uncertain": false
+  },
+  "Mangalore": {
+   "lat": 12.91723,
+   "lon": 74.85603,
+   "state": "Karnataka",
+   "district": "Dakshina Kannada",
+   "uncertain": false
+  },
+  "NAGAUR": {
+   "lat": 27.20201,
+   "lon": 73.73394,
+   "state": "Rajasthan",
+   "district": "Nagaur",
+   "uncertain": false
+  },
+  "NAGPUR": {
+   "lat": 21.14631,
+   "lon": 79.08491,
+   "state": "Maharashtra",
+   "district": "Nagpur Division",
+   "uncertain": false
+  },
+  "NALANDA": {
+   "lat": 25.25,
+   "lon": 85.58333,
+   "state": "Bihar",
+   "district": "Nālanda",
+   "uncertain": false
+  },
+  "NALGONDA": {
+   "lat": 17.05439,
+   "lon": 79.26707,
+   "state": "Telangana",
+   "district": "Nalgonda",
+   "uncertain": false
+  },
+  "NAMAKKAL": {
+   "lat": 11.22126,
+   "lon": 78.16524,
+   "state": "Tamil Nadu",
+   "district": "Namakkal",
+   "uncertain": false
+  },
+  "NANDED": {
+   "lat": 19.16023,
+   "lon": 77.31497,
+   "state": "Maharashtra",
+   "district": "Nanded",
+   "uncertain": false
+  },
+  "NANDYAL": {
+   "lat": 15.47799,
+   "lon": 78.4836,
+   "state": "Andhra Pradesh",
+   "district": "Nandyal",
+   "uncertain": false
+  },
+  "NARSARAOPET": {
+   "lat": 16.23488,
+   "lon": 80.04927,
+   "state": "Andhra Pradesh",
+   "district": "Palnadu",
+   "uncertain": false
+  },
+  "NARWANA": {
+   "lat": 29.59903,
+   "lon": 76.11927,
+   "state": "Haryana",
+   "district": "Jīnd",
+   "uncertain": false
+  },
+  "NASHIK": {
+   "lat": 19.99727,
+   "lon": 73.79096,
+   "state": "Maharashtra",
+   "district": "Nashik Division",
+   "uncertain": false
+  },
+  "NEEMUCH": {
+   "lat": 24.47,
+   "lon": 74.87,
+   "state": "Madhya Pradesh",
+   "district": "Neemuch",
+   "uncertain": false
+  },
+  "NELLORE": {
+   "lat": 14.44992,
+   "lon": 79.98697,
+   "state": "Andhra Pradesh",
+   "district": "Nellore",
+   "uncertain": false
+  },
+  "NOKHA": {
+   "lat": 27.56155,
+   "lon": 73.47141,
+   "state": "Rajasthan",
+   "district": "Bikaner",
+   "uncertain": false
+  },
+  "ONGOLE": {
+   "lat": 15.50357,
+   "lon": 80.04454,
+   "state": "Andhra Pradesh",
+   "district": "Prakasam",
+   "uncertain": false
+  },
+  "PADRA": {
+   "lat": 22.2398,
+   "lon": 73.08451,
+   "state": "Gujarat",
+   "district": "Vadodara",
+   "uncertain": false
+  },
+  "PALANPUR": {
+   "lat": 24.17128,
+   "lon": 72.43827,
+   "state": "Gujarat",
+   "district": "Banās Kāntha",
+   "uncertain": false
+  },
+  "PALEJ": {
+   "lat": 21.91547,
+   "lon": 73.07889,
+   "state": "Gujarat",
+   "district": "Vadodara",
+   "uncertain": false
+  },
+  "PALGHAT": {
+   "lat": 10.77319,
+   "lon": 76.65366,
+   "state": "Kerala",
+   "district": "Palakkad",
+   "uncertain": false
+  },
+  "PALI": {
+   "lat": 25.77276,
+   "lon": 73.32335,
+   "state": "Rajasthan",
+   "district": "Pali",
+   "uncertain": false
+  },
+  "PANIPAT": {
+   "lat": 29.38747,
+   "lon": 76.96825,
+   "state": "Haryana",
+   "district": "Panipat",
+   "uncertain": false
+  },
+  "PAONTA SAHIB": {
+   "lat": 30.43666,
+   "lon": 77.62462,
+   "state": "Himachal Pradesh",
+   "district": "Sirmaur",
+   "uncertain": false
+  },
+  "PARBHANI": {
+   "lat": 19.26855,
+   "lon": 76.77081,
+   "state": "Maharashtra",
+   "district": "Parbhani",
+   "uncertain": false
+  },
+  "PARWANU": {
+   "lat": 30.83716,
+   "lon": 76.96143,
+   "state": "Himachal Pradesh",
+   "district": "Solan",
+   "uncertain": false
+  },
+  "PATHANAMTH": {
+   "lat": 9.26667,
+   "lon": 76.78333,
+   "state": "Kerala",
+   "district": "Pattanamtitta",
+   "uncertain": false
+  },
+  "PATNA": {
+   "lat": 25.59408,
+   "lon": 85.13563,
+   "state": "Bihar",
+   "district": "Patna",
+   "uncertain": false
+  },
+  "PHALODI": {
+   "lat": 27.13102,
+   "lon": 72.36826,
+   "state": "Rajasthan",
+   "district": "Jodhpur",
+   "uncertain": false
+  },
+  "PIDUGURALLA": {
+   "lat": 16.47926,
+   "lon": 79.88632,
+   "state": "Andhra Pradesh",
+   "district": "Palnadu",
+   "uncertain": false
+  },
+  "PONDICHERRY": {
+   "lat": 11.93381,
+   "lon": 79.82979,
+   "state": "Puducherry",
+   "district": "Puducherry",
+   "uncertain": false
+  },
+  "PORBANDAR": {
+   "lat": 21.64219,
+   "lon": 69.60929,
+   "state": "Gujarat",
+   "district": "Porbandar",
+   "uncertain": false
+  },
+  "PUNE": {
+   "lat": 18.51957,
+   "lon": 73.85535,
+   "state": "Maharashtra",
+   "district": "Pune Division",
+   "uncertain": false
+  },
+  "RAI BAREILLY": {
+   "lat": 26.2309,
+   "lon": 81.23315,
+   "state": "Uttar Pradesh",
+   "district": "District Raebareli",
+   "uncertain": false
+  },
+  "RAIGAD": {
+   "lat": 18.57,
+   "lon": 73.13,
+   "state": "Maharashtra",
+   "district": "Raigarh",
+   "uncertain": false
+  },
+  "RAIGARH": {
+   "lat": 21.89764,
+   "lon": 83.3966,
+   "state": "Chhattisgarh",
+   "district": "Raigarh",
+   "uncertain": false
+  },
+  "RAIPUR": {
+   "lat": 21.23333,
+   "lon": 81.63333,
+   "state": "Chhattisgarh",
+   "district": "Raipur",
+   "uncertain": false
+  },
+  "RAJKOT": {
+   "lat": 22.29161,
+   "lon": 70.79322,
+   "state": "Gujarat",
+   "district": "Rājkot",
+   "uncertain": false
+  },
+  "RAJMUNDHRY": {
+   "lat": 17.00517,
+   "lon": 81.77784,
+   "state": "Andhra Pradesh",
+   "district": "East Godāvari",
+   "uncertain": false
+  },
+  "RAJNANDGAON": {
+   "lat": 21.09687,
+   "lon": 81.0289,
+   "state": "Chhattisgarh",
+   "district": "Rāj Nāndgaon",
+   "uncertain": false
+  },
+  "RAJPALAYAM": {
+   "lat": 9.45296,
+   "lon": 77.55335,
+   "state": "Tamil Nadu",
+   "district": "Virudhunagar",
+   "uncertain": false
+  },
+  "RAJPURA": {
+   "lat": 30.47856,
+   "lon": 76.59284,
+   "state": "Punjab",
+   "district": "Patiala",
+   "uncertain": false
+  },
+  "RANCHI": {
+   "lat": 23.34316,
+   "lon": 85.3094,
+   "state": "Jharkhand",
+   "district": "Rānchī",
+   "uncertain": false
+  },
+  "RANIA": {
+   "lat": 29.52454,
+   "lon": 74.83689,
+   "state": "Haryana",
+   "district": "Sirsa",
+   "uncertain": true
+  },
+  "RANIPET": {
+   "lat": 12.92471,
+   "lon": 79.33331,
+   "state": "Tamil Nadu",
+   "district": "Ranipet",
+   "uncertain": false
+  },
+  "RATHANGARH": {
+   "lat": 28.08137,
+   "lon": 74.61854,
+   "state": "Rajasthan",
+   "district": "Churu",
+   "uncertain": true
+  },
+  "RATLAM": {
+   "lat": 23.33033,
+   "lon": 75.04032,
+   "state": "Madhya Pradesh",
+   "district": "Ratlām",
+   "uncertain": false
+  },
+  "RATNAGARI": {
+   "lat": 16.99154,
+   "lon": 73.31022,
+   "state": "Maharashtra",
+   "district": "Ratnagiri",
+   "uncertain": false
+  },
+  "REWA": {
+   "lat": 24.53256,
+   "lon": 81.29234,
+   "state": "Madhya Pradesh",
+   "district": "Rewa",
+   "uncertain": false
+  },
+  "REWARI": {
+   "lat": 28.199,
+   "lon": 76.6183,
+   "state": "Haryana",
+   "district": "Rewari",
+   "uncertain": false
+  },
+  "ROHA": {
+   "lat": 18.43687,
+   "lon": 73.11964,
+   "state": "Maharashtra",
+   "district": "Raigarh",
+   "uncertain": false
+  },
+  "ROHTAK": {
+   "lat": 28.89447,
+   "lon": 76.58917,
+   "state": "Haryana",
+   "district": "Rohtak",
+   "uncertain": false
+  },
+  "ROORKEE": {
+   "lat": 29.86632,
+   "lon": 77.89118,
+   "state": "Uttarakhand",
+   "district": "Haridwar",
+   "uncertain": false
+  },
+  "ROURKELA": {
+   "lat": 22.22496,
+   "lon": 84.86414,
+   "state": "Odisha",
+   "district": "Sundargarh",
+   "uncertain": false
+  },
+  "RUDERPUR": {
+   "lat": 28.98,
+   "lon": 79.4,
+   "state": "Uttarakhand",
+   "district": "Udham Singh Nagar",
+   "uncertain": false
+  },
+  "SAHARANPUR": {
+   "lat": 29.9679,
+   "lon": 77.54522,
+   "state": "Uttar Pradesh",
+   "district": "District Saharanpur",
+   "uncertain": false
+  },
+  "SALEM": {
+   "lat": 11.65376,
+   "lon": 78.15538,
+   "state": "Tamil Nadu",
+   "district": "Salem",
+   "uncertain": false
+  },
+  "SAMBALPUR": {
+   "lat": 21.46527,
+   "lon": 83.97573,
+   "state": "Odisha",
+   "district": "Sambalpur",
+   "uncertain": false
+  },
+  "SAMPLA": {
+   "lat": 28.77718,
+   "lon": 76.77165,
+   "state": "Haryana",
+   "district": "Rohtak",
+   "uncertain": false
+  },
+  "SANAND": {
+   "lat": 22.99227,
+   "lon": 72.38177,
+   "state": "Gujarat",
+   "district": "Ahmadābād",
+   "uncertain": false
+  },
+  "SANGLI": {
+   "lat": 16.85438,
+   "lon": 74.56417,
+   "state": "Maharashtra",
+   "district": "Sangli",
+   "uncertain": false
+  },
+  "SANSARPUR TERRACE": {
+   "lat": 31.94016,
+   "lon": 75.92491,
+   "state": "Himachal Pradesh",
+   "district": "Kāngra",
+   "uncertain": true
+  },
+  "SANTEJ": {
+   "lat": 23.10802,
+   "lon": 72.47534,
+   "state": "Gujarat",
+   "district": "Gāndhīnagar",
+   "uncertain": false
+  },
+  "SATARA": {
+   "lat": 17.68589,
+   "lon": 73.99333,
+   "state": "Maharashtra",
+   "district": "Satara Division",
+   "uncertain": false
+  },
+  "SATNA": {
+   "lat": 24.57726,
+   "lon": 80.82719,
+   "state": "Madhya Pradesh",
+   "district": "Satna",
+   "uncertain": false
+  },
+  "SAVLI": {
+   "lat": 22.56188,
+   "lon": 73.22317,
+   "state": "Gujarat",
+   "district": "Vadodara",
+   "uncertain": false
+  },
+  "SHAJAPUR": {
+   "lat": 23.42637,
+   "lon": 76.27775,
+   "state": "Madhya Pradesh",
+   "district": "Shājāpur",
+   "uncertain": false
+  },
+  "SHILLONG": {
+   "lat": 25.56892,
+   "lon": 91.88313,
+   "state": "Meghalaya",
+   "district": "East Khāsi Hills",
+   "uncertain": false
+  },
+  "SHIMOGA": {
+   "lat": 13.93157,
+   "lon": 75.56791,
+   "state": "Karnataka",
+   "district": "Shimoga",
+   "uncertain": false
+  },
+  "SHIVPURI": {
+   "lat": 25.42378,
+   "lon": 77.66223,
+   "state": "Madhya Pradesh",
+   "district": "Shivpurī",
+   "uncertain": false
+  },
+  "SIKAR": {
+   "lat": 27.61206,
+   "lon": 75.13996,
+   "state": "Rajasthan",
+   "district": "Sikar",
+   "uncertain": false
+  },
+  "SILCHAR": {
+   "lat": 24.82733,
+   "lon": 92.79787,
+   "state": "Assam",
+   "district": "Cāchār",
+   "uncertain": false
+  },
+  "SILIGUDI": {
+   "lat": 26.71004,
+   "lon": 88.42851,
+   "state": "West Bengal",
+   "district": "Darjeeling",
+   "uncertain": false
+  },
+  "SILVASSA / DADRA & NAGAR HAVELI": {
+   "lat": 20.27386,
+   "lon": 72.99673,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "district": "Dadra & Nagar Haveli",
+   "uncertain": false
+  },
+  "SIROHI": {
+   "lat": 24.88838,
+   "lon": 72.84794,
+   "state": "Rajasthan",
+   "district": "Sirohi",
+   "uncertain": false
+  },
+  "SIRSA": {
+   "lat": 29.53489,
+   "lon": 75.02898,
+   "state": "Haryana",
+   "district": "Sirsa",
+   "uncertain": false
+  },
+  "SITARGANJ": {
+   "lat": 28.9293,
+   "lon": 79.70436,
+   "state": "Uttarakhand",
+   "district": "Udham Singh Nagar",
+   "uncertain": false
+  },
+  "SIVAKASI": {
+   "lat": 9.44999,
+   "lon": 77.79797,
+   "state": "Tamil Nadu",
+   "district": "Virudhunagar",
+   "uncertain": false
+  },
+  "SIVSAGAR": {
+   "lat": 26.91636,
+   "lon": 94.65546,
+   "state": "Assam",
+   "district": "Sibsāgar",
+   "uncertain": false
+  },
+  "SOHAGPUR": {
+   "lat": 22.70055,
+   "lon": 78.19522,
+   "state": "Madhya Pradesh",
+   "district": "Narmadapuram",
+   "uncertain": false
+  },
+  "SOLAN": {
+   "lat": 30.90908,
+   "lon": 77.10869,
+   "state": "Himachal Pradesh",
+   "district": "Solan",
+   "uncertain": false
+  },
+  "SOLAPUR": {
+   "lat": 17.67152,
+   "lon": 75.91044,
+   "state": "Maharashtra",
+   "district": "Solapur",
+   "uncertain": false
+  },
+  "SONEPAT": {
+   "lat": 28.99478,
+   "lon": 77.01937,
+   "state": "Haryana",
+   "district": "Sonīpat",
+   "uncertain": false
+  },
+  "SRIGANGANAGAR": {
+   "lat": 29.92009,
+   "lon": 73.87496,
+   "state": "Rajasthan",
+   "district": "Gangānagar",
+   "uncertain": false
+  },
+  "SRIKAKULAM": {
+   "lat": 18.2989,
+   "lon": 83.89751,
+   "state": "Andhra Pradesh",
+   "district": "Srīkākulam",
+   "uncertain": false
+  },
+  "SRINAGAR": {
+   "lat": 34.08565,
+   "lon": 74.80555,
+   "state": "Jammu and Kashmir",
+   "district": "Srīnagar",
+   "uncertain": false
+  },
+  "SURAT": {
+   "lat": 21.19594,
+   "lon": 72.83023,
+   "state": "Gujarat",
+   "district": "Sūrat",
+   "uncertain": false
+  },
+  "SURENDRANAGAR": {
+   "lat": 22.72706,
+   "lon": 71.64856,
+   "state": "Gujarat",
+   "district": "Surendranagar",
+   "uncertain": false
+  },
+  "SURYAPET": {
+   "lat": 17.14054,
+   "lon": 79.62045,
+   "state": "Telangana",
+   "district": "Suryapet",
+   "uncertain": false
+  },
+  "TALOJA": {
+   "lat": 19.08555,
+   "lon": 73.09837,
+   "state": "Maharashtra",
+   "district": "Raigarh",
+   "uncertain": false
+  },
+  "TARAPUR": {
+   "lat": 19.86499,
+   "lon": 72.68426,
+   "state": "Maharashtra",
+   "district": "Palghar",
+   "uncertain": false
+  },
+  "THANE": {
+   "lat": 19.19704,
+   "lon": 72.96355,
+   "state": "Maharashtra",
+   "district": "Thane",
+   "uncertain": false
+  },
+  "THRISSUR": {
+   "lat": 10.51667,
+   "lon": 76.21667,
+   "state": "Kerala",
+   "district": "Thrissur",
+   "uncertain": false
+  },
+  "TINSUKIA": {
+   "lat": 27.48905,
+   "lon": 95.35992,
+   "state": "Assam",
+   "district": "Tinsukia",
+   "uncertain": false
+  },
+  "TIRUPATHI": {
+   "lat": 13.63551,
+   "lon": 79.41989,
+   "state": "Andhra Pradesh",
+   "district": "Tirupati",
+   "uncertain": false
+  },
+  "TIRUPUR": {
+   "lat": 11.11541,
+   "lon": 77.35456,
+   "state": "Tamil Nadu",
+   "district": "Tiruppur",
+   "uncertain": false
+  },
+  "TRICHY": {
+   "lat": 10.8155,
+   "lon": 78.69651,
+   "state": "Tamil Nadu",
+   "district": "Tiruchirappalli",
+   "uncertain": false
+  },
+  "TRIVANDRUM": {
+   "lat": 8.4855,
+   "lon": 76.94924,
+   "state": "Kerala",
+   "district": "Thiruvananthapuram",
+   "uncertain": false
+  },
+  "TUMKUR": {
+   "lat": 13.34136,
+   "lon": 77.1022,
+   "state": "Karnataka",
+   "district": "Tumkur",
+   "uncertain": false
+  },
+  "TUTICORIN": {
+   "lat": 8.76735,
+   "lon": 78.13425,
+   "state": "Tamil Nadu",
+   "district": "Thoothukkudi",
+   "uncertain": false
+  },
+  "UDAIPUR": {
+   "lat": 24.58584,
+   "lon": 73.71346,
+   "state": "Rajasthan",
+   "district": "Udaipur",
+   "uncertain": false
+  },
+  "UJJAIN": {
+   "lat": 23.18239,
+   "lon": 75.77643,
+   "state": "Madhya Pradesh",
+   "district": "Ujjain",
+   "uncertain": false
+  },
+  "UMBERGAON": {
+   "lat": 20.2494,
+   "lon": 72.83519,
+   "state": "Gujarat",
+   "district": "Valsād",
+   "uncertain": false
+  },
+  "VADODARA": {
+   "lat": 22.29941,
+   "lon": 73.20812,
+   "state": "Gujarat",
+   "district": "Vadodara",
+   "uncertain": false
+  },
+  "VALSAD": {
+   "lat": 20.61013,
+   "lon": 72.93428,
+   "state": "Gujarat",
+   "district": "Valsād",
+   "uncertain": false
+  },
+  "VAPI": {
+   "lat": 20.37175,
+   "lon": 72.90493,
+   "state": "Gujarat",
+   "district": "Valsād",
+   "uncertain": false
+  },
+  "VARANASI": {
+   "lat": 25.31668,
+   "lon": 83.01041,
+   "state": "Uttar Pradesh",
+   "district": "Varanasi",
+   "uncertain": false
+  },
+  "VERAWAL": {
+   "lat": 20.9077,
+   "lon": 70.36786,
+   "state": "Gujarat",
+   "district": "Gir Somnath",
+   "uncertain": false
+  },
+  "VIJAYAPURA": {
+   "lat": 16.82442,
+   "lon": 75.71537,
+   "state": "Karnataka",
+   "district": "Bijāpur",
+   "uncertain": false
+  },
+  "VIJAYWADA": {
+   "lat": 16.50745,
+   "lon": 80.6466,
+   "state": "Andhra Pradesh",
+   "district": "NTR",
+   "uncertain": false
+  },
+  "VILLUPURAM": {
+   "lat": 11.93975,
+   "lon": 79.49244,
+   "state": "Tamil Nadu",
+   "district": "Villupuram",
+   "uncertain": false
+  },
+  "VIRAMGAM": {
+   "lat": 23.12564,
+   "lon": 72.05014,
+   "state": "Gujarat",
+   "district": "Ahmadābād",
+   "uncertain": false
+  },
+  "VISNAGAR": {
+   "lat": 23.69855,
+   "lon": 72.5521,
+   "state": "Gujarat",
+   "district": "Mahesāna",
+   "uncertain": false
+  },
+  "VIZAG": {
+   "lat": 17.68009,
+   "lon": 83.20161,
+   "state": "Andhra Pradesh",
+   "district": "Visākhapatnam",
+   "uncertain": false
+  },
+  "WAGHODIA": {
+   "lat": 22.30505,
+   "lon": 73.40016,
+   "state": "Gujarat",
+   "district": "Vadodara",
+   "uncertain": false
+  },
+  "WAI": {
+   "lat": 17.95276,
+   "lon": 73.89058,
+   "state": "Maharashtra",
+   "district": "Satara Division",
+   "uncertain": false
+  },
+  "WANI": {
+   "lat": 20.05507,
+   "lon": 78.95313,
+   "state": "Maharashtra",
+   "district": "Yavatmal",
+   "uncertain": false
+  },
+  "WARANGAL": {
+   "lat": 18.0,
+   "lon": 79.58333,
+   "state": "Telangana",
+   "district": "Hanamkonda",
+   "uncertain": false
+  },
+  "WARDHA": {
+   "lat": 20.73933,
+   "lon": 78.59784,
+   "state": "Maharashtra",
+   "district": "Wardha",
+   "uncertain": false
+  },
+  "YAMUNANAGAR": {
+   "lat": 30.12796,
+   "lon": 77.28371,
+   "state": "Haryana",
+   "district": "Yamunanagar",
+   "uncertain": false
+  },
+  "YANAM": {
+   "lat": 16.73463,
+   "lon": 82.21773,
+   "state": "Puducherry",
+   "district": "Yanam",
+   "uncertain": false
+  },
+  "YAWATMAL": {
+   "lat": 20.39324,
+   "lon": 78.13201,
+   "state": "Maharashtra",
+   "district": "Yavatmal",
+   "uncertain": false
+  }
+ },
+ "zones": {
+  "IOCL|Jammu": {
+   "producer": "IOCL",
+   "zone": "Jammu",
+   "lat": 32.73528,
+   "lon": 74.86167,
+   "state": "Jammu and Kashmir",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Chandigarh": {
+   "producer": "IOCL",
+   "zone": "Chandigarh",
+   "lat": 30.73629,
+   "lon": 76.7884,
+   "state": "Chandigarh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Delhi": {
+   "producer": "IOCL",
+   "zone": "Delhi",
+   "lat": 28.62137,
+   "lon": 77.2148,
+   "state": "Delhi",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Solan": {
+   "producer": "IOCL",
+   "zone": "Solan",
+   "lat": 30.90908,
+   "lon": 77.10869,
+   "state": "Himachal Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Una": {
+   "producer": "IOCL",
+   "zone": "Una",
+   "lat": 31.46493,
+   "lon": 76.26914,
+   "state": "Himachal Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Haridwar": {
+   "producer": "IOCL",
+   "zone": "Haridwar",
+   "lat": 29.94791,
+   "lon": 78.16025,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Udham Singh Nagar": {
+   "producer": "IOCL",
+   "zone": "Udham Singh Nagar",
+   "lat": 28.98,
+   "lon": 79.4,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Ludhiana": {
+   "producer": "IOCL",
+   "zone": "Ludhiana",
+   "lat": 30.91204,
+   "lon": 75.85379,
+   "state": "Punjab",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Jalandhar": {
+   "producer": "IOCL",
+   "zone": "Jalandhar",
+   "lat": 31.32556,
+   "lon": 75.57917,
+   "state": "Punjab",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Panipat": {
+   "producer": "IOCL",
+   "zone": "Panipat",
+   "lat": 29.38747,
+   "lon": 76.96825,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Gurgaon": {
+   "producer": "IOCL",
+   "zone": "Gurgaon",
+   "lat": 28.4601,
+   "lon": 77.02635,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Faridabad": {
+   "producer": "IOCL",
+   "zone": "Faridabad",
+   "lat": 28.41124,
+   "lon": 77.31316,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Gautam Budh nagar": {
+   "producer": "IOCL",
+   "zone": "Gautam Budh nagar",
+   "lat": 28.58,
+   "lon": 77.33,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Mathura": {
+   "producer": "IOCL",
+   "zone": "Mathura",
+   "lat": 27.5035,
+   "lon": 77.67215,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Kanpur": {
+   "producer": "IOCL",
+   "zone": "Kanpur",
+   "lat": 26.46523,
+   "lon": 80.34975,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Chandauli": {
+   "producer": "IOCL",
+   "zone": "Chandauli",
+   "lat": 25.25803,
+   "lon": 83.26825,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Alwar (Bhiwadi)": {
+   "producer": "IOCL",
+   "zone": "Alwar (Bhiwadi)",
+   "lat": 28.21024,
+   "lon": 76.86056,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Jaipur": {
+   "producer": "IOCL",
+   "zone": "Jaipur",
+   "lat": 26.91962,
+   "lon": 75.78781,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Jodhpur": {
+   "producer": "IOCL",
+   "zone": "Jodhpur",
+   "lat": 26.26841,
+   "lon": 73.00594,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Udaipur": {
+   "producer": "IOCL",
+   "zone": "Udaipur",
+   "lat": 24.58584,
+   "lon": 73.71346,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Gwalior": {
+   "producer": "IOCL",
+   "zone": "Gwalior",
+   "lat": 26.22983,
+   "lon": 78.17337,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Rewa": {
+   "producer": "IOCL",
+   "zone": "Rewa",
+   "lat": 24.53256,
+   "lon": 81.29234,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Jabalpur": {
+   "producer": "IOCL",
+   "zone": "Jabalpur",
+   "lat": 23.16697,
+   "lon": 79.95006,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Bhopal": {
+   "producer": "IOCL",
+   "zone": "Bhopal",
+   "lat": 23.25469,
+   "lon": 77.40289,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Indore": {
+   "producer": "IOCL",
+   "zone": "Indore",
+   "lat": 22.71792,
+   "lon": 75.8333,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Chattisgarh": {
+   "producer": "IOCL",
+   "zone": "Chattisgarh",
+   "lat": null,
+   "lon": null,
+   "state": [
+    "Chhattisgarh"
+   ],
+   "scope": "state",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Dadra(Silvassa)": {
+   "producer": "IOCL",
+   "zone": "Dadra(Silvassa)",
+   "lat": 20.27386,
+   "lon": 72.99673,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Daman": {
+   "producer": "IOCL",
+   "zone": "Daman",
+   "lat": 20.41431,
+   "lon": 72.83236,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Goa": {
+   "producer": "IOCL",
+   "zone": "Goa",
+   "lat": null,
+   "lon": null,
+   "state": [
+    "Goa"
+   ],
+   "scope": "state",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Gandhidham": {
+   "producer": "IOCL",
+   "zone": "Gandhidham",
+   "lat": 23.08333,
+   "lon": 70.13333,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Rajkot": {
+   "producer": "IOCL",
+   "zone": "Rajkot",
+   "lat": 22.29161,
+   "lon": 70.79322,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Ahmedabad": {
+   "producer": "IOCL",
+   "zone": "Ahmedabad",
+   "lat": 23.02579,
+   "lon": 72.58727,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Vadodara": {
+   "producer": "IOCL",
+   "zone": "Vadodara",
+   "lat": 22.29941,
+   "lon": 73.20812,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Surat": {
+   "producer": "IOCL",
+   "zone": "Surat",
+   "lat": 21.19594,
+   "lon": 72.83023,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Nagpur": {
+   "producer": "IOCL",
+   "zone": "Nagpur",
+   "lat": 21.14631,
+   "lon": 79.08491,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Aurangabad": {
+   "producer": "IOCL",
+   "zone": "Aurangabad",
+   "lat": 19.87757,
+   "lon": 75.34226,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Jalgaon": {
+   "producer": "IOCL",
+   "zone": "Jalgaon",
+   "lat": 21.00292,
+   "lon": 75.56602,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Kolhapur": {
+   "producer": "IOCL",
+   "zone": "Kolhapur",
+   "lat": 16.69563,
+   "lon": 74.23167,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Mumbai": {
+   "producer": "IOCL",
+   "zone": "Mumbai",
+   "lat": 19.07283,
+   "lon": 72.88261,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Nashik": {
+   "producer": "IOCL",
+   "zone": "Nashik",
+   "lat": 19.99727,
+   "lon": 73.79096,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Pune": {
+   "producer": "IOCL",
+   "zone": "Pune",
+   "lat": 18.51957,
+   "lon": 73.85535,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Visak": {
+   "producer": "IOCL",
+   "zone": "Visak",
+   "lat": 17.68009,
+   "lon": 83.20161,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Guntur": {
+   "producer": "IOCL",
+   "zone": "Guntur",
+   "lat": 16.29974,
+   "lon": 80.45729,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Rangareddy": {
+   "producer": "IOCL",
+   "zone": "Rangareddy",
+   "lat": 17.27883,
+   "lon": 78.16844,
+   "state": "Telangana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Dharwad": {
+   "producer": "IOCL",
+   "zone": "Dharwad",
+   "lat": 15.46005,
+   "lon": 75.00778,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Mangalore": {
+   "producer": "IOCL",
+   "zone": "Mangalore",
+   "lat": 12.91723,
+   "lon": 74.85603,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Bangalore": {
+   "producer": "IOCL",
+   "zone": "Bangalore",
+   "lat": 12.97194,
+   "lon": 77.59369,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Kerala": {
+   "producer": "IOCL",
+   "zone": "Kerala",
+   "lat": null,
+   "lon": null,
+   "state": [
+    "Kerala"
+   ],
+   "scope": "state",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Pondicherry": {
+   "producer": "IOCL",
+   "zone": "Pondicherry",
+   "lat": 11.93381,
+   "lon": 79.82979,
+   "state": "Puducherry",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Chennai": {
+   "producer": "IOCL",
+   "zone": "Chennai",
+   "lat": 13.08784,
+   "lon": 80.27847,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Madurai": {
+   "producer": "IOCL",
+   "zone": "Madurai",
+   "lat": 9.919,
+   "lon": 78.11953,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Salem": {
+   "producer": "IOCL",
+   "zone": "Salem",
+   "lat": 11.65376,
+   "lon": 78.15538,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Coimbatore": {
+   "producer": "IOCL",
+   "zone": "Coimbatore",
+   "lat": 11.00555,
+   "lon": 76.96612,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Bihar": {
+   "producer": "IOCL",
+   "zone": "Bihar",
+   "lat": null,
+   "lon": null,
+   "state": [
+    "Bihar"
+   ],
+   "scope": "state",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Jharkhand": {
+   "producer": "IOCL",
+   "zone": "Jharkhand",
+   "lat": null,
+   "lon": null,
+   "state": [
+    "Jharkhand"
+   ],
+   "scope": "state",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Cuttack": {
+   "producer": "IOCL",
+   "zone": "Cuttack",
+   "lat": 20.46497,
+   "lon": 85.87927,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Balasore": {
+   "producer": "IOCL",
+   "zone": "Balasore",
+   "lat": 21.49266,
+   "lon": 86.93348,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Howrah": {
+   "producer": "IOCL",
+   "zone": "Howrah",
+   "lat": 22.57688,
+   "lon": 88.31857,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Jalpaiguri": {
+   "producer": "IOCL",
+   "zone": "Jalpaiguri",
+   "lat": 26.51667,
+   "lon": 88.73333,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Guwahati": {
+   "producer": "IOCL",
+   "zone": "Guwahati",
+   "lat": 26.1844,
+   "lon": 91.7458,
+   "state": "Assam",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Mehsana": {
+   "producer": "IOCL",
+   "zone": "Mehsana",
+   "lat": 23.59864,
+   "lon": 72.38472,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Chittoor": {
+   "producer": "IOCL",
+   "zone": "Chittoor",
+   "lat": 13.21055,
+   "lon": 79.0956,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Purulia": {
+   "producer": "IOCL",
+   "zone": "Purulia",
+   "lat": 23.33062,
+   "lon": 86.36303,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Bargarh": {
+   "producer": "IOCL",
+   "zone": "Bargarh",
+   "lat": 21.33348,
+   "lon": 83.61905,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Paschim Bardhaman": {
+   "producer": "IOCL",
+   "zone": "Paschim Bardhaman",
+   "lat": 23.25572,
+   "lon": 87.85691,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Malda": {
+   "producer": "IOCL",
+   "zone": "Malda",
+   "lat": 25.00447,
+   "lon": 88.14573,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Bareilly": {
+   "producer": "IOCL",
+   "zone": "Bareilly",
+   "lat": 28.36678,
+   "lon": 79.43167,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "IOCL|Suryapet": {
+   "producer": "IOCL",
+   "zone": "Suryapet",
+   "lat": 17.14054,
+   "lon": 79.62045,
+   "state": "Telangana",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "IOCL|Kathua": {
+   "producer": "IOCL",
+   "zone": "Kathua",
+   "lat": 32.36941,
+   "lon": 75.52539,
+   "state": "Jammu and Kashmir",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "RIL|AGARTALA": {
+   "producer": "RIL",
+   "zone": "AGARTALA",
+   "lat": 23.83605,
+   "lon": 91.27939,
+   "state": "Tripura",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|AGRA": {
+   "producer": "RIL",
+   "zone": "AGRA",
+   "lat": 27.18333,
+   "lon": 78.01667,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|AHMEDABAD": {
+   "producer": "RIL",
+   "zone": "AHMEDABAD",
+   "lat": 23.02579,
+   "lon": 72.58727,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|AURANGBDMH": {
+   "producer": "RIL",
+   "zone": "AURANGBDMH",
+   "lat": 19.87757,
+   "lon": 75.34226,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|BADDI": {
+   "producer": "RIL",
+   "zone": "BADDI",
+   "lat": 30.95783,
+   "lon": 76.79136,
+   "state": "Himachal Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|BALASORE": {
+   "producer": "RIL",
+   "zone": "BALASORE",
+   "lat": 21.49266,
+   "lon": 86.93348,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|BARGARH": {
+   "producer": "RIL",
+   "zone": "BARGARH",
+   "lat": 21.33348,
+   "lon": 83.61905,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|BARODA": {
+   "producer": "RIL",
+   "zone": "BARODA",
+   "lat": 22.29941,
+   "lon": 73.20812,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|BELLARY": {
+   "producer": "RIL",
+   "zone": "BELLARY",
+   "lat": 15.14205,
+   "lon": 76.92398,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|BENGALURU": {
+   "producer": "RIL",
+   "zone": "BENGALURU",
+   "lat": 12.97194,
+   "lon": 77.59369,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|BHAVNAGAR": {
+   "producer": "RIL",
+   "zone": "BHAVNAGAR",
+   "lat": 21.76287,
+   "lon": 72.15331,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|BHIWADI": {
+   "producer": "RIL",
+   "zone": "BHIWADI",
+   "lat": 28.21024,
+   "lon": 76.86056,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|BHOPAL": {
+   "producer": "RIL",
+   "zone": "BHOPAL",
+   "lat": 23.25469,
+   "lon": 77.40289,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|BILASPUR": {
+   "producer": "RIL",
+   "zone": "BILASPUR",
+   "lat": 22.08005,
+   "lon": 82.15543,
+   "state": "Chhattisgarh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|CALCUTTA": {
+   "producer": "RIL",
+   "zone": "CALCUTTA",
+   "lat": 22.56263,
+   "lon": 88.36304,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|CALICUT": {
+   "producer": "RIL",
+   "zone": "CALICUT",
+   "lat": 11.24802,
+   "lon": 75.7804,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|CHENNAI": {
+   "producer": "RIL",
+   "zone": "CHENNAI",
+   "lat": 13.08784,
+   "lon": 80.27847,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|COCHIN": {
+   "producer": "RIL",
+   "zone": "COCHIN",
+   "lat": 9.93988,
+   "lon": 76.26022,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|COIMBATORE": {
+   "producer": "RIL",
+   "zone": "COIMBATORE",
+   "lat": 11.00555,
+   "lon": 76.96612,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|CUDDAPAH": {
+   "producer": "RIL",
+   "zone": "CUDDAPAH",
+   "lat": 14.47995,
+   "lon": 78.82346,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|CUTTACK": {
+   "producer": "RIL",
+   "zone": "CUTTACK",
+   "lat": 20.46497,
+   "lon": 85.87927,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|DEHRADUN": {
+   "producer": "RIL",
+   "zone": "DEHRADUN",
+   "lat": 30.32443,
+   "lon": 78.03392,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|DELHI": {
+   "producer": "RIL",
+   "zone": "DELHI",
+   "lat": 28.62137,
+   "lon": 77.2148,
+   "state": "Delhi",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|GANDHIDHAM": {
+   "producer": "RIL",
+   "zone": "GANDHIDHAM",
+   "lat": 23.08333,
+   "lon": 70.13333,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|GUWAHATI": {
+   "producer": "RIL",
+   "zone": "GUWAHATI",
+   "lat": 26.1844,
+   "lon": 91.7458,
+   "state": "Assam",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|GWALIOR": {
+   "producer": "RIL",
+   "zone": "GWALIOR",
+   "lat": 26.22983,
+   "lon": 78.17337,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|HOSUR-TK": {
+   "producer": "RIL",
+   "zone": "HOSUR-TK",
+   "lat": 12.73647,
+   "lon": 77.83264,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|HUBLI": {
+   "producer": "RIL",
+   "zone": "HUBLI",
+   "lat": 15.34776,
+   "lon": 75.13378,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|HYDERABAD": {
+   "producer": "RIL",
+   "zone": "HYDERABAD",
+   "lat": 17.38405,
+   "lon": 78.45636,
+   "state": "Telangana",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|INDORE": {
+   "producer": "RIL",
+   "zone": "INDORE",
+   "lat": 22.71792,
+   "lon": 75.8333,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|JABALPUR": {
+   "producer": "RIL",
+   "zone": "JABALPUR",
+   "lat": 23.16697,
+   "lon": 79.95006,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|JAIPUR": {
+   "producer": "RIL",
+   "zone": "JAIPUR",
+   "lat": 26.91962,
+   "lon": 75.78781,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|JALGAON": {
+   "producer": "RIL",
+   "zone": "JALGAON",
+   "lat": 21.00292,
+   "lon": 75.56602,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|JALPAIGURI": {
+   "producer": "RIL",
+   "zone": "JALPAIGURI",
+   "lat": 26.51667,
+   "lon": 88.73333,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|JAMMU": {
+   "producer": "RIL",
+   "zone": "JAMMU",
+   "lat": 32.73528,
+   "lon": 74.86167,
+   "state": "Jammu and Kashmir",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|JODHPUR": {
+   "producer": "RIL",
+   "zone": "JODHPUR",
+   "lat": 26.26841,
+   "lon": 73.00594,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|KANPUR": {
+   "producer": "RIL",
+   "zone": "KANPUR",
+   "lat": 26.46523,
+   "lon": 80.34975,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|KARUR": {
+   "producer": "RIL",
+   "zone": "KARUR",
+   "lat": 10.95771,
+   "lon": 78.08095,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|KOLHAPUR": {
+   "producer": "RIL",
+   "zone": "KOLHAPUR",
+   "lat": 16.69563,
+   "lon": 74.23167,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|KOTA": {
+   "producer": "RIL",
+   "zone": "KOTA",
+   "lat": 25.18254,
+   "lon": 75.83907,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|LUDHIANA": {
+   "producer": "RIL",
+   "zone": "LUDHIANA",
+   "lat": 30.91204,
+   "lon": 75.85379,
+   "state": "Punjab",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|MADURAI": {
+   "producer": "RIL",
+   "zone": "MADURAI",
+   "lat": 9.919,
+   "lon": 78.11953,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|MANGALORE": {
+   "producer": "RIL",
+   "zone": "MANGALORE",
+   "lat": 12.91723,
+   "lon": 74.85603,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|MUMBAI": {
+   "producer": "RIL",
+   "zone": "MUMBAI",
+   "lat": 19.07283,
+   "lon": 72.88261,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|MYSORE": {
+   "producer": "RIL",
+   "zone": "MYSORE",
+   "lat": 12.29791,
+   "lon": 76.63925,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|NAGPUR": {
+   "producer": "RIL",
+   "zone": "NAGPUR",
+   "lat": 21.14631,
+   "lon": 79.08491,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|NANDYAL": {
+   "producer": "RIL",
+   "zone": "NANDYAL",
+   "lat": 15.47799,
+   "lon": 78.4836,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|NASHIK": {
+   "producer": "RIL",
+   "zone": "NASHIK",
+   "lat": 19.99727,
+   "lon": 73.79096,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|PANIPAT": {
+   "producer": "RIL",
+   "zone": "PANIPAT",
+   "lat": 29.38747,
+   "lon": 76.96825,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|PANJIM": {
+   "producer": "RIL",
+   "zone": "PANJIM",
+   "lat": 15.49574,
+   "lon": 73.82624,
+   "state": "Goa",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|PATNA": {
+   "producer": "RIL",
+   "zone": "PATNA",
+   "lat": 25.59408,
+   "lon": 85.13563,
+   "state": "Bihar",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|PONDICHERY": {
+   "producer": "RIL",
+   "zone": "PONDICHERY",
+   "lat": 11.93381,
+   "lon": 79.82979,
+   "state": "Puducherry",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|PUNE": {
+   "producer": "RIL",
+   "zone": "PUNE",
+   "lat": 18.51957,
+   "lon": 73.85535,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|PURULIA": {
+   "producer": "RIL",
+   "zone": "PURULIA",
+   "lat": 23.33062,
+   "lon": 86.36303,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|RAIPUR": {
+   "producer": "RIL",
+   "zone": "RAIPUR",
+   "lat": 21.23333,
+   "lon": 81.63333,
+   "state": "Chhattisgarh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|RAJKOT": {
+   "producer": "RIL",
+   "zone": "RAJKOT",
+   "lat": 22.29161,
+   "lon": 70.79322,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|RANCHI": {
+   "producer": "RIL",
+   "zone": "RANCHI",
+   "lat": 23.34316,
+   "lon": 85.3094,
+   "state": "Jharkhand",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|REWA": {
+   "producer": "RIL",
+   "zone": "REWA",
+   "lat": 24.53256,
+   "lon": 81.29234,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|RUDRAPUR": {
+   "producer": "RIL",
+   "zone": "RUDRAPUR",
+   "lat": 28.98,
+   "lon": 79.4,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|SALEM": {
+   "producer": "RIL",
+   "zone": "SALEM",
+   "lat": 11.65376,
+   "lon": 78.15538,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|SATARA": {
+   "producer": "RIL",
+   "zone": "SATARA",
+   "lat": 17.68589,
+   "lon": 73.99333,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|SENDH": {
+   "producer": "RIL",
+   "zone": "SENDH",
+   "lat": null,
+   "lon": null,
+   "state": null,
+   "scope": "unlocated",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|SILVASSA": {
+   "producer": "RIL",
+   "zone": "SILVASSA",
+   "lat": 20.27386,
+   "lon": 72.99673,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|SOLAPUR": {
+   "producer": "RIL",
+   "zone": "SOLAPUR",
+   "lat": 17.67152,
+   "lon": 75.91044,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|SRINAGAR": {
+   "producer": "RIL",
+   "zone": "SRINAGAR",
+   "lat": 34.08565,
+   "lon": 74.80555,
+   "state": "Jammu and Kashmir",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|SURAT": {
+   "producer": "RIL",
+   "zone": "SURAT",
+   "lat": 21.19594,
+   "lon": 72.83023,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|SURYAPET": {
+   "producer": "RIL",
+   "zone": "SURYAPET",
+   "lat": 17.14054,
+   "lon": 79.62045,
+   "state": "Telangana",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|TIKAMGARH": {
+   "producer": "RIL",
+   "zone": "TIKAMGARH",
+   "lat": 24.74327,
+   "lon": 78.83061,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|TIRUPATHI": {
+   "producer": "RIL",
+   "zone": "TIRUPATHI",
+   "lat": 13.63551,
+   "lon": 79.41989,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|TRIVANDRUM": {
+   "producer": "RIL",
+   "zone": "TRIVANDRUM",
+   "lat": 8.4855,
+   "lon": 76.94924,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|TUTICORIN": {
+   "producer": "RIL",
+   "zone": "TUTICORIN",
+   "lat": 8.76735,
+   "lon": 78.13425,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|UDAIPUR": {
+   "producer": "RIL",
+   "zone": "UDAIPUR",
+   "lat": 24.58584,
+   "lon": 73.71346,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|VARANASI": {
+   "producer": "RIL",
+   "zone": "VARANASI",
+   "lat": 25.31668,
+   "lon": 83.01041,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|VIJAYAWADA": {
+   "producer": "RIL",
+   "zone": "VIJAYAWADA",
+   "lat": 16.50745,
+   "lon": 80.6466,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "RIL|VISHAKAPATNAM": {
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "lat": 17.68009,
+   "lon": 83.20161,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Delhi": {
+   "producer": "HMEL",
+   "zone": "Delhi",
+   "lat": 28.62137,
+   "lon": 77.2148,
+   "state": "Delhi",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Faridabad": {
+   "producer": "HMEL",
+   "zone": "Faridabad",
+   "lat": 28.41124,
+   "lon": 77.31316,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Gurgaon": {
+   "producer": "HMEL",
+   "zone": "Gurgaon",
+   "lat": 28.4601,
+   "lon": 77.02635,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Panipat": {
+   "producer": "HMEL",
+   "zone": "Panipat",
+   "lat": 29.38747,
+   "lon": 76.96825,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Jammu": {
+   "producer": "HMEL",
+   "zone": "Jammu",
+   "lat": 32.73528,
+   "lon": 74.86167,
+   "state": "Jammu and Kashmir",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Baddi": {
+   "producer": "HMEL",
+   "zone": "Baddi",
+   "lat": 30.95783,
+   "lon": 76.79136,
+   "state": "Himachal Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Chandigarh": {
+   "producer": "HMEL",
+   "zone": "Chandigarh",
+   "lat": 30.73629,
+   "lon": 76.7884,
+   "state": "Chandigarh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Punjab": {
+   "producer": "HMEL",
+   "zone": "Punjab",
+   "lat": null,
+   "lon": null,
+   "state": [
+    "Punjab"
+   ],
+   "scope": "state",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Dehradun": {
+   "producer": "HMEL",
+   "zone": "Dehradun",
+   "lat": 30.32443,
+   "lon": 78.03392,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Rudrapur": {
+   "producer": "HMEL",
+   "zone": "Rudrapur",
+   "lat": 28.98,
+   "lon": 79.4,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Agra": {
+   "producer": "HMEL",
+   "zone": "Agra",
+   "lat": 27.18333,
+   "lon": 78.01667,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Ghaziabad": {
+   "producer": "HMEL",
+   "zone": "Ghaziabad",
+   "lat": 28.66535,
+   "lon": 77.43915,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Saharanpur": {
+   "producer": "HMEL",
+   "zone": "Saharanpur",
+   "lat": 29.9679,
+   "lon": 77.54522,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Kanpur": {
+   "producer": "HMEL",
+   "zone": "Kanpur",
+   "lat": 26.46523,
+   "lon": 80.34975,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Chandauli": {
+   "producer": "HMEL",
+   "zone": "Chandauli",
+   "lat": 25.25803,
+   "lon": 83.26825,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Varanasi": {
+   "producer": "HMEL",
+   "zone": "Varanasi",
+   "lat": 25.31668,
+   "lon": 83.01041,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Bhiwadi": {
+   "producer": "HMEL",
+   "zone": "Bhiwadi",
+   "lat": 28.21024,
+   "lon": 76.86056,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Jaipur": {
+   "producer": "HMEL",
+   "zone": "Jaipur",
+   "lat": 26.91962,
+   "lon": 75.78781,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Ajmer": {
+   "producer": "HMEL",
+   "zone": "Ajmer",
+   "lat": 26.4521,
+   "lon": 74.63867,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Jodhpur": {
+   "producer": "HMEL",
+   "zone": "Jodhpur",
+   "lat": 26.26841,
+   "lon": 73.00594,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Udaipur": {
+   "producer": "HMEL",
+   "zone": "Udaipur",
+   "lat": 24.58584,
+   "lon": 73.71346,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Ahmedabad": {
+   "producer": "HMEL",
+   "zone": "Ahmedabad",
+   "lat": 23.02579,
+   "lon": 72.58727,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Vadodara": {
+   "producer": "HMEL",
+   "zone": "Vadodara",
+   "lat": 22.29941,
+   "lon": 73.20812,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Bhavnagar": {
+   "producer": "HMEL",
+   "zone": "Bhavnagar",
+   "lat": 21.76287,
+   "lon": 72.15331,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|DIU": {
+   "producer": "HMEL",
+   "zone": "DIU",
+   "lat": 20.71405,
+   "lon": 70.98224,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Gandhidham": {
+   "producer": "HMEL",
+   "zone": "Gandhidham",
+   "lat": 23.08333,
+   "lon": 70.13333,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Porbandar": {
+   "producer": "HMEL",
+   "zone": "Porbandar",
+   "lat": 21.64219,
+   "lon": 69.60929,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Rajkot": {
+   "producer": "HMEL",
+   "zone": "Rajkot",
+   "lat": 22.29161,
+   "lon": 70.79322,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Mehsana": {
+   "producer": "HMEL",
+   "zone": "Mehsana",
+   "lat": 23.59864,
+   "lon": 72.38472,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Surat": {
+   "producer": "HMEL",
+   "zone": "Surat",
+   "lat": 21.19594,
+   "lon": 72.83023,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Valsad": {
+   "producer": "HMEL",
+   "zone": "Valsad",
+   "lat": 20.61013,
+   "lon": 72.93428,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Daman": {
+   "producer": "HMEL",
+   "zone": "Daman",
+   "lat": 20.41431,
+   "lon": 72.83236,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Mumbai": {
+   "producer": "HMEL",
+   "zone": "Mumbai",
+   "lat": 19.07283,
+   "lon": 72.88261,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Bhiwandi": {
+   "producer": "HMEL",
+   "zone": "Bhiwandi",
+   "lat": 19.30023,
+   "lon": 73.05881,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Aurangabad": {
+   "producer": "HMEL",
+   "zone": "Aurangabad",
+   "lat": 19.87757,
+   "lon": 75.34226,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Jalgaon": {
+   "producer": "HMEL",
+   "zone": "Jalgaon",
+   "lat": 21.00292,
+   "lon": 75.56602,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Nashik": {
+   "producer": "HMEL",
+   "zone": "Nashik",
+   "lat": 19.99727,
+   "lon": 73.79096,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Pune": {
+   "producer": "HMEL",
+   "zone": "Pune",
+   "lat": 18.51957,
+   "lon": 73.85535,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Kolhapur": {
+   "producer": "HMEL",
+   "zone": "Kolhapur",
+   "lat": 16.69563,
+   "lon": 74.23167,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Nimrani": {
+   "producer": "HMEL",
+   "zone": "Nimrani",
+   "lat": 22.11749,
+   "lon": 75.4583,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Nagpur": {
+   "producer": "HMEL",
+   "zone": "Nagpur",
+   "lat": 21.14631,
+   "lon": 79.08491,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Panjim": {
+   "producer": "HMEL",
+   "zone": "Panjim",
+   "lat": 15.49574,
+   "lon": 73.82624,
+   "state": "Goa",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Bhopal": {
+   "producer": "HMEL",
+   "zone": "Bhopal",
+   "lat": 23.25469,
+   "lon": 77.40289,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Indore": {
+   "producer": "HMEL",
+   "zone": "Indore",
+   "lat": 22.71792,
+   "lon": 75.8333,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Gwalior": {
+   "producer": "HMEL",
+   "zone": "Gwalior",
+   "lat": 26.22983,
+   "lon": 78.17337,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Jabalpur": {
+   "producer": "HMEL",
+   "zone": "Jabalpur",
+   "lat": 23.16697,
+   "lon": 79.95006,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Rewa": {
+   "producer": "HMEL",
+   "zone": "Rewa",
+   "lat": 24.53256,
+   "lon": 81.29234,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Bilaspur": {
+   "producer": "HMEL",
+   "zone": "Bilaspur",
+   "lat": 22.08005,
+   "lon": 82.15543,
+   "state": "Chhattisgarh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Raipur": {
+   "producer": "HMEL",
+   "zone": "Raipur",
+   "lat": 21.23333,
+   "lon": 81.63333,
+   "state": "Chhattisgarh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Patna": {
+   "producer": "HMEL",
+   "zone": "Patna",
+   "lat": 25.59408,
+   "lon": 85.13563,
+   "state": "Bihar",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Jamshedpur": {
+   "producer": "HMEL",
+   "zone": "Jamshedpur",
+   "lat": 22.80278,
+   "lon": 86.18545,
+   "state": "Jharkhand",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Ranchi": {
+   "producer": "HMEL",
+   "zone": "Ranchi",
+   "lat": 23.34316,
+   "lon": 85.3094,
+   "state": "Jharkhand",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Kolkata": {
+   "producer": "HMEL",
+   "zone": "Kolkata",
+   "lat": 22.56263,
+   "lon": 88.36304,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Purulia": {
+   "producer": "HMEL",
+   "zone": "Purulia",
+   "lat": 23.33062,
+   "lon": 86.36303,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Siliguri": {
+   "producer": "HMEL",
+   "zone": "Siliguri",
+   "lat": 26.71004,
+   "lon": 88.42851,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Guwahati": {
+   "producer": "HMEL",
+   "zone": "Guwahati",
+   "lat": 26.1844,
+   "lon": 91.7458,
+   "state": "Assam",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Bargarh": {
+   "producer": "HMEL",
+   "zone": "Bargarh",
+   "lat": 21.33348,
+   "lon": 83.61905,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Balasore": {
+   "producer": "HMEL",
+   "zone": "Balasore",
+   "lat": 21.49266,
+   "lon": 86.93348,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Cuttack": {
+   "producer": "HMEL",
+   "zone": "Cuttack",
+   "lat": 20.46497,
+   "lon": 85.87927,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Hyderabad": {
+   "producer": "HMEL",
+   "zone": "Hyderabad",
+   "lat": 17.38405,
+   "lon": 78.45636,
+   "state": "Telangana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Kodad": {
+   "producer": "HMEL",
+   "zone": "Kodad",
+   "lat": 16.9985,
+   "lon": 79.9656,
+   "state": "Telangana",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Tirupathi": {
+   "producer": "HMEL",
+   "zone": "Tirupathi",
+   "lat": 13.63551,
+   "lon": 79.41989,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Cuddapah": {
+   "producer": "HMEL",
+   "zone": "Cuddapah",
+   "lat": 14.47995,
+   "lon": 78.82346,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Vijayawada": {
+   "producer": "HMEL",
+   "zone": "Vijayawada",
+   "lat": 16.50745,
+   "lon": 80.6466,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Vishakapatnam": {
+   "producer": "HMEL",
+   "zone": "Vishakapatnam",
+   "lat": 17.68009,
+   "lon": 83.20161,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Bengaluru": {
+   "producer": "HMEL",
+   "zone": "Bengaluru",
+   "lat": 12.97194,
+   "lon": 77.59369,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Bellary": {
+   "producer": "HMEL",
+   "zone": "Bellary",
+   "lat": 15.14205,
+   "lon": 76.92398,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Hubli": {
+   "producer": "HMEL",
+   "zone": "Hubli",
+   "lat": 15.34776,
+   "lon": 75.13378,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Mangalore": {
+   "producer": "HMEL",
+   "zone": "Mangalore",
+   "lat": 12.91723,
+   "lon": 74.85603,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Chennai": {
+   "producer": "HMEL",
+   "zone": "Chennai",
+   "lat": 13.08784,
+   "lon": 80.27847,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Coimbatore": {
+   "producer": "HMEL",
+   "zone": "Coimbatore",
+   "lat": 11.00555,
+   "lon": 76.96612,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Karur": {
+   "producer": "HMEL",
+   "zone": "Karur",
+   "lat": 10.95771,
+   "lon": 78.08095,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Madurai": {
+   "producer": "HMEL",
+   "zone": "Madurai",
+   "lat": 9.919,
+   "lon": 78.11953,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Pondicherry": {
+   "producer": "HMEL",
+   "zone": "Pondicherry",
+   "lat": 11.93381,
+   "lon": 79.82979,
+   "state": "Puducherry",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Tuticorin": {
+   "producer": "HMEL",
+   "zone": "Tuticorin",
+   "lat": 8.76735,
+   "lon": 78.13425,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Thiruvananthapuram": {
+   "producer": "HMEL",
+   "zone": "Thiruvananthapuram",
+   "lat": 8.4855,
+   "lon": 76.94924,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "HMEL|Calicut": {
+   "producer": "HMEL",
+   "zone": "Calicut",
+   "lat": 11.24802,
+   "lon": 75.7804,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Cochin": {
+   "producer": "HMEL",
+   "zone": "Cochin",
+   "lat": 9.93988,
+   "lon": 76.26022,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Khalapur": {
+   "producer": "HMEL",
+   "zone": "Khalapur",
+   "lat": 18.82977,
+   "lon": 73.28364,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HMEL|Mundra": {
+   "producer": "HMEL",
+   "zone": "Mundra",
+   "lat": 22.83918,
+   "lon": 69.7219,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|West Bengal_Howrah": {
+   "producer": "HPL",
+   "zone": "West Bengal_Howrah",
+   "lat": 22.57688,
+   "lon": 88.31857,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|West Bengal_Asansol": {
+   "producer": "HPL",
+   "zone": "West Bengal_Asansol",
+   "lat": 23.68333,
+   "lon": 86.98333,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|West Bengal_Purulia": {
+   "producer": "HPL",
+   "zone": "West Bengal_Purulia",
+   "lat": 23.33062,
+   "lon": 86.36303,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|West Bengal_Malda": {
+   "producer": "HPL",
+   "zone": "West Bengal_Malda",
+   "lat": 25.00447,
+   "lon": 88.14573,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|West Bengal_Siliguri": {
+   "producer": "HPL",
+   "zone": "West Bengal_Siliguri",
+   "lat": 26.71004,
+   "lon": 88.42851,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Bihar": {
+   "producer": "HPL",
+   "zone": "Bihar",
+   "lat": null,
+   "lon": null,
+   "state": [
+    "Bihar"
+   ],
+   "scope": "state",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Jharkhand_Ranchi": {
+   "producer": "HPL",
+   "zone": "Jharkhand_Ranchi",
+   "lat": null,
+   "lon": null,
+   "state": [
+    "Jharkhand"
+   ],
+   "scope": "state",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Orissa_Balasore": {
+   "producer": "HPL",
+   "zone": "Orissa_Balasore",
+   "lat": 21.49266,
+   "lon": 86.93348,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Orissa_Bhubaneswar": {
+   "producer": "HPL",
+   "zone": "Orissa_Bhubaneswar",
+   "lat": 20.27241,
+   "lon": 85.83385,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Orissa_Bargarh": {
+   "producer": "HPL",
+   "zone": "Orissa_Bargarh",
+   "lat": 21.33348,
+   "lon": 83.61905,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Chattisgarh": {
+   "producer": "HPL",
+   "zone": "Chattisgarh",
+   "lat": null,
+   "lon": null,
+   "state": [
+    "Chhattisgarh"
+   ],
+   "scope": "state",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Madhya Pradesh_Rewa": {
+   "producer": "HPL",
+   "zone": "Madhya Pradesh_Rewa",
+   "lat": 24.53256,
+   "lon": 81.29234,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Madhya Pradesh_Jabalpur": {
+   "producer": "HPL",
+   "zone": "Madhya Pradesh_Jabalpur",
+   "lat": 23.16697,
+   "lon": 79.95006,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Assam": {
+   "producer": "HPL",
+   "zone": "Assam",
+   "lat": null,
+   "lon": null,
+   "state": [
+    "Assam"
+   ],
+   "scope": "state",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Meghalaya & NE States": {
+   "producer": "HPL",
+   "zone": "Meghalaya & NE States",
+   "lat": null,
+   "lon": null,
+   "state": [
+    "Meghalaya",
+    "Manipur",
+    "Tripura",
+    "Nagaland",
+    "Arunachal Pradesh",
+    "Mizoram"
+   ],
+   "scope": "state",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Tamil Nadu_Chennai": {
+   "producer": "HPL",
+   "zone": "Tamil Nadu_Chennai",
+   "lat": 13.08784,
+   "lon": 80.27847,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Tamil Nadu_Trichy": {
+   "producer": "HPL",
+   "zone": "Tamil Nadu_Trichy",
+   "lat": 10.8155,
+   "lon": 78.69651,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Tamil Nadu_Coimbatore": {
+   "producer": "HPL",
+   "zone": "Tamil Nadu_Coimbatore",
+   "lat": 11.00555,
+   "lon": 76.96612,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Tamil Nadu_Madurai": {
+   "producer": "HPL",
+   "zone": "Tamil Nadu_Madurai",
+   "lat": 9.919,
+   "lon": 78.11953,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Pondicherry": {
+   "producer": "HPL",
+   "zone": "Pondicherry",
+   "lat": 11.93381,
+   "lon": 79.82979,
+   "state": "Puducherry",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Telangana_Suryapet": {
+   "producer": "HPL",
+   "zone": "Telangana_Suryapet",
+   "lat": 17.14054,
+   "lon": 79.62045,
+   "state": "Telangana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Telangana_Hyderabad": {
+   "producer": "HPL",
+   "zone": "Telangana_Hyderabad",
+   "lat": 17.38405,
+   "lon": 78.45636,
+   "state": "Telangana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Andhra Pradesh_Vizag": {
+   "producer": "HPL",
+   "zone": "Andhra Pradesh_Vizag",
+   "lat": 17.68009,
+   "lon": 83.20161,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Andhra Pradesh_Guntur": {
+   "producer": "HPL",
+   "zone": "Andhra Pradesh_Guntur",
+   "lat": 16.29974,
+   "lon": 80.45729,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Andhra Pradesh_tirupati": {
+   "producer": "HPL",
+   "zone": "Andhra Pradesh_tirupati",
+   "lat": 13.63551,
+   "lon": 79.41989,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Karnataka_Bangalore": {
+   "producer": "HPL",
+   "zone": "Karnataka_Bangalore",
+   "lat": 12.97194,
+   "lon": 77.59369,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Karnataka_Bellary": {
+   "producer": "HPL",
+   "zone": "Karnataka_Bellary",
+   "lat": 15.14205,
+   "lon": 76.92398,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Karnataka_Mangalore": {
+   "producer": "HPL",
+   "zone": "Karnataka_Mangalore",
+   "lat": 12.91723,
+   "lon": 74.85603,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Kerala": {
+   "producer": "HPL",
+   "zone": "Kerala",
+   "lat": null,
+   "lon": null,
+   "state": [
+    "Kerala"
+   ],
+   "scope": "state",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Delhi": {
+   "producer": "HPL",
+   "zone": "Delhi",
+   "lat": 28.62137,
+   "lon": 77.2148,
+   "state": "Delhi",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Haryana_Faridabad": {
+   "producer": "HPL",
+   "zone": "Haryana_Faridabad",
+   "lat": 28.41124,
+   "lon": 77.31316,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Haryana_Gurgaon": {
+   "producer": "HPL",
+   "zone": "Haryana_Gurgaon",
+   "lat": 28.4601,
+   "lon": 77.02635,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Haryana_Panipat": {
+   "producer": "HPL",
+   "zone": "Haryana_Panipat",
+   "lat": 29.38747,
+   "lon": 76.96825,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Uttar Pradesh_Varanasi": {
+   "producer": "HPL",
+   "zone": "Uttar Pradesh_Varanasi",
+   "lat": 25.31668,
+   "lon": 83.01041,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Uttar Pradesh_Kanpur": {
+   "producer": "HPL",
+   "zone": "Uttar Pradesh_Kanpur",
+   "lat": 26.46523,
+   "lon": 80.34975,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Uttar Pradesh_Bareilly": {
+   "producer": "HPL",
+   "zone": "Uttar Pradesh_Bareilly",
+   "lat": 28.36678,
+   "lon": 79.43167,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Uttar Pradesh_Mathura": {
+   "producer": "HPL",
+   "zone": "Uttar Pradesh_Mathura",
+   "lat": 27.5035,
+   "lon": 77.67215,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Uttar Pradesh_Noida": {
+   "producer": "HPL",
+   "zone": "Uttar Pradesh_Noida",
+   "lat": 28.58,
+   "lon": 77.33,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Uttarakhand_Sitarganj": {
+   "producer": "HPL",
+   "zone": "Uttarakhand_Sitarganj",
+   "lat": 28.9293,
+   "lon": 79.70436,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Uttarakhand_Haridwar": {
+   "producer": "HPL",
+   "zone": "Uttarakhand_Haridwar",
+   "lat": 29.94791,
+   "lon": 78.16025,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Punjab_Ludhiana": {
+   "producer": "HPL",
+   "zone": "Punjab_Ludhiana",
+   "lat": 30.91204,
+   "lon": 75.85379,
+   "state": "Punjab",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Punjab_Amritsar": {
+   "producer": "HPL",
+   "zone": "Punjab_Amritsar",
+   "lat": 31.62234,
+   "lon": 74.87534,
+   "state": "Punjab",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Chandigarh": {
+   "producer": "HPL",
+   "zone": "Chandigarh",
+   "lat": 30.73629,
+   "lon": 76.7884,
+   "state": "Chandigarh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Himachal Pradesh_Una": {
+   "producer": "HPL",
+   "zone": "Himachal Pradesh_Una",
+   "lat": 31.46493,
+   "lon": 76.26914,
+   "state": "Himachal Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Himachal Pradesh_Baddi": {
+   "producer": "HPL",
+   "zone": "Himachal Pradesh_Baddi",
+   "lat": 30.95783,
+   "lon": 76.79136,
+   "state": "Himachal Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|J&K_Kathua": {
+   "producer": "HPL",
+   "zone": "J&K_Kathua",
+   "lat": 32.36941,
+   "lon": 75.52539,
+   "state": "Jammu and Kashmir",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|J&K_Jammu": {
+   "producer": "HPL",
+   "zone": "J&K_Jammu",
+   "lat": 32.73528,
+   "lon": 74.86167,
+   "state": "Jammu and Kashmir",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Rajasthan_Bhiwadi": {
+   "producer": "HPL",
+   "zone": "Rajasthan_Bhiwadi",
+   "lat": 28.21024,
+   "lon": 76.86056,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Rajasthan_Jaipur": {
+   "producer": "HPL",
+   "zone": "Rajasthan_Jaipur",
+   "lat": 26.91962,
+   "lon": 75.78781,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Rajasthan_Kota": {
+   "producer": "HPL",
+   "zone": "Rajasthan_Kota",
+   "lat": 25.18254,
+   "lon": 75.83907,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Rajasthan_Jodhpur": {
+   "producer": "HPL",
+   "zone": "Rajasthan_Jodhpur",
+   "lat": 26.26841,
+   "lon": 73.00594,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Maharashtra_Nagpur": {
+   "producer": "HPL",
+   "zone": "Maharashtra_Nagpur",
+   "lat": 21.14631,
+   "lon": 79.08491,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Maharashtra_Jalgaon": {
+   "producer": "HPL",
+   "zone": "Maharashtra_Jalgaon",
+   "lat": 21.00292,
+   "lon": 75.56602,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Maharashtra_Aurangabad": {
+   "producer": "HPL",
+   "zone": "Maharashtra_Aurangabad",
+   "lat": 19.87757,
+   "lon": 75.34226,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Maharashtra_Nashik": {
+   "producer": "HPL",
+   "zone": "Maharashtra_Nashik",
+   "lat": 19.99727,
+   "lon": 73.79096,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Maharashtra_Pune": {
+   "producer": "HPL",
+   "zone": "Maharashtra_Pune",
+   "lat": 18.51957,
+   "lon": 73.85535,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Maharashtra_Mumbai": {
+   "producer": "HPL",
+   "zone": "Maharashtra_Mumbai",
+   "lat": 19.07283,
+   "lon": 72.88261,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Maharashtra_Kolhapur": {
+   "producer": "HPL",
+   "zone": "Maharashtra_Kolhapur",
+   "lat": 16.69563,
+   "lon": 74.23167,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Goa": {
+   "producer": "HPL",
+   "zone": "Goa",
+   "lat": null,
+   "lon": null,
+   "state": [
+    "Goa"
+   ],
+   "scope": "state",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Gujarat_Vadodara": {
+   "producer": "HPL",
+   "zone": "Gujarat_Vadodara",
+   "lat": 22.29941,
+   "lon": 73.20812,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Gujarat_Surat": {
+   "producer": "HPL",
+   "zone": "Gujarat_Surat",
+   "lat": 21.19594,
+   "lon": 72.83023,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Gujarat_Ahmedabad": {
+   "producer": "HPL",
+   "zone": "Gujarat_Ahmedabad",
+   "lat": 23.02579,
+   "lon": 72.58727,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Gujarat_Mehsana": {
+   "producer": "HPL",
+   "zone": "Gujarat_Mehsana",
+   "lat": 23.59864,
+   "lon": 72.38472,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Gujarat_Rajkot": {
+   "producer": "HPL",
+   "zone": "Gujarat_Rajkot",
+   "lat": 22.29161,
+   "lon": 70.79322,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Gujarat_Bhavnagar": {
+   "producer": "HPL",
+   "zone": "Gujarat_Bhavnagar",
+   "lat": 21.76287,
+   "lon": 72.15331,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Gujarat_Gandhidham": {
+   "producer": "HPL",
+   "zone": "Gujarat_Gandhidham",
+   "lat": 23.08333,
+   "lon": 70.13333,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Madhya Pradesh_Gwalior": {
+   "producer": "HPL",
+   "zone": "Madhya Pradesh_Gwalior",
+   "lat": 26.22983,
+   "lon": 78.17337,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Madhya Pradesh_Bhopal": {
+   "producer": "HPL",
+   "zone": "Madhya Pradesh_Bhopal",
+   "lat": 23.25469,
+   "lon": 77.40289,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Madhya Pradesh_Indore": {
+   "producer": "HPL",
+   "zone": "Madhya Pradesh_Indore",
+   "lat": 22.71792,
+   "lon": 75.8333,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Dadra": {
+   "producer": "HPL",
+   "zone": "Dadra",
+   "lat": 20.27386,
+   "lon": 72.99673,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "HPL|Daman": {
+   "producer": "HPL",
+   "zone": "Daman",
+   "lat": 20.41431,
+   "lon": 72.83236,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Diu": {
+   "producer": "OPaL",
+   "zone": "Diu",
+   "lat": 20.71405,
+   "lon": 70.98224,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Ahmedabad": {
+   "producer": "OPaL",
+   "zone": "Ahmedabad",
+   "lat": 23.02579,
+   "lon": 72.58727,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Bhavnagar": {
+   "producer": "OPaL",
+   "zone": "Bhavnagar",
+   "lat": 21.76287,
+   "lon": 72.15331,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Gandhidham": {
+   "producer": "OPaL",
+   "zone": "Gandhidham",
+   "lat": 23.08333,
+   "lon": 70.13333,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Kalol (Mehsana)": {
+   "producer": "OPaL",
+   "zone": "Kalol (Mehsana)",
+   "lat": 23.24656,
+   "lon": 72.49508,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Rajkot": {
+   "producer": "OPaL",
+   "zone": "Rajkot",
+   "lat": 22.29161,
+   "lon": 70.79322,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Surat": {
+   "producer": "OPaL",
+   "zone": "Surat",
+   "lat": 21.19594,
+   "lon": 72.83023,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Vadodara": {
+   "producer": "OPaL",
+   "zone": "Vadodara",
+   "lat": 22.29941,
+   "lon": 73.20812,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Valsad": {
+   "producer": "OPaL",
+   "zone": "Valsad",
+   "lat": 20.61013,
+   "lon": 72.93428,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Bhopal": {
+   "producer": "OPaL",
+   "zone": "Bhopal",
+   "lat": 23.25469,
+   "lon": 77.40289,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Gwalior": {
+   "producer": "OPaL",
+   "zone": "Gwalior",
+   "lat": 26.22983,
+   "lon": 78.17337,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Indore": {
+   "producer": "OPaL",
+   "zone": "Indore",
+   "lat": 22.71792,
+   "lon": 75.8333,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Jabalpur": {
+   "producer": "OPaL",
+   "zone": "Jabalpur",
+   "lat": 23.16697,
+   "lon": 79.95006,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Sendh": {
+   "producer": "OPaL",
+   "zone": "Sendh",
+   "lat": null,
+   "lon": null,
+   "state": null,
+   "scope": "unlocated",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Tikamgarh": {
+   "producer": "OPaL",
+   "zone": "Tikamgarh",
+   "lat": 24.74327,
+   "lon": 78.83061,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Bhiwadi": {
+   "producer": "OPaL",
+   "zone": "Bhiwadi",
+   "lat": 28.21024,
+   "lon": 76.86056,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Jaipur": {
+   "producer": "OPaL",
+   "zone": "Jaipur",
+   "lat": 26.91962,
+   "lon": 75.78781,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Jodhpur": {
+   "producer": "OPaL",
+   "zone": "Jodhpur",
+   "lat": 26.26841,
+   "lon": 73.00594,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Kota": {
+   "producer": "OPaL",
+   "zone": "Kota",
+   "lat": 25.18254,
+   "lon": 75.83907,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Udaipur": {
+   "producer": "OPaL",
+   "zone": "Udaipur",
+   "lat": 24.58584,
+   "lon": 73.71346,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Silvassa": {
+   "producer": "OPaL",
+   "zone": "Silvassa",
+   "lat": 20.27386,
+   "lon": 72.99673,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Daman": {
+   "producer": "OPaL",
+   "zone": "Daman",
+   "lat": 20.41431,
+   "lon": 72.83236,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Panji": {
+   "producer": "OPaL",
+   "zone": "Panji",
+   "lat": 15.49574,
+   "lon": 73.82624,
+   "state": "Goa",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Aurangabad (MH)": {
+   "producer": "OPaL",
+   "zone": "Aurangabad (MH)",
+   "lat": 19.87757,
+   "lon": 75.34226,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Bhiwandi": {
+   "producer": "OPaL",
+   "zone": "Bhiwandi",
+   "lat": 19.30023,
+   "lon": 73.05881,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Jalgaon": {
+   "producer": "OPaL",
+   "zone": "Jalgaon",
+   "lat": 21.00292,
+   "lon": 75.56602,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Kolhapur": {
+   "producer": "OPaL",
+   "zone": "Kolhapur",
+   "lat": 16.69563,
+   "lon": 74.23167,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Mumbai": {
+   "producer": "OPaL",
+   "zone": "Mumbai",
+   "lat": 19.07283,
+   "lon": 72.88261,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Nagpur": {
+   "producer": "OPaL",
+   "zone": "Nagpur",
+   "lat": 21.14631,
+   "lon": 79.08491,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Nashik": {
+   "producer": "OPaL",
+   "zone": "Nashik",
+   "lat": 19.99727,
+   "lon": 73.79096,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Pune": {
+   "producer": "OPaL",
+   "zone": "Pune",
+   "lat": 18.51957,
+   "lon": 73.85535,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Solapur": {
+   "producer": "OPaL",
+   "zone": "Solapur",
+   "lat": 17.67152,
+   "lon": 75.91044,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Guwahati": {
+   "producer": "OPaL",
+   "zone": "Guwahati",
+   "lat": 26.1844,
+   "lon": 91.7458,
+   "state": "Assam",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Patna": {
+   "producer": "OPaL",
+   "zone": "Patna",
+   "lat": 25.59408,
+   "lon": 85.13563,
+   "state": "Bihar",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Bilaspur": {
+   "producer": "OPaL",
+   "zone": "Bilaspur",
+   "lat": 22.08005,
+   "lon": 82.15543,
+   "state": "Chhattisgarh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Raipur": {
+   "producer": "OPaL",
+   "zone": "Raipur",
+   "lat": 21.23333,
+   "lon": 81.63333,
+   "state": "Chhattisgarh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Jamshedpur": {
+   "producer": "OPaL",
+   "zone": "Jamshedpur",
+   "lat": 22.80278,
+   "lon": 86.18545,
+   "state": "Jharkhand",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Ranchi": {
+   "producer": "OPaL",
+   "zone": "Ranchi",
+   "lat": 23.34316,
+   "lon": 85.3094,
+   "state": "Jharkhand",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Byrnihat": {
+   "producer": "OPaL",
+   "zone": "Byrnihat",
+   "lat": 26.04264,
+   "lon": 91.86599,
+   "state": "Meghalaya",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Balasore": {
+   "producer": "OPaL",
+   "zone": "Balasore",
+   "lat": 21.49266,
+   "lon": 86.93348,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Bargarh": {
+   "producer": "OPaL",
+   "zone": "Bargarh",
+   "lat": 21.33348,
+   "lon": 83.61905,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Cuttack": {
+   "producer": "OPaL",
+   "zone": "Cuttack",
+   "lat": 20.46497,
+   "lon": 85.87927,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Gangtok": {
+   "producer": "OPaL",
+   "zone": "Gangtok",
+   "lat": 27.32574,
+   "lon": 88.61216,
+   "state": "Sikkim",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Agartala": {
+   "producer": "OPaL",
+   "zone": "Agartala",
+   "lat": 23.83605,
+   "lon": 91.27939,
+   "state": "Tripura",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Jalpaiguri": {
+   "producer": "OPaL",
+   "zone": "Jalpaiguri",
+   "lat": 26.51667,
+   "lon": 88.73333,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Kolkata": {
+   "producer": "OPaL",
+   "zone": "Kolkata",
+   "lat": 22.56263,
+   "lon": 88.36304,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Puruliya": {
+   "producer": "OPaL",
+   "zone": "Puruliya",
+   "lat": 23.33062,
+   "lon": 86.36303,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Chandigarh": {
+   "producer": "OPaL",
+   "zone": "Chandigarh",
+   "lat": 30.73629,
+   "lon": 76.7884,
+   "state": "Chandigarh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Delhi": {
+   "producer": "OPaL",
+   "zone": "Delhi",
+   "lat": 28.62137,
+   "lon": 77.2148,
+   "state": "Delhi",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Faridabad": {
+   "producer": "OPaL",
+   "zone": "Faridabad",
+   "lat": 28.41124,
+   "lon": 77.31316,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Gurgaon": {
+   "producer": "OPaL",
+   "zone": "Gurgaon",
+   "lat": 28.4601,
+   "lon": 77.02635,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Panipat": {
+   "producer": "OPaL",
+   "zone": "Panipat",
+   "lat": 29.38747,
+   "lon": 76.96825,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Baddi": {
+   "producer": "OPaL",
+   "zone": "Baddi",
+   "lat": 30.95783,
+   "lon": 76.79136,
+   "state": "Himachal Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Kalaamb": {
+   "producer": "OPaL",
+   "zone": "Kalaamb",
+   "lat": 30.49721,
+   "lon": 77.21358,
+   "state": "Himachal Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Jammu": {
+   "producer": "OPaL",
+   "zone": "Jammu",
+   "lat": 32.73528,
+   "lon": 74.86167,
+   "state": "Jammu and Kashmir",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Srinagar": {
+   "producer": "OPaL",
+   "zone": "Srinagar",
+   "lat": 34.08565,
+   "lon": 74.80555,
+   "state": "Jammu and Kashmir",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Ludhiana": {
+   "producer": "OPaL",
+   "zone": "Ludhiana",
+   "lat": 30.91204,
+   "lon": 75.85379,
+   "state": "Punjab",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Agra": {
+   "producer": "OPaL",
+   "zone": "Agra",
+   "lat": 27.18333,
+   "lon": 78.01667,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Ghaziabad/Dadri": {
+   "producer": "OPaL",
+   "zone": "Ghaziabad/Dadri",
+   "lat": 28.66535,
+   "lon": 77.43915,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Kanpur": {
+   "producer": "OPaL",
+   "zone": "Kanpur",
+   "lat": 26.46523,
+   "lon": 80.34975,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Saharanpur": {
+   "producer": "OPaL",
+   "zone": "Saharanpur",
+   "lat": 29.9679,
+   "lon": 77.54522,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Varanasi": {
+   "producer": "OPaL",
+   "zone": "Varanasi",
+   "lat": 25.31668,
+   "lon": 83.01041,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Dehradun": {
+   "producer": "OPaL",
+   "zone": "Dehradun",
+   "lat": 30.32443,
+   "lon": 78.03392,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Rudrapur": {
+   "producer": "OPaL",
+   "zone": "Rudrapur",
+   "lat": 28.98,
+   "lon": 79.4,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Cuddapah": {
+   "producer": "OPaL",
+   "zone": "Cuddapah",
+   "lat": 14.47995,
+   "lon": 78.82346,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Nandyal": {
+   "producer": "OPaL",
+   "zone": "Nandyal",
+   "lat": 15.47799,
+   "lon": 78.4836,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Tirupathi": {
+   "producer": "OPaL",
+   "zone": "Tirupathi",
+   "lat": 13.63551,
+   "lon": 79.41989,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Vijaywada/Guntur": {
+   "producer": "OPaL",
+   "zone": "Vijaywada/Guntur",
+   "lat": 16.50745,
+   "lon": 80.6466,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Vishakhapatnam": {
+   "producer": "OPaL",
+   "zone": "Vishakhapatnam",
+   "lat": 17.68009,
+   "lon": 83.20161,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Bengaluru": {
+   "producer": "OPaL",
+   "zone": "Bengaluru",
+   "lat": 12.97194,
+   "lon": 77.59369,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Bellary": {
+   "producer": "OPaL",
+   "zone": "Bellary",
+   "lat": 15.14205,
+   "lon": 76.92398,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Gulbarga": {
+   "producer": "OPaL",
+   "zone": "Gulbarga",
+   "lat": 17.33583,
+   "lon": 76.83757,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Hubli": {
+   "producer": "OPaL",
+   "zone": "Hubli",
+   "lat": 15.34776,
+   "lon": 75.13378,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Mangalore": {
+   "producer": "OPaL",
+   "zone": "Mangalore",
+   "lat": 12.91723,
+   "lon": 74.85603,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Calicut": {
+   "producer": "OPaL",
+   "zone": "Calicut",
+   "lat": 11.24802,
+   "lon": 75.7804,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Cochin": {
+   "producer": "OPaL",
+   "zone": "Cochin",
+   "lat": 9.93988,
+   "lon": 76.26022,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Trivandrum": {
+   "producer": "OPaL",
+   "zone": "Trivandrum",
+   "lat": 8.4855,
+   "lon": 76.94924,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Pondichery": {
+   "producer": "OPaL",
+   "zone": "Pondichery",
+   "lat": 11.93381,
+   "lon": 79.82979,
+   "state": "Puducherry",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Yanam": {
+   "producer": "OPaL",
+   "zone": "Yanam",
+   "lat": 16.73463,
+   "lon": 82.21773,
+   "state": "Puducherry",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Chennai": {
+   "producer": "OPaL",
+   "zone": "Chennai",
+   "lat": 13.08784,
+   "lon": 80.27847,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Coimbatore": {
+   "producer": "OPaL",
+   "zone": "Coimbatore",
+   "lat": 11.00555,
+   "lon": 76.96612,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Hosur": {
+   "producer": "OPaL",
+   "zone": "Hosur",
+   "lat": 12.73647,
+   "lon": 77.83264,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Karur": {
+   "producer": "OPaL",
+   "zone": "Karur",
+   "lat": 10.95771,
+   "lon": 78.08095,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Madurai": {
+   "producer": "OPaL",
+   "zone": "Madurai",
+   "lat": 9.919,
+   "lon": 78.11953,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Salem": {
+   "producer": "OPaL",
+   "zone": "Salem",
+   "lat": 11.65376,
+   "lon": 78.15538,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Tuticorin": {
+   "producer": "OPaL",
+   "zone": "Tuticorin",
+   "lat": 8.76735,
+   "lon": 78.13425,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Hyderabad": {
+   "producer": "OPaL",
+   "zone": "Hyderabad",
+   "lat": 17.38405,
+   "lon": 78.45636,
+   "state": "Telangana",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Suryapet": {
+   "producer": "OPaL",
+   "zone": "Suryapet",
+   "lat": 17.14054,
+   "lon": 79.62045,
+   "state": "Telangana",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "OPaL|Navi Mumbai": {
+   "producer": "OPaL",
+   "zone": "Navi Mumbai",
+   "lat": 19.03681,
+   "lon": 73.01582,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot",
+    "works"
+   ]
+  },
+  "OPaL|Dahej": {
+   "producer": "OPaL",
+   "zone": "Dahej",
+   "lat": 21.7119,
+   "lon": 72.59113,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "works"
+   ]
+  },
+  "GAIL|GAZIABAD/NOIDA": {
+   "producer": "GAIL",
+   "zone": "GAZIABAD/NOIDA",
+   "lat": 28.66535,
+   "lon": 77.43915,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|VADODARA": {
+   "producer": "GAIL",
+   "zone": "VADODARA",
+   "lat": 22.29941,
+   "lon": 73.20812,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|PONDICHERRY": {
+   "producer": "GAIL",
+   "zone": "PONDICHERRY",
+   "lat": 11.93381,
+   "lon": 79.82979,
+   "state": "Puducherry",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|JAMMU": {
+   "producer": "GAIL",
+   "zone": "JAMMU",
+   "lat": 32.73528,
+   "lon": 74.86167,
+   "state": "Jammu and Kashmir",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|AHMEDABAD": {
+   "producer": "GAIL",
+   "zone": "AHMEDABAD",
+   "lat": 23.02579,
+   "lon": 72.58727,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|VARANASI": {
+   "producer": "GAIL",
+   "zone": "VARANASI",
+   "lat": 25.31668,
+   "lon": 83.01041,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|GOA": {
+   "producer": "GAIL",
+   "zone": "GOA",
+   "lat": 15.38914,
+   "lon": 73.81491,
+   "state": "Goa",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|JAIPUR": {
+   "producer": "GAIL",
+   "zone": "JAIPUR",
+   "lat": 26.91962,
+   "lon": 75.78781,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|NAGPUR": {
+   "producer": "GAIL",
+   "zone": "NAGPUR",
+   "lat": 21.14631,
+   "lon": 79.08491,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|KUNDLI": {
+   "producer": "GAIL",
+   "zone": "KUNDLI",
+   "lat": 28.86913,
+   "lon": 77.12061,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|INDORE": {
+   "producer": "GAIL",
+   "zone": "INDORE",
+   "lat": 22.71792,
+   "lon": 75.8333,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|COIMBATORE": {
+   "producer": "GAIL",
+   "zone": "COIMBATORE",
+   "lat": 11.00555,
+   "lon": 76.96612,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|KOLKATA": {
+   "producer": "GAIL",
+   "zone": "KOLKATA",
+   "lat": 22.56263,
+   "lon": 88.36304,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|BANGALORE": {
+   "producer": "GAIL",
+   "zone": "BANGALORE",
+   "lat": 12.97194,
+   "lon": 77.59369,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|THRISSUR": {
+   "producer": "GAIL",
+   "zone": "THRISSUR",
+   "lat": 10.51667,
+   "lon": 76.21667,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|KANPUR": {
+   "producer": "GAIL",
+   "zone": "KANPUR",
+   "lat": 26.46523,
+   "lon": 80.34975,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|BHIWANDI": {
+   "producer": "GAIL",
+   "zone": "BHIWANDI",
+   "lat": 19.30023,
+   "lon": 73.05881,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|DAMAN": {
+   "producer": "GAIL",
+   "zone": "DAMAN",
+   "lat": 20.41431,
+   "lon": 72.83236,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|COCHIN": {
+   "producer": "GAIL",
+   "zone": "COCHIN",
+   "lat": 9.93988,
+   "lon": 76.26022,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|GUNTUR": {
+   "producer": "GAIL",
+   "zone": "GUNTUR",
+   "lat": 16.29974,
+   "lon": 80.45729,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|VIZAG": {
+   "producer": "GAIL",
+   "zone": "VIZAG",
+   "lat": 17.68009,
+   "lon": 83.20161,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|JODHPUR": {
+   "producer": "GAIL",
+   "zone": "JODHPUR",
+   "lat": 26.26841,
+   "lon": 73.00594,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|AGRA": {
+   "producer": "GAIL",
+   "zone": "AGRA",
+   "lat": 27.18333,
+   "lon": 78.01667,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|HARIDWAR": {
+   "producer": "GAIL",
+   "zone": "HARIDWAR",
+   "lat": 29.94791,
+   "lon": 78.16025,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|KASORGOD": {
+   "producer": "GAIL",
+   "zone": "KASORGOD",
+   "lat": 12.49838,
+   "lon": 74.98959,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|AURANGABAD": {
+   "producer": "GAIL",
+   "zone": "AURANGABAD",
+   "lat": 19.87757,
+   "lon": 75.34226,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|DELHI": {
+   "producer": "GAIL",
+   "zone": "DELHI",
+   "lat": 28.62137,
+   "lon": 77.2148,
+   "state": "Delhi",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|ETAWAH": {
+   "producer": "GAIL",
+   "zone": "ETAWAH",
+   "lat": 26.77615,
+   "lon": 79.02133,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|CALICUT": {
+   "producer": "GAIL",
+   "zone": "CALICUT",
+   "lat": 11.24802,
+   "lon": 75.7804,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|GUWAHATI": {
+   "producer": "GAIL",
+   "zone": "GUWAHATI",
+   "lat": 26.1844,
+   "lon": 91.7458,
+   "state": "Assam",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|HYDERABAD": {
+   "producer": "GAIL",
+   "zone": "HYDERABAD",
+   "lat": 17.38405,
+   "lon": 78.45636,
+   "state": "Telangana",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|CUTTACK": {
+   "producer": "GAIL",
+   "zone": "CUTTACK",
+   "lat": 20.46497,
+   "lon": 85.87927,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|RUDERPUR": {
+   "producer": "GAIL",
+   "zone": "RUDERPUR",
+   "lat": 28.98,
+   "lon": 79.4,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|SILIGUDI": {
+   "producer": "GAIL",
+   "zone": "SILIGUDI",
+   "lat": 26.71004,
+   "lon": 88.42851,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|RANCHI": {
+   "producer": "GAIL",
+   "zone": "RANCHI",
+   "lat": 23.34316,
+   "lon": 85.3094,
+   "state": "Jharkhand",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|CHENNAI": {
+   "producer": "GAIL",
+   "zone": "CHENNAI",
+   "lat": 13.08784,
+   "lon": 80.27847,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|MADURAI": {
+   "producer": "GAIL",
+   "zone": "MADURAI",
+   "lat": 9.919,
+   "lon": 78.11953,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|PUNE": {
+   "producer": "GAIL",
+   "zone": "PUNE",
+   "lat": 18.51957,
+   "lon": 73.85535,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|PATNA": {
+   "producer": "GAIL",
+   "zone": "PATNA",
+   "lat": 25.59408,
+   "lon": 85.13563,
+   "state": "Bihar",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|BHIWADI": {
+   "producer": "GAIL",
+   "zone": "BHIWADI",
+   "lat": 28.21024,
+   "lon": 76.86056,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|ANANTAPUR": {
+   "producer": "GAIL",
+   "zone": "ANANTAPUR",
+   "lat": 14.67784,
+   "lon": 77.60813,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|NARELA": {
+   "producer": "GAIL",
+   "zone": "NARELA",
+   "lat": 28.85267,
+   "lon": 77.09288,
+   "state": "Delhi",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|MANGALORE": {
+   "producer": "GAIL",
+   "zone": "MANGALORE",
+   "lat": 12.91723,
+   "lon": 74.85603,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|GURGAON": {
+   "producer": "GAIL",
+   "zone": "GURGAON",
+   "lat": 28.4601,
+   "lon": 77.02635,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|FARIDABAD": {
+   "producer": "GAIL",
+   "zone": "FARIDABAD",
+   "lat": 28.41124,
+   "lon": 77.31316,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|SILVASSA / DADRA & NAGAR HAVELI": {
+   "producer": "GAIL",
+   "zone": "SILVASSA / DADRA & NAGAR HAVELI",
+   "lat": 20.27386,
+   "lon": 72.99673,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|Umbergaon": {
+   "producer": "GAIL",
+   "zone": "Umbergaon",
+   "lat": 20.2494,
+   "lon": 72.83519,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|BALASORE": {
+   "producer": "GAIL",
+   "zone": "BALASORE",
+   "lat": 21.49266,
+   "lon": 86.93348,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|LUDHIANA": {
+   "producer": "GAIL",
+   "zone": "LUDHIANA",
+   "lat": 30.91204,
+   "lon": 75.85379,
+   "state": "Punjab",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|BHAVNAGAR": {
+   "producer": "GAIL",
+   "zone": "BHAVNAGAR",
+   "lat": 21.76287,
+   "lon": 72.15331,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|RAJKOT": {
+   "producer": "GAIL",
+   "zone": "RAJKOT",
+   "lat": 22.29161,
+   "lon": 70.79322,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|HUBLI": {
+   "producer": "GAIL",
+   "zone": "HUBLI",
+   "lat": 15.34776,
+   "lon": 75.13378,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|JALGAON": {
+   "producer": "GAIL",
+   "zone": "JALGAON",
+   "lat": 21.00292,
+   "lon": 75.56602,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|SALEM": {
+   "producer": "GAIL",
+   "zone": "SALEM",
+   "lat": 11.65376,
+   "lon": 78.15538,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|RAIPUR": {
+   "producer": "GAIL",
+   "zone": "RAIPUR",
+   "lat": 21.23333,
+   "lon": 81.63333,
+   "state": "Chhattisgarh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|SAMBALPUR": {
+   "producer": "GAIL",
+   "zone": "SAMBALPUR",
+   "lat": 21.46527,
+   "lon": 83.97573,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|Greater Noida": {
+   "producer": "GAIL",
+   "zone": "Greater Noida",
+   "lat": 28.49615,
+   "lon": 77.53601,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|BADDI": {
+   "producer": "GAIL",
+   "zone": "BADDI",
+   "lat": 30.95783,
+   "lon": 76.79136,
+   "state": "Himachal Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "GAIL|KARNAL": {
+   "producer": "GAIL",
+   "zone": "KARNAL",
+   "lat": 29.69197,
+   "lon": 76.98448,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "IOCL|Udham singh Nagar": {
+   "producer": "IOCL",
+   "zone": "Udham singh Nagar",
+   "lat": 28.98,
+   "lon": 79.4,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "IOCL|Gautam Budh Nagar": {
+   "producer": "IOCL",
+   "zone": "Gautam Budh Nagar",
+   "lat": 28.58,
+   "lon": 77.33,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "IOCL|Raipur": {
+   "producer": "IOCL",
+   "zone": "Raipur",
+   "lat": 21.23333,
+   "lon": 81.63333,
+   "state": "Chhattisgarh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "IOCL|Dehradun": {
+   "producer": "IOCL",
+   "zone": "Dehradun",
+   "lat": 30.32443,
+   "lon": 78.03392,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "IOCL|Murshidabad": {
+   "producer": "IOCL",
+   "zone": "Murshidabad",
+   "lat": 24.1839,
+   "lon": 88.27171,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "IOCL|Durgapur": {
+   "producer": "IOCL",
+   "zone": "Durgapur",
+   "lat": 23.51583,
+   "lon": 87.30801,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "IOCL|Vapi": {
+   "producer": "IOCL",
+   "zone": "Vapi",
+   "lat": 20.37175,
+   "lon": 72.90493,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "IOCL|Pathankot": {
+   "producer": "IOCL",
+   "zone": "Pathankot",
+   "lat": 32.27484,
+   "lon": 75.65287,
+   "state": "Punjab",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "IOCL|Satna": {
+   "producer": "IOCL",
+   "zone": "Satna",
+   "lat": 24.57726,
+   "lon": 80.82719,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "IOCL|Rewari": {
+   "producer": "IOCL",
+   "zone": "Rewari",
+   "lat": 28.199,
+   "lon": 76.6183,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Vijay": {
+   "producer": "RIL",
+   "zone": "Vijay",
+   "lat": 16.50745,
+   "lon": 80.6466,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Patna": {
+   "producer": "RIL",
+   "zone": "Patna",
+   "lat": 25.59408,
+   "lon": 85.13563,
+   "state": "Bihar",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Raipur": {
+   "producer": "RIL",
+   "zone": "Raipur",
+   "lat": 21.23333,
+   "lon": 81.63333,
+   "state": "Chhattisgarh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Daman": {
+   "producer": "RIL",
+   "zone": "Daman",
+   "lat": 20.41431,
+   "lon": 72.83236,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Delhi": {
+   "producer": "RIL",
+   "zone": "Delhi",
+   "lat": 28.62137,
+   "lon": 77.2148,
+   "state": "Delhi",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Silvassa": {
+   "producer": "RIL",
+   "zone": "Silvassa",
+   "lat": 20.27386,
+   "lon": 72.99673,
+   "state": "Dadra and Nagar Haveli and Daman and Diu",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Rajkot": {
+   "producer": "RIL",
+   "zone": "Rajkot",
+   "lat": 22.29161,
+   "lon": 70.79322,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Sanand": {
+   "producer": "RIL",
+   "zone": "Sanand",
+   "lat": 22.99227,
+   "lon": 72.38177,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Ahmedabad": {
+   "producer": "RIL",
+   "zone": "Ahmedabad",
+   "lat": 23.02579,
+   "lon": 72.58727,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Baroda": {
+   "producer": "RIL",
+   "zone": "Baroda",
+   "lat": 22.29941,
+   "lon": 73.20812,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Valsad": {
+   "producer": "RIL",
+   "zone": "Valsad",
+   "lat": 20.61013,
+   "lon": 72.93428,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Navsar": {
+   "producer": "RIL",
+   "zone": "Navsar",
+   "lat": 20.94237,
+   "lon": 72.92467,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Baddi": {
+   "producer": "RIL",
+   "zone": "Baddi",
+   "lat": 30.95783,
+   "lon": 76.79136,
+   "state": "Himachal Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Binola": {
+   "producer": "RIL",
+   "zone": "Binola",
+   "lat": null,
+   "lon": null,
+   "state": null,
+   "scope": "unlocated",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Baghola": {
+   "producer": "RIL",
+   "zone": "Baghola",
+   "lat": 28.20879,
+   "lon": 77.30791,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Bangalore": {
+   "producer": "RIL",
+   "zone": "Bangalore",
+   "lat": 12.97194,
+   "lon": 77.59369,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Mangalore": {
+   "producer": "RIL",
+   "zone": "Mangalore",
+   "lat": 12.91723,
+   "lon": 74.85603,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Calicut": {
+   "producer": "RIL",
+   "zone": "Calicut",
+   "lat": 11.24802,
+   "lon": 75.7804,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Cochin": {
+   "producer": "RIL",
+   "zone": "Cochin",
+   "lat": 9.93988,
+   "lon": 76.26022,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Pune": {
+   "producer": "RIL",
+   "zone": "Pune",
+   "lat": 18.51957,
+   "lon": 73.85535,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Jalgaon": {
+   "producer": "RIL",
+   "zone": "Jalgaon",
+   "lat": 21.00292,
+   "lon": 75.56602,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Nashik": {
+   "producer": "RIL",
+   "zone": "Nashik",
+   "lat": 19.99727,
+   "lon": 73.79096,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Mumbai": {
+   "producer": "RIL",
+   "zone": "Mumbai",
+   "lat": 19.07283,
+   "lon": 72.88261,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Aurangabad": {
+   "producer": "RIL",
+   "zone": "Aurangabad",
+   "lat": 19.87757,
+   "lon": 75.34226,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Nagpur": {
+   "producer": "RIL",
+   "zone": "Nagpur",
+   "lat": 21.14631,
+   "lon": 79.08491,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Indore": {
+   "producer": "RIL",
+   "zone": "Indore",
+   "lat": 22.71792,
+   "lon": 75.8333,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Rewa": {
+   "producer": "RIL",
+   "zone": "Rewa",
+   "lat": 24.53256,
+   "lon": 81.29234,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Balasore": {
+   "producer": "RIL",
+   "zone": "Balasore",
+   "lat": 21.49266,
+   "lon": 86.93348,
+   "state": "Odisha",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Ludhiana": {
+   "producer": "RIL",
+   "zone": "Ludhiana",
+   "lat": 30.91204,
+   "lon": 75.85379,
+   "state": "Punjab",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Pondicherry": {
+   "producer": "RIL",
+   "zone": "Pondicherry",
+   "lat": 11.93381,
+   "lon": 79.82979,
+   "state": "Puducherry",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Jaipur": {
+   "producer": "RIL",
+   "zone": "Jaipur",
+   "lat": 26.91962,
+   "lon": 75.78781,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Udaipur": {
+   "producer": "RIL",
+   "zone": "Udaipur",
+   "lat": 24.58584,
+   "lon": 73.71346,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Jodhpur": {
+   "producer": "RIL",
+   "zone": "Jodhpur",
+   "lat": 26.26841,
+   "lon": 73.00594,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Hyderabad": {
+   "producer": "RIL",
+   "zone": "Hyderabad",
+   "lat": 17.38405,
+   "lon": 78.45636,
+   "state": "Telangana",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Suryapet": {
+   "producer": "RIL",
+   "zone": "Suryapet",
+   "lat": 17.14054,
+   "lon": 79.62045,
+   "state": "Telangana",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Chennai": {
+   "producer": "RIL",
+   "zone": "Chennai",
+   "lat": 13.08784,
+   "lon": 80.27847,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Madurai": {
+   "producer": "RIL",
+   "zone": "Madurai",
+   "lat": 9.919,
+   "lon": 78.11953,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Hosur": {
+   "producer": "RIL",
+   "zone": "Hosur",
+   "lat": 12.73647,
+   "lon": 77.83264,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Coimbatore": {
+   "producer": "RIL",
+   "zone": "Coimbatore",
+   "lat": 11.00555,
+   "lon": 76.96612,
+   "state": "Tamil Nadu",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Kanpur": {
+   "producer": "RIL",
+   "zone": "Kanpur",
+   "lat": 26.46523,
+   "lon": 80.34975,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Dadri": {
+   "producer": "RIL",
+   "zone": "Dadri",
+   "lat": 28.55257,
+   "lon": 77.55403,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Chandauli": {
+   "producer": "RIL",
+   "zone": "Chandauli",
+   "lat": 25.25803,
+   "lon": 83.26825,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Haridwar": {
+   "producer": "RIL",
+   "zone": "Haridwar",
+   "lat": 29.94791,
+   "lon": 78.16025,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Rudrapur": {
+   "producer": "RIL",
+   "zone": "Rudrapur",
+   "lat": 28.98,
+   "lon": 79.4,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "RIL|Kolkata": {
+   "producer": "RIL",
+   "zone": "Kolkata",
+   "lat": 22.56263,
+   "lon": 88.36304,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Amritsar": {
+   "producer": "HMEL",
+   "zone": "Amritsar",
+   "lat": 31.62234,
+   "lon": 74.87534,
+   "state": "Punjab",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Ludhiana": {
+   "producer": "HMEL",
+   "zone": "Ludhiana",
+   "lat": 30.91204,
+   "lon": 75.85379,
+   "state": "Punjab",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Kundli(Sonipat)": {
+   "producer": "HMEL",
+   "zone": "Kundli(Sonipat)",
+   "lat": 28.86913,
+   "lon": 77.12061,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Kalaamb": {
+   "producer": "HMEL",
+   "zone": "Kalaamb",
+   "lat": 30.49721,
+   "lon": 77.21358,
+   "state": "Himachal Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Haridwar": {
+   "producer": "HMEL",
+   "zone": "Haridwar",
+   "lat": 29.94791,
+   "lon": 78.16025,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Noida/Ghaziabad": {
+   "producer": "HMEL",
+   "zone": "Noida/Ghaziabad",
+   "lat": 28.58,
+   "lon": 77.33,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Morbi": {
+   "producer": "HMEL",
+   "zone": "Morbi",
+   "lat": 22.81731,
+   "lon": 70.8377,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Jaggayyapet": {
+   "producer": "HMEL",
+   "zone": "Jaggayyapet",
+   "lat": 16.8938,
+   "lon": 80.09807,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Thrissur(Trichur)": {
+   "producer": "HMEL",
+   "zone": "Thrissur(Trichur)",
+   "lat": 10.51667,
+   "lon": 76.21667,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Gandhinagar": {
+   "producer": "HMEL",
+   "zone": "Gandhinagar",
+   "lat": 23.21667,
+   "lon": 72.68333,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Rangia": {
+   "producer": "HMEL",
+   "zone": "Rangia",
+   "lat": 26.44931,
+   "lon": 91.61356,
+   "state": "Assam",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Halol": {
+   "producer": "HMEL",
+   "zone": "Halol",
+   "lat": 22.50321,
+   "lon": 73.47242,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Chakan": {
+   "producer": "HMEL",
+   "zone": "Chakan",
+   "lat": 18.76059,
+   "lon": 73.86351,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Dhule": {
+   "producer": "HMEL",
+   "zone": "Dhule",
+   "lat": 20.9013,
+   "lon": 74.77737,
+   "state": "Maharashtra",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Ankleshwar": {
+   "producer": "HMEL",
+   "zone": "Ankleshwar",
+   "lat": 21.63236,
+   "lon": 72.99001,
+   "state": "Gujarat",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Goa": {
+   "producer": "HMEL",
+   "zone": "Goa",
+   "lat": 15.38914,
+   "lon": 73.81491,
+   "state": "Goa",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Barddhaman": {
+   "producer": "HMEL",
+   "zone": "Barddhaman",
+   "lat": 23.25572,
+   "lon": 87.85691,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Kolar": {
+   "producer": "HMEL",
+   "zone": "Kolar",
+   "lat": 13.13768,
+   "lon": 78.12999,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Abu Road": {
+   "producer": "HMEL",
+   "zone": "Abu Road",
+   "lat": 24.48012,
+   "lon": 72.78186,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Mandideep": {
+   "producer": "HMEL",
+   "zone": "Mandideep",
+   "lat": 23.08166,
+   "lon": 77.53328,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Murshidabad": {
+   "producer": "HMEL",
+   "zone": "Murshidabad",
+   "lat": 24.1839,
+   "lon": 88.27171,
+   "state": "West Bengal",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Palakkad": {
+   "producer": "HMEL",
+   "zone": "Palakkad",
+   "lat": 10.77319,
+   "lon": 76.65366,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Chittorgarh": {
+   "producer": "HMEL",
+   "zone": "Chittorgarh",
+   "lat": 24.88963,
+   "lon": 74.62403,
+   "state": "Rajasthan",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Satna": {
+   "producer": "HMEL",
+   "zone": "Satna",
+   "lat": 24.57726,
+   "lon": 80.82719,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "HMEL|Gorakhpur": {
+   "producer": "HMEL",
+   "zone": "Gorakhpur",
+   "lat": 26.76628,
+   "lon": 83.36889,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "OPaL|Ratlam": {
+   "producer": "OPaL",
+   "zone": "Ratlam",
+   "lat": 23.33033,
+   "lon": 75.04032,
+   "state": "Madhya Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "OPaL|Panaji": {
+   "producer": "OPaL",
+   "zone": "Panaji",
+   "lat": 15.49574,
+   "lon": 73.82624,
+   "state": "Goa",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "OPaL|Kundli": {
+   "producer": "OPaL",
+   "zone": "Kundli",
+   "lat": 28.86913,
+   "lon": 77.12061,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "OPaL|Manesar": {
+   "producer": "OPaL",
+   "zone": "Manesar",
+   "lat": 28.35311,
+   "lon": 76.94036,
+   "state": "Haryana",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "OPaL|Haridwar": {
+   "producer": "OPaL",
+   "zone": "Haridwar",
+   "lat": 29.94791,
+   "lon": 78.16025,
+   "state": "Uttarakhand",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "OPaL|Gorakhpur": {
+   "producer": "OPaL",
+   "zone": "Gorakhpur",
+   "lat": 26.76628,
+   "lon": 83.36889,
+   "state": "Uttar Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "OPaL|Vijayawada": {
+   "producer": "OPaL",
+   "zone": "Vijayawada",
+   "lat": 16.50745,
+   "lon": 80.6466,
+   "state": "Andhra Pradesh",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "OPaL|Bangalore": {
+   "producer": "OPaL",
+   "zone": "Bangalore",
+   "lat": 12.97194,
+   "lon": 77.59369,
+   "state": "Karnataka",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  },
+  "OPaL|Kochi": {
+   "producer": "OPaL",
+   "zone": "Kochi",
+   "lat": 9.93988,
+   "lon": 76.26022,
+   "state": "Kerala",
+   "scope": "point",
+   "bases": [
+    "depot"
+   ]
+  }
+ }
+}

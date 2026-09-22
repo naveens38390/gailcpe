@@ -27,6 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / "extractors"))
 
 import crossref  # noqa: E402
 import depot as depot_x  # noqa: E402
+import equivalence  # noqa: E402
 import freight as freight_x  # noqa: E402
 import gail as gail_x  # noqa: E402
 import haldia as haldia_x  # noqa: E402
@@ -670,9 +671,9 @@ def main() -> None:
         "evidence-derived aliases: "
         + ", ".join(f"{p} {len(m)}" for p, m in sorted(evidence.items()))
     )
-    for producer, resolver in resolvers.items():
-        if producer != "HPL":
-            resolver.add_cluster_hubs(haldia_territory)
+    # No add_cluster_hubs on the works resolvers (WP2a, decision 0010): the reviewed
+    # location_equivalence.json below is now the only source of an inferred works mapping,
+    # so the two inferred concepts (this and the fallback table) don't overlap or disagree.
 
     # Freight destinations need resolving too, and through the same machinery:
     # HMEL and HPL both deliver to Goa, but bill it as "Panaji". A second,
@@ -695,6 +696,19 @@ def main() -> None:
     )
 
     coverage = {p: r.coverage(gail_locations) for p, r in resolvers.items()}
+
+    # Ex-Works nearest-location fallback (decision 0010): a reviewed, committed table, not a
+    # computation this build performs (see equivalence.py). Fills only what the resolvers above
+    # left unresolved; never overwrites an exact/alias/evidence/published_map match. Ex-depot
+    # coverage is untouched — depot_coverage is computed separately, below, and this merge never
+    # sees it.
+    equivalence_rows = equivalence.load(gail_locations, resolvers, coverage)
+    equivalence_result = equivalence.merge(coverage, equivalence_rows)
+    location_meta = equivalence_result["location_meta"]
+    note(
+        f"location fallback (Ex-Works, decision 0010): {equivalence_result['added']} town/producer "
+        f"pairs filled from {len(equivalence_rows)} approved rows"
+    )
 
     # Depot zones are named differently from a producer's ex-works zones, so
     # they are resolved on their own. RIL's ex-works alias table would send
@@ -783,6 +797,7 @@ def main() -> None:
             "canonical": gail_locations,
             "coverage": coverage,
             "spellings": SPELLINGS,
+            "meta": location_meta,
         },
     )
 
@@ -793,6 +808,7 @@ def main() -> None:
             "producers": flat,
             "location_map": {p: c["map"] for p, c in coverage.items()},
             "location_tier": {p: c["tier_of"] for p, c in coverage.items()},
+            "location_meta": location_meta,
             "depot": depot_flat,
             "depot_location_map": {p: c["map"] for p, c in depot_coverage.items()},
             "depot_location_tier": {p: c["tier_of"] for p, c in depot_coverage.items()},

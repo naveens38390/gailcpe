@@ -51,6 +51,7 @@
   "depot OPaL   44 zones,   1683 prices (ex_depot)",
   "evidence-derived aliases: GAIL 1, HMEL 5, IOCL 2, OPaL 6, RIL 5",
   "freight destinations resolved: GAIL 303/313, HMEL 222/313, HPL 191/313, OPaL 230/313",
+  "location fallback (Ex-Works, decision 0010): 979 town/producer pairs filled from 1076 approved rows",
   "",
   "depot coverage against GAIL's 313 ex-works locations:",
   "  GAIL   57/313 (18.2%)  from 59 depot zones",
@@ -61,12 +62,12 @@
   "  OPaL   41/313 (13.1%)  from 44 depot zones",
   "",
   "location coverage against GAIL's 313 ex-works locations:",
-  "  IOCL  139/313 (44.4%)  from 69 published zones  [alias=8, evidence=2, exact=51, inferred_via_hpl=78]",
-  "  RIL   134/313 (42.8%)  from 75 published zones  [alias=3, evidence=5, exact=59, inferred_via_hpl=67]",
-  "  HMEL  137/313 (43.8%)  from 80 published zones  [alias=1, evidence=5, exact=64, inferred_via_hpl=67]",
-  "  HPL   154/313 (49.2%)  from 71 published zones  [alias=1, exact=56, published_map=97]",
-  "  OPaL  149/313 (47.6%)  from 90 published zones  [alias=3, evidence=6, exact=70, inferred_via_hpl=70]",
-  "  GAIL locations with at least one competitor price: 176/313",
+  "  IOCL  276/313 (88.2%)  from 69 published zones  [alias=8, evidence=2, exact=51, inferred_location=193, state_zone=22]",
+  "  RIL   274/313 (87.5%)  from 75 published zones  [alias=3, evidence=5, exact=59, inferred_location=207]",
+  "  HMEL  275/313 (87.9%)  from 80 published zones  [alias=1, evidence=5, exact=64, inferred_location=198, state_zone=7]",
+  "  HPL   309/313 (98.7%)  from 71 published zones  [alias=1, exact=56, inferred_location=3, published_map=213, state_zone=36]",
+  "  OPaL  276/313 (88.2%)  from 90 published zones  [alias=3, evidence=6, exact=70, inferred_location=197]",
+  "  GAIL locations with at least one competitor price: 312/313",
   "\ncross-reference  44 GAIL grades, 16 portfolio gaps"
  ]
 }

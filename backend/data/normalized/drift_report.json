@@ -7,53 +7,53 @@
   "GAIL": {
    "compared": 16589,
    "median_pct": 0.0,
-   "p95_pct": 1.494,
-   "max_pct": 1.535,
+   "p95_pct": 0.0,
+   "max_pct": 0.0,
    "over_5pct": 0,
    "over_10pct": 0,
    "over_10pct_share": 0.0
   },
   "IOCL": {
-   "compared": 2721,
-   "median_pct": 0.062,
-   "p95_pct": 1.487,
-   "max_pct": 3.027,
+   "compared": 2760,
+   "median_pct": 0.0,
+   "p95_pct": 0.0,
+   "max_pct": 0.0,
    "over_5pct": 0,
    "over_10pct": 0,
    "over_10pct_share": 0.0
   },
   "RIL": {
-   "compared": 19050,
-   "median_pct": 0.635,
-   "p95_pct": 3.3,
-   "max_pct": 5.337,
-   "over_5pct": 148,
+   "compared": 19200,
+   "median_pct": 0.0,
+   "p95_pct": 0.0,
+   "max_pct": 0.0,
+   "over_5pct": 0,
    "over_10pct": 0,
    "over_10pct_share": 0.0
   },
   "HMEL": {
-   "compared": 3920,
+   "compared": 9120,
    "median_pct": 0.0,
-   "p95_pct": 3.683,
-   "max_pct": 10.134,
-   "over_5pct": 133,
-   "over_10pct": 1,
-   "over_10pct_share": 0.026
+   "p95_pct": 0.0,
+   "max_pct": 0.0,
+   "over_5pct": 0,
+   "over_10pct": 0,
+   "over_10pct_share": 0.0
   },
   "HPL": {
-   "compared": 3763,
-   "median_pct": 0.732,
-   "p95_pct": 0.795,
-   "max_pct": 1.826,
+   "compared": 4260,
+   "median_pct": 0.0,
+   "p95_pct": 0.0,
+   "max_pct": 0.0,
    "over_5pct": 0,
    "over_10pct": 0,
    "over_10pct_share": 0.0
   },
   "OPaL": {
-   "compared": 3420,
+   "compared": 3510,
    "median_pct": 0.0,
-   "p95_pct": 1.522,
-   "max_pct": 1.653,
+   "p95_pct": 0.0,
+   "max_pct": 0.0,
    "over_5pct": 0,
    "over_10pct": 0,
    "over_10pct_share": 0.0
@@ -61,164 +61,164 @@
  },
  "largest_movements": [
   {
-   "producer": "HMEL",
-   "zone": "Guwahati",
-   "grade": "N0320L",
-   "was": 143580.0,
-   "now": 129030.0,
-   "pct": 10.134
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "X24065",
+   "was": 151020.0,
+   "now": 151020.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Bilaspur",
-   "grade": "N0320L",
-   "was": 146800.0,
-   "now": 134480.0,
-   "pct": 8.392
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "WAXPENC",
+   "was": 64003.0,
+   "now": 64003.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Raipur",
-   "grade": "N0320L",
-   "was": 146850.0,
-   "now": 134530.0,
-   "pct": 8.39
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "WAXPEJG",
+   "was": 57505.0,
+   "now": 57505.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Bargarh",
-   "grade": "N0320L",
-   "was": 141750.0,
-   "now": 130050.0,
-   "pct": 8.254
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "WAXPEGC",
+   "was": 26139.0,
+   "now": 26139.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Siliguri",
-   "grade": "N0153S",
-   "was": 129960.0,
-   "now": 140360.0,
-   "pct": 8.002
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "WAXPEBC",
+   "was": 57503.0,
+   "now": 57503.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Cuttack",
-   "grade": "N0320L",
-   "was": 140570.0,
-   "now": 129870.0,
-   "pct": 7.612
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "UTNC",
+   "was": 157353.0,
+   "now": 157353.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Balasore",
-   "grade": "N0320L",
-   "was": 140610.0,
-   "now": 129920.0,
-   "pct": 7.603
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "UTJG",
+   "was": 156355.0,
+   "now": 156355.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Jamshedpur",
-   "grade": "N0320L",
-   "was": 140800.0,
-   "now": 130250.0,
-   "pct": 7.493
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "UTBC",
+   "was": 156353.0,
+   "now": 156353.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Ranchi",
-   "grade": "N0320L",
-   "was": 140930.0,
-   "now": 130380.0,
-   "pct": 7.486
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "URNCT",
+   "was": 136423.0,
+   "now": 136423.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Purulia",
-   "grade": "N0320L",
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "URNC",
+   "was": 136423.0,
+   "now": 136423.0,
+   "pct": 0.0
+  },
+  {
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "URJG",
+   "was": 136415.0,
+   "now": 136415.0,
+   "pct": 0.0
+  },
+  {
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "UR",
+   "was": 136430.0,
+   "now": 136430.0,
+   "pct": 0.0
+  },
+  {
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "UMNC",
+   "was": 126743.0,
+   "now": 126743.0,
+   "pct": 0.0
+  },
+  {
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "UMLL",
    "was": 141190.0,
-   "now": 130920.0,
-   "pct": 7.274
+   "now": 141190.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Guwahati",
-   "grade": "N0153S",
-   "was": 131200.0,
-   "now": 140710.0,
-   "pct": 7.248
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "UM",
+   "was": 124080.0,
+   "now": 124080.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Rudrapur",
-   "grade": "N0153S",
-   "was": 133190.0,
-   "now": 142690.0,
-   "pct": 7.133
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "UFNCT",
+   "was": 128833.0,
+   "now": 128833.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Patna",
-   "grade": "N0320L",
-   "was": 141560.0,
-   "now": 131610.0,
-   "pct": 7.029
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "UFNC",
+   "was": 128833.0,
+   "now": 128833.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Siliguri",
-   "grade": "N0320L",
-   "was": 141960.0,
-   "now": 132080.0,
-   "pct": 6.96
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "UFJG",
+   "was": 128835.0,
+   "now": 128835.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Kolkata",
-   "grade": "N0320L",
-   "was": 140620.0,
-   "now": 130870.0,
-   "pct": 6.934
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "UF",
+   "was": 129090.0,
+   "now": 129090.0,
+   "pct": 0.0
   },
   {
-   "producer": "HMEL",
-   "zone": "Purulia",
-   "grade": "N0153S",
-   "was": 129390.0,
-   "now": 138340.0,
-   "pct": 6.917
-  },
-  {
-   "producer": "HMEL",
-   "zone": "Patna",
-   "grade": "N0153S",
-   "was": 130410.0,
-   "now": 139270.0,
-   "pct": 6.794
-  },
-  {
-   "producer": "HMEL",
-   "zone": "Jamshedpur",
-   "grade": "N0153S",
-   "was": 129180.0,
-   "now": 137930.0,
-   "pct": 6.773
-  },
-  {
-   "producer": "HMEL",
-   "zone": "Cuttack",
-   "grade": "N0153S",
-   "was": 129220.0,
-   "now": 137910.0,
-   "pct": 6.725
-  },
-  {
-   "producer": "HMEL",
-   "zone": "Baddi",
-   "grade": "N0320L",
-   "was": 147010.0,
-   "now": 137140.0,
-   "pct": 6.714
+   "producer": "RIL",
+   "zone": "VISHAKAPATNAM",
+   "grade": "UENCJB",
+   "was": 132253.0,
+   "now": 132253.0,
+   "pct": 0.0
   }
  ]
 }
