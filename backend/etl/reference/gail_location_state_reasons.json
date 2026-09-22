@@ -1,0 +1,18 @@
+{
+ "AURANGABAD": "Producers' freight books name both a Maharashtra and a Bihar Aurangabad; GAIL's Aurangabad is the Maharashtra industrial town.",
+ "BILASPUR": "A real town in Chhattisgarh and a real district in Himachal Pradesh share the name. GAIL's Bilaspur is the Chhattisgarh town — this is the exact collision the state guard in locations.py exists to catch (R20).",
+ "BUNDHI": "No place called Bundhi in any gazetteer; taken as Bundi (Rajasthan) — GAIL's own list groups it among Rajasthan towns.",
+ "CHANDIGARH": "A union territory that some freight books file under Punjab; treated as its own entry (Chandigarh), matching how producers price it as a distinct destination.",
+ "DAMTAL": "Small Himachal Pradesh place near the Punjab border; several small places share the name nearby.",
+ "DIBIYAPUR": "Recorded elsewhere as \"Debiapur\" (Auraiya district, Uttar Pradesh); spelling only, not a state dispute.",
+ "JAGDISHPUR": "The name exists in Uttar Pradesh (Amethi), Bihar (Bhojpur) and elsewhere; Uttar Pradesh assumed from context.",
+ "KALOL": "Two towns named Kalol in Gujarat (Gandhinagar district and Panchmahal district); HPL's freight book lists both under different rates.",
+ "KUDAL": "Near the Maharashtra/Goa border; some freight books label it Goa. GAIL's Kudal is the Maharashtra (Sindhudurg district) town.",
+ "LOTE": "Not found under any spelling; likely Lote Parshuram (Ratnagiri district, Maharashtra) but unconfirmed. See open-questions.md.",
+ "RANIA": "Rania exists in Haryana (Sirsa district) and in Uttar Pradesh (Kanpur Dehat district); Haryana assumed.",
+ "RATHANGARH": "Taken as Ratangarh (Churu district, Rajasthan); spelling only.",
+ "SANSARPUR TERRACE": "Small Kangra district (Himachal Pradesh) place; not separately listed in most gazetteers.",
+ "SILVASSA / DADRA & NAGAR HAVELI": "The union territory's two former names/labels appear separately across producers' books; both refer to the same place.",
+ "TARAPUR": "Producers' freight books disagree between a Maharashtra (Boisar) and a Gujarat Tarapur; GAIL's is the Maharashtra one (Boisar industrial area).",
+ "YANAM": "A Puducherry exclave physically inside Andhra Pradesh; some freight books file it under Andhra Pradesh by geography rather than jurisdiction. Puducherry is the correct administrative state."
+}

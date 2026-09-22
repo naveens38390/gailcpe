@@ -502,6 +502,23 @@ def main() -> None:
     note(f"GAIL stockpoint {len(stock)} points")
     note(f"GAIL freight    {len(gail_freight['current'])} destinations")
 
+    # Reviewed, committed table of each GAIL location's own state — the state guard in
+    # `Resolver.resolve_detailed` uses it to reject a published-map match whose price point is
+    # plainly in a different state (R20; see reference/gail_location_state_reasons.json for the
+    # handful of names that needed a judgment call). Kept in step with the canonical list by hand,
+    # so a location this table has never heard of stops the build rather than silently going
+    # unguarded.
+    gail_state_path = Path(__file__).resolve().parent / "reference" / "gail_location_state.json"
+    gail_location_state: dict[str, str] = json.loads(gail_state_path.read_text(encoding="utf-8"))
+    missing_state = sorted(set(gail_locations) - set(gail_location_state))
+    if missing_state:
+        raise SystemExit(
+            f"\n{gail_state_path} has no state for {len(missing_state)} GAIL location(s): "
+            f"{missing_state}\nAdd them (and a reason in gail_location_state_reasons.json if the "
+            "state needed a judgment call) before continuing."
+        )
+    note(f"GAIL location states  {len(gail_location_state)} reviewed, covering all {len(gail_locations)} locations")
+
     # ---- competitors ------------------------------------------------------
     iocl_prices = iocl_x.prices(src["iocl"])
     DISCOUNTS["IOCL"]["quantity_slabs"] = iocl_x.upliftment_slabs(src["iocl"])
@@ -634,7 +651,7 @@ def main() -> None:
         "IOCL": Resolver("IOCL", sorted(iocl_prices["delivered"])),
         "RIL": Resolver("RIL", sorted(ril_prices["IA"]["zones"])),
         "HMEL": Resolver("HMEL", sorted(hmel_prices["ex_works"])),
-        "HPL": Resolver("HPL", sorted(haldia_hdpe["I"]["points"])),
+        "HPL": Resolver("HPL", sorted(haldia_hdpe["I"]["points"]), gail_state=gail_location_state),
         "OPaL": Resolver("OPaL", sorted(opal_dta["sheets"].get("DTA-HDPE", {}))),
     }
     resolvers["HPL"].add_district_map(haldia_territory)
@@ -685,7 +702,8 @@ def main() -> None:
     # for a depot that stands in Daman itself.
     depot_aliases = {"RIL": {"BHIWANDI": "MUMBAI", "VIJAYAWADA": "VIJAY"}}
     depot_resolvers = {
-        p: Resolver(p, sorted(d["zones"]), depot_aliases.get(p))
+        p: Resolver(p, sorted(d["zones"]), depot_aliases.get(p),
+                    gail_state=gail_location_state if p == "HPL" else None)
         for p, d in depot_flat.items()
     }
     depot_resolvers["HPL"].add_district_map(haldia_territory)

@@ -98,3 +98,36 @@ for k, v in marks.items():
 print("  prices() hard-codes pages=range(3, 15)")
 total_pages = len({r.page for r in rows(SEPT["hmel"])})
 print(f"  document has {total_pages} pages; the range covers 3-14")
+
+# ---- Location state guard (R20) -----------------------------------------
+# Bilaspur is a real town in Chhattisgarh and, separately, a real district in
+# Himachal Pradesh; HPL's Annexure V lists the latter, and the resolver used
+# to return it for GAIL's (Chhattisgarh) Bilaspur with no state check at all.
+# Uses the real September circular and the real, committed reviewed table —
+# not a synthetic fixture — so this proves the fix against what actually
+# ships, the same way the rest of this file does.
+print("\nLocation state guard (locations.py, R20)")
+import json as _json  # noqa: E402
+from pathlib import Path as _Path  # noqa: E402
+from locations import Resolver  # noqa: E402
+
+gail_state = _json.loads(
+    (_Path(__file__).resolve().parent / "reference" / "gail_location_state.json").read_text(encoding="utf-8")
+)
+territory = haldia.territory_map(SEPT["haldia"])
+hpl_prices = haldia.prices(SEPT["haldia"])
+guarded = Resolver("HPL", sorted(hpl_prices["I"]["points"]), gail_state=gail_state)
+guarded.add_district_map(territory)
+unguarded = Resolver("HPL", sorted(hpl_prices["I"]["points"]))
+unguarded.add_district_map(territory)
+
+zone, tier = guarded.resolve_detailed("BILASPUR")
+verdict = "OK (guard fired)" if zone is None else f"SILENT: guard did not reject, got {zone!r}"
+print(f"  BILASPUR, guarded  : {zone!r:28} {tier:<14} {verdict}")
+zone_u, tier_u = unguarded.resolve_detailed("BILASPUR")
+print(f"  BILASPUR, unguarded: {zone_u!r:28} {tier_u:<14} (shows what the guard is suppressing)")
+
+# A town whose own state agrees with the district match it hits must be unaffected.
+sample = next(t for t in gail_state if guarded.resolve_detailed(t)[1] == "published_map")
+same = guarded.resolve_detailed(sample) == unguarded.resolve_detailed(sample)
+print(f"  {sample}, guarded == unguarded: {same}   {'OK' if same else 'SILENT: guard changed an agreeing match'}")

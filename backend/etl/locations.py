@@ -90,6 +90,44 @@ SPELLINGS = {
 }
 
 
+# A published district-to-price-point map (currently HPL's alone) is read purely by district
+# *name*, with no state attached (see `Resolver.add_district_map`). A name that happens to be a
+# real place in two different states — Bilaspur is a Chhattisgarh town and, separately, a Himachal
+# Pradesh district — then resolves to whichever one the producer's document lists, regardless of
+# which one GAIL actually meant (R20). These two tables let `resolve_detailed` catch that: the
+# state a price *point*'s own name implies, and the state each canonical GAIL location is actually
+# in (`reference/gail_location_state.json`, committed and reviewed — see
+# `reference/gail_location_state_reasons.json` for the handful that needed a judgment call).
+_POINT_STATE_PREFIX = {
+    "West Bengal": "West Bengal", "Orissa": "Odisha", "Madhya Pradesh": "Madhya Pradesh",
+    "Tamil Nadu": "Tamil Nadu", "Telangana": "Telangana", "Andhra Pradesh": "Andhra Pradesh",
+    "Karnataka": "Karnataka", "Haryana": "Haryana", "Uttar Pradesh": "Uttar Pradesh",
+    "Uttarakhand": "Uttarakhand", "Punjab": "Punjab", "Himachal Pradesh": "Himachal Pradesh",
+    "J&K": "Jammu and Kashmir", "Rajasthan": "Rajasthan", "Maharashtra": "Maharashtra",
+    "Gujarat": "Gujarat", "Jharkhand": "Jharkhand",
+}
+_POINT_STATE_FIXED = {
+    "Bihar": "Bihar", "Chattisgarh": "Chhattisgarh", "Assam": "Assam", "Kerala": "Kerala",
+    "Goa": "Goa", "Delhi": "Delhi", "Chandigarh": "Chandigarh", "Pondicherry": "Puducherry",
+    "Dadra": "Dadra and Nagar Haveli and Daman and Diu",
+    "Daman": "Dadra and Nagar Haveli and Daman and Diu",
+}
+
+
+def point_state(point: str) -> str | None:
+    """The state a producer's own price-point name implies, or None if it cannot be told.
+
+    A point named `State_City` (HPL's convention) or a bare state name says so directly; anything
+    else (a plain city name, a multi-state grouping like "Meghalaya & NE States") returns None —
+    a guard must never *reject* a match on a guess, only on a state it can actually name.
+    """
+    if point in _POINT_STATE_FIXED:
+        return _POINT_STATE_FIXED[point]
+    if "_" in point:
+        return _POINT_STATE_PREFIX.get(point.split("_", 1)[0])
+    return None
+
+
 def normalise(name: str) -> str:
     """Fold a place name to a comparable key.
 
@@ -110,7 +148,8 @@ class Resolver:
     """Maps a canonical GAIL location onto one producer's own place names."""
 
     def __init__(self, producer: str, names: list[str],
-                 aliases: dict[str, str] | None = None):
+                 aliases: dict[str, str] | None = None,
+                 gail_state: dict[str, str] | None = None):
         self.producer = producer
         self.names = names
         self._by_key: dict[str, str] = {}
@@ -121,6 +160,8 @@ class Resolver:
         self._district_map: dict[str, str] = {}
         self._inferred: dict[str, str] = {}
         self._evidence: dict[str, str] = {}
+        # State guard for `add_district_map` (R20): {canonical GAIL location: its state}.
+        self._gail_state = gail_state or {}
 
     def add_district_map(self, mapping: dict[str, list[str]]) -> None:
         """Take a producer's published district-to-price-point map (HPL's).
@@ -172,7 +213,13 @@ class Resolver:
         if key in self._by_key:
             return self._by_key[key], "exact"
         if key in self._district_map:
-            return self._district_map[key], "published_map"
+            point = self._district_map[key]
+            town_state = self._gail_state.get(gail_location)
+            pt_state = point_state(point)
+            # Reject only a *confirmed* disagreement (both sides known); an unclassifiable point
+            # name (a multi-state grouping, say) is never treated as a mismatch.
+            if not (town_state and pt_state and town_state != pt_state):
+                return point, "published_map"
         if key in self._inferred:
             return self._inferred[key], "inferred_via_hpl"
         return None, "unresolved"

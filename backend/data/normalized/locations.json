@@ -1724,11 +1724,11 @@
   "HPL": {
    "producer": "HPL",
    "zones_published": 71,
-   "resolved": 155,
+   "resolved": 154,
    "total": 313,
    "tiers": {
-    "unresolved": 158,
-    "published_map": 98,
+    "unresolved": 159,
+    "published_map": 97,
     "exact": 56,
     "alias": 1
    },
@@ -1752,6 +1752,7 @@
     "BERHAMPUR",
     "BHADOHI",
     "BHINMAL",
+    "BILASPUR",
     "BORIVALLI",
     "BUNDHI",
     "BYRNIHAT",
@@ -1924,7 +1925,6 @@
     "BHUBANESWAR": "Orissa_Bhubaneswar",
     "BIDAR": "Karnataka_Bellary",
     "BIKANER": "Rajasthan_Jodhpur",
-    "BILASPUR": "Himachal Pradesh_Baddi",
     "BURHANPUR": "Madhya Pradesh_Indore",
     "CHANDIGARH": "Chandigarh",
     "CHENNAI": "Tamil Nadu_Chennai",
@@ -2081,7 +2081,6 @@
     "BHUBANESWAR": "exact",
     "BIDAR": "published_map",
     "BIKANER": "published_map",
-    "BILASPUR": "published_map",
     "BURHANPUR": "published_map",
     "CHANDIGARH": "exact",
     "CHENNAI": "exact",
