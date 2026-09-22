@@ -223,9 +223,17 @@ npm run verify-release -- --stage post-load --with-deal  # after load-depot --ap
 
 `pre-load` checks Ex Works is unchanged (Bhiwandi figures), the tie-break order, and that Ex Depot reads "Not published" for
 all six. `post-load` adds the Bhiwandi Ex Depot figures, RIL's 350 dealer discount and 1,550 delta, four mixed-basis
-scenarios, Agra "Not published", and (with `--with-deal`) Deal on both bases. Side effects: about 15 comparison-history
-records, and 3 stored simulations with `--with-deal`. The expected figures are the September 2026 round's; update them in
-`src/tools/verify-release.ts` when a new round is published. Passing does not replace looking at the screens.
+scenarios, Agra "Not published", and (with `--with-deal`) Deal on both bases plus a History section (Compare/Deal history
+carry `pricingBasis` and `basisOverrides`, `?pricingBasis=` filtering works, and — when `MONGODB_URI` is also set — a
+record saved before that field existed is still matched by `?pricingBasis=ex_works`). Pass `--with-deal` at **either**
+stage; it is stage-aware. Side effects: about 15 comparison-history records, a few stored simulations, and (only with
+`MONGODB_URI` set) one synthetic `comparisonHistory` record named `VERIFY_RELEASE_PROBE` that is inserted and deleted in
+the same run. The expected figures are the September 2026 round's; update them in `src/tools/verify-release.ts` when a
+new round is published. Passing does not replace looking at the screens — follow up with
+`docs/post-release-checklist.md`.
+
+**If anything needs to come back out:** `npm run rollback-depot` (dry run, then `-- --apply`) reverses exactly what
+`load-depot` added — see `docs/rollback-runbook.md` for the full procedure and every other failure mode in this sequence.
 
 After the restart, verify Bhiwandi Ex Depot (GAIL 1,40,420 · IOCL 1,39,296 · RIL 1,38,870 · HMEL 1,39,290 · OPaL 1,39,836) on Compare, then the Deal page on both bases (IOCL leads Ex Works, RIL leads Ex Depot). Depot matching is exact/alias/evidence only, so most towns show "Not published" for some producers; that is expected. Build the APK only after this.
 
