@@ -84,9 +84,20 @@ export class PricingService {
     return equivalentOptions(data, grade, location);
   }
 
-  async recent(userId?: string, limit = 20) {
+  /**
+   * @param pricingBasis Restrict to comparisons whose GLOBAL basis was this one.
+   *   A record with a per-card override still matches on its own global basis,
+   *   the same field Compare sends as `pricingBasis` — it does not search inside
+   *   `basisOverrides` or the embedded quotes. A record saved before this field
+   *   existed has none and is excluded by an explicit filter, matching "history
+   *   predates ex-depot" rather than silently counting as ex_works.
+   */
+  async recent(userId?: string, limit = 20, pricingBasis?: PricingBasis) {
     return this.history
-      .find(userId ? { user: userId } : {})
+      .find({
+        ...(userId ? { user: userId } : {}),
+        ...(pricingBasis ? { pricingBasis } : {}),
+      })
       .sort({ createdAt: -1 })
       .limit(limit)
       .lean();

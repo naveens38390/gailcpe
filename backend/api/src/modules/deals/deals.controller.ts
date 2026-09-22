@@ -4,6 +4,9 @@ import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { DealsService } from "./deals.service";
 import { SimulateDto } from "./dto/simulate.dto";
 
+const isPricingBasis = (v?: string): v is "ex_works" | "ex_depot" =>
+  v === "ex_works" || v === "ex_depot";
+
 @ApiTags("deals")
 @Controller("deals")
 export class DealsController {
@@ -43,7 +46,15 @@ export class DealsController {
 
   @Get("history")
   @ApiOperation({ summary: "This user's recent simulations" })
-  history(@Req() req: any, @Query("limit") limit?: string) {
-    return this.deals.recent(req.user?.id, limit ? Number(limit) : undefined);
+  history(
+    @Req() req: any,
+    @Query("limit") limit?: string,
+    @Query("pricingBasis") pricingBasis?: string,
+  ) {
+    return this.deals.recent(
+      req.user?.id,
+      limit ? Number(limit) : undefined,
+      isPricingBasis(pricingBasis) ? pricingBasis : undefined,
+    );
   }
 }

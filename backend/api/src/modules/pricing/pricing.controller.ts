@@ -52,8 +52,16 @@ export class PricingController {
 
   @Get("history")
   @ApiOperation({ summary: "This user's recent comparisons" })
-  history(@Req() req: any, @Query("limit") limit?: string) {
-    return this.pricing.recent(req.user?.id, limit ? Number(limit) : undefined);
+  history(
+    @Req() req: any,
+    @Query("limit") limit?: string,
+    @Query("pricingBasis") pricingBasis?: string,
+  ) {
+    return this.pricing.recent(
+      req.user?.id,
+      limit ? Number(limit) : undefined,
+      pricingBasis === "ex_works" || pricingBasis === "ex_depot" ? pricingBasis : undefined,
+    );
   }
 
   @Get("gail-book")

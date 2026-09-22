@@ -80,9 +80,13 @@ export class DealsService {
     return updated;
   }
 
-  async recent(userId?: string, limit = 20) {
+  /** @param pricingBasis See PricingService.recent — same semantics, same caveat for records saved before the field existed. */
+  async recent(userId?: string, limit = 20, pricingBasis?: PricingBasis) {
     return this.simulations
-      .find(userId ? { user: userId } : {})
+      .find({
+        ...(userId ? { user: userId } : {}),
+        ...(pricingBasis ? { pricingBasis } : {}),
+      })
       .sort({ createdAt: -1 })
       .limit(limit)
       .lean();
