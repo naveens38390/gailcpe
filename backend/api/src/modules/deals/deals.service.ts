@@ -80,13 +80,16 @@ export class DealsService {
     return updated;
   }
 
-  /** @param pricingBasis See PricingService.recent — same semantics, same caveat for records saved before the field existed. */
+  /** @param pricingBasis See PricingService.recent — same semantics, including matching ex_works against a record saved before the field existed. */
   async recent(userId?: string, limit = 20, pricingBasis?: PricingBasis) {
+    const basisFilter =
+      pricingBasis === "ex_works"
+        ? { $or: [{ pricingBasis: "ex_works" }, { pricingBasis: { $exists: false } }] }
+        : pricingBasis
+          ? { pricingBasis }
+          : {};
     return this.simulations
-      .find({
-        ...(userId ? { user: userId } : {}),
-        ...(pricingBasis ? { pricingBasis } : {}),
-      })
+      .find({ ...(userId ? { user: userId } : {}), ...basisFilter })
       .sort({ createdAt: -1 })
       .limit(limit)
       .lean();

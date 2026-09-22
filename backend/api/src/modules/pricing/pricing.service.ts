@@ -88,16 +88,23 @@ export class PricingService {
    * @param pricingBasis Restrict to comparisons whose GLOBAL basis was this one.
    *   A record with a per-card override still matches on its own global basis,
    *   the same field Compare sends as `pricingBasis` — it does not search inside
-   *   `basisOverrides` or the embedded quotes. A record saved before this field
-   *   existed has none and is excluded by an explicit filter, matching "history
-   *   predates ex-depot" rather than silently counting as ex_works.
+   *   `basisOverrides` or the embedded quotes. A record saved before the field
+   *   existed has it entirely absent, and the schema's own comment says to read
+   *   that as ex_works — so `?pricingBasis=ex_works` matches an absent field too
+   *   (a plain `{pricingBasis: "ex_works"}` filter would not; Mongo does not
+   *   match an equality condition against a missing field. Found and fixed
+   *   2026-09-22 by inserting a record shaped exactly like the app's own writes
+   *   and observing the filter silently drop it — see verification addendum 6).
    */
   async recent(userId?: string, limit = 20, pricingBasis?: PricingBasis) {
+    const basisFilter =
+      pricingBasis === "ex_works"
+        ? { $or: [{ pricingBasis: "ex_works" }, { pricingBasis: { $exists: false } }] }
+        : pricingBasis
+          ? { pricingBasis }
+          : {};
     return this.history
-      .find({
-        ...(userId ? { user: userId } : {}),
-        ...(pricingBasis ? { pricingBasis } : {}),
-      })
+      .find({ ...(userId ? { user: userId } : {}), ...basisFilter })
       .sort({ createdAt: -1 })
       .limit(limit)
       .lean();
