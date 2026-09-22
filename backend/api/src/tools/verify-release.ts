@@ -12,10 +12,22 @@
  *              Bhiwandi Ex Depot figures, RIL dealer discount and delta, mixed-basis
  *              scenarios, Not Published towns.
  *
- * It only reads, with two side effects to know about: every /pricing/compare is
+ * It only reads, with side effects to know about: every /pricing/compare is
  * kept in comparison history (about 15 small records), and --with-deal runs
- * /deals/simulate, which stores each simulation (3 records). Nothing is deleted
- * or edited. The credentials are read from the environment and never printed.
+ * /deals/simulate, which stores each simulation (a few records), and also runs
+ * the "History" section below. Nothing existing is deleted or edited. The
+ * credentials are read from the environment and never printed.
+ *
+ * The History section's last check needs to insert and then delete ONE
+ * synthetic record shaped exactly like a comparison saved before the
+ * `pricingBasis` field existed (to prove a documented backward-compatibility
+ * promise: "a record with no pricingBasis field is found by ?pricingBasis=
+ * ex_works" — this cannot be tested through the HTTP API alone, because the
+ * API always sets the field now). That one check runs only when MONGODB_URI
+ * is set in the environment (the same variable load-depot/rollback-depot use)
+ * and is skipped, not failed, otherwise. The inserted document is named
+ * grade/location "VERIFY_RELEASE_PROBE" so it is unmistakable if cleanup ever
+ * fails, and cleanup runs in a finally block.
  *
  * THE EXPECTED FIGURES BELONG TO ONE ROUND (EXPECTED_ROUND below; grade B52A003,
  * 1 MT, cash). The script reads the round the API is serving before anything else
@@ -208,6 +220,92 @@ async function main() {
       const dd = await sim({ pricingBasis: "ex_depot" });
       check(dd.outcome === "not_priced", "Deal Ex Depot before the load: not_priced (no error)", String(dd.outcome));
     }
+
+    await checkHistory();
+  }
+}
+
+/**
+ * Compare/Deal history: the basis is stored where a report or an admin screen
+ * could read it without parsing quotes, and the documented backward-compatibility
+ * promise for records saved before the field existed actually holds.
+ */
+async function checkHistory() {
+  console.log("\nHistory");
+  await compare({}); // a plain Ex Works comparison, to check its history record below
+  if (STAGE === "post-load") {
+    await compare({ pricingBasis: "ex_depot" });
+    await compare({ basisOverrides: { HMEL: "ex_depot" } });
+  }
+  await call("/deals/simulate", { grade: GRADE, location: LOCATION, quantityMt: 250, paymentMode: "cash" });
+
+  const hist = (await call(`/pricing/history?limit=50`)).json as any[];
+  const byGrade = (id: string) => hist?.find((h) => String(h._id) === id);
+  check(Array.isArray(hist) && hist.length > 0, "GET /pricing/history returns records");
+  const wRec = hist?.find((h) => h.location === LOCATION && h.pricingBasis === "ex_works" && !h.basisOverrides);
+  check(!!wRec, "a plain Ex Works comparison is stored with pricingBasis: ex_works");
+  if (STAGE === "post-load") {
+    const dRec = hist?.find((h) => h.location === LOCATION && h.pricingBasis === "ex_depot");
+    check(!!dRec, "an Ex Depot comparison is stored with pricingBasis: ex_depot");
+    const mRec = hist?.find((h) => h.basisOverrides?.HMEL === "ex_depot");
+    check(!!mRec && mRec.pricingBasis === "ex_works", "a mixed-basis comparison stores basisOverrides AND its global pricingBasis");
+    check(
+      Array.isArray(mRec?.result?.quotes) &&
+        mRec.result.quotes.find((q: any) => q.producer === "HMEL")?.pricingBasis === "ex_depot" &&
+        mRec.result.quotes.find((q: any) => q.producer === "IOCL")?.pricingBasis === "ex_works",
+      "…and the embedded quotes carry each producer's own basis, matching basisOverrides",
+    );
+    const worksFiltered = (await call(`/pricing/history?limit=50&pricingBasis=ex_works`)).json as any[];
+    const depotFiltered = (await call(`/pricing/history?limit=50&pricingBasis=ex_depot`)).json as any[];
+    check(
+      worksFiltered.every((h) => h.pricingBasis === "ex_works") && depotFiltered.every((h) => h.pricingBasis === "ex_depot"),
+      "?pricingBasis= filters return only matching records",
+    );
+  }
+
+  const dealHist = (await call(`/deals/history?limit=50`)).json as any[];
+  const dwRec = dealHist?.find((h) => h.location === LOCATION && h.pricingBasis === "ex_works");
+  check(!!dwRec, "Deal history stores pricingBasis on a plain Ex Works simulation");
+
+  // The one check that needs direct DB access: a record saved before pricingBasis
+  // existed has the field entirely absent (not "ex_works" written in) — the API
+  // cannot produce that shape any more, so this is inserted and removed here.
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    console.log("  skip  MONGODB_URI not set — cannot test that a pre-existing record (no pricingBasis field at all) is matched by ?pricingBasis=ex_works");
+    return;
+  }
+  const mongoose = await import("mongoose");
+  const conn = await mongoose.createConnection(uri).asPromise();
+  const probeId = new mongoose.Types.ObjectId();
+  const me = (await call("/auth/me")).json as { id?: string };
+  try {
+    // `user` is stored as the plain string id the app itself writes (confirmed
+    // by inspection — Mongoose does not cast it here despite the schema saying
+    // ObjectId), and history is scoped to the requesting user, so the probe
+    // must carry that same id or the account-scoping alone would hide it.
+    await conn.db!.collection("comparisonHistory").insertOne({
+      _id: probeId,
+      user: me.id,
+      grade: "VERIFY_RELEASE_PROBE",
+      location: "VERIFY_RELEASE_PROBE",
+      quantityMt: 1,
+      paymentMode: "cash",
+      effectiveDate: new Date(EXPECTED_ROUND),
+      result: { quotes: [] },
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      // deliberately no pricingBasis field
+    });
+    const withFilter = (await call(`/pricing/history?limit=200&pricingBasis=ex_works`)).json as any[];
+    check(
+      withFilter.some((h) => h._id === String(probeId)),
+      "a record saved before pricingBasis existed (field entirely absent) IS matched by ?pricingBasis=ex_works",
+      "the schema comment promises this; a plain equality filter would not do it (found and fixed 2026-09-22)",
+    );
+  } finally {
+    await conn.db!.collection("comparisonHistory").deleteOne({ _id: probeId });
+    await conn.close();
   }
 }
 
@@ -260,16 +358,26 @@ async function crossGrade(apiRound: string) {
   check(bad.length === 0, `${cells} producer quotes (${GRADES.length} grades x ${TOWNS.length} towns x 2 bases): every priced basic and zone equals the data file`, bad.slice(0, 3).join(" | "));
   check(priced > 0 && unpublished > 0, `both outcomes were exercised (${priced} priced, ${unpublished} Not Published ex depot)`);
 
-  // a producer's own grade code (HPL E5201, the equivalent of B52A003) on both price lists
-  for (const basis of ["ex_works", "ex_depot"] as const) {
-    const c = (await call("/pricing/compare", { grade: GRADE, location: LOCATION, quantityMt: 1, paymentMode: "cash", gradeOverrides: { HPL: "E5201" }, ...(basis === "ex_depot" ? { pricingBasis: basis } : {}) })).json as Cmp & { quotes: QQ[] };
-    const h = c.quotes.find((x) => x.producer === "HPL")!;
-    const { book } = lookup(basis, "HPL", LOCATION);
-    check(
-      h.grade === "E5201" && book !== undefined && h.basic === book["E5201"],
-      `HPL E5201 override on ${basis}: quoted grade and basic equal the data file`,
-      `${h.grade} basic ${h.basic}, data ${book?.["E5201"]}`,
-    );
+  // A producer's own grade code (HPL E5201, the equivalent of B52A003) on both
+  // price lists — skipped at pre-load, where HPL genuinely has no price at
+  // Bhiwandi yet on either basis (its works zone is filled in only by
+  // load-depot, and no ex_depot data exists before it runs), while the data
+  // file always shows the post-load target state. (Found running this section
+  // at --stage pre-load with --with-deal, a combination the documented runbook
+  // does not use, but now that --with-deal also runs History checks it can.)
+  if (STAGE === "pre-load") {
+    console.log("  skip  HPL E5201 override check (Bhiwandi has no HPL price on either basis before load-depot)");
+  } else {
+    for (const basis of ["ex_works", "ex_depot"] as const) {
+      const c = (await call("/pricing/compare", { grade: GRADE, location: LOCATION, quantityMt: 1, paymentMode: "cash", gradeOverrides: { HPL: "E5201" }, ...(basis === "ex_depot" ? { pricingBasis: basis } : {}) })).json as Cmp & { quotes: QQ[] };
+      const h = c.quotes.find((x) => x.producer === "HPL")!;
+      const { book } = lookup(basis, "HPL", LOCATION);
+      check(
+        h.grade === "E5201" && book !== undefined && h.basic === book["E5201"],
+        `HPL E5201 override on ${basis}: quoted grade and basic equal the data file`,
+        `${h.grade} basic ${h.basic}, data ${book?.["E5201"]}`,
+      );
+    }
   }
 }
 
