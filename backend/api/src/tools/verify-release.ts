@@ -77,6 +77,7 @@ type Q = {
 type Cmp = { quotes: Q[]; leader: Q | null; gailRank: number | null; warnings: string[]; gapToLeader: number | null };
 
 let token = "";
+let stopped = false; // the dataset round is not the one this script was written for
 let failures = 0;
 let passes = 0;
 const check = (ok: boolean, label: string, detail = "") => {
@@ -124,7 +125,7 @@ async function main() {
     console.log(`  STOP the API is serving the price round ${apiRound}; this script's figures are for ${EXPECTED_ROUND}.`);
     console.log("       This is not a pricing failure. Update EXPECTED_ROUND and the figure tables in src/tools/verify-release.ts");
     console.log("       from the client's sheet for the new round, then run again.");
-    process.exitCode = 3;
+    stopped = true;
     return;
   }
   check(true, `API serves the expected round ${EXPECTED_ROUND}`);
@@ -274,8 +275,13 @@ async function crossGrade(apiRound: string) {
 
 main()
   .then(() => {
-    console.log(`\n${failures ? "RELEASE CHECK FAILED" : "RELEASE CHECK PASSED"}: ${passes} ok, ${failures} failed`);
     // exitCode, not exit(): exiting while fetch sockets are still closing trips a libuv assertion on Windows.
+    if (stopped) {
+      console.log("\nRELEASE CHECK NOT RUN: wrong dataset round (exit code 3). Nothing was checked against the wrong round.");
+      process.exitCode = 3;
+      return;
+    }
+    console.log(`\n${failures ? "RELEASE CHECK FAILED" : "RELEASE CHECK PASSED"}: ${passes} ok, ${failures} failed`);
     process.exitCode = failures ? 1 : 0;
   })
   .catch((e) => {
