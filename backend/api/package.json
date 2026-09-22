@@ -14,6 +14,7 @@
     "seed": "ts-node -r tsconfig-paths/register src/database/seed.ts",
     "verify": "ts-node -r tsconfig-paths/register src/database/verify-counts.ts",
     "load-depot": "ts-node -r tsconfig-paths/register src/database/load-depot.ts",
+    "rollback-depot": "ts-node -r tsconfig-paths/register src/database/rollback-depot.ts",
     "verify-release": "ts-node -r tsconfig-paths/register src/tools/verify-release.ts",
     "test": "jest",
     "typecheck": "tsc --noEmit"
