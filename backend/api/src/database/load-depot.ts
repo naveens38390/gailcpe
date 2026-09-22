@@ -13,7 +13,9 @@
  *     and no ex-works price is touched.
  *   - Locations gain their depot zone maps. A works zone is filled in only where
  *     a location has none for that producer; an existing one, which may have been
- *     corrected by hand in the admin panel, is never overwritten.
+ *     corrected by hand in the admin panel, is never overwritten. Every fill is
+ *     recorded in `depotLoadAudits` so `rollback-depot.ts` can undo precisely
+ *     that fill, and nothing an admin corrects afterwards.
  *   - Discount schemes gain the depot cash-discount rate where the source has one.
  *
  * ORDER MATTERS. An API build that predates the ex-depot list reads every price
@@ -37,6 +39,7 @@ import {
   PriceCircularSchema,
   PriceEntrySchema,
 } from "./schemas/circular.schema";
+import { DepotLoadAuditSchema } from "./schemas/depot-load-audit.schema";
 
 const DATA = process.env.GCPE_DATA ?? join(__dirname, "..", "..", "..", "data", "normalized");
 const read = (name: string) => JSON.parse(readFileSync(join(DATA, `${name}.json`), "utf8"));
@@ -58,6 +61,7 @@ async function main() {
   const PriceEntry = mongoose.model("PriceEntry", PriceEntrySchema);
   const Location = mongoose.model("Location", LocationSchema);
   const DiscountScheme = mongoose.model("DiscountScheme", DiscountSchemeSchema);
+  const DepotLoadAudit = mongoose.model("DepotLoadAudit", DepotLoadAuditSchema);
 
   // ---- price entries ---------------------------------------------------------
   let written = 0;
@@ -117,6 +121,9 @@ async function main() {
   const depotTier = priceIndex.depot_location_tier ?? {};
   let touched = 0;
   let filled = 0;
+  // What this run actually fills in, so rollback-depot can undo exactly this
+  // and nothing an admin corrects afterwards.
+  const fills: { producer: string; location: string; zone: string; tier?: string }[] = [];
   const same = (a: unknown, b: unknown) => {
     const norm = (o: any) => JSON.stringify(Object.entries(o ?? {}).sort(([x], [y]) => x.localeCompare(y)));
     return norm(a) === norm(b);
@@ -146,8 +153,10 @@ async function main() {
     for (const producer of Object.keys(worksMap)) {
       const zone = worksMap[producer]?.[doc.name];
       if (zone && !doc.producerZone?.[producer]) {
+        const tier = worksTier[producer]?.[doc.name];
         set[`producerZone.${producer}`] = zone;
-        set[`producerZoneTier.${producer}`] = worksTier[producer]?.[doc.name];
+        set[`producerZoneTier.${producer}`] = tier;
+        fills.push({ producer, location: doc.name, zone, tier });
         filled++;
       }
     }
@@ -161,6 +170,13 @@ async function main() {
     }
   }
   console.log(`  locations: ${touched} changed; ${filled} missing works zones filled in`);
+  if (APPLY && fills.length) {
+    await DepotLoadAudit.updateOne(
+      { effectiveDate: priceDate },
+      { $push: { worksZoneFills: { $each: fills } } },
+      { upsert: true },
+    );
+  }
 
   // ---- discount schemes ---------------------------------------------------------
   let rates = 0;
