@@ -112611,7 +112611,9 @@
    "Orissa_Balasore": [
     "Baleshwar (Balasore)",
     "Bhadrak",
-    "Mayurbhanj",
+    "Mayurbhanj"
+   ],
+   "Orissa_Bhubaneswar": [
     "Bhubaneswar",
     "Cuttack",
     "Jagatsinghapur",
@@ -112622,9 +112624,7 @@
     "Kendujhar (Keonjhar)",
     "Kalahandi",
     "Gajapati",
-    "Ganjam"
-   ],
-   "Orissa_Bhubaneswar": [
+    "Ganjam",
     "Koraput",
     "Malkangiri",
     "Nabarangpur",
@@ -112635,7 +112635,7 @@
     "Kandhamal",
     "Nayagarh"
    ],
-   "Orissa_Barhgarh": [
+   "Orissa_Bargarh": [
     "Deogarh",
     "Sambalpur",
     "Sundargarh",
@@ -112712,7 +112712,9 @@
     "Tiruppur",
     "Salem",
     "Erode",
-    "Dharmapuri",
+    "Dharmapuri"
+   ],
+   "Tamil Nadu_Madurai": [
     "Madurai",
     "Dindigul",
     "theni",
@@ -112721,9 +112723,7 @@
     "Virudhunagar",
     "Tenkasi",
     "Tirunelveli",
-    "Thoothukkudi(Tuticorin)"
-   ],
-   "Tamil Nadu_Madurai": [
+    "Thoothukkudi(Tuticorin)",
     "Kanyakumari",
     "Karur",
     "Namakkal"
@@ -112737,7 +112737,9 @@
     "Suryapet",
     "Nalgonda",
     "Khammam",
-    "Mahabubabad",
+    "Mahabubabad"
+   ],
+   "Telangana_Hyderabad": [
     "Adilabad",
     "Komaram Bheem (Asifabad)",
     "Mancherial",
@@ -112753,9 +112755,7 @@
     "Medchal-Malkajgiri",
     "Ranga Reddy",
     "Vikarabad",
-    "Bhadradri Kothagudem"
-   ],
-   "Telangana_Hyderabad": [
+    "Bhadradri Kothagudem",
     "Mulugu",
     "Warangal Urban (Hanumakonda)",
     "Warangal Rural",
@@ -112766,16 +112766,16 @@
     "Jogulamba Gadwal",
     "Wanaparthy",
     "Nagarkurnool",
-    "Narayanpet",
+    "Narayanpet"
+   ],
+   "Andhra Pradesh_Vizag": [
     "Alluri Sitharama Raju",
     "Anakapalli",
     "Dr. B.R. Ambedkar Konaseema",
     "East Godavari",
     "Kakinada",
     "Parvathipuram Manyam",
-    "Srikakulam"
-   ],
-   "Andhra Pradesh_Vizag": [
+    "Srikakulam",
     "Visakhapatnam",
     "Vizianagaram"
    ],
@@ -112798,7 +112798,9 @@
     "Sri Potti Sriramulu Nellore",
     "Sri Sathya Sai",
     "Tirupati",
-    "Y.S.R.",
+    "Y.S.R."
+   ],
+   "Karnataka_Bangalore": [
     "Chitradurga",
     "Davanagere",
     "Tumakuru",
@@ -112807,9 +112809,7 @@
     "Chamarajanagar",
     "Chikkaballapura",
     "Kolar",
-    "Mandya"
-   ],
-   "Karnataka_Bangalore": [
+    "Mandya",
     "Mysuru (Mysore)",
     "Ramanagara"
    ],
@@ -112839,7 +112839,9 @@
     "All Districts of Kerala"
    ],
    "Delhi": [
-    "Delhi",
+    "Delhi"
+   ],
+   "Haryana_Faridabad": [
     "Faridabad",
     "Nuh (Mewat)",
     "Palwal"
@@ -112865,7 +112867,9 @@
     "Karnal",
     "Panipat",
     "Rohtak",
-    "Sonipat",
+    "Sonipat"
+   ],
+   "Uttar Pradesh_Varanasi": [
     "Amethi",
     "Pratapgarh",
     "Ambedkar Nagar",
@@ -112876,9 +112880,7 @@
     "Deoria",
     "Faizabad (Ayodhya)",
     "Ghazipur",
-    "Gorakhpur"
-   ],
-   "Uttar Pradesh_Varanasi": [
+    "Gorakhpur",
     "Jaunpur",
     "Kaushambi",
     "Kushinagar",
@@ -112887,13 +112889,14 @@
     "Mirzapur",
     "Prayagraj (Allahabad)",
     "Sant Kabir Nagar",
-    "Sant Ravidas Nagar",
-    "(Bhadohi)",
+    "Sant Ravidas Nagar (Bhadohi)",
     "Siddharthnagar",
     "Sultanpur",
     "Varanasi",
     "Balrampur",
-    "Sonbhadra",
+    "Sonbhadra"
+   ],
+   "Uttar Pradesh_Kanpur": [
     "Etawah",
     "Auraiya",
     "Bahraich",
@@ -112904,9 +112907,7 @@
     "Kanpur Nagar",
     "Lakhimpur Kheri",
     "Lucknow",
-    "Rae Bareli"
-   ],
-   "Uttar Pradesh_Kanpur": [
+    "Rae Bareli",
     "Sitapur",
     "Unnao",
     "Gonda",
@@ -112938,7 +112939,9 @@
     "Kasganj",
     "Mainpuri",
     "Mathura",
-    "Farrukhabad",
+    "Farrukhabad"
+   ],
+   "Uttar Pradesh_Noida": [
     "Gautam Buddh Nagar (Noida)",
     "Amroha",
     "Baghpat",
@@ -112948,9 +112951,7 @@
     "Hapur",
     "Meerut",
     "Muzaffarnagar",
-    "Saharanpur"
-   ],
-   "Uttar Pradesh_Noida": [
+    "Saharanpur",
     "Shamli"
    ],
    "Uttarakhand_Sitarganj": [
@@ -112968,7 +112969,9 @@
     "Dehradun",
     "Haridwar",
     "Pauri Garhwal",
-    "Tehri Garhwal",
+    "Tehri Garhwal"
+   ],
+   "Punjab_Ludhiana": [
     "Rupnagar",
     "Ludhiana",
     "Shaheed Bhagat Singh Nagar",
@@ -112978,9 +112981,7 @@
     "Patiala",
     "Ferozepur",
     "Fazilka",
-    "Barnala"
-   ],
-   "Punjab_Ludhiana": [
+    "Barnala",
     "Bathinda",
     "Faridkot",
     "Mansa",
@@ -113018,7 +113019,9 @@
    ],
    "J&K_Kathua": [
     "Kathua",
-    "Samba",
+    "Samba"
+   ],
+   "J&K_Jammu": [
     "Anantnag",
     "Bandipora",
     "Baramulla",
@@ -113031,9 +113034,7 @@
     "Kupwara",
     "Poonch",
     "Pulwama",
-    "Rajouri"
-   ],
-   "J&K_Jammu": [
+    "Rajouri",
     "Ramban",
     "Reasi",
     "Shopian",
@@ -113155,7 +113156,9 @@
     "Navsari",
     "The Dangs",
     "Valsad",
-    "Tapi",
+    "Tapi"
+   ],
+   "Gujarat_Ahmedabad": [
     "Ahmedabad",
     "Gandhinagar",
     "Kheda",
@@ -113206,7 +113209,9 @@
     "Raisen",
     "Sehore",
     "Narmadapuram (Hoshangabad)",
-    "Rajgarh",
+    "Rajgarh"
+   ],
+   "Madhya Pradesh_Indore": [
     "Indore",
     "Burhanpur",
     "Barwani",
@@ -113219,10 +113224,7 @@
     "Ujjain",
     "Dewas",
     "Dhar",
-    "East Nimar"
-   ],
-   "Madhya Pradesh_Indore": [
-    "(Khandwa)",
+    "East Nimar (Khandwa)",
     "West Nimar (Khargone)"
    ],
    "Dadra": [
@@ -113231,17 +113233,6 @@
    ],
    "Daman": [
     "Daman"
-   ],
-   "Buyer hereby undertakes and warrants to comply, at all": [
-    "times",
-    "with the applicable laws including but not limited to the Plastic Waste Management Rules 2016 as amended from time to time and notifications"
-   ],
-   "and directives issued thereunder ('PWM Rules\"), in relation": [
-    "to the use of the Goods. Buyer expressly undertakes and warrants that the plastic raw material purchased shall not be used",
-    "directly or indirectly",
-    "in",
-    "production of banned Single Use Plastic (SUP) items",
-    "listed in PWM Rules."
    ]
   },
   "basis": "ex_works"

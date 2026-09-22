@@ -244,55 +244,124 @@ def lldpe_prices(path: str) -> dict:
     return out
 
 
+def _split_districts(text: str) -> list[str]:
+    """Split a district cell on commas that are not inside brackets.
+
+    "Sant Ravidas Nagar (Bhadohi)" and "Prayagraj (Allahabad)" are one district
+    each, printed with a second name in brackets.
+    """
+    parts: list[str] = []
+    depth = 0
+    current: list[str] = []
+    for ch in text:
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth = max(0, depth - 1)
+        if ch == "," and depth == 0:
+            parts.append("".join(current))
+            current = []
+        else:
+            current.append(ch)
+    parts.append("".join(current))
+    return [re.sub(r"\s+", " ", p).strip() for p in parts if p.strip()]
+
+
 def territory_map(path: str) -> dict[str, list[str]]:
     """Annexure V: which districts each price point covers.
 
     HPL is the only producer in the pack that publishes this. IOCL's equivalent
     (its Annexure III) is referenced by its circular but absent from the file,
     so this map is the only authoritative district-to-zone data available.
+
+    Read from the table's own cells, not from lines of text. HPL centres each
+    price-point label vertically in its row, so a row's districts sit above and
+    below the label. Read line by line, every line above a label was attached to
+    the previous price point: a quarter of all districts landed on the wrong
+    point (Gorakhpur was priced at Haryana_Panipat, Lucknow at Varanasi instead
+    of Kanpur), two price points vanished, and the legal notice under the table
+    was stored as two more. The cell border is the only thing that says which
+    lines belong together.
+
+    The table is found by its "Territory Division" heading rather than by page
+    number, and the build stops if it is not a clean 1..N numbered list: a
+    partial map would look exactly like a complete one.
     """
-    body = [
-        r
-        for r in rows(path, pages=[9, 10])
-        if not r.text.strip().startswith(("Annexure", "Circular", "Effective", "Sl."))
-        and "Territory Division" not in r.text
-    ]
+    import pdfplumber
 
-    # The "Districts" header is centred over its column, so its own x tells us
-    # nothing about where district text begins. The data's left edges do: the
-    # serial, name and district columns each start at one recurring x, and they
-    # are by far the most common left edges on the page.
-    edges = collections.Counter(round(w.x0, 1) for r in body for w in r.words)
-    columns = sorted(x for x, _ in edges.most_common(3))
-    if len(columns) < 3:
-        return {}
-    boundary = columns[-1] - 1.0
+    found: dict[int, tuple[str, str]] = {}
+    with pdfplumber.open(path) as pdf:
+        start = next(
+            (i for i, page in enumerate(pdf.pages) if "Territory Division" in (page.extract_text() or "")),
+            None,
+        )
+        if start is None:
+            raise SystemExit(
+                'HPL Annexure V not found: no page carries the "Territory Division" heading.\n'
+                "The circular changed shape and territory_map() has not kept up."
+            )
+        for index in range(start, len(pdf.pages)):
+            numbered = 0
+            for table in pdf.pages[index].extract_tables():
+                for cells in table:
+                    if len(cells) < 3 or not re.fullmatch(r"\d+", (cells[0] or "").strip()):
+                        continue  # header row, or the legal notice under the table
+                    serial = int(cells[0].strip())
+                    name = re.sub(r"\s+", " ", cells[1] or "").strip()
+                    districts = re.sub(r"\s+", " ", cells[2] or "").strip()
+                    if not name or not districts:
+                        raise SystemExit(f"HPL Annexure V row {serial} has an empty name or district cell.")
+                    if serial in found:
+                        raise SystemExit(f"HPL Annexure V serial {serial} appears twice.")
+                    found[serial] = (name, districts)
+                    numbered += 1
+            if numbered == 0 and index > start:
+                break  # the table ended on the previous page
 
-    out: dict[str, list[str]] = {}
-    current: str | None = None
+    if not found or sorted(found) != list(range(1, len(found) + 1)):
+        raise SystemExit(
+            "HPL Annexure V is not a clean 1..N list of price points "
+            f"(serials read: {sorted(found)[:5]}..{sorted(found)[-3:]}, {len(found)} rows)."
+        )
+    names = [name for name, _ in found.values()]
+    if len(set(names)) != len(names):
+        raise SystemExit("HPL Annexure V names a price point twice.")
+    return {name: _split_districts(districts) for _, (name, districts) in sorted(found.items())}
 
-    for row in body:
-        name_words = [w for w in row.words if w.x0 < boundary]
-        district_words = [w for w in row.words if w.x0 >= boundary]
-        name = " ".join(w.text for w in name_words).strip()
-        name = re.sub(r"^\d+\s*", "", name)
-        districts = " ".join(w.text for w in district_words).strip()
 
-        if name:
-            current = name
-            out.setdefault(current, [])
-        if districts and current:
-            out[current].append(districts)
+def reconcile_territory(
+    territory: dict[str, list[str]], price_points
+) -> tuple[dict[str, list[str]], dict[str, str]]:
+    """Key Annexure V by the price book's own point names, or stop the build.
 
-    return {
-        point: [
-            d.strip()
-            for d in ", ".join(chunks).split(",")
-            if d.strip()
-        ]
-        for point, chunks in out.items()
-        if chunks
-    }
+    HPL prints the same point differently in two annexures ("Orissa_Barhgarh" in
+    the territory list, "Orissa_Bargarh" in the price book). A district mapped to
+    a name no price row carries resolves a town to a zone with no prices, which
+    the engine reports as "no price" for a town HPL does serve.
+
+    Every Annexure V point must match exactly one price point and every price
+    point must be covered. Anything else is a fact about the round for a person
+    to look at, so it raises rather than guesses.
+    """
+    import difflib
+
+    points = list(price_points)
+    unmatched_prices = [p for p in points if p not in territory]
+    renamed: dict[str, str] = {}
+    for name in [n for n in territory if n not in points]:
+        close = difflib.get_close_matches(name, unmatched_prices, n=1, cutoff=0.85)
+        if close:
+            renamed[name] = close[0]
+            unmatched_prices.remove(close[0])
+    orphans = [n for n in territory if n not in points and n not in renamed]
+    if orphans or unmatched_prices:
+        raise SystemExit(
+            "HPL Annexure V and the price book do not describe the same price points.\n"
+            f"  in Annexure V only: {orphans}\n"
+            f"  in the price book only: {unmatched_prices}\n"
+            "Either the circular changed shape or a point was renamed; confirm which."
+        )
+    return {renamed.get(n, n): districts for n, districts in territory.items()}, renamed
 
 
 def quantity_slabs() -> list[dict]:

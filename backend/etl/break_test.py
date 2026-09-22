@@ -49,7 +49,7 @@ marks = where(SEPT["haldia"], ["Annexure - I", "Annexure - II", "Annexure - III"
 for k, v in marks.items():
     print(f"  {k:<18} on page(s) {v}")
 print(f"  lldpe_prices() hard-codes pages=[6, 7]")
-print(f"  territory_map() hard-codes pages=[9, 10]")
+print(f"  territory_map() finds Annexure V by its 'Territory Division' heading (no page constant)")
 
 base = haldia.lldpe_prices(SEPT["haldia"])
 print(f"  as written        : {len(base['ex_works'])} ex-works price points")

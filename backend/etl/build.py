@@ -514,6 +514,12 @@ def main() -> None:
     haldia_hdpe = haldia_x.prices(src["haldia"])
     haldia_lldpe = haldia_x.lldpe_prices(src["haldia"])
     haldia_territory = haldia_x.territory_map(src["haldia"])
+    # Annexure V and the price book spell a point differently ("Orissa_Barhgarh" /
+    # "Orissa_Bargarh"); key the territory by the price book so no district resolves
+    # a town to a zone that has no prices. Stops the build if they disagree.
+    haldia_territory, haldia_renamed = haldia_x.reconcile_territory(
+        haldia_territory, haldia_hdpe["I"]["points"]
+    )
     opal_dta = opal_x.prices(src["opal_dta"])
     opal_csa = opal_x.prices(src["opal_csa"])
 
@@ -521,6 +527,8 @@ def main() -> None:
     note(f"RIL    {len(ril_prices)} annexures, {len(ril_prices['IA']['zones'])} zones")
     note(f"HMEL   {len(hmel_prices['ex_works'])} locations, {len(hmel_prices['basic'])} grades")
     note(f"HPL    {len(haldia_hdpe['I']['points'])} price points, {len(haldia_territory)} mapped")
+    for spelt, used in haldia_renamed.items():
+        note(f"HPL    Annexure V spells {spelt!r}; the price book says {used!r}, which is what is used")
     note(f"OPaL   DTA {len(opal_dta['sheets'].get('DTA-HDPE', {}))} zones, CSA {len(opal_csa['sheets'].get('CS2-PE', {}))} zones")
 
     # ---- freight ----------------------------------------------------------
