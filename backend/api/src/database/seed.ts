@@ -201,6 +201,14 @@ export async function seed(
           .map(([producer, cov]) => [producer, cov.tier_of?.[name]])
           .filter(([, tier]) => tier),
       ),
+      // Decision 0010: distance/corroboration for a fallback-supplied zone.
+      // `locations.meta` carries only the rows the fallback table added, so
+      // most towns contribute nothing here — the filter below drops those.
+      producerZoneMeta: Object.fromEntries(
+        Object.entries<any>(locations.meta ?? {})
+          .map(([producer, byTown]) => [producer, byTown?.[name]])
+          .filter(([, meta]) => meta),
+      ),
       freightDestination: Object.fromEntries(
         Object.entries<any>(freight.destination_map ?? {})
           .map(([producer, map]) => [producer, map?.[name]])

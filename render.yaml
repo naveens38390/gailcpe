@@ -29,6 +29,11 @@ services:
         generateValue: true
       - key: REQUIRE_SEPARATE_APPROVER
         value: "false"
+      # Decision 0010 kill-switch. false treats every inferred-group quote as
+      # unresolved (fail-safe) — set it here first, restart, and only then
+      # investigate; do not wait on a code change to stop a bad fallback price.
+      - key: LOCATION_FALLBACK
+        value: "true"
     # Uploaded circulars are stored in MongoDB rather than on disk. This
     # instance has no persistent volume — a disk needs a paid plan — and a
     # free instance spins down when idle and restarts with an empty

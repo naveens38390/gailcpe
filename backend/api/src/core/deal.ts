@@ -10,6 +10,7 @@
  * best offer they have in hand.
  */
 
+import { tierGroup } from "./location-match";
 import type {
   Comparison,
   DealOption,
@@ -181,7 +182,7 @@ export function simulate(
   }
 
   const inferred = comparison.quotes.some(
-    (q) => q.locationTier === "inferred_via_hpl",
+    (q) => tierGroup(q.locationTier) === "inferred",
   );
   const lowConfidenceMapping = comparison.quotes.some(
     (q) => q.mappingConfidence && q.mappingConfidence !== "H",

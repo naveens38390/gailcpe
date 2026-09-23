@@ -16,7 +16,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
 import type { Dataset } from "../../core/pricing";
-import { useSpellings } from "../../core/pricing";
+import { useLocationFallback, useSpellings } from "../../core/pricing";
 import type { DiscountTerms, Producer } from "../../core/types";
 import {
   DiscountScheme,
@@ -104,6 +104,10 @@ export class DatasetService {
     @InjectModel(ProducerDoc.name) private producerDocs: Model<ProducerDoc>,
   ) {
     useSpellings(SPELLINGS);
+    // Decision 0010 §6/§10: kill-switch, default on. Set once at boot, like
+    // useSpellings — the engine stays a pure function library, never reading
+    // process.env itself.
+    useLocationFallback(process.env.LOCATION_FALLBACK !== "false");
   }
 
   /**
@@ -184,6 +188,7 @@ export class DatasetService {
 
     const location_map: Record<string, Record<string, string>> = {};
     const location_tier: Record<string, Record<string, string>> = {};
+    const location_meta: Record<string, Record<string, unknown>> = {};
     const depot_location_map: Record<string, Record<string, string>> = {};
     const depot_location_tier: Record<string, Record<string, string>> = {};
     const destination_map: Record<string, Record<string, string>> = {};
@@ -193,6 +198,9 @@ export class DatasetService {
       }
       for (const [producer, tier] of Object.entries(row.producerZoneTier ?? {})) {
         (location_tier[producer] ??= {})[row.name] = tier as string;
+      }
+      for (const [producer, meta] of Object.entries(row.producerZoneMeta ?? {})) {
+        (location_meta[producer] ??= {})[row.name] = meta;
       }
       for (const [producer, zone] of Object.entries(row.producerDepotZone ?? {})) {
         (depot_location_map[producer] ??= {})[row.name] = zone as string;
@@ -231,6 +239,7 @@ export class DatasetService {
         producers,
         location_map: location_map as any,
         location_tier: location_tier as any,
+        location_meta: location_meta as any,
         depot: depot as any,
         depot_location_map: depot_location_map as any,
         depot_location_tier: depot_location_tier as any,

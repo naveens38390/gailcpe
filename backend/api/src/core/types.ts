@@ -23,13 +23,50 @@ export type PaymentMode = "cash" | "credit_ifc";
  */
 export type PricingBasis = "ex_works" | "ex_depot";
 
-/** How confidently a customer location was matched to a producer's zone. */
+/**
+ * How confidently a customer location was matched to a producer's zone.
+ *
+ * `evidence` was always emitted by the ETL (a price the zonal workbook
+ * proves) but missing from this union (R13) — added here, not new behaviour.
+ * `state_zone` and `inferred_location` are decision 0010's fallback tiers.
+ * `inferred_via_hpl` is a read-only legacy alias: never written after the
+ * fallback table exists, but a stored `comparisonHistory` / `dealSimulations`
+ * record keeps it forever (saved as served, never migrated) — see
+ * `core/location-match.ts`, which is what actually groups these for display.
+ */
 export type LocationTier =
   | "exact"
   | "alias"
+  | "evidence"
   | "published_map"
+  | "state_zone"
+  | "inferred_location"
   | "inferred_via_hpl"
   | "unresolved";
+
+/** One producer's fallback provenance for one town — meaningful only for a `territory`/`inferred` match. */
+export interface LocationMeta {
+  /** Straight-line distance in km to the matched zone; null for a whole-state zone (no single point). */
+  km: number | null;
+  crossesState: boolean;
+  /** Whether HPL's own Annexure V corroborates the match. */
+  corroborated: boolean;
+  source: "annexure_v" | "state_zone" | "nearest";
+}
+
+/**
+ * What a `Quote` carries instead of the app interpreting `locationTier`
+ * itself — the server sends the group and label already resolved (`core/location-match.ts`).
+ */
+export interface LocationMatch {
+  group: "exact" | "territory" | "inferred" | "none";
+  label: string;
+  matchedZone: string | null;
+  distanceKm?: number;
+  crossesState?: boolean;
+  corroborated?: boolean;
+  source?: string;
+}
 
 export interface QuantitySlab {
   from_mt: number;
@@ -97,6 +134,12 @@ export interface Quote {
 
   zone: string | null;
   locationTier: LocationTier;
+  /**
+   * Optional: absent when `zone` is null (unresolved, nothing to report).
+   * `locationTier` stays on the Quote unchanged for compatibility; this is
+   * the field a new app reads instead of interpreting the tier string itself.
+   */
+  locationMatch?: LocationMatch;
   /** Why this quote is incomplete, if it is. Never silently zero-filled. */
   gaps: string[];
   /** Confidence carried from the cross-reference sheet (H / M / L). */

@@ -21,9 +21,11 @@
  *     no freight figure is incomplete, not cheap.
  */
 
+import { buildLocationMatch, inferredCaveat, tierGroup } from "./location-match";
 import type {
   Comparison,
   DiscountTerms,
+  LocationMeta,
   LocationTier,
   PaymentMode,
   PriceBasis,
@@ -32,6 +34,19 @@ import type {
   QuantitySlab,
   Quote,
 } from "./types";
+
+/**
+ * Decision 0010 §6/§10 kill-switch: off treats every `inferred`-group quote
+ * as unresolved. Default on (fail-open for the feature, fail-safe direction
+ * is *disabling* it). Set once at boot from `LOCATION_FALLBACK`
+ * (`DatasetService`), not read from `process.env` here — this module stays a
+ * pure function library, the same reason `useSpellings` exists as a setter.
+ */
+let LOCATION_FALLBACK_ENABLED = true;
+
+export function useLocationFallback(enabled: boolean): void {
+  LOCATION_FALLBACK_ENABLED = enabled;
+}
 
 export interface Dataset {
   priceIndex: {
@@ -42,6 +57,12 @@ export interface Dataset {
     >;
     location_map: Record<Producer, Record<string, string>>;
     location_tier: Record<Producer, Record<string, LocationTier>>;
+    /**
+     * Fallback provenance (decision 0010) — present only for a town/producer
+     * pair the fallback table filled in, never for an exact/alias/evidence or
+     * a genuine HPL district match the resolver found on its own.
+     */
+    location_meta?: Partial<Record<Producer, Record<string, LocationMeta>>>;
     /**
      * Each producer's second price list, for stock the customer collects from a
      * depot or warehouse. Absent for a producer whose list is not loaded for
@@ -404,12 +425,12 @@ function priceLookup(
     ? data.priceIndex.depot?.[producer]?.zones
     : data.priceIndex.producers[producer]?.zones;
 
-  const zone = depot
+  let zone = depot
     ? (data.priceIndex.depot_location_map?.[producer]?.[canonical] ?? null)
     : producer === "GAIL"
       ? (zones?.[canonical] ? canonical : null)
       : (data.priceIndex.location_map[producer]?.[canonical] ?? null);
-  const tier: LocationTier = depot
+  let tier: LocationTier = depot
     ? zone
       ? (data.priceIndex.depot_location_tier?.[producer]?.[canonical] ?? "unresolved")
       : "unresolved"
@@ -418,6 +439,22 @@ function priceLookup(
         ? "exact"
         : "unresolved"
       : (data.priceIndex.location_tier[producer]?.[canonical] ?? "unresolved");
+
+  // Defence in depth on top of the data (decision 0010 §7): a depot price is
+  // where the customer physically collects, never a guess by distance, and
+  // the ETL never writes a fallback tier into depot coverage — but a future
+  // bug placing one there must not silently ship as if it were published.
+  if (depot && (tier === "state_zone" || tier === "inferred_location")) {
+    zone = null;
+    tier = "unresolved";
+  }
+  // Kill-switch (§6/§10): off treats every inferred-group quote as
+  // unresolved, fail-safe direction. Territory Match is unaffected — it is a
+  // producer's own published statement, not an inference.
+  if (!LOCATION_FALLBACK_ENABLED && tierGroup(tier) === "inferred") {
+    zone = null;
+    tier = "unresolved";
+  }
 
   if (!zone) {
     gaps.push(
@@ -483,6 +520,8 @@ export function quote(
   };
   const { zone, tier, grade, basic } = chosen;
   const gaps = [...chosen.gaps];
+  const meta = depot ? undefined : data.priceIndex.location_meta?.[producer]?.[canonical];
+  const locationMatch = buildLocationMatch(tier, zone, meta);
 
   // A depot sale carries its own cash-discount rate where the producer prints
   // one (GAIL and OPaL give none); otherwise it is the ordinary rate.
@@ -581,6 +620,7 @@ export function quote(
       invoiceLanded === null ? null : invoiceLanded - quantityDiscount,
     zone,
     locationTier: tier,
+    locationMatch,
     gaps,
     mappingConfidence: producer === "GAIL" ? null : (entry?.confidence ?? null),
   };
@@ -647,12 +687,15 @@ export function compare(
       `Not compared: ${unresolved.map((q) => q.producer).join(", ")} — see each quote's gaps.`,
     );
   }
-  const inferred = priced.filter((q) => q.locationTier === "inferred_via_hpl");
+  // Group test (decision 0010), not the bare tier string: catches both the
+  // fallback table's inferred_location and a legacy inferred_via_hpl record.
+  const inferred = priced.filter((q) => tierGroup(q.locationTier) === "inferred");
   if (inferred.length) {
+    const detail = inferred
+      .map((q) => (q.locationMatch ? inferredCaveat(q.producer, location, q.locationMatch) : q.producer))
+      .join("; ");
     warnings.push(
-      `Zone inferred from HPL's district map for ${inferred
-        .map((q) => q.producer)
-        .join(", ")} — confirm before quoting.`,
+      `Inferred Location Match: ${detail}. These are the nearest published zones, not the customer's town. Confirm before quoting.`,
     );
   }
   const entry = crossRefFor(data, gailGrade);

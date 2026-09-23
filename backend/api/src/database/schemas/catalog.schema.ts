@@ -20,14 +20,29 @@ export type PriceBasis = "delivered" | "ex_works" | "ex_depot";
  */
 export type GradeStatus = "active" | "deprecated" | "retired";
 
-/** How a customer location was matched to a producer's pricing zone. */
+/**
+ * How a customer location was matched to a producer's pricing zone.
+ * `state_zone` and `inferred_location` are decision 0010's fallback tiers;
+ * `inferred_via_hpl` is a legacy value the ETL no longer writes but a stored
+ * document (or comparison/deal record) may still carry.
+ */
 export type LocationTier =
   | "exact"
   | "alias"
   | "evidence"
   | "published_map"
+  | "state_zone"
+  | "inferred_location"
   | "inferred_via_hpl"
   | "unresolved";
+
+/** Fallback provenance (decision 0010) — set only for a town/producer pair the fallback table filled in. */
+export interface LocationZoneMeta {
+  km: number | null;
+  crossesState: boolean;
+  corroborated: boolean;
+  source: "annexure_v" | "state_zone" | "nearest";
+}
 
 @Schema({ collection: "producers", timestamps: true })
 export class Producer {
@@ -136,6 +151,15 @@ export class Location {
   /** How each of those was arrived at, so the UI can flag inferences. */
   @Prop({ type: Object, default: {} })
   producerZoneTier!: Record<string, LocationTier>;
+
+  /**
+   * Fallback provenance (decision 0010): distance, state-crossing and HPL
+   * corroboration for a producerZone entry the fallback table supplied.
+   * Optional — absent for exact/alias/evidence and a genuine HPL district
+   * match, which have no such thing to report.
+   */
+  @Prop({ type: Object, default: {} })
+  producerZoneMeta?: Record<string, LocationZoneMeta>;
 
   /** { HMEL: "Panaji", HPL: "PANAJI", ... } — freight is billed by its own name. */
   @Prop({ type: Object, default: {} })
