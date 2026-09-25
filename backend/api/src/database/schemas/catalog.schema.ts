@@ -41,7 +41,9 @@ export interface LocationZoneMeta {
   km: number | null;
   crossesState: boolean;
   corroborated: boolean;
-  source: "annexure_v" | "state_zone" | "nearest";
+  source: "annexure_v" | "state_zone" | "nearest" | "retained";
+  /** true: the approved table supplied the zone; false: it confirms a direct match. */
+  supplied?: boolean;
 }
 
 @Schema({ collection: "producers", timestamps: true })
@@ -153,10 +155,11 @@ export class Location {
   producerZoneTier!: Record<string, LocationTier>;
 
   /**
-   * Fallback provenance (decision 0010): distance, state-crossing and HPL
-   * corroboration for a producerZone entry the fallback table supplied.
-   * Optional — absent for exact/alias/evidence and a genuine HPL district
-   * match, which have no such thing to report.
+   * Fallback provenance (decision 0010): distance, state-crossing, HPL
+   * corroboration and classification for every producerZone entry in the
+   * approved table — whether the table supplied it or confirms a direct HPL
+   * district match (`supplied`). Absent for exact/alias/evidence, which the
+   * table does not cover.
    */
   @Prop({ type: Object, default: {} })
   producerZoneMeta?: Record<string, LocationZoneMeta>;

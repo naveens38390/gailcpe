@@ -51,7 +51,14 @@ export interface LocationMeta {
   crossesState: boolean;
   /** Whether HPL's own Annexure V corroborates the match. */
   corroborated: boolean;
-  source: "annexure_v" | "state_zone" | "nearest";
+  /** `retained`: one of the 60 option-3 rows (today's live mapping, kept) — shown as Retained Existing Mapping. */
+  source: "annexure_v" | "state_zone" | "nearest" | "retained";
+  /**
+   * true: the approved table supplied this zone (the producer publishes nothing for the town).
+   * false: the table confirms a zone the producer's own published data already gives.
+   * Absent on data built before 2026-09-25, which only carried supplied rows.
+   */
+  supplied?: boolean;
 }
 
 /**

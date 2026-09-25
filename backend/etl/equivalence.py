@@ -27,6 +27,9 @@ SOURCE_OF_TIER = {
     "inferred_location": "nearest",
 }
 
+# The marker the reference table carries on the 60 option-3 rows (today's live mapping, kept).
+RETAINED_EVIDENCE = "retained_live_hpl_hub"
+
 
 def validate(
     equivalence: list[dict], review: list[dict], gail_locations: list[str],
@@ -117,28 +120,38 @@ def merge(coverage: dict[str, dict], equivalence: list[dict]) -> dict:
     "nothing" means no exact/alias/evidence/published_map match — the fallback table is the
     only remaining source of an inferred mapping). Never overwrites an existing entry.
 
-    Returns `location_meta`: {producer: {town: {km, crossesState, corroborated, source}}}, for
-    the rows this merge actually added. A direct match (exact/alias/evidence/published_map found
-    by the resolver itself) has no distance or corroboration to report, so it gets no entry.
+    Returns `location_meta`: {producer: {town: {km, crossesState, corroborated, source,
+    supplied}}} for every row of the approved table — the approved *Competitor Presence and
+    Fallback Mapping* workbook (2026-09-25) shows a distance and classification for all 1,076,
+    including the 97 where the table only confirms a zone the resolver already found natively.
+    `supplied` separates the two: true where this merge filled a gap, false where it confirmed an
+    existing match (`fix-hpl-territory.ts` relies on it to leave M1's rows alone). `source` is
+    `retained` for the 60 option-3 rows, which the workbook classifies as Retained Existing
+    Mapping. A direct match that is not in the table (exact/alias/evidence) gets no entry.
     """
     location_meta: dict[str, dict[str, dict]] = {}
     added = 0
     for r in equivalence:
         producer, town = r["producer"], r["town"]
         cov = coverage.get(producer)
-        if cov is None or town in cov["map"]:
+        if cov is None:
             continue
-        cov["map"][town] = r["zone"]
-        cov["tier_of"][town] = r["tier"]
-        cov["resolved"] += 1
-        cov["tiers"][r["tier"]] = cov["tiers"].get(r["tier"], 0) + 1
-        if town in cov["missing"]:
-            cov["missing"].remove(town)
+        # validate() has already rejected a row whose zone disagrees with a direct match, so a
+        # town already in the map here holds exactly this row's zone.
+        supplied = town not in cov["map"]
+        if supplied:
+            cov["map"][town] = r["zone"]
+            cov["tier_of"][town] = r["tier"]
+            cov["resolved"] += 1
+            cov["tiers"][r["tier"]] = cov["tiers"].get(r["tier"], 0) + 1
+            if town in cov["missing"]:
+                cov["missing"].remove(town)
+            added += 1
         location_meta.setdefault(producer, {})[town] = {
             "km": r["distance_km"],
             "crossesState": r["crosses_state"],
             "corroborated": r["corroborated_by_hpl"],
-            "source": SOURCE_OF_TIER[r["tier"]],
+            "source": "retained" if r["evidence"] == RETAINED_EVIDENCE else SOURCE_OF_TIER[r["tier"]],
+            "supplied": supplied,
         }
-        added += 1
     return {"added": added, "location_meta": location_meta}

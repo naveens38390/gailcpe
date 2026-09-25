@@ -18,6 +18,7 @@
     "fix-hpl-territory": "ts-node -r tsconfig-paths/register src/database/fix-hpl-territory.ts",
     "load-equivalence": "ts-node -r tsconfig-paths/register src/database/load-equivalence.ts",
     "verify-equivalence": "ts-node -r tsconfig-paths/register src/tools/equivalence-verify.ts",
+    "verify-workbook": "ts-node -r tsconfig-paths/register src/tools/workbook-verify.ts",
     "verify-release": "ts-node -r tsconfig-paths/register src/tools/verify-release.ts",
     "test": "jest",
     "typecheck": "tsc --noEmit"

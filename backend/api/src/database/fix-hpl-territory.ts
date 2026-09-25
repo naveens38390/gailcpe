@@ -65,8 +65,15 @@ const ACTION = "migration.m0";
 export function computeUpdates(locations: any, priceIndex: any, currentDocs: Map<string, any>): LocationFieldUpdate[] {
   const canonical: string[] = locations.canonical;
   // A town the fallback table supplies is M1's job — this script's target for it is
-  // "unresolved", the same as before the fallback table existed.
-  const m1Supplied: Set<string> = new Set(Object.keys(priceIndex.location_meta?.HPL ?? {}));
+  // "unresolved", the same as before the fallback table existed. A table row with
+  // `supplied: false` only confirms a zone HPL's own district list already gives (the
+  // workbook shows those too, with a distance), so it stays in this script's target.
+  // Data built before 2026-09-25 has no `supplied` field and only supplied rows.
+  const m1Supplied: Set<string> = new Set(
+    Object.entries<any>(priceIndex.location_meta?.HPL ?? {})
+      .filter(([, meta]) => meta?.supplied !== false)
+      .map(([town]) => town),
+  );
   const cov = locations.coverage.HPL;
   const depotMap = priceIndex.depot_location_map?.HPL ?? {};
   const depotTier = priceIndex.depot_location_tier?.HPL ?? {};

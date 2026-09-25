@@ -79069,1231 +79069,1436 @@
     "km": 95,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ALAPPUZHA": {
     "km": 51,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ALIGARH": {
     "km": 78,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ALLAHABAD": {
     "km": 118,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ALWAR": {
     "km": 76,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AMBALA": {
     "km": 109,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AMRAWATI": {
     "km": 141,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AMRITSAR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "ANANTAPUR": {
     "km": 133,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ANNAND": {
     "km": 38,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ASANGAON": {
     "km": 30,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BAHADURGARH": {
     "km": 27,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BARAMATI": {
     "km": 87,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BAREILLY": {
     "km": 68,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BARJORA": {
     "km": 95,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BARMER": {
     "km": 171,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BAWAL": {
     "km": 61,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BEED": {
     "km": 108,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BEHROR": {
     "km": 67,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BELGAUM": {
     "km": 88,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BERHAMPUR": {
     "km": 171,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHADOHI": {
     "km": 45,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHATINDA": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "BHIND": {
     "km": 72,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHUBANESWAR": {
     "km": 22,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BIDAR": {
     "km": 115,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BIKANER": {
     "km": 197,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BORIVALLI": {
     "km": 18,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BURHANPUR": {
     "km": 120,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BYRNIHAT": {
     "km": 20,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "CHINDWARA": {
     "km": 161,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "CHITTOOR": {
     "km": 59,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "CHITTOREGARH": {
     "km": 98,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DEGLOOR": {
     "km": 277,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHANBAD": {
     "km": 52,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHAR": {
     "km": 57,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHARUHERA": {
     "km": 36,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHORAJI": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHULE": {
     "km": 83,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DISPUR": {
     "km": 8,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DURG": {
     "km": 37,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DURGAPUR": {
     "km": 99,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ELURU": {
     "km": 54,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "FATEHPUR": {
     "km": 76,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "FAZILKA": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "FIROZPUR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "GADARWARA": {
     "km": 122,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GADCHIROLI": {
     "km": 144,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GANGTOK (SIKKIM)": {
     "km": 71,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GAYA": {
     "km": 90,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GHAZIPUR": {
     "km": 48,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GODHRA": {
     "km": 67,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GONDIA": {
     "km": 120,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GORAKHPUR": {
     "km": 165,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GUNA": {
     "km": 155,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GUNTUR": {
     "km": 31,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALDAWANI": {
     "km": 30,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALDIA": {
     "km": 62,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALOL": {
     "km": 35,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALVAD": {
     "km": 90,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HARIDWAR": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HATHRAS": {
     "km": 46,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HIMMATNAGAR": {
     "km": 59,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HINGANGHAT": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HISSAR": {
     "km": 124,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "IDUKKI": {
     "km": 78,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JAGADHARI": {
     "km": 93,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JALANDHAR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "JALNA": {
     "km": 57,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JAM KHAMBH": {
     "km": 63,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JETPUR": {
     "km": 62,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JUNAGADH": {
     "km": 89,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KADI": {
     "km": 34,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KAIMUR": {
     "km": 42,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KAITHAL": {
     "km": 72,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KAKINADA": {
     "km": 130,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KALA AMB": {
     "km": 65,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KANNUR": {
     "km": 83,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KARAIKAL": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KARNAL": {
     "km": 34,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KASHIPUR": {
     "km": 50,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KASORGOD": {
     "km": 49,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KATHUA": {
     "km": 74,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHAMGAON": {
     "km": 109,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHAMMAM": {
     "km": 34,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHANDWA": {
     "km": 98,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHARGONE": {
     "km": 36,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHEDA": {
     "km": 32,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHOPOLI": {
     "km": 8,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KOLAR": {
     "km": 61,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KOLLAM": {
     "km": 60,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KOTTAYAM": {
     "km": 49,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KUDAL": {
     "km": 96,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KURUKSHETRA": {
     "km": 66,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "LASALGAON/CHALISGAON": {
     "km": 50,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "LONAWALA": {
     "km": 15,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "LUCKNOW": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "LUDHIANA": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "MAHBOOBNAGAR": {
     "km": 87,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MAHUVA": {
     "km": 85,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MANDSAUR": {
     "km": 170,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MATHURA": {
     "km": 49,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MEDAK": {
     "km": 76,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MEERUT": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MODINAGAR": {
     "km": 23,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MORADABAD": {
     "km": 63,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MORBI": {
     "km": 59,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MUDHOL": {
     "km": 111,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MUZAFFARNAGAR": {
     "km": 57,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MYSORE": {
     "km": 128,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "Machlipatnam": {
     "km": 63,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NALANDA": {
     "km": 59,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NALGONDA": {
     "km": 75,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NAMAKKAL": {
     "km": 31,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NANDED": {
     "km": 222,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NARSARAOPET": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NARWANA": {
     "km": 85,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NEEMUCH": {
     "km": 218,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NELLORE": {
     "km": 109,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NOKHA": {
     "km": 151,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ONGOLE": {
     "km": 129,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PADRA": {
     "km": 14,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PALANPUR": {
     "km": 64,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PALEJ": {
     "km": 45,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PALGHAT": {
     "km": 43,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PALI": {
     "km": 64,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PAONTA SAHIB": {
     "km": 99,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PARBHANI": {
     "km": 164,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PARWANU": {
     "km": 21,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PHALODI": {
     "km": 115,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PIDUGURALLA": {
     "km": 81,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAI BAREILLY": {
     "km": 92,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAIGAD": {
     "km": 33,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAJNANDGAON": {
     "km": 64,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAJPALAYAM": {
     "km": 81,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAJPURA": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "RANIPET": {
     "km": 104,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RATLAM": {
     "km": 106,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RATNAGARI": {
     "km": 103,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "REWARI": {
     "km": 49,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ROHA": {
     "km": 47,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ROORKEE": {
     "km": 53,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ROURKELA": {
     "km": 162,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RUDERPUR": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SAMBALPUR": {
     "km": 40,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SANAND": {
     "km": 21,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SANGLI": {
     "km": 40,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SANTEJ": {
     "km": 15,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SATNA": {
     "km": 47,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SAVLI": {
     "km": 29,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SHILLONG": {
     "km": 70,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SHIMOGA": {
     "km": 137,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SHIVPURI": {
     "km": 103,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIKAR": {
     "km": 100,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SILIGUDI": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIROHI": {
     "km": 94,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIRSA": {
     "km": 188,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SITARGANJ": {
     "km": 30,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIVAKASI": {
     "km": 63,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SOHAGPUR": {
     "km": 102,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SOLAN": {
     "km": 31,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SOLAPUR": {
     "km": 209,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SONEPAT": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SRIGANGANAGAR": {
     "km": 347,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SRIKAKULAM": {
     "km": 101,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SRINAGAR": {
     "km": 150,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SURYAPET": {
     "km": 40,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TALOJA": {
     "km": 23,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TARAPUR": {
     "km": 74,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "THANE": {
     "km": 16,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "THRISSUR": {
     "km": 64,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TIRUPUR": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TRICHY": {
     "km": 69,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TUMKUR": {
     "km": 67,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "UJJAIN": {
     "km": 52,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "UMBERGAON": {
     "km": 41,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VAPI": {
     "km": 27,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VERAWAL": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VIJAYWADA": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VILLUPURAM": {
     "km": 154,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VIRAMGAM": {
     "km": 56,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VISNAGAR": {
     "km": 20,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VIZAG": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "WAGHODIA": {
     "km": 20,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "WANI": {
     "km": 122,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "WARDHA": {
     "km": 68,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "YAMUNANAGAR": {
     "km": 88,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "YAWATMAL": {
     "km": 130,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AHMEDNAGAR": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "AKOLA": {
     "km": 222,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "BEAWAR": {
     "km": 132,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "BHARATPUR": {
     "km": 172,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "BHARUCH": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "BHIWANI": {
     "km": 104,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "DHOLPUR": {
     "km": 209,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "ERODE": {
     "km": 91,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "ETAWAH": {
     "km": 137,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "JAMNAGAR": {
     "km": 77,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "KATNI": {
     "km": 119,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "NAGAUR": {
     "km": 127,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "ROHTAK": {
     "km": 66,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "SALEM": {
     "km": 148,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "SATARA": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "SHAJAPUR": {
     "km": 116,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "SURENDRANAGAR": {
     "km": 102,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    }
   },
   "HPL": {
@@ -80301,931 +80506,1765 @@
     "km": 318,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "AGARTALA": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
+   },
+   "AGRA": {
+    "km": 49,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "AHMEDNAGAR": {
+    "km": 113,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "AJMER": {
+    "km": 125,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "AKOLA": {
+    "km": 222,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "ALAPPUZHA": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
+   },
+   "ALIGARH": {
+    "km": 58,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "ALLAHABAD": {
     "km": 118,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "ALWAR": {
+    "km": 76,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "AMBALA": {
+    "km": 109,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "AMRAWATI": {
     "km": 141,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "ANANTAPUR": {
     "km": 227,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "ANKLESHWAR": {
     "km": 78,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "ANNAND": {
     "km": 38,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "ASANGAON": {
     "km": 60,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "BAHADURGARH": {
     "km": 27,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "BARAMATI": {
     "km": 87,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "BARJORA": {
     "km": 42,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "BARMER": {
+    "km": 171,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "BARSI": {
     "km": 231,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "BAWAL": {
     "km": 61,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "BEAWAR": {
+    "km": 132,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "BEED": {
+    "km": 108,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "BEHROR": {
     "km": 67,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "BELGAUM": {
     "km": 329,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "BERHAMPUR": {
     "km": 153,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "BHADOHI": {
     "km": 45,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "BHARATPUR": {
+    "km": 172,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "BHARUCH": {
+    "km": 71,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "BHATINDA": {
+    "km": 118,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "BHILWARA": {
+    "km": 122,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "BHIND": {
+    "km": 72,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "BHINMAL": {
     "km": 159,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "BHIWANI": {
+    "km": 104,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "BIDAR": {
+    "km": 314,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "BIKANER": {
+    "km": 197,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "BILASPUR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "BORIVALLI": {
     "km": 18,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "BUNDHI": {
     "km": 35,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "BURHANPUR": {
+    "km": 162,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "BYRNIHAT": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "CALICUT": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "CHALISGAON": {
     "km": 83,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "CHINDWARA": {
+    "km": 161,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "CHITTOOR": {
+    "km": 59,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "CHITTOREGARH": {
     "km": 127,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "COCHIN": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "CUDDAPAH": {
     "km": 114,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "CUTTACK": {
+    "km": 22,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "DAMTAL": {
     "km": 177,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "DEGLOOR": {
     "km": 277,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "DEHRADUN": {
+    "km": 44,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "DHANBAD": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
+   },
+   "DHAR": {
+    "km": 57,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "DHARUHERA": {
     "km": 36,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "DHOLPUR": {
+    "km": 209,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "DHORAJI": {
     "km": 71,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "DHULE": {
+    "km": 83,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "DIBIYAPUR": {
     "km": 82,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "DIBRUGARH": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "DIMAPUR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "DISPUR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "DURG": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "DURGAPUR": {
     "km": 38,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "ELURU": {
+    "km": 83,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "ERODE": {
+    "km": 91,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "ETAWAH": {
+    "km": 137,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "FATEHPUR": {
+    "km": 76,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "FAZILKA": {
+    "km": 184,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "FIROZPUR": {
     "km": 118,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "GADARWARA": {
     "km": 122,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "GADCHIROLI": {
     "km": 144,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "GANGTOK (SIKKIM)": {
     "km": 71,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GAYA": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
+   },
+   "GAZIABAD/NOIDA": {
+    "km": 0,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "GHAZIPUR": {
+    "km": 65,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "GODHRA": {
     "km": 67,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "GONDIA": {
+    "km": 120,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "GORAKHPUR": {
+    "km": 165,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "GUNA": {
+    "km": 155,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "GUWAHATI": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "HALDAWANI": {
     "km": 37,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "HALDIA": {
     "km": 61,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "HALOL": {
     "km": 35,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "HALVAD": {
     "km": 90,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "HATHRAS": {
+    "km": 39,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "HIMMATNAGAR": {
     "km": 59,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "HINGANGHAT": {
     "km": 71,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "HISSAR": {
     "km": 124,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "HOSUR": {
     "km": 214,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "HUBLI": {
     "km": 272,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "IDUKKI": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "IMPHAL": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "JAGADHARI": {
     "km": 93,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "JAGDISHPUR": {
     "km": 293,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "JALANDHAR": {
+    "km": 74,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "JALNA": {
+    "km": 57,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "JAM KHAMBH": {
     "km": 118,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "JAMNAGAR": {
+    "km": 77,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "JAMSHEDPUR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "JETPUR": {
     "km": 62,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "JEYPORE": {
     "km": 376,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "JUNAGADH": {
     "km": 92,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "KADI": {
     "km": 34,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "KAIMUR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
+   },
+   "KAITHAL": {
+    "km": 72,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "KAKINADA": {
+    "km": 130,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "KALA AMB": {
     "km": 65,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "KALOL": {
     "km": 128,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "KANHANGAD": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "KANNUR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "KARAIKAL": {
     "km": 113,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "KARNAL": {
+    "km": 34,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "KARUR": {
+    "km": 116,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "KASHIPUR": {
     "km": 79,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "KASORGOD": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "KATIHAR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
+   },
+   "KATNI": {
+    "km": 119,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "KHAMGAON": {
     "km": 109,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "KHAMMAM": {
+    "km": 57,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "KHANDWA": {
     "km": 113,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "KHARGONE": {
     "km": 102,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "KHEDA": {
+    "km": 32,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "KHOPOLI": {
     "km": 58,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "KOLAR": {
+    "km": 61,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "KOLKATA": {
+    "km": 5,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "KOLLAM": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "KOTTAYAM": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "KUDAL": {
     "km": 96,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "KUNDLI": {
     "km": 60,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "KURNOOL": {
+    "km": 264,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "KURUKSHETRA": {
+    "km": 66,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "LASALGAON/CHALISGAON": {
     "km": 50,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
+   },
+   "LATUR": {
+    "km": 312,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "LUCKNOW": {
+    "km": 71,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "MAHBOOBNAGAR": {
     "km": 87,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "MAHUVA": {
     "km": 85,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "MANDSAUR": {
+    "km": 170,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "MEDAK": {
+    "km": 76,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "MEERUT": {
+    "km": 58,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "MODINAGAR": {
     "km": 37,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "MORADABAD": {
+    "km": 83,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "MORBI": {
+    "km": 59,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "MUDHOL": {
     "km": 220,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "MUNDRA": {
     "km": 50,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "MUZAFFARNAGAR": {
+    "km": 106,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "MYSORE": {
     "km": 128,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "Machlipatnam": {
     "km": 74,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "NAGAUR": {
+    "km": 127,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "NALANDA": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
+   },
+   "NALGONDA": {
+    "km": 39,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "NAMAKKAL": {
+    "km": 145,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "NANDED": {
+    "km": 222,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "NANDYAL": {
+    "km": 230,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "NARSARAOPET": {
     "km": 44,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "NARWANA": {
     "km": 85,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "NEEMUCH": {
+    "km": 218,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "NELLORE": {
     "km": 109,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "NOKHA": {
     "km": 151,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "ONGOLE": {
     "km": 99,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "PADRA": {
     "km": 14,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "PALANPUR": {
     "km": 64,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "PALEJ": {
     "km": 45,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "PALGHAT": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
+   },
+   "PALI": {
+    "km": 64,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "PAONTA SAHIB": {
     "km": 99,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "PARBHANI": {
+    "km": 164,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "PARWANU": {
     "km": 21,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "PATHANAMTH": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "PATNA": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
+   },
+   "PHALODI": {
+    "km": 115,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "PIDUGURALLA": {
     "km": 64,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "PORBANDAR": {
+    "km": 142,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "RAI BAREILLY": {
     "km": 92,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
+   },
+   "RAIGAD": {
+    "km": 62,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "RAIGARH": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "RAIPUR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "RAJMUNDHRY": {
     "km": 169,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "RAJNANDGAON": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "RAJPALAYAM": {
     "km": 81,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "RAJPURA": {
     "km": 86,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "RANIA": {
     "km": 207,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "RANIPET": {
+    "km": 104,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "RATHANGARH": {
     "km": 220,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "RATLAM": {
+    "km": 106,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "RATNAGARI": {
     "km": 103,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "REWARI": {
+    "km": 49,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "ROHA": {
     "km": 75,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "ROHTAK": {
+    "km": 66,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "ROORKEE": {
     "km": 27,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "ROURKELA": {
     "km": 162,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "RUDERPUR": {
     "km": 30,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "SAHARANPUR": {
+    "km": 156,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "SALEM": {
+    "km": 148,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "SAMBALPUR": {
+    "km": 40,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "SAMPLA": {
     "km": 70,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "SANAND": {
     "km": 21,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "SANGLI": {
+    "km": 40,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "SANSARPUR TERRACE": {
     "km": 137,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "SANTEJ": {
     "km": 15,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "SATARA": {
+    "km": 113,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "SATNA": {
+    "km": 47,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "SAVLI": {
     "km": 29,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "SHAJAPUR": {
+    "km": 116,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "SHILLONG": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
+   },
+   "SHIMOGA": {
+    "km": 137,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "SHIVPURI": {
+    "km": 103,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "SIKAR": {
+    "km": 100,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "SILCHAR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "SILIGUDI": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "SILVASSA / DADRA & NAGAR HAVELI": {
+    "km": 0,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "SIROHI": {
+    "km": 303,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "SIRSA": {
+    "km": 188,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "SIVAKASI": {
     "km": 63,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "SIVSAGAR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "SOHAGPUR": {
     "km": 102,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "SOLAN": {
+    "km": 31,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "SOLAPUR": {
+    "km": 209,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "SONEPAT": {
     "km": 44,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "SRIGANGANAGAR": {
     "km": 347,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "SRIKAKULAM": {
+    "km": 101,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "SRINAGAR": {
+    "km": 150,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "SURENDRANAGAR": {
+    "km": 102,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "TALOJA": {
     "km": 23,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "TARAPUR": {
     "km": 91,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "THANE": {
+    "km": 16,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "THRISSUR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "TINSUKIA": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "TIRUPATHI": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "TIRUPUR": {
     "km": 44,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "TRIVANDRUM": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "TUMKUR": {
     "km": 67,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "TUTICORIN": {
     "km": 128,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "UDAIPUR": {
+    "km": 224,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
+   },
+   "UJJAIN": {
+    "km": 52,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "UMBERGAON": {
     "km": 105,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "VALSAD": {
+    "km": 66,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "VAPI": {
     "km": 92,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "VERAWAL": {
     "km": 160,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "VIJAYAPURA": {
     "km": 227,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "VIJAYWADA": {
     "km": 31,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "VILLUPURAM": {
     "km": 154,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "VIRAMGAM": {
     "km": 56,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "VISNAGAR": {
     "km": 20,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "WAGHODIA": {
     "km": 20,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "WAI": {
     "km": 144,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "WANI": {
     "km": 122,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "WARANGAL": {
     "km": 138,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    },
    "WARDHA": {
     "km": 68,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
+   },
+   "YAMUNANAGAR": {
+    "km": 88,
+    "crossesState": false,
+    "corroborated": false,
+    "source": "annexure_v",
+    "supplied": false
    },
    "YAWATMAL": {
     "km": 130,
     "crossesState": false,
     "corroborated": false,
-    "source": "annexure_v"
+    "source": "annexure_v",
+    "supplied": true
    }
   },
   "IOCL": {
@@ -81233,1291 +82272,1506 @@
     "km": 95,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AGRA": {
     "km": 49,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AJMER": {
     "km": 125,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ALAPPUZHA": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "ALIGARH": {
     "km": 58,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ALLAHABAD": {
     "km": 145,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AMBALA": {
     "km": 109,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AMRAWATI": {
     "km": 141,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AMRITSAR": {
     "km": 74,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ANANTAPUR": {
     "km": 229,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ANNAND": {
     "km": 38,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ASANGAON": {
     "km": 60,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BADDI": {
     "km": 31,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BAHADURGARH": {
     "km": 27,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BARAMATI": {
     "km": 87,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BARJORA": {
     "km": 61,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BARMER": {
     "km": 171,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BAWAL": {
     "km": 61,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BEED": {
     "km": 108,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BEHROR": {
     "km": 67,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BELGAUM": {
     "km": 69,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BERHAMPUR": {
     "km": 171,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHADOHI": {
     "km": 72,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHATINDA": {
     "km": 118,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHAVNAGAR": {
     "km": 94,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHILWARA": {
     "km": 126,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHIND": {
     "km": 72,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHIWADI": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHUBANESWAR": {
     "km": 22,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BIDAR": {
     "km": 98,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BIKANER": {
     "km": 197,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BILASPUR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "BORIVALLI": {
     "km": 18,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BURHANPUR": {
     "km": 162,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BYRNIHAT": {
     "km": 20,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "CALICUT": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "CHINDWARA": {
     "km": 161,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "CHITTOREGARH": {
     "km": 98,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "CUDDAPAH": {
     "km": 144,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DEGLOOR": {
     "km": 277,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DEHRADUN": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHANBAD": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "DHAR": {
     "km": 57,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHARUHERA": {
     "km": 36,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHORAJI": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHULE": {
     "km": 83,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DISPUR": {
     "km": 8,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DURG": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "DURGAPUR": {
     "km": 63,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ELURU": {
     "km": 83,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ERODE": {
     "km": 58,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ETAWAH": {
     "km": 137,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "FATEHPUR": {
     "km": 76,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GADARWARA": {
     "km": 122,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GADCHIROLI": {
     "km": 144,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GANGTOK (SIKKIM)": {
     "km": 91,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GAYA": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "GHAZIPUR": {
     "km": 48,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GODHRA": {
     "km": 67,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GONDIA": {
     "km": 120,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GORAKHPUR": {
     "km": 168,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GUNA": {
     "km": 155,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALDAWANI": {
     "km": 30,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALDIA": {
     "km": 61,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALOL": {
     "km": 35,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALVAD": {
     "km": 90,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HATHRAS": {
     "km": 39,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HIMMATNAGAR": {
     "km": 59,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HINGANGHAT": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HISSAR": {
     "km": 124,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HOSUR": {
     "km": 125,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HUBLI": {
     "km": 18,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "IDUKKI": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "JAGADHARI": {
     "km": 93,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JALNA": {
     "km": 57,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JAMSHEDPUR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "JETPUR": {
     "km": 62,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JUNAGADH": {
     "km": 92,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KADI": {
     "km": 34,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KAIMUR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "KAITHAL": {
     "km": 72,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KAKINADA": {
     "km": 130,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KALA AMB": {
     "km": 47,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KANHANGAD": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "KANNUR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "KARAIKAL": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KARNAL": {
     "km": 34,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KASHIPUR": {
     "km": 50,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KASORGOD": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "KATIHAR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "KHAMGAON": {
     "km": 109,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHAMMAM": {
     "km": 57,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHANDWA": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHARGONE": {
     "km": 102,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHEDA": {
     "km": 32,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHOPOLI": {
     "km": 58,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KOLAR": {
     "km": 61,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KOLLAM": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "KOTTAYAM": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "KUDAL": {
     "km": 96,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KURNOOL": {
     "km": 264,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KURUKSHETRA": {
     "km": 66,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "LASALGAON/CHALISGAON": {
     "km": 50,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "LUCKNOW": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MAHBOOBNAGAR": {
     "km": 63,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MAHUVA": {
     "km": 111,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MANDSAUR": {
     "km": 170,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MEDAK": {
     "km": 86,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MEERUT": {
     "km": 58,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MODINAGAR": {
     "km": 37,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MORADABAD": {
     "km": 83,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MORBI": {
     "km": 59,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MUDHOL": {
     "km": 101,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MUNDRA": {
     "km": 50,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MUZAFFARNAGAR": {
     "km": 106,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MYSORE": {
     "km": 128,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "Machlipatnam": {
     "km": 74,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NAGAUR": {
     "km": 127,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NALANDA": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "NALGONDA": {
     "km": 39,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NANDED": {
     "km": 222,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NANDYAL": {
     "km": 230,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NARSARAOPET": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NARWANA": {
     "km": 85,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NEEMUCH": {
     "km": 218,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NELLORE": {
     "km": 168,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NOKHA": {
     "km": 151,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ONGOLE": {
     "km": 99,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PADRA": {
     "km": 14,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PALANPUR": {
     "km": 64,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PALEJ": {
     "km": 45,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PALGHAT": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "PALI": {
     "km": 64,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PAONTA SAHIB": {
     "km": 72,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PARBHANI": {
     "km": 164,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PARWANU": {
     "km": 16,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PATHANAMTH": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "PHALODI": {
     "km": 115,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PIDUGURALLA": {
     "km": 64,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PORBANDAR": {
     "km": 142,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAI BAREILLY": {
     "km": 92,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAIGAD": {
     "km": 62,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAIGARH": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "RAJNANDGAON": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "RAJPALAYAM": {
     "km": 81,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAJPURA": {
     "km": 86,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RANIPET": {
     "km": 104,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RATLAM": {
     "km": 106,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RATNAGARI": {
     "km": 103,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "REWARI": {
     "km": 49,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ROHA": {
     "km": 75,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ROORKEE": {
     "km": 27,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ROURKELA": {
     "km": 162,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RUDERPUR": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SAHARANPUR": {
     "km": 156,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SAMBALPUR": {
     "km": 40,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SANAND": {
     "km": 21,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SANGLI": {
     "km": 40,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SANTEJ": {
     "km": 15,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SATNA": {
     "km": 47,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SAVLI": {
     "km": 29,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SHILLONG": {
     "km": 70,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SHIMOGA": {
     "km": 137,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SHIVPURI": {
     "km": 103,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIKAR": {
     "km": 100,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SILIGUDI": {
     "km": 37,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIROHI": {
     "km": 94,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIRSA": {
     "km": 188,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SITARGANJ": {
     "km": 30,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIVAKASI": {
     "km": 63,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SOHAGPUR": {
     "km": 102,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SOLAPUR": {
     "km": 209,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SONEPAT": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SRIGANGANAGAR": {
     "km": 347,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SRIKAKULAM": {
     "km": 101,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SRINAGAR": {
     "km": 150,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TALOJA": {
     "km": 23,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TARAPUR": {
     "km": 91,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "THANE": {
     "km": 16,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "THRISSUR": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "TIRUPATHI": {
     "km": 59,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TIRUPUR": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TRIVANDRUM": {
     "km": null,
     "crossesState": false,
     "corroborated": false,
-    "source": "state_zone"
+    "source": "state_zone",
+    "supplied": true
    },
    "TUMKUR": {
     "km": 67,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TUTICORIN": {
     "km": 128,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "UJJAIN": {
     "km": 52,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "UMBERGAON": {
     "km": 105,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VALSAD": {
     "km": 66,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VAPI": {
     "km": 92,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VARANASI": {
     "km": 27,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VERAWAL": {
     "km": 160,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VIJAYWADA": {
     "km": 31,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VIRAMGAM": {
     "km": 56,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VISNAGAR": {
     "km": 20,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "WAGHODIA": {
     "km": 20,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "WANI": {
     "km": 122,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "WARDHA": {
     "km": 68,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "YAMUNANAGAR": {
     "km": 88,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "YAWATMAL": {
     "km": 130,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AHMEDNAGAR": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "AKOLA": {
     "km": 222,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "BEAWAR": {
     "km": 132,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "BHARATPUR": {
     "km": 172,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "BHARUCH": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "BHIWANI": {
     "km": 104,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "DHOLPUR": {
     "km": 209,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "FAZILKA": {
     "km": 184,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "JAMNAGAR": {
     "km": 77,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "KARUR": {
     "km": 116,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "KATNI": {
     "km": 119,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "NAMAKKAL": {
     "km": 145,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "ROHTAK": {
     "km": 66,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "SATARA": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "SHAJAPUR": {
     "km": 116,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "SURENDRANAGAR": {
     "km": 102,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    }
   },
   "OPaL": {
@@ -82525,1183 +83779,1380 @@
     "km": 95,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AJMER": {
     "km": 125,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ALAPPUZHA": {
     "km": 51,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ALIGARH": {
     "km": 78,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ALLAHABAD": {
     "km": 118,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ALWAR": {
     "km": 76,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AMBALA": {
     "km": 109,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AMRAWATI": {
     "km": 141,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ANKLESHWAR": {
     "km": 42,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ANNAND": {
     "km": 38,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ASANGAON": {
     "km": 30,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BAHADURGARH": {
     "km": 27,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BARAMATI": {
     "km": 87,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BAREILLY": {
     "km": 68,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BARJORA": {
     "km": 95,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BARMER": {
     "km": 171,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BARSI": {
     "km": 67,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BAWAL": {
     "km": 61,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BEED": {
     "km": 108,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BEHROR": {
     "km": 67,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BELGAUM": {
     "km": 88,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BERHAMPUR": {
     "km": 171,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHADOHI": {
     "km": 45,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHARUCH": {
     "km": 40,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHATINDA": {
     "km": 118,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHILWARA": {
     "km": 122,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHIND": {
     "km": 72,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHUBANESWAR": {
     "km": 22,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BIDAR": {
     "km": 96,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BIKANER": {
     "km": 197,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BORIVALLI": {
     "km": 18,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BURHANPUR": {
     "km": 162,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "CHINDWARA": {
     "km": 161,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "CHITTOOR": {
     "km": 59,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "CHITTOREGARH": {
     "km": 98,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHANBAD": {
     "km": 52,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHAR": {
     "km": 57,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHARUHERA": {
     "km": 36,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHORAJI": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHULE": {
     "km": 83,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DISPUR": {
     "km": 8,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DURG": {
     "km": 37,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DURGAPUR": {
     "km": 99,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ELURU": {
     "km": 54,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "FATEHPUR": {
     "km": 76,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "FAZILKA": {
     "km": 184,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "FIROZPUR": {
     "km": 118,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GADARWARA": {
     "km": 122,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GADCHIROLI": {
     "km": 144,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GAYA": {
     "km": 90,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GHAZIPUR": {
     "km": 65,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GODHRA": {
     "km": 67,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GONDIA": {
     "km": 120,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GORAKHPUR": {
     "km": 165,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GUNTUR": {
     "km": 31,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALDAWANI": {
     "km": 30,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALDIA": {
     "km": 62,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALOL": {
     "km": 35,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALVAD": {
     "km": 90,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HARIDWAR": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HATHRAS": {
     "km": 46,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HINGANGHAT": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HISSAR": {
     "km": 124,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "IDUKKI": {
     "km": 78,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JAGADHARI": {
     "km": 93,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JALANDHAR": {
     "km": 53,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JALNA": {
     "km": 57,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JETPUR": {
     "km": 62,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JUNAGADH": {
     "km": 92,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KADI": {
     "km": 17,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KAIMUR": {
     "km": 67,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KAITHAL": {
     "km": 72,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KAKINADA": {
     "km": 130,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KALA AMB": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KANNUR": {
     "km": 83,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KARAIKAL": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KARNAL": {
     "km": 34,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KASHIPUR": {
     "km": 50,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KASORGOD": {
     "km": 49,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KATHUA": {
     "km": 74,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHAMGAON": {
     "km": 109,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHAMMAM": {
     "km": 57,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHANDWA": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHARGONE": {
     "km": 102,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHEDA": {
     "km": 32,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHOPOLI": {
     "km": 45,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KOLAR": {
     "km": 61,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KOLLAM": {
     "km": 60,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KOTTAYAM": {
     "km": 49,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KUDAL": {
     "km": 96,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KURNOOL": {
     "km": 62,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KURUKSHETRA": {
     "km": 66,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "LASALGAON/CHALISGAON": {
     "km": 50,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "LATUR": {
     "km": 107,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "LUCKNOW": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MAHBOOBNAGAR": {
     "km": 87,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MAHUVA": {
     "km": 85,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MANDSAUR": {
     "km": 170,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MATHURA": {
     "km": 49,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MEDAK": {
     "km": 76,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MEERUT": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MODINAGAR": {
     "km": 23,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MORADABAD": {
     "km": 63,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MORBI": {
     "km": 59,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MUNDRA": {
     "km": 50,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MUZAFFARNAGAR": {
     "km": 57,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MYSORE": {
     "km": 128,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "Machlipatnam": {
     "km": 63,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NAGAUR": {
     "km": 127,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NALANDA": {
     "km": 59,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NALGONDA": {
     "km": 39,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NAMAKKAL": {
     "km": 31,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NANDED": {
     "km": 222,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NARSARAOPET": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NARWANA": {
     "km": 85,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NEEMUCH": {
     "km": 218,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NELLORE": {
     "km": 109,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NOKHA": {
     "km": 151,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ONGOLE": {
     "km": 129,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PADRA": {
     "km": 14,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PALANPUR": {
     "km": 103,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PALEJ": {
     "km": 45,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PALGHAT": {
     "km": 43,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PALI": {
     "km": 64,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PAONTA SAHIB": {
     "km": 40,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PARBHANI": {
     "km": 164,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PARWANU": {
     "km": 21,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PHALODI": {
     "km": 115,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PIDUGURALLA": {
     "km": 81,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PONDICHERRY": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PORBANDAR": {
     "km": 142,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAI BAREILLY": {
     "km": 92,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAIGAD": {
     "km": 62,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAJNANDGAON": {
     "km": 64,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAJPALAYAM": {
     "km": 81,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAJPURA": {
     "km": 86,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RANIPET": {
     "km": 104,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RATLAM": {
     "km": 106,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RATNAGARI": {
     "km": 103,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "REWARI": {
     "km": 49,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ROHA": {
     "km": 68,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ROORKEE": {
     "km": 53,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ROURKELA": {
     "km": 162,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RUDERPUR": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SAMBALPUR": {
     "km": 40,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SANAND": {
     "km": 21,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SANGLI": {
     "km": 40,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SANTEJ": {
     "km": 15,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SAVLI": {
     "km": 29,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SHILLONG": {
     "km": 53,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SHIMOGA": {
     "km": 137,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SHIVPURI": {
     "km": 103,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIKAR": {
     "km": 100,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SILIGUDI": {
     "km": 37,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIROHI": {
     "km": 94,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIRSA": {
     "km": 188,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SITARGANJ": {
     "km": 30,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIVAKASI": {
     "km": 63,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SOHAGPUR": {
     "km": 102,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SOLAN": {
     "km": 31,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SONEPAT": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SRIGANGANAGAR": {
     "km": 347,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SRIKAKULAM": {
     "km": 101,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TALOJA": {
     "km": 10,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TARAPUR": {
     "km": 74,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "THANE": {
     "km": 16,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "THRISSUR": {
     "km": 64,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TIRUPUR": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TRICHY": {
     "km": 69,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TUMKUR": {
     "km": 67,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "UJJAIN": {
     "km": 52,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "UMBERGAON": {
     "km": 41,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VAPI": {
     "km": 27,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VERAWAL": {
     "km": 160,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VIJAYAPURA": {
     "km": 132,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VIRAMGAM": {
     "km": 47,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VISNAGAR": {
     "km": 51,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VIZAG": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "WAGHODIA": {
     "km": 20,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "WANI": {
     "km": 122,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "WARDHA": {
     "km": 68,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "YAMUNANAGAR": {
     "km": 88,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "YAWATMAL": {
     "km": 130,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AHMEDNAGAR": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "AKOLA": {
     "km": 222,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "BEAWAR": {
     "km": 132,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "BHARATPUR": {
     "km": 172,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "BHIWANI": {
     "km": 104,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "DHOLPUR": {
     "km": 209,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "ERODE": {
     "km": 91,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "ETAWAH": {
     "km": 137,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "GUNA": {
     "km": 155,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "JAMNAGAR": {
     "km": 77,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "ROHTAK": {
     "km": 66,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "SATARA": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "SHAJAPUR": {
     "km": 116,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "SURENDRANAGAR": {
     "km": 102,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    }
   },
   "RIL": {
@@ -83709,1243 +85160,1450 @@
     "km": 95,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AJMER": {
     "km": 125,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ALAPPUZHA": {
     "km": 51,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ALIGARH": {
     "km": 78,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ALLAHABAD": {
     "km": 118,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ALWAR": {
     "km": 76,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AMBALA": {
     "km": 109,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AMRAWATI": {
     "km": 141,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ANNAND": {
     "km": 38,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ASANGAON": {
     "km": 60,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BAREILLY": {
     "km": 68,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BARJORA": {
     "km": 95,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BARMER": {
     "km": 171,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BARSI": {
     "km": 67,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BAWAL": {
     "km": 31,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BEED": {
     "km": 108,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BEHROR": {
     "km": 67,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BELGAUM": {
     "km": 88,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BERHAMPUR": {
     "km": 171,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHADOHI": {
     "km": 45,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHATINDA": {
     "km": 118,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHILWARA": {
     "km": 122,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHIND": {
     "km": 72,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHIWANI": {
     "km": 104,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BHUBANESWAR": {
     "km": 22,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BIDAR": {
     "km": 115,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BIKANER": {
     "km": 197,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BORIVALLI": {
     "km": 18,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BURHANPUR": {
     "km": 162,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "BYRNIHAT": {
     "km": 20,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "CHANDIGARH": {
     "km": 25,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "CHINDWARA": {
     "km": 161,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "CHITTOOR": {
     "km": 59,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "CHITTOREGARH": {
     "km": 98,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHANBAD": {
     "km": 52,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHAR": {
     "km": 57,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHARUHERA": {
     "km": 6,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHORAJI": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DHULE": {
     "km": 83,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DISPUR": {
     "km": 8,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DURG": {
     "km": 37,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "DURGAPUR": {
     "km": 99,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ELURU": {
     "km": 54,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "FARIDABAD": {
     "km": 25,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "FATEHPUR": {
     "km": 76,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "FAZILKA": {
     "km": 184,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "FIROZPUR": {
     "km": 118,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GADARWARA": {
     "km": 122,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GADCHIROLI": {
     "km": 144,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GANGTOK (SIKKIM)": {
     "km": 91,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GAYA": {
     "km": 90,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GAZIABAD/NOIDA": {
     "km": 12,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GHAZIPUR": {
     "km": 65,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GODHRA": {
     "km": 67,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GONDIA": {
     "km": 120,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GORAKHPUR": {
     "km": 165,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "GUNTUR": {
     "km": 31,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALDAWANI": {
     "km": 30,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALDIA": {
     "km": 62,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALOL": {
     "km": 35,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HALVAD": {
     "km": 90,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HARIDWAR": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HATHRAS": {
     "km": 46,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HIMMATNAGAR": {
     "km": 75,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HINGANGHAT": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HISSAR": {
     "km": 124,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "HOSUR": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "IDUKKI": {
     "km": 78,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JAGADHARI": {
     "km": 93,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JALANDHAR": {
     "km": 53,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JALNA": {
     "km": 57,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JETPUR": {
     "km": 62,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "JUNAGADH": {
     "km": 92,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KADI": {
     "km": 40,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KAIMUR": {
     "km": 67,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KAITHAL": {
     "km": 72,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KAKINADA": {
     "km": 130,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KALA AMB": {
     "km": 65,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KANNUR": {
     "km": 83,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KARAIKAL": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KARNAL": {
     "km": 34,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KASHIPUR": {
     "km": 50,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KASORGOD": {
     "km": 49,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KATHUA": {
     "km": 74,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHAMGAON": {
     "km": 109,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHAMMAM": {
     "km": 57,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHANDWA": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHARGONE": {
     "km": 102,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHEDA": {
     "km": 32,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KHOPOLI": {
     "km": 58,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KOLAR": {
     "km": 61,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KOLLAM": {
     "km": 60,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KOTTAYAM": {
     "km": 49,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KUDAL": {
     "km": 96,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KUNDLI": {
     "km": 60,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KURNOOL": {
     "km": 62,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "KURUKSHETRA": {
     "km": 66,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "LASALGAON/CHALISGAON": {
     "km": 50,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "LATUR": {
     "km": 107,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "LUCKNOW": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MAHBOOBNAGAR": {
     "km": 87,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MAHUVA": {
     "km": 85,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MANDSAUR": {
     "km": 170,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MATHURA": {
     "km": 49,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MEDAK": {
     "km": 76,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MEERUT": {
     "km": 62,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MEHSANA": {
     "km": 67,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MODINAGAR": {
     "km": 42,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MORADABAD": {
     "km": 63,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MORBI": {
     "km": 59,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MUDHOL": {
     "km": 111,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MUNDRA": {
     "km": 50,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "MUZAFFARNAGAR": {
     "km": 72,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "Machlipatnam": {
     "km": 63,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NAGAUR": {
     "km": 127,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NALANDA": {
     "km": 59,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NALGONDA": {
     "km": 39,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NAMAKKAL": {
     "km": 31,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NANDED": {
     "km": 222,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NARSARAOPET": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NARWANA": {
     "km": 85,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NEEMUCH": {
     "km": 218,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NELLORE": {
     "km": 109,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "NOKHA": {
     "km": 151,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ONGOLE": {
     "km": 129,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PADRA": {
     "km": 14,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PALEJ": {
     "km": 45,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PALGHAT": {
     "km": 43,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PALI": {
     "km": 64,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PAONTA SAHIB": {
     "km": 99,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PARBHANI": {
     "km": 164,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PARWANU": {
     "km": 21,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PHALODI": {
     "km": 115,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PIDUGURALLA": {
     "km": 81,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PONDICHERRY": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "PORBANDAR": {
     "km": 142,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAI BAREILLY": {
     "km": 92,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAIGAD": {
     "km": 62,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAJNANDGAON": {
     "km": 64,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAJPALAYAM": {
     "km": 81,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RAJPURA": {
     "km": 86,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RANIPET": {
     "km": 104,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RATLAM": {
     "km": 106,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RATNAGARI": {
     "km": 103,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "REWARI": {
     "km": 24,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ROHA": {
     "km": 75,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ROHTAK": {
     "km": 66,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ROORKEE": {
     "km": 53,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "ROURKELA": {
     "km": 162,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "RUDERPUR": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SAHARANPUR": {
     "km": 61,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SAMBALPUR": {
     "km": 40,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SAMPLA": {
     "km": 70,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SANAND": {
     "km": 21,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SANGLI": {
     "km": 40,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SANTEJ": {
     "km": 15,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SATNA": {
     "km": 47,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SAVLI": {
     "km": 29,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SHILLONG": {
     "km": 70,
     "crossesState": true,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SHIMOGA": {
     "km": 137,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SHIVPURI": {
     "km": 103,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIKAR": {
     "km": 100,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SILIGUDI": {
     "km": 37,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIROHI": {
     "km": 94,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIRSA": {
     "km": 188,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SITARGANJ": {
     "km": 30,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SIVAKASI": {
     "km": 63,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SOHAGPUR": {
     "km": 102,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SOLAN": {
     "km": 31,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SONEPAT": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SRIGANGANAGAR": {
     "km": 347,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "SRIKAKULAM": {
     "km": 101,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TALOJA": {
     "km": 23,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TARAPUR": {
     "km": 91,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "THANE": {
     "km": 16,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "THRISSUR": {
     "km": 64,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TIRUPUR": {
     "km": 44,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TRICHY": {
     "km": 69,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "TUMKUR": {
     "km": 67,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "UJJAIN": {
     "km": 52,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "UMBERGAON": {
     "km": 105,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VALSAD": {
     "km": 66,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VAPI": {
     "km": 92,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VERAWAL": {
     "km": 160,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VIJAYWADA": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VIRAMGAM": {
     "km": 56,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VISNAGAR": {
     "km": 75,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "VIZAG": {
     "km": 0,
     "crossesState": false,
     "corroborated": false,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "WAGHODIA": {
     "km": 20,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "WAI": {
     "km": 32,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "WANI": {
     "km": 122,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "WARDHA": {
     "km": 68,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "YAMUNANAGAR": {
     "km": 88,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "YAWATMAL": {
     "km": 130,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "nearest",
+    "supplied": true
    },
    "AHMEDNAGAR": {
     "km": 113,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "AKOLA": {
     "km": 222,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "BEAWAR": {
     "km": 132,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "BHARATPUR": {
     "km": 172,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "BHARUCH": {
     "km": 71,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "DHOLPUR": {
     "km": 209,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "ERODE": {
     "km": 91,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "ETAWAH": {
     "km": 137,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "GUNA": {
     "km": 155,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "JAMNAGAR": {
     "km": 77,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "KATNI": {
     "km": 119,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "SHAJAPUR": {
     "km": 116,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    },
    "SURENDRANAGAR": {
     "km": 102,
     "crossesState": false,
     "corroborated": true,
-    "source": "nearest"
+    "source": "retained",
+    "supplied": true
    }
   }
  },

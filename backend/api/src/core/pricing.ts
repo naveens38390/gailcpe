@@ -695,7 +695,7 @@ export function compare(
       .map((q) => (q.locationMatch ? inferredCaveat(q.producer, location, q.locationMatch) : q.producer))
       .join("; ");
     warnings.push(
-      `Inferred Location Match: ${detail}. These are the nearest published zones, not the customer's town. Confirm before quoting.`,
+      `Inferred Location Match: ${detail}. These are published zones near the customer's town, not the town itself. Confirm before quoting.`,
     );
   }
   const entry = crossRefFor(data, gailGrade);

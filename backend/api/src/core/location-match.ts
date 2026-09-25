@@ -47,6 +47,14 @@ export const TIER_LABEL: Record<TierGroup, string> = {
 };
 
 /**
+ * The fourth classification in the approved Competitor Presence and Fallback
+ * Mapping workbook (2026-09-25): one of the 60 option-3 rows, today's live
+ * mapping kept. It stays in the `inferred` group — distance caveat, Deal
+ * confidence capped at medium, cleared by the kill-switch — only the label differs.
+ */
+export const RETAINED_LABEL = "Retained Existing Mapping";
+
+/**
  * The payload a `Quote` carries so the app can render the right label and
  * caveat without knowing what a `LocationTier` string means. `undefined` when
  * there is no zone at all (`unresolved`) — nothing to report.
@@ -59,7 +67,8 @@ export function buildLocationMatch(
   if (!zone) return undefined;
   const group = tierGroup(tier);
   if (group === "none") return undefined;
-  const match: LocationMatch = { group, label: TIER_LABEL[group], matchedZone: zone };
+  const label = group === "inferred" && meta?.source === "retained" ? RETAINED_LABEL : TIER_LABEL[group];
+  const match: LocationMatch = { group, label, matchedZone: zone };
   if (meta) {
     if (meta.km !== null && meta.km !== undefined) match.distanceKm = meta.km;
     if (meta.crossesState !== undefined) match.crossesState = meta.crossesState;
@@ -82,5 +91,6 @@ export function inferredCaveat(
 ): string {
   const distance = match.distanceKm !== undefined ? ` (${match.distanceKm} km from ${location})` : "";
   const cross = match.crossesState ? "; crosses into another state" : "";
-  return `${producer} is priced at ${match.matchedZone}${distance}${cross}`;
+  const retained = match.label === RETAINED_LABEL ? ", the existing mapping" : "";
+  return `${producer} is priced at ${match.matchedZone}${distance}${cross}${retained}`;
 }

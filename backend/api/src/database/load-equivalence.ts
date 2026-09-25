@@ -13,14 +13,18 @@
  *   RELABEL  same zone as today, only the tier string changes (legacy
  *            inferred_via_hpl -> inferred_location, or a retained-live row)
  *   REPLACE  the zone itself changes
+ *   META     zone and tier already right; only the distance/classification
+ *            (`producerZoneMeta`) is recorded — the 97 rows where the table
+ *            confirms HPL's own district match, which the approved Competitor
+ *            Presence workbook (2026-09-25) shows with a distance
  *   REMOVE   currently `inferred_via_hpl` for a town/producer NOT in the
  *            approved table (the 2 Latur rows) — decision 0010 §9.2/§9.3:
  *            after WP2a there is no other source of an inferred works
  *            mapping, so anything the table does not carry is gone, not
  *            reduced to a guess
  *
- * A row already matching production (HPL's own genuine district match, the
- * documented no-op bucket) writes nothing.
+ * A row already matching in zone, tier and provenance writes nothing (NOOP),
+ * which is what makes a second run a no-op.
  *
  *   MONGODB_URI=... npm run load-equivalence                        # dry run
  *   MONGODB_URI=... npm run load-equivalence -- --apply
@@ -48,6 +52,7 @@ import {
   printPlan,
   readBack,
   rollback,
+  sameMeta,
   saveManifest,
   writeAuditEntry,
   type LocationFieldUpdate,
@@ -73,35 +78,45 @@ export function computeUpdates(
   const covered = new Set<string>(); // `${producer}|${town}`
   const updates: LocationFieldUpdate[] = [];
 
+  const missingMeta: string[] = [];
   for (const row of equivalence) {
     covered.add(`${row.producer}|${row.town}`);
     const doc = currentDocs.get(row.town);
     const currentZone = doc?.producerZone?.[row.producer];
     const currentTier = doc?.producerZoneTier?.[row.producer];
+    const currentMeta = doc?.producerZoneMeta?.[row.producer];
+    // Provenance comes from the ETL only (price_index.json), never re-derived here: one place
+    // classifies a row (retained or not, supplied or confirmed), so the two cannot disagree.
+    const nextMeta = priceIndex.location_meta?.[row.producer]?.[row.town];
+    if (!nextMeta) {
+      missingMeta.push(`${row.producer} ${row.town}`);
+      continue;
+    }
 
     // opFor alone only distinguishes "same zone" from "different"; RELABEL (same zone, tier
-    // string changes — legacy inferred_via_hpl -> inferred_location) needs the tier compared too.
+    // string changes — legacy inferred_via_hpl -> inferred_location) needs the tier compared
+    // too, and META (zone and tier already right, distance/classification not yet recorded —
+    // the 97 rows confirming an HPL direct district match) needs the meta compared as well.
     let op: LocationFieldUpdate["op"];
     if (currentZone === undefined) op = "ADD";
     else if (currentZone !== row.zone) op = "REPLACE";
     else if (currentTier !== row.tier) op = "RELABEL";
+    else if (!sameMeta(currentMeta, nextMeta)) op = "META";
     else op = "NOOP";
 
-    const nextMeta =
-      op === "NOOP"
-        ? undefined
-        : (priceIndex.location_meta?.[row.producer]?.[row.town] ?? {
-            km: row.distance_km,
-            crossesState: row.crosses_state,
-            corroborated: row.corroborated_by_hpl,
-            source: row.tier === "published_map" ? "annexure_v" : row.tier === "state_zone" ? "state_zone" : "nearest",
-          });
     updates.push({
       location: row.town, producer: row.producer, basis: "works",
       op,
       expectedZone: currentZone, expectedTier: currentTier,
-      nextZone: row.zone, nextTier: op === "NOOP" ? currentTier : row.tier, nextMeta,
+      nextZone: row.zone, nextTier: row.tier, nextMeta,
     });
+  }
+  if (missingMeta.length) {
+    throw new Error(
+      `price_index.json carries no location_meta for ${missingMeta.length} approved row(s) ` +
+        `(e.g. ${missingMeta.slice(0, 3).join(", ")}). It was built by an ETL older than the ` +
+        "approved table; rebuild it before loading.",
+    );
   }
 
   // Anything currently inferred_via_hpl that the approved table does not cover is gone —

@@ -21,7 +21,12 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import type { Model } from "mongoose";
 
-export type MigrationOp = "ADD" | "RELABEL" | "REPLACE" | "REMOVE" | "CLEAR" | "NOOP";
+/**
+ * META: zone and tier already correct; only `producerZoneMeta` (distance and
+ * classification) is recorded — the 97 table rows that confirm an HPL direct
+ * district match, and any row whose provenance changed.
+ */
+export type MigrationOp = "ADD" | "RELABEL" | "REPLACE" | "META" | "REMOVE" | "CLEAR" | "NOOP";
 export type LocationBasis = "works" | "depot";
 
 const FIELD = {
@@ -81,7 +86,7 @@ export function opCounts(updates: LocationFieldUpdate[]): Record<string, number>
 
 export function printPlan(updates: LocationFieldUpdate[]): void {
   const counts = opCounts(updates);
-  for (const op of ["ADD", "RELABEL", "REPLACE", "CLEAR", "REMOVE", "NOOP"]) {
+  for (const op of ["ADD", "RELABEL", "REPLACE", "META", "CLEAR", "REMOVE", "NOOP"]) {
     if (counts[op]) console.log(`  ${op.padEnd(7)} ${counts[op]}`);
   }
   const sample = updates.filter((u) => u.op !== "NOOP").slice(0, 10);
@@ -172,6 +177,14 @@ export async function captureBeforeImage(
 
 const existsOr = (value: string | undefined) => (value === undefined ? { $exists: false } : value);
 
+/** Order-insensitive equality for a meta object (MongoDB may hand fields back in a different order). */
+export function sameMeta(a: unknown, b: unknown): boolean {
+  if (a === undefined || a === null || b === undefined || b === null) return (a ?? undefined) === (b ?? undefined);
+  const norm = (o: Record<string, unknown>) =>
+    JSON.stringify(Object.keys(o).sort().map((k) => [k, o[k]]));
+  return norm(a as Record<string, unknown>) === norm(b as Record<string, unknown>);
+}
+
 /**
  * Apply every non-NOOP update, one `updateOne` per Location document (all of
  * that document's changes in this batch in a single write). A document whose
@@ -249,6 +262,10 @@ export async function readBack(
         `${u.producer} ${u.basis} ${u.location}: expected ${u.nextZone ?? "(absent)"}/${u.nextTier ?? "(absent)"}, ` +
           `got ${gotZone ?? "(absent)"}/${gotTier ?? "(absent)"}`,
       );
+      continue;
+    }
+    if (f.meta && !sameMeta(doc?.[f.meta]?.[u.producer], u.nextMeta)) {
+      failures.push(`${u.producer} ${u.basis} ${u.location}: zone and tier right, but producerZoneMeta is not what was written`);
     }
   }
   return { pass: failures.length === 0, failures };

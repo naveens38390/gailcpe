@@ -80,8 +80,16 @@ const stagedM0 = {
   },
   priceIndex: {
     // BILASPUR_TEST is HPL-fallback-supplied (M1's job) — present in location_meta.HPL, so M0
-    // treats it as "nothing native to say", target = unresolved = CLEAR.
-    location_meta: { HPL: { BILASPUR_TEST: { km: null, crossesState: false, corroborated: false, source: "state_zone" } } },
+    // treats it as "nothing native to say", target = unresolved = CLEAR. It has no `supplied`
+    // field: data built before 2026-09-25 carried supplied rows only, and must still work.
+    // M0_NOOP_TOWN is in the table too, but only CONFIRMS HPL's own district match
+    // (supplied: false) — it stays in M0's target and must not be cleared.
+    location_meta: {
+      HPL: {
+        BILASPUR_TEST: { km: null, crossesState: false, corroborated: false, source: "state_zone" },
+        M0_NOOP_TOWN: { km: 12, crossesState: false, corroborated: true, source: "annexure_v", supplied: false },
+      },
+    },
     depot_location_map: { HPL: { BILASPUR_TEST: undefined } as any },
     depot_location_tier: { HPL: {} },
   },
@@ -94,9 +102,12 @@ const equivalence = [
   { producer: "HMEL", town: "M1_REPLACE_TOWN", zone: "NewZoneM1", tier: "inferred_location", distance_km: 30, crosses_state: true, corroborated_by_hpl: false, evidence: "e", round: "2026-09-01" },
   { producer: "HPL", town: "M1_NOOP_TOWN", zone: "AlreadyRight", tier: "published_map", distance_km: 5, crosses_state: false, corroborated_by_hpl: false, evidence: "e", round: "2026-09-01" },
 ];
-const priceIndexM1 = { location_meta: { IOCL: { ADD_TOWN: { km: 40, crossesState: false, corroborated: true, source: "nearest" } },
-  RIL: { RELABEL_TOWN: { km: 12, crossesState: false, corroborated: true, source: "nearest" } },
-  HMEL: { M1_REPLACE_TOWN: { km: 30, crossesState: true, corroborated: false, source: "nearest" } } } };
+const priceIndexM1 = { location_meta: {
+  IOCL: { ADD_TOWN: { km: 40, crossesState: false, corroborated: true, source: "nearest", supplied: true } },
+  RIL: { RELABEL_TOWN: { km: 12, crossesState: false, corroborated: true, source: "retained", supplied: true } },
+  HMEL: { M1_REPLACE_TOWN: { km: 30, crossesState: true, corroborated: false, source: "nearest", supplied: true } },
+  HPL: { M1_NOOP_TOWN: { km: 5, crossesState: false, corroborated: false, source: "annexure_v", supplied: false } },
+} };
 
 describe("M0 (fix-hpl-territory) rehearsal", () => {
   it("computes REPLACE, CLEAR and NOOP correctly from the staged M0 target", async () => {
@@ -118,6 +129,15 @@ describe("M0 (fix-hpl-territory) rehearsal", () => {
 
     const noop = updates.find((u) => u.location === "M0_NOOP_TOWN" && u.basis === "works")!;
     expect(noop.op).toBe("NOOP");
+  });
+
+  it("does not clear an HPL row the fallback table only confirms (supplied: false)", async () => {
+    await seedPreM0();
+    const docs = await Location.find({}).lean();
+    const updates = computeM0Updates(stagedM0.locations, stagedM0.priceIndex, new Map(docs.map((d: any) => [d.name, d])));
+    const confirmed = updates.find((u) => u.location === "M0_NOOP_TOWN" && u.basis === "works")!;
+    expect(confirmed.op).toBe("NOOP");
+    expect(confirmed.nextZone).toBe("SameZone");
   });
 
   it("applies, reads back PASS, and a second apply is a no-op (idempotent)", async () => {
@@ -204,7 +224,7 @@ describe("M1 (load-equivalence) rehearsal — runs on the post-M0 state", () => 
     ]);
   }
 
-  it("computes ADD, RELABEL, REPLACE, REMOVE and NOOP correctly", async () => {
+  it("computes ADD, RELABEL, REPLACE, META and REMOVE correctly", async () => {
     await seedPostM0();
     const docs = await Location.find({}).lean();
     const updates = computeM1Updates(equivalence, priceIndexM1, new Map(docs.map((d: any) => [d.name, d])));
@@ -212,7 +232,8 @@ describe("M1 (load-equivalence) rehearsal — runs on the post-M0 state", () => 
     expect(updates.find((u) => u.location === "ADD_TOWN")!.op).toBe("ADD");
     expect(updates.find((u) => u.location === "RELABEL_TOWN")!.op).toBe("RELABEL");
     expect(updates.find((u) => u.location === "M1_REPLACE_TOWN")!.op).toBe("REPLACE");
-    expect(updates.find((u) => u.location === "M1_NOOP_TOWN")!.op).toBe("NOOP");
+    // Zone and tier already right; only its distance/classification is not yet recorded.
+    expect(updates.find((u) => u.location === "M1_NOOP_TOWN")!.op).toBe("META");
     // LATUR_TEST is inferred_via_hpl and not in the approved table at all — gone, not guessed.
     const latur = updates.find((u) => u.location === "LATUR_TEST")!;
     expect(latur.op).toBe("REMOVE");
@@ -241,7 +262,25 @@ describe("M1 (load-equivalence) rehearsal — runs on the post-M0 state", () => 
     expect(latur.producerZoneTier.IOCL).toBeUndefined();
 
     const added = await Location.findOne({ name: "ADD_TOWN" }).lean<any>();
-    expect(added.producerZoneMeta.IOCL).toEqual({ km: 40, crossesState: false, corroborated: true, source: "nearest" });
+    expect(added.producerZoneMeta.IOCL).toEqual({ km: 40, crossesState: false, corroborated: true, source: "nearest", supplied: true });
+
+    // META: zone and tier untouched, provenance recorded.
+    const confirmed = await Location.findOne({ name: "M1_NOOP_TOWN" }).lean<any>();
+    expect(confirmed.producerZone.HPL).toBe("AlreadyRight");
+    expect(confirmed.producerZoneTier.HPL).toBe("published_map");
+    expect(confirmed.producerZoneMeta.HPL.km).toBe(5);
+
+    // Idempotent: a second run on the updated state plans nothing.
+    const again = computeM1Updates(equivalence, priceIndexM1, new Map((await Location.find({}).lean()).map((d: any) => [d.name, d])));
+    expect(again.filter((u) => u.op !== "NOOP")).toHaveLength(0);
+  });
+
+  it("refuses to load a price_index.json without provenance for every approved row", async () => {
+    await seedPostM0();
+    const docs = await Location.find({}).lean();
+    expect(() => computeM1Updates(equivalence, { location_meta: {} }, new Map(docs.map((d: any) => [d.name, d])))).toThrow(
+      /carries no location_meta/,
+    );
   });
 
   it("prints a plan without throwing (dry-run report path)", async () => {

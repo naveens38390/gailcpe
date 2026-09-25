@@ -82,6 +82,31 @@ describe("buildLocationMatch", () => {
     expect(match?.group).toBe("territory");
   });
 
+  it("labels a retained row Retained Existing Mapping, keeping it in the inferred group", () => {
+    const match = buildLocationMatch("inferred_location", "Pune", {
+      km: 113,
+      crossesState: false,
+      corroborated: true,
+      source: "retained",
+      supplied: true,
+    });
+    expect(match?.label).toBe("Retained Existing Mapping");
+    expect(match?.group).toBe("inferred");
+    expect(match?.distanceKm).toBe(113);
+  });
+
+  it("carries a distance for a Territory Match the table only confirms (supplied: false)", () => {
+    const match = buildLocationMatch("published_map", "Rajasthan_Kota", {
+      km: 12,
+      crossesState: false,
+      corroborated: true,
+      source: "annexure_v",
+      supplied: false,
+    });
+    expect(match?.label).toBe("Territory Match");
+    expect(match?.distanceKm).toBe(12);
+  });
+
   it("still groups the legacy inferred_via_hpl tier as inferred for old stored records", () => {
     const match = buildLocationMatch("inferred_via_hpl", "Kolhapur");
     expect(match?.group).toBe("inferred");
@@ -111,6 +136,18 @@ describe("inferredCaveat", () => {
     })!;
     expect(inferredCaveat("RIL", "Bidar", match)).toBe(
       "RIL is priced at Hyderabad (115 km from Bidar); crosses into another state",
+    );
+  });
+
+  it("says so when the quote is a retained existing mapping", () => {
+    const match = buildLocationMatch("inferred_location", "Pune", {
+      km: 113,
+      crossesState: false,
+      corroborated: true,
+      source: "retained",
+    })!;
+    expect(inferredCaveat("HMEL", "Ahmednagar", match)).toBe(
+      "HMEL is priced at Pune (113 km from Ahmednagar), the existing mapping",
     );
   });
 
