@@ -4,10 +4,12 @@ import { Modal, Pressable, ScrollView, Text, View } from "react-native";
 
 import {
   api,
+  locationMatchOf,
   type Comparison,
   type GradeAvailability,
   type GradeOption,
   type GradeOptionsResponse,
+  type LocationMatch,
   type PaymentMode,
   type PricingBasis,
   type ProductVariants,
@@ -19,7 +21,7 @@ import { PriceLadder } from "../../components/priceLadder";
 import { ChipMulti, SelectField, type Option } from "../../components/select";
 import { seriesColor } from "../../constants/colors";
 import { useCatalog } from "../../context/catalog";
-import { gapColor, rupees, theme, TIER_LABEL } from "../../theme";
+import { gapColor, MATCH_LABEL, rupees, theme } from "../../theme";
 import { Card, Caveat, Empty, ErrorNote, Pill, SectionTitle } from "../../components/ui";
 import { makeStyles, useTheme } from "../../context/theme";
 
@@ -399,6 +401,7 @@ export default function CompareScreen() {
             <QuoteRow
               key={quote.producer}
               quote={quote}
+              location={result.location}
               isLeader={quote.producer === result.leader?.producer}
               options={gradeOptions?.[quote.producer]}
               overridden={gradeOverrides[quote.producer] !== undefined}
@@ -570,6 +573,7 @@ function Verdict({ result }: { result: Comparison }) {
 
 function QuoteRow({
   quote,
+  location,
   isLeader,
   options,
   overridden,
@@ -578,6 +582,8 @@ function QuoteRow({
   onChangeBasis,
 }: {
   quote: Quote;
+  /** The customer's town, as compared — named in the location-match caveat. */
+  location: string;
   /** This card's price list was chosen on the card rather than inherited from the global one. */
   basisOverridden?: boolean;
   onChangeBasis?: (basis: PricingBasis | null) => void;
@@ -603,6 +609,11 @@ function QuoteRow({
   // same as a price that could not be worked out.
   const notPublished =
     unpriced && depot && quote.basisAvailability && !quote.basisAvailability.ex_depot;
+  const match = locationMatchOf(quote, MATCH_LABEL);
+  // An inferred zone gave a basic price, but freight is billed to the town's own
+  // name and that producer publishes none: priced, not compared.
+  const inferredNoFreight =
+    match?.group === "inferred" && unpriced && !depot && quote.basic !== null && quote.freight === null;
 
   return (
     <Card
@@ -736,8 +747,15 @@ function QuoteRow({
         </Text>
       ) : null}
 
-      {quote.locationTier === "inferred_via_hpl" ? (
-        <Caveat>{TIER_LABEL[quote.locationTier]}</Caveat>
+      {match?.group === "territory" ? (
+        <Text style={styles.matchNote}>{territoryNote(quote.producer, match)}</Text>
+      ) : null}
+      {match?.group === "inferred" ? <Caveat>{inferredCaveat(match, location)}</Caveat> : null}
+      {inferredNoFreight ? (
+        <Text style={styles.notPublished}>
+          Basic price is from {match?.matchedZone}. No freight rate is published to{" "}
+          {location}, so this producer is not compared.
+        </Text>
       ) : null}
       {quote.mappingConfidence && quote.mappingConfidence !== "H" ? (
         <Caveat>
@@ -747,11 +765,34 @@ function QuoteRow({
       ) : null}
       {quote.gaps
         .filter((gap) => !(notPublished && /has no depot price covering|not loaded for this round/.test(gap)))
+        .filter((gap) => !(inferredNoFreight && /publishes no freight rate to/.test(gap)))
         .map((gap) => (
           <Caveat key={gap}>{gap}</Caveat>
         ))}
     </Card>
   );
+}
+
+/**
+ * Territory Match: a quiet line, not a warning — the producer's own published
+ * statement about which zone serves the town.
+ */
+function territoryNote(producer: string, match: LocationMatch): string {
+  return match.source === "state_zone"
+    ? `${match.label}: ${producer}'s ${match.matchedZone} zone covers the whole state`
+    : `${match.label}: from ${producer}'s own territory list`;
+}
+
+/**
+ * Inferred Location Match / Retained Existing Mapping: the zone is near the
+ * town, not the town — say where the price is from and how far, and ask for a
+ * check. The label comes from the API.
+ */
+function inferredCaveat(match: LocationMatch, location: string): string {
+  const distance = match.distanceKm !== undefined ? `, ${match.distanceKm} km from ${location}` : "";
+  const cross = match.crossesState ? ", across a state border" : "";
+  const retained = match.source === "retained" ? " — the zone already in use" : "";
+  return `${match.label}: priced at ${match.matchedZone}${distance}${cross}${retained}. Confirm before quoting.`;
 }
 
 /**
@@ -1083,6 +1124,7 @@ const useStyles = makeStyles((c) => ({
     marginTop: theme.space(3),
     lineHeight: 17,
   },
+  matchNote: { color: c.textFaint, fontSize: 11, marginTop: theme.space(2), lineHeight: 16 },
   pickerNote: {
     color: c.textFaint,
     fontSize: 11,

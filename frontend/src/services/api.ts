@@ -728,13 +728,36 @@ export type PaymentMode = "cash" | "credit_ifc";
 /** Which of a producer's two price lists a quote is read from. */
 export type PricingBasis = "ex_works" | "ex_depot";
 
+/** Mirrors the API's `LocationTier`. `inferred_via_hpl` is legacy: never sent by the current API, kept for an older one. */
 export type LocationTier =
   | "exact"
   | "alias"
   | "evidence"
   | "published_map"
+  | "state_zone"
+  | "inferred_location"
   | "inferred_via_hpl"
   | "unresolved";
+
+export type LocationMatchGroup = "exact" | "territory" | "inferred";
+
+/**
+ * How the API matched this producer to the customer's town (decision 0010).
+ * The server resolves the group and the label — Exact Published Match,
+ * Territory Match, Inferred Location Match or Retained Existing Mapping — so
+ * the app renders them and holds no tier logic of its own.
+ */
+export interface LocationMatch {
+  group: LocationMatchGroup;
+  label: string;
+  matchedZone: string | null;
+  /** Straight-line km to the matched zone; absent for a whole-state zone. */
+  distanceKm?: number;
+  crossesState?: boolean;
+  corroborated?: boolean;
+  /** "annexure_v" (HPL's territory list), "state_zone", "nearest" or "retained". */
+  source?: string;
+}
 
 /** How much of an answer a grade can produce, given what the circulars hold. */
 export type GradeAvailabilityKind = "comparable" | "gail_only" | "no_gail_price";
@@ -1001,8 +1024,30 @@ export interface Quote {
   effectiveNet: number | null;
   zone: string | null;
   locationTier: LocationTier;
+  /** Absent when there is no zone (no published price), and from an API older than decision 0010. */
+  locationMatch?: LocationMatch;
   gaps: string[];
   mappingConfidence: string | null;
+}
+
+/**
+ * The quote's location match. The server's `locationMatch` when present;
+ * otherwise read from `locationTier`, which only an API older than decision
+ * 0010 would send (e.g. after a code rollback) — so its inferred quotes still
+ * carry a caveat instead of reading as exact.
+ */
+export function locationMatchOf(quote: Quote, labels: Record<LocationMatchGroup, string>): LocationMatch | undefined {
+  if (quote.locationMatch) return quote.locationMatch;
+  if (!quote.zone) return undefined;
+  const group: LocationMatchGroup | undefined =
+    quote.locationTier === "exact" || quote.locationTier === "alias" || quote.locationTier === "evidence"
+      ? "exact"
+      : quote.locationTier === "published_map" || quote.locationTier === "state_zone"
+        ? "territory"
+        : quote.locationTier === "inferred_location" || quote.locationTier === "inferred_via_hpl"
+          ? "inferred"
+          : undefined;
+  return group ? { group, label: labels[group], matchedZone: quote.zone } : undefined;
 }
 
 export interface Comparison {

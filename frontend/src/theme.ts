@@ -28,14 +28,12 @@ export function gapColor(gap: number | null, c: ThemeColors): string {
 }
 
 /**
- * Location tiers, in words a sales officer can act on. An inferred zone is the
- * one case where the number needs checking before it is quoted.
+ * The three location-match groups (decision 0010). The API sends the label on
+ * every quote, including the fourth, Retained Existing Mapping; these are only
+ * the fallback for a quote from an API that predates the field.
  */
-export const TIER_LABEL: Record<string, string> = {
-  exact: "Published for this location",
-  alias: "Known naming difference",
-  evidence: "Matched from zonal workbook pricing",
-  published_map: "From the producer's own district map",
-  inferred_via_hpl: "Zone inferred — confirm before quoting",
-  unresolved: "No published price point",
-};
+export const MATCH_LABEL = {
+  exact: "Exact Published Match",
+  territory: "Territory Match",
+  inferred: "Inferred Location Match",
+} as const;
