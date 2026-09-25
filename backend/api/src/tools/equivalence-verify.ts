@@ -23,14 +23,21 @@
  */
 
 import { readFileSync } from "node:fs";
+import { join } from "node:path";
 
 import { compare, useLocationFallback, useSpellings, type Dataset } from "../core/pricing";
 import { tierGroup } from "../core/location-match";
 import type { Producer } from "../core/types";
 
-const BEFORE_DIR = process.argv[2] ?? "D:/Gail2/staged/post-m0";
-const AFTER_DIR = process.argv[3] ?? "D:/Gail2/gailcpe/backend/data/normalized";
-const REFERENCE_DIR = process.argv[4] ?? "D:/Gail2/gailcpe/backend/etl/reference";
+// BEFORE is the post-M0 data (git history: the PR1 Bilaspur-guard commit's data/normalized), so it
+// has no default in the working tree; AFTER and the reference table default to this checkout.
+const BEFORE_DIR = process.argv[2] ?? process.env.GCPE_POST_M0_DATA ?? "";
+const AFTER_DIR = process.argv[3] ?? join(__dirname, "..", "..", "..", "data", "normalized");
+const REFERENCE_DIR = process.argv[4] ?? join(__dirname, "..", "..", "..", "etl", "reference");
+if (!BEFORE_DIR) {
+  console.error("Pass the post-M0 data directory as the first argument, or set GCPE_POST_M0_DATA.");
+  process.exit(2);
+}
 
 function loadDataset(dir: string): { data: Dataset; locations: any } {
   const load = (name: string) => JSON.parse(readFileSync(`${dir}/${name}.json`, "utf8"));

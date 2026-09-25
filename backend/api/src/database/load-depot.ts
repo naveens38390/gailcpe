@@ -44,6 +44,7 @@ import { DepotLoadAuditSchema } from "./schemas/depot-load-audit.schema";
 const DATA = process.env.GCPE_DATA ?? join(__dirname, "..", "..", "..", "data", "normalized");
 const read = (name: string) => JSON.parse(readFileSync(join(DATA, `${name}.json`), "utf8"));
 const APPLY = process.argv.includes("--apply");
+const FALLBACK_TIERS = new Set<unknown>(["state_zone", "inferred_location"]);
 
 async function main() {
   const uri = process.env.MONGODB_URI;
@@ -121,6 +122,7 @@ async function main() {
   const depotTier = priceIndex.depot_location_tier ?? {};
   let touched = 0;
   let filled = 0;
+  let leftForM1 = 0;
   // What this run actually fills in, so rollback-depot can undo exactly this
   // and nothing an admin corrects afterwards.
   const fills: { producer: string; location: string; zone: string; tier?: string }[] = [];
@@ -154,6 +156,17 @@ async function main() {
       const zone = worksMap[producer]?.[doc.name];
       if (zone && !doc.producerZone?.[producer]) {
         const tier = worksTier[producer]?.[doc.name];
+        // A fallback mapping (decision 0010) is written only by load-equivalence (M1), with its
+        // provenance, before-image and audit entry. Data built after the fallback table exists
+        // carries 699 such zones; filling them here would bypass all of that. The approved table
+        // marks every zone it supplied (`location_meta.supplied`) — including 116 HPL rows whose
+        // tier, published_map, is also used by a direct district match — and the tier check
+        // covers data that predates that marker.
+        const meta = priceIndex.location_meta?.[producer]?.[doc.name];
+        if (FALLBACK_TIERS.has(tier) || (meta && meta.supplied !== false)) {
+          leftForM1++;
+          continue;
+        }
         set[`producerZone.${producer}`] = zone;
         set[`producerZoneTier.${producer}`] = tier;
         fills.push({ producer, location: doc.name, zone, tier });
@@ -170,6 +183,9 @@ async function main() {
     }
   }
   console.log(`  locations: ${touched} changed; ${filled} missing works zones filled in`);
+  if (leftForM1) {
+    console.log(`  ${leftForM1} works zone(s) from the approved fallback table left for load-equivalence (M1), not filled here`);
+  }
   if (APPLY && fills.length) {
     await DepotLoadAudit.updateOne(
       { effectiveDate: priceDate },

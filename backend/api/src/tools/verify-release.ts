@@ -3,14 +3,23 @@
  *
  *   API_URL=https://gcpe-api.onrender.com/api \
  *   VERIFY_EMAIL=... VERIFY_PASSWORD=... \
- *   npm run verify-release -- [--stage pre-load|post-load] [--with-deal]
+ *   npm run verify-release -- [--stage pre-load|post-load|pre-fallback|post-fallback] [--with-deal]
  *
- * Stages (the release runbook in docs/release-checklist.md says when to use each):
+ * Stages (the release runbooks in docs/release-checklist.md and
+ * docs/location-fallback/12-deployment-checklist.md say when to use each):
  *   pre-load   the new API is live and NO depot rows have been loaded yet:
  *              Ex Works is unchanged and every producer reads "Not published" on Ex Depot.
  *   post-load  (default) the depot rows are loaded and the API has been restarted:
  *              Bhiwandi Ex Depot figures, RIL dealer discount and delta, mixed-basis
  *              scenarios, Not Published towns.
+ *   pre-fallback   location-fallback release (decision 0010): depot loaded, M0
+ *              (fix-hpl-territory) applied, the fallback-aware API live, M1 NOT yet run.
+ *              Every post-load check, plus: quotes carry locationMatch, no fallback tier is
+ *              served yet, HPL Bilaspur reads unresolved.
+ *   post-fallback  M1 (load-equivalence) applied and the API restarted: every post-load check,
+ *              plus 12 towns (60 competitor cells, all five classifications) checked against the
+ *              client-approved Competitor Presence workbook, and named checks for Bilaspur,
+ *              Latur, Beawar and Ex Depot.
  *
  * It only reads, with side effects to know about: every /pricing/compare is
  * kept in comparison history (about 15 small records), and --with-deal runs
@@ -44,20 +53,26 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
+import { checkLocation, readApprovedWorkbook, WORKBOOK_DEFAULT } from "./workbook-verify";
+
 const API = (process.env.API_URL ?? "http://localhost:3000/api").replace(/\/$/, "");
 const EMAIL = process.env.VERIFY_EMAIL;
 const PASSWORD = process.env.VERIFY_PASSWORD;
 const args = process.argv.slice(2);
 const stageArg = args.indexOf("--stage");
 const STAGE = stageArg >= 0 ? args[stageArg + 1] : "post-load";
+const STAGES = ["pre-load", "post-load", "pre-fallback", "post-fallback"];
+/** Every stage after the depot load: the depot's own post-load checks apply to all of them. */
+const DEPOT_LOADED = STAGE !== "pre-load";
+const FALLBACK_STAGE = STAGE === "pre-fallback" || STAGE === "post-fallback";
 const WITH_DEAL = args.includes("--with-deal");
 
 if (!EMAIL || !PASSWORD) {
   console.error("Set VERIFY_EMAIL and VERIFY_PASSWORD (an existing account on the target API).");
   process.exit(2);
 }
-if (STAGE !== "pre-load" && STAGE !== "post-load") {
-  console.error(`--stage must be pre-load or post-load, got "${STAGE}".`);
+if (!STAGES.includes(STAGE)) {
+  console.error(`--stage must be one of ${STAGES.join(", ")}, got "${STAGE}".`);
   process.exit(2);
 }
 
@@ -85,6 +100,8 @@ type Q = {
   dealerDiscount?: number;
   priceDelta?: number | null;
   basisAvailability?: { ex_depot?: boolean };
+  locationTier?: string;
+  locationMatch?: { group: string; label: string; matchedZone: string | null; distanceKm?: number };
 };
 type Cmp = { quotes: Q[]; leader: Q | null; gailRank: number | null; warnings: string[]; gapToLeader: number | null };
 
@@ -154,7 +171,7 @@ async function main() {
     "quotes come back in the fixed tie-break order (GAIL, IOCL, HMEL, HPL, OPaL, RIL)",
     works.quotes.map((x) => x.producer).join(","),
   );
-  if (STAGE === "post-load") check(near(q(works, "HPL").invoiceLanded, HPL_WORKS_AFTER_LOAD), `HPL now priced at Bhiwandi ${inr(HPL_WORKS_AFTER_LOAD)}`, inr(q(works, "HPL").invoiceLanded));
+  if (DEPOT_LOADED) check(near(q(works, "HPL").invoiceLanded, HPL_WORKS_AFTER_LOAD), `HPL now priced at Bhiwandi ${inr(HPL_WORKS_AFTER_LOAD)}`, inr(q(works, "HPL").invoiceLanded));
   else check(q(works, "HPL").invoiceLanded === null, "HPL still unpriced at Bhiwandi (loader not run yet)", inr(q(works, "HPL").invoiceLanded));
 
   console.log("\nEx Depot at Bhiwandi");
@@ -174,7 +191,7 @@ async function main() {
   const bad = await call("/pricing/compare", { grade: GRADE, location: LOCATION, quantityMt: 1, paymentMode: "cash", pricingBasis: "bogus" });
   check(bad.status === 400, "an unknown basis is rejected with 400", `HTTP ${bad.status}`);
 
-  if (STAGE === "post-load") {
+  if (DEPOT_LOADED) {
     console.log("\nMixed basis (global selector plus per-card overrides)");
     const m1 = await compare({ basisOverrides: { HMEL: "ex_depot", RIL: "ex_depot" } });
     check(near(q(m1, "RIL").invoiceLanded, DEPOT.RIL) && near(q(m1, "HMEL").invoiceLanded, DEPOT.HMEL), "HMEL and RIL on depot prices");
@@ -198,6 +215,7 @@ async function main() {
   }
 
   await crossGrade(apiRound);
+  if (FALLBACK_STAGE) await locationFallback();
 
   if (WITH_DEAL) {
     console.log("\nDeal (stores 3 simulations)");
@@ -205,7 +223,7 @@ async function main() {
       (await call("/deals/simulate", { grade: GRADE, location, quantityMt: 250, paymentMode: "cash", ...extra })).json;
     const dw = await sim({});
     check(dw.pricingBasis === "ex_works" && dw.comparison?.leader?.producer === "IOCL", "Deal Ex Works: leader IOCL", String(dw.comparison?.leader?.producer));
-    if (STAGE === "post-load") {
+    if (DEPOT_LOADED) {
       const dd = await sim({ pricingBasis: "ex_depot" });
       check(dd.pricingBasis === "ex_depot" && dd.comparison?.leader?.producer === "RIL", "Deal Ex Depot: leader RIL", String(dd.comparison?.leader?.producer));
       check(near(dd.comparison?.gapToLeader, RIL_DELTA_DEPOT), `Deal Ex Depot gap ${inr(RIL_DELTA_DEPOT)}`, String(dd.comparison?.gapToLeader));
@@ -233,7 +251,7 @@ async function main() {
 async function checkHistory() {
   console.log("\nHistory");
   await compare({}); // a plain Ex Works comparison, to check its history record below
-  if (STAGE === "post-load") {
+  if (DEPOT_LOADED) {
     await compare({ pricingBasis: "ex_depot" });
     await compare({ basisOverrides: { HMEL: "ex_depot" } });
   }
@@ -244,7 +262,7 @@ async function checkHistory() {
   check(Array.isArray(hist) && hist.length > 0, "GET /pricing/history returns records");
   const wRec = hist?.find((h) => h.location === LOCATION && h.pricingBasis === "ex_works" && !h.basisOverrides);
   check(!!wRec, "a plain Ex Works comparison is stored with pricingBasis: ex_works");
-  if (STAGE === "post-load") {
+  if (DEPOT_LOADED) {
     const dRec = hist?.find((h) => h.location === LOCATION && h.pricingBasis === "ex_depot");
     check(!!dRec, "an Ex Depot comparison is stored with pricingBasis: ex_depot");
     const mRec = hist?.find((h) => h.basisOverrides?.HMEL === "ex_depot");
@@ -331,7 +349,7 @@ async function crossGrade(apiRound: string) {
     return { zone, book: zone ? book?.[zone] : undefined };
   };
   type QQ = Q & { grade?: string; zone?: string; basic?: number | null };
-  let cells = 0, priced = 0, unpublished = 0;
+  let cells = 0, priced = 0, unpublished = 0, preM1Skipped = 0;
   const bad: string[] = [];
   for (const grade of GRADES) {
     for (const town of TOWNS) {
@@ -347,6 +365,10 @@ async function crossGrade(apiRound: string) {
             }
             continue;
           }
+          if (STAGE === "pre-fallback" && x.locationMatch?.group !== "exact") {
+            preM1Skipped++; // M1 not run: Territory/Inferred zones still differ from this checkout's data by design
+            continue;
+          }
           priced++;
           if (x.zone !== zone) bad.push(`${grade} ${town} ${x.producer} ${basis}: API zone ${x.zone}, data says ${zone}`);
           else if (!book || x.grade === undefined || book[x.grade] === undefined) bad.push(`${grade} ${town} ${x.producer} ${basis}: grade ${x.grade} not in the data's zone ${zone}`);
@@ -357,6 +379,7 @@ async function crossGrade(apiRound: string) {
   }
   check(bad.length === 0, `${cells} producer quotes (${GRADES.length} grades x ${TOWNS.length} towns x 2 bases): every priced basic and zone equals the data file`, bad.slice(0, 3).join(" | "));
   check(priced > 0 && unpublished > 0, `both outcomes were exercised (${priced} priced, ${unpublished} Not Published ex depot)`);
+  if (preM1Skipped) console.log(`  note  ${preM1Skipped} Territory/Inferred quotes not compared with the data file (pre-fallback: M1 not run yet)`);
 
   // A producer's own grade code (HPL E5201, the equivalent of B52A003) on both
   // price lists — skipped at pre-load, where HPL genuinely has no price at
@@ -378,6 +401,72 @@ async function crossGrade(apiRound: string) {
         `${h.grade} basic ${h.basic}, data ${book?.["E5201"]}`,
       );
     }
+  }
+}
+
+// ---- location fallback (decision 0010): pre-fallback and post-fallback stages ----------------
+/** Covers all five workbook classifications: 27 inferred, 15 territory, 8 retained, 8 exact, 2 none (Latur). */
+const FALLBACK_TOWNS = [
+  "ABU ROAD", "AHMEDNAGAR", "ALAPPUZHA", "BIDAR", "BHIWANDI", "BILASPUR",
+  "LATUR", "BEAWAR", "DURG", "GAYA", "HALDIA", "DURGAPUR",
+];
+const FALLBACK_TIERS = ["state_zone", "inferred_location"];
+
+async function locationFallback() {
+  console.log(`
+Location fallback (${STAGE}; stores ${FALLBACK_TOWNS.length + 2} comparison records)`);
+  const works: Record<string, Cmp> = {};
+  for (const town of FALLBACK_TOWNS) works[town] = await compare({}, town);
+  const all = Object.values(works).flatMap((c) => c.quotes);
+
+  check(
+    all.filter((x) => x.zone).every((x) => x.locationMatch?.group),
+    "fallback-aware API is live: every quote with a zone carries locationMatch",
+  );
+
+  if (STAGE === "pre-fallback") {
+    const early = all.filter((x) => FALLBACK_TIERS.includes(x.locationTier ?? ""));
+    check(early.length === 0, "no fallback tier is served yet (M1 not run)", early.slice(0, 3).map((x) => `${x.producer} ${x.zone}`).join(", "));
+    const hpl = q(works["BILASPUR"], "HPL");
+    check(hpl.zone == null, "M0 applied: HPL Bilaspur reads unresolved (the wrong Himachal Pradesh price is gone)", String(hpl.zone));
+    return;
+  }
+
+  // post-fallback: the client-approved workbook is the oracle.
+  if (!existsSync(WORKBOOK_DEFAULT)) {
+    check(false, "approved workbook present in this checkout", `${WORKBOOK_DEFAULT} not found - run from a clean clone of the release commit`);
+    return;
+  }
+  const wb = await readApprovedWorkbook(WORKBOOK_DEFAULT);
+  const problems = FALLBACK_TOWNS.flatMap((town) => checkLocation(town, works[town].quotes as any, wb));
+  check(
+    problems.length === 0,
+    `${FALLBACK_TOWNS.length} towns x 5 competitors match the approved Competitor Presence workbook (classification, mapped location, distance)`,
+    problems.slice(0, 3).join(" | "),
+  );
+  if (q(works["ABU ROAD"], "IOCL").zone == null) {
+    console.log("  hint  IOCL has no zone at Abu Road: is LOCATION_FALLBACK=false (kill-switch) set on the API, or M1 not applied?");
+  }
+
+  const bil = q(works["BILASPUR"], "HPL");
+  check(bil.locationMatch?.label === "Territory Match" && bil.zone === "Chattisgarh", "HPL Bilaspur: Territory Match, Chattisgarh", `${bil.locationMatch?.label} ${bil.zone}`);
+  const latur = works["LATUR"];
+  check(q(latur, "IOCL").zone == null && q(latur, "HMEL").zone == null, "Latur: IOCL and HMEL removed (no price)", `${q(latur, "IOCL").zone} / ${q(latur, "HMEL").zone}`);
+  const beawar = works["BEAWAR"];
+  check(
+    ["IOCL", "RIL", "OPaL"].every((p) => q(beawar, p).locationMatch?.label === "Retained Existing Mapping"),
+    "Beawar: IOCL, RIL, OPaL only as Retained Existing Mapping (candidates not approved)",
+    ["IOCL", "RIL", "OPaL"].map((p) => q(beawar, p).locationMatch?.label).join(", "),
+  );
+  check(
+    /Inferred Location Match: .* km from ABU ROAD/.test(works["ABU ROAD"].warnings.join(" ")),
+    "the comparison warning names the inferred zones and distances",
+  );
+
+  for (const town of ["ABU ROAD", "BIDAR"]) {
+    const depot = await compare({ pricingBasis: "ex_depot" }, town);
+    const leaked = depot.quotes.filter((x) => FALLBACK_TIERS.includes(x.locationTier ?? "") || x.locationMatch?.group === "inferred");
+    check(leaked.length === 0, `Ex Depot at ${town}: no fallback or inferred match`, leaked.map((x) => x.producer).join(","));
   }
 }
 

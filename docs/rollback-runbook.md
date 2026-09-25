@@ -76,6 +76,44 @@ By this point the backend is confirmed working; Push B only affects the web app 
 
 ---
 
+# Location fallback release (decision 0010)
+
+*Checklist: `docs/location-fallback/12-deployment-checklist.md`. Every step below was rehearsed on a
+local MongoDB from the depot release's data, 2026-09-25.* **Undo data before code**: an older API
+reading the new tier strings would show no caveat on an inferred price.
+
+## 7. Any doubt about a fallback price (L1, fastest)
+
+- **Detect:** a Compare card shows an Inferred Location Match / Retained Existing Mapping that looks
+  wrong, or `verify-release --stage post-fallback` fails on the workbook check.
+- **Act:** set `LOCATION_FALLBACK=false` on the Render service, restart. Every Inferred / Retained
+  quote then reads "no published price"; exact and Territory Match quotes are unchanged (rehearsed:
+  35 cleared, all others identical). No data changes, fully reversible. Nothing is lost.
+
+## 8. A wrong mapping is live, or M0/M1 wrote the wrong thing (L2)
+
+- **Roll back M1, then M0**, each from the before-image manifest its `--apply` printed:
+  ```bash
+  cd backend/api
+  MONGODB_URI=<production URI> npm run load-equivalence -- --rollback <m1-….json>
+  MONGODB_URI=<production URI> npm run fix-hpl-territory -- --rollback <m0-….json>
+  ```
+  Each restores a field only where its value is still what the migration wrote; a value an admin has
+  changed since is reported and left alone. Rehearsed: restored 1,078 then 48, database byte-identical
+  to before M0. Restart the API. Re-run `verify-release --stage post-load`.
+- M0 alone applied, M1 failed: HPL Bilaspur reads "not published" (an honest gap, not a wrong price) —
+  finish M1 or roll back M0; do not leave it for days.
+- **Never** re-run `npm run seed` as a rollback (R4), and never run `load-depot` from this release's
+  commit.
+
+## 9. Engine or app defect (L3)
+
+- Redeploy the previous API build **after** step 8 (or with step 7 on). The app degrades safely against
+  an older API: the Compare card falls back to the tier and still shows a caveat for an inferred quote.
+- A bad APK: don't distribute it; rebuild above 0.2.6 / code 8.
+
+---
+
 ## After any rollback
 
 1. Re-run `verify-release --stage pre-load` (if you rolled back to before the load) or

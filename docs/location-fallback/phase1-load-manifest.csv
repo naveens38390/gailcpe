@@ -1,0 +1,1017 @@
+﻿producer,town,zone,zone_label,stored_tier,ui_tier,distance_km,crosses_state,corroborated_by_hpl,kept_live_zone,today_zone,today_tier,change,quote_complete_in_phase1
+HMEL,ABU ROAD,Udaipur,Udaipur,inferred_location,Inferred Location Match,95,,yes,,,,new,yes
+HMEL,ALAPPUZHA,Cochin,Kochi,inferred_location,Inferred Location Match,51,,,,,,new,yes
+HMEL,ALIGARH,Agra,Agra,inferred_location,Inferred Location Match,78,,yes,,,,new,yes
+HMEL,ALLAHABAD,Varanasi,Varanasi,inferred_location,Inferred Location Match,118,,yes,,,,new,yes
+HMEL,ALWAR,Bhiwadi,Bhiwadi,inferred_location,Inferred Location Match,76,,yes,,Bhiwadi,inferred_via_hpl,relabel only,yes
+HMEL,AMBALA,Panipat,Panipat,inferred_location,Inferred Location Match,109,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+HMEL,AMRAWATI,Nagpur,Nagpur,inferred_location,Inferred Location Match,141,,yes,,,,new,no (no freight rate for this town)
+HMEL,AMRITSAR,Punjab,Punjab (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HMEL,ANANTAPUR,Cuddapah,Kadapa,inferred_location,Inferred Location Match,133,,yes,,,,new,yes
+HMEL,ANNAND,Vadodara,Vadodara,inferred_location,Inferred Location Match,38,,yes,,,,new,no (no freight rate for this town)
+HMEL,ASANGAON,Bhiwandi,Bhiwandi,inferred_location,Inferred Location Match,30,,yes,,,,new,no (no freight rate for this town)
+HMEL,BAHADURGARH,Gurgaon,Gurugram,inferred_location,Inferred Location Match,27,,yes,,,,new,yes
+HMEL,BARAMATI,Pune,Pune,inferred_location,Inferred Location Match,87,,yes,,,,new,yes
+HMEL,BAREILLY,Rudrapur,Rudrapur,inferred_location,Inferred Location Match,68,yes,,,,,new,yes
+HMEL,BARJORA,Purulia,Puruliya,inferred_location,Inferred Location Match,95,,,,,,new,no (no freight rate for this town)
+HMEL,BARMER,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,171,,yes,,Jodhpur,inferred_via_hpl,relabel only,yes
+HMEL,BAWAL,Gurgaon,Gurugram,inferred_location,Inferred Location Match,61,,yes,,,,new,yes
+HMEL,BEED,Aurangabad,Aurangabad,inferred_location,Inferred Location Match,108,,yes,,Aurangabad,inferred_via_hpl,relabel only,yes
+HMEL,BEHROR,Bhiwadi,Bhiwadi,inferred_location,Inferred Location Match,67,,yes,,,,new,yes
+HMEL,BELGAUM,Hubli,Hubballi,inferred_location,Inferred Location Match,88,,yes,,,,new,yes
+HMEL,BERHAMPUR,Cuttack,Cuttack,inferred_location,Inferred Location Match,171,,yes,,,,new,yes
+HMEL,BHADOHI,Varanasi,Varanasi,inferred_location,Inferred Location Match,45,,yes,,,,new,yes
+HMEL,BHATINDA,Punjab,Punjab (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HMEL,BHIND,Gwalior,Gwalior,inferred_location,Inferred Location Match,72,,yes,,Gwalior,inferred_via_hpl,relabel only,yes
+HMEL,BHUBANESWAR,Cuttack,Cuttack,inferred_location,Inferred Location Match,22,,yes,,,,new,no (no freight rate for this town)
+HMEL,BIDAR,Hyderabad,Hyderabad,inferred_location,Inferred Location Match,115,yes,,,Bellary,inferred_via_hpl,zone change,yes
+HMEL,BIKANER,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,197,,yes,,Jodhpur,inferred_via_hpl,relabel only,yes
+HMEL,BORIVALLI,Mumbai,Mumbai,inferred_location,Inferred Location Match,18,,yes,,,,new,no (no freight rate for this town)
+HMEL,BURHANPUR,Nimrani,Nimrani,inferred_location,Inferred Location Match,120,,yes,,Indore,inferred_via_hpl,zone change,yes
+HMEL,BYRNIHAT,Guwahati,Guwahati,inferred_location,Inferred Location Match,20,yes,,,,,new,no (no freight rate for this town)
+HMEL,CHINDWARA,Jabalpur,Jabalpur,inferred_location,Inferred Location Match,161,,yes,,Jabalpur,inferred_via_hpl,relabel only,yes
+HMEL,CHITTOOR,Tirupathi,Tirupati,inferred_location,Inferred Location Match,59,,yes,,,,new,yes
+HMEL,CHITTOREGARH,Udaipur,Udaipur,inferred_location,Inferred Location Match,98,,yes,,,,new,no (no freight rate for this town)
+HMEL,DEGLOOR,Aurangabad,Aurangabad,inferred_location,Inferred Location Match,277,,yes,,,,new,no (no freight rate for this town)
+HMEL,DHANBAD,Purulia,Puruliya,inferred_location,Inferred Location Match,52,yes,,,,,new,yes
+HMEL,DHAR,Indore,Indore,inferred_location,Inferred Location Match,57,,yes,yes,Indore,inferred_via_hpl,relabel only,yes
+HMEL,DHARUHERA,Gurgaon,Gurugram,inferred_location,Inferred Location Match,36,,yes,,,,new,no (no freight rate for this town)
+HMEL,DHORAJI,Rajkot,Rajkot,inferred_location,Inferred Location Match,71,,yes,,,,new,no (no freight rate for this town)
+HMEL,DHULE,Jalgaon,Jalgaon,inferred_location,Inferred Location Match,83,,yes,,Jalgaon,inferred_via_hpl,relabel only,yes
+HMEL,DISPUR,Guwahati,Guwahati,inferred_location,Inferred Location Match,8,,,,,,new,no (no freight rate for this town)
+HMEL,DURG,Raipur,Raipur,inferred_location,Inferred Location Match,37,,,,,,new,yes
+HMEL,DURGAPUR,Purulia,Puruliya,inferred_location,Inferred Location Match,99,,,,,,new,yes
+HMEL,ELURU,Vijayawada,Vijayawada,inferred_location,Inferred Location Match,54,,yes,,,,new,yes
+HMEL,FATEHPUR,Kanpur,Kanpur,inferred_location,Inferred Location Match,76,,yes,,Kanpur,inferred_via_hpl,relabel only,yes
+HMEL,FAZILKA,Punjab,Punjab (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HMEL,FIROZPUR,Punjab,Punjab (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HMEL,GADARWARA,Jabalpur,Jabalpur,inferred_location,Inferred Location Match,122,,yes,,,,new,no (no freight rate for this town)
+HMEL,GADCHIROLI,Nagpur,Nagpur,inferred_location,Inferred Location Match,144,,yes,,,,new,yes
+HMEL,GANGTOK (SIKKIM),Siliguri,Siliguri,inferred_location,Inferred Location Match,71,yes,,,,,new,no (no freight rate for this town)
+HMEL,GAYA,Patna,Patna,inferred_location,Inferred Location Match,90,,,,,,new,yes
+HMEL,GHAZIPUR,Chandauli,Chandauli,inferred_location,Inferred Location Match,48,,yes,,Varanasi,inferred_via_hpl,zone change,yes
+HMEL,GODHRA,Vadodara,Vadodara,inferred_location,Inferred Location Match,67,,yes,,,,new,yes
+HMEL,GONDIA,Nagpur,Nagpur,inferred_location,Inferred Location Match,120,,yes,,Nagpur,inferred_via_hpl,relabel only,yes
+HMEL,GORAKHPUR,Varanasi,Varanasi,inferred_location,Inferred Location Match,165,,yes,,Varanasi,inferred_via_hpl,relabel only,yes
+HMEL,GUNA,Bhopal,Bhopal,inferred_location,Inferred Location Match,155,,yes,,Bhopal,inferred_via_hpl,relabel only,yes
+HMEL,GUNTUR,Vijayawada,Vijayawada,inferred_location,Inferred Location Match,31,,yes,,,,new,yes
+HMEL,HALDAWANI,Rudrapur,Rudrapur,inferred_location,Inferred Location Match,30,,yes,,,,new,no (no freight rate for this town)
+HMEL,HALDIA,Kolkata,Kolkata,inferred_location,Inferred Location Match,62,,yes,,,,new,yes
+HMEL,HALOL,Vadodara,Vadodara,inferred_location,Inferred Location Match,35,,yes,,,,new,yes
+HMEL,HALVAD,Rajkot,Rajkot,inferred_location,Inferred Location Match,90,,yes,,,,new,no (no freight rate for this town)
+HMEL,HARIDWAR,Dehradun,Dehradun,inferred_location,Inferred Location Match,44,,yes,,,,new,yes
+HMEL,HATHRAS,Agra,Agra,inferred_location,Inferred Location Match,46,,yes,,,,new,yes
+HMEL,HIMMATNAGAR,Mehsana,Mahesana,inferred_location,Inferred Location Match,59,,yes,,,,new,no (no freight rate for this town)
+HMEL,HINGANGHAT,Nagpur,Nagpur,inferred_location,Inferred Location Match,71,,yes,,,,new,no (no freight rate for this town)
+HMEL,HISSAR,Panipat,Panipat,inferred_location,Inferred Location Match,124,,yes,,,,new,no (no freight rate for this town)
+HMEL,IDUKKI,Cochin,Kochi,inferred_location,Inferred Location Match,78,,,,,,new,no (no freight rate for this town)
+HMEL,JAGADHARI,Panipat,Panipat,inferred_location,Inferred Location Match,93,,yes,,,,new,no (no freight rate for this town)
+HMEL,JALANDHAR,Punjab,Punjab (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HMEL,JALNA,Aurangabad,Aurangabad,inferred_location,Inferred Location Match,57,,yes,,Aurangabad,inferred_via_hpl,relabel only,yes
+HMEL,JAM KHAMBH,Porbandar,Porbandar,inferred_location,Inferred Location Match,63,,yes,,,,new,no (no freight rate for this town)
+HMEL,JETPUR,Rajkot,Rajkot,inferred_location,Inferred Location Match,62,,yes,,,,new,no (no freight rate for this town)
+HMEL,JUNAGADH,Porbandar,Porbandar,inferred_location,Inferred Location Match,89,,yes,,,,new,yes
+HMEL,KADI,Mehsana,Mahesana,inferred_location,Inferred Location Match,34,,yes,,,,new,yes
+HMEL,KAIMUR,Chandauli,Chandauli,inferred_location,Inferred Location Match,42,yes,,,,,new,no (no freight rate for this town)
+HMEL,KAITHAL,Panipat,Panipat,inferred_location,Inferred Location Match,72,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+HMEL,KAKINADA,Vishakapatnam,Visakhapatnam,inferred_location,Inferred Location Match,130,,yes,,,,new,yes
+HMEL,KALA AMB,Baddi,Baddi,inferred_location,Inferred Location Match,65,,yes,,,,new,no (no freight rate for this town)
+HMEL,KANNUR,Calicut,Kozhikode,inferred_location,Inferred Location Match,83,,,,,,new,yes
+HMEL,KARAIKAL,Pondicherry,Puducherry,inferred_location,Inferred Location Match,113,,yes,,,,new,yes
+HMEL,KARNAL,Panipat,Panipat,inferred_location,Inferred Location Match,34,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+HMEL,KASHIPUR,Rudrapur,Rudrapur,inferred_location,Inferred Location Match,50,,yes,,,,new,yes
+HMEL,KASORGOD,Mangalore,Mangaluru,inferred_location,Inferred Location Match,49,yes,,,,,new,no (no freight rate for this town)
+HMEL,KATHUA,Jammu,Jammu,inferred_location,Inferred Location Match,74,,,,,,new,yes
+HMEL,KHAMGAON,Jalgaon,Jalgaon,inferred_location,Inferred Location Match,109,,yes,,,,new,no (no freight rate for this town)
+HMEL,KHAMMAM,Kodad,Kodar,inferred_location,Inferred Location Match,34,,yes,,,,new,yes
+HMEL,KHANDWA,Nimrani,Nimrani,inferred_location,Inferred Location Match,98,,yes,,,,new,yes
+HMEL,KHARGONE,Nimrani,Nimrani,inferred_location,Inferred Location Match,36,,yes,,,,new,no (no freight rate for this town)
+HMEL,KHEDA,Ahmedabad,Ahmedabad,inferred_location,Inferred Location Match,32,,yes,,Ahmedabad,inferred_via_hpl,relabel only,yes
+HMEL,KHOPOLI,Khalapur,Khalapur,inferred_location,Inferred Location Match,8,,,,,,new,yes
+HMEL,KOLAR,Bengaluru,Bengaluru,inferred_location,Inferred Location Match,61,,yes,,Bengaluru,inferred_via_hpl,relabel only,yes
+HMEL,KOLLAM,Thiruvananthapuram,Thiruvananthapuram,inferred_location,Inferred Location Match,60,,,,,,new,yes
+HMEL,KOTTAYAM,Cochin,Kochi,inferred_location,Inferred Location Match,49,,,,,,new,yes
+HMEL,KUDAL,Kolhapur,Kolhapur,inferred_location,Inferred Location Match,96,,yes,,,,new,yes
+HMEL,KURUKSHETRA,Panipat,Panipat,inferred_location,Inferred Location Match,66,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+HMEL,LASALGAON/CHALISGAON,Nashik,Nashik,inferred_location,Inferred Location Match,50,,,,,,new,no (no freight rate for this town)
+HMEL,LONAWALA,Khalapur,Khalapur,inferred_location,Inferred Location Match,15,,,,,,new,no (no freight rate for this town)
+HMEL,LUCKNOW,Kanpur,Kanpur,inferred_location,Inferred Location Match,71,,yes,,Kanpur,inferred_via_hpl,relabel only,yes
+HMEL,LUDHIANA,Punjab,Punjab (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HMEL,MAHBOOBNAGAR,Hyderabad,Hyderabad,inferred_location,Inferred Location Match,87,,yes,,,,new,no (no freight rate for this town)
+HMEL,MAHUVA,Bhavnagar,Bhavnagar,inferred_location,Inferred Location Match,85,,yes,,,,new,yes
+HMEL,MANDSAUR,Indore,Indore,inferred_location,Inferred Location Match,170,,yes,,Indore,inferred_via_hpl,relabel only,yes
+HMEL,MATHURA,Agra,Agra,inferred_location,Inferred Location Match,49,,yes,,,,new,yes
+HMEL,MEDAK,Hyderabad,Hyderabad,inferred_location,Inferred Location Match,76,,yes,,Hyderabad,inferred_via_hpl,relabel only,yes
+HMEL,MEERUT,Ghaziabad,Ghaziabad,inferred_location,Inferred Location Match,44,,yes,,,,new,yes
+HMEL,MODINAGAR,Ghaziabad,Ghaziabad,inferred_location,Inferred Location Match,23,,yes,,,,new,no (no freight rate for this town)
+HMEL,MORADABAD,Rudrapur,Rudrapur,inferred_location,Inferred Location Match,63,yes,,,,,new,yes
+HMEL,MORBI,Rajkot,Rajkot,inferred_location,Inferred Location Match,59,,yes,,Rajkot,inferred_via_hpl,relabel only,yes
+HMEL,MUDHOL,Hubli,Hubballi,inferred_location,Inferred Location Match,111,,,,,,new,no (no freight rate for this town)
+HMEL,MUZAFFARNAGAR,Saharanpur,Saharanpur,inferred_location,Inferred Location Match,57,,yes,,,,new,yes
+HMEL,MYSORE,Bengaluru,Bengaluru,inferred_location,Inferred Location Match,128,,yes,,,,new,yes
+HMEL,Machlipatnam,Vijayawada,Vijayawada,inferred_location,Inferred Location Match,63,,yes,,,,new,no (no freight rate for this town)
+HMEL,NALANDA,Patna,Patna,inferred_location,Inferred Location Match,59,,,,,,new,no (no freight rate for this town)
+HMEL,NALGONDA,Kodad,Kodar,inferred_location,Inferred Location Match,75,,yes,,,,new,yes
+HMEL,NAMAKKAL,Karur,Karur,inferred_location,Inferred Location Match,31,,yes,,Madurai,inferred_via_hpl,zone change,yes
+HMEL,NANDED,Aurangabad,Aurangabad,inferred_location,Inferred Location Match,222,,yes,,Aurangabad,inferred_via_hpl,relabel only,yes
+HMEL,NARSARAOPET,Vijayawada,Vijayawada,inferred_location,Inferred Location Match,71,,yes,,,,new,no (no freight rate for this town)
+HMEL,NARWANA,Panipat,Panipat,inferred_location,Inferred Location Match,85,,yes,,,,new,no (no freight rate for this town)
+HMEL,NEEMUCH,Indore,Indore,inferred_location,Inferred Location Match,218,,yes,,Indore,inferred_via_hpl,relabel only,yes
+HMEL,NELLORE,Tirupathi,Tirupati,inferred_location,Inferred Location Match,109,,yes,,,,new,yes
+HMEL,NOKHA,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,151,,yes,,,,new,no (no freight rate for this town)
+HMEL,ONGOLE,Vijayawada,Vijayawada,inferred_location,Inferred Location Match,129,,yes,,,,new,yes
+HMEL,PADRA,Vadodara,Vadodara,inferred_location,Inferred Location Match,14,,yes,,,,new,no (no freight rate for this town)
+HMEL,PALANPUR,Mehsana,Mahesana,inferred_location,Inferred Location Match,64,,yes,,,,new,yes
+HMEL,PALEJ,Vadodara,Vadodara,inferred_location,Inferred Location Match,45,,yes,,,,new,no (no freight rate for this town)
+HMEL,PALGHAT,Coimbatore,Coimbatore,inferred_location,Inferred Location Match,43,yes,,,,,new,no (no freight rate for this town)
+HMEL,PALI,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,64,,yes,,Jodhpur,inferred_via_hpl,relabel only,yes
+HMEL,PAONTA SAHIB,Baddi,Baddi,inferred_location,Inferred Location Match,99,,yes,,,,new,yes
+HMEL,PARBHANI,Aurangabad,Aurangabad,inferred_location,Inferred Location Match,164,,yes,,Aurangabad,inferred_via_hpl,relabel only,yes
+HMEL,PARWANU,Baddi,Baddi,inferred_location,Inferred Location Match,21,,yes,,,,new,no (no freight rate for this town)
+HMEL,PHALODI,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,115,,yes,,Jodhpur,inferred_via_hpl,relabel only,yes
+HMEL,PIDUGURALLA,Vijayawada,Vijayawada,inferred_location,Inferred Location Match,81,,yes,,,,new,no (no freight rate for this town)
+HMEL,RAI BAREILLY,Kanpur,Kanpur,inferred_location,Inferred Location Match,92,,,,,,new,no (no freight rate for this town)
+HMEL,RAIGAD,Khalapur,Khalapur,inferred_location,Inferred Location Match,33,,yes,,Mumbai,inferred_via_hpl,zone change,yes
+HMEL,RAJNANDGAON,Raipur,Raipur,inferred_location,Inferred Location Match,64,,,,,,new,no (no freight rate for this town)
+HMEL,RAJPALAYAM,Madurai,Madurai,inferred_location,Inferred Location Match,81,,yes,,,,new,no (no freight rate for this town)
+HMEL,RAJPURA,Punjab,Punjab (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HMEL,RANIPET,Chennai,Chennai,inferred_location,Inferred Location Match,104,,yes,,Chennai,inferred_via_hpl,relabel only,yes
+HMEL,RATLAM,Indore,Indore,inferred_location,Inferred Location Match,106,,yes,,Indore,inferred_via_hpl,relabel only,yes
+HMEL,RATNAGARI,Kolhapur,Kolhapur,inferred_location,Inferred Location Match,103,,yes,,,,new,no (no freight rate for this town)
+HMEL,REWARI,Gurgaon,Gurugram,inferred_location,Inferred Location Match,49,,yes,,Gurgaon,inferred_via_hpl,relabel only,yes
+HMEL,ROHA,Khalapur,Khalapur,inferred_location,Inferred Location Match,47,,yes,,,,new,no (no freight rate for this town)
+HMEL,ROORKEE,Dehradun,Dehradun,inferred_location,Inferred Location Match,53,,yes,,,,new,yes
+HMEL,ROURKELA,Bargarh,Bargarh,inferred_location,Inferred Location Match,162,,yes,,,,new,yes
+HMEL,RUDERPUR,Rudrapur,Rudrapur,inferred_location,Inferred Location Match,0,,,,,,new,no (no freight rate for this town)
+HMEL,SAMBALPUR,Bargarh,Bargarh,inferred_location,Inferred Location Match,40,,yes,,Bargarh,inferred_via_hpl,relabel only,yes
+HMEL,SANAND,Ahmedabad,Ahmedabad,inferred_location,Inferred Location Match,21,,yes,,,,new,yes
+HMEL,SANGLI,Kolhapur,Kolhapur,inferred_location,Inferred Location Match,40,,yes,,Kolhapur,inferred_via_hpl,relabel only,yes
+HMEL,SANTEJ,Ahmedabad,Ahmedabad,inferred_location,Inferred Location Match,15,,yes,,,,new,no (no freight rate for this town)
+HMEL,SATNA,Rewa,Rewa,inferred_location,Inferred Location Match,47,,yes,,Rewa,inferred_via_hpl,relabel only,yes
+HMEL,SAVLI,Vadodara,Vadodara,inferred_location,Inferred Location Match,29,,yes,,,,new,yes
+HMEL,SHILLONG,Guwahati,Guwahati,inferred_location,Inferred Location Match,70,yes,,,,,new,no (no freight rate for this town)
+HMEL,SHIMOGA,Mangalore,Mangaluru,inferred_location,Inferred Location Match,137,,yes,,Mangalore,inferred_via_hpl,relabel only,yes
+HMEL,SHIVPURI,Gwalior,Gwalior,inferred_location,Inferred Location Match,103,,yes,,Gwalior,inferred_via_hpl,relabel only,yes
+HMEL,SIKAR,Jaipur,Jaipur,inferred_location,Inferred Location Match,100,,yes,,Jaipur,inferred_via_hpl,relabel only,yes
+HMEL,SILIGUDI,Siliguri,Siliguri,inferred_location,Inferred Location Match,0,,,,,,new,no (no freight rate for this town)
+HMEL,SIROHI,Udaipur,Udaipur,inferred_location,Inferred Location Match,94,,yes,,,,new,yes
+HMEL,SIRSA,Panipat,Panipat,inferred_location,Inferred Location Match,188,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+HMEL,SITARGANJ,Rudrapur,Rudrapur,inferred_location,Inferred Location Match,30,,yes,,,,new,yes
+HMEL,SIVAKASI,Madurai,Madurai,inferred_location,Inferred Location Match,63,,yes,,,,new,no (no freight rate for this town)
+HMEL,SOHAGPUR,Bhopal,Bhopal,inferred_location,Inferred Location Match,102,,yes,,,,new,no (no freight rate for this town)
+HMEL,SOLAN,Baddi,Baddi,inferred_location,Inferred Location Match,31,,yes,,Baddi,inferred_via_hpl,relabel only,yes
+HMEL,SOLAPUR,Kolhapur,Kolhapur,inferred_location,Inferred Location Match,209,,yes,,Kolhapur,inferred_via_hpl,relabel only,yes
+HMEL,SONEPAT,Panipat,Panipat,inferred_location,Inferred Location Match,44,,yes,,,,new,no (no freight rate for this town)
+HMEL,SRIGANGANAGAR,Bhiwadi,Bhiwadi,inferred_location,Inferred Location Match,347,,yes,,,,new,no (no freight rate for this town)
+HMEL,SRIKAKULAM,Vishakapatnam,Visakhapatnam,inferred_location,Inferred Location Match,101,,yes,,,,new,yes
+HMEL,SRINAGAR,Jammu,Jammu,inferred_location,Inferred Location Match,150,,yes,,Jammu,inferred_via_hpl,relabel only,yes
+HMEL,SURYAPET,Kodad,Kodar,inferred_location,Inferred Location Match,40,,yes,,,,new,yes
+HMEL,TALOJA,Mumbai,Mumbai,inferred_location,Inferred Location Match,23,,yes,,,,new,no (no freight rate for this town)
+HMEL,TARAPUR,Bhiwandi,Bhiwandi,inferred_location,Inferred Location Match,74,,yes,,,,new,yes
+HMEL,THANE,Mumbai,Mumbai,inferred_location,Inferred Location Match,16,,yes,yes,Mumbai,inferred_via_hpl,relabel only,yes
+HMEL,THRISSUR,Cochin,Kochi,inferred_location,Inferred Location Match,64,,,,,,new,yes
+HMEL,TIRUPUR,Coimbatore,Coimbatore,inferred_location,Inferred Location Match,44,,yes,,,,new,no (no freight rate for this town)
+HMEL,TRICHY,Karur,Karur,inferred_location,Inferred Location Match,69,,,,,,new,no (no freight rate for this town)
+HMEL,TUMKUR,Bengaluru,Bengaluru,inferred_location,Inferred Location Match,67,,yes,,,,new,yes
+HMEL,UJJAIN,Indore,Indore,inferred_location,Inferred Location Match,52,,yes,,Indore,inferred_via_hpl,relabel only,yes
+HMEL,UMBERGAON,Valsad,Valsad,inferred_location,Inferred Location Match,41,,yes,,,,new,no (no freight rate for this town)
+HMEL,VAPI,Valsad,Valsad,inferred_location,Inferred Location Match,27,,yes,,,,new,yes
+HMEL,VERAWAL,Porbandar,Porbandar,inferred_location,Inferred Location Match,113,,yes,,,,new,no (no freight rate for this town)
+HMEL,VIJAYWADA,Vijayawada,Vijayawada,inferred_location,Inferred Location Match,0,,,,,,new,no (no freight rate for this town)
+HMEL,VILLUPURAM,Chennai,Chennai,inferred_location,Inferred Location Match,154,,yes,,,,new,no (no freight rate for this town)
+HMEL,VIRAMGAM,Ahmedabad,Ahmedabad,inferred_location,Inferred Location Match,56,,yes,,,,new,yes
+HMEL,VISNAGAR,Mehsana,Mahesana,inferred_location,Inferred Location Match,20,,yes,,,,new,no (no freight rate for this town)
+HMEL,VIZAG,Vishakapatnam,Visakhapatnam,inferred_location,Inferred Location Match,0,,,,,,new,no (no freight rate for this town)
+HMEL,WAGHODIA,Vadodara,Vadodara,inferred_location,Inferred Location Match,20,,yes,,,,new,no (no freight rate for this town)
+HMEL,WANI,Nagpur,Nagpur,inferred_location,Inferred Location Match,122,,yes,,,,new,no (no freight rate for this town)
+HMEL,WARDHA,Nagpur,Nagpur,inferred_location,Inferred Location Match,68,,yes,,,,new,yes
+HMEL,YAMUNANAGAR,Panipat,Panipat,inferred_location,Inferred Location Match,88,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+HMEL,YAWATMAL,Nagpur,Nagpur,inferred_location,Inferred Location Match,130,,yes,,,,new,no (no freight rate for this town)
+HPL,ABU ROAD,Rajasthan_Kota,Kota,published_map,Territory Match,318,,,,,,new,yes
+HPL,AGARTALA,Meghalaya & NE States,NE states (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,AGRA,Uttar Pradesh_Mathura,Mathura,published_map,Territory Match,49,,,,Uttar Pradesh_Mathura,published_map,unchanged,yes
+HPL,AHMEDNAGAR,Maharashtra_Pune,Pune,published_map,Territory Match,113,,,,Maharashtra_Pune,published_map,unchanged,yes
+HPL,AJMER,Rajasthan_Jaipur,Jaipur,published_map,Territory Match,125,,,,Rajasthan_Jaipur,published_map,unchanged,yes
+HPL,AKOLA,Maharashtra_Nagpur,Nagpur,published_map,Territory Match,222,,,,Maharashtra_Nagpur,published_map,unchanged,yes
+HPL,ALAPPUZHA,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,ALIGARH,Uttar Pradesh_Mathura,Mathura,published_map,Territory Match,58,,,,Uttar Pradesh_Mathura,published_map,unchanged,yes
+HPL,ALLAHABAD,Uttar Pradesh_Varanasi,Varanasi,published_map,Territory Match,118,,,,,,new,yes
+HPL,ALWAR,Rajasthan_Bhiwadi,Bhiwadi,published_map,Territory Match,76,,,,Rajasthan_Bhiwadi,published_map,unchanged,yes
+HPL,AMBALA,Haryana_Panipat,Panipat,published_map,Territory Match,109,,,,Haryana_Panipat,published_map,unchanged,yes
+HPL,AMRAWATI,Maharashtra_Nagpur,Nagpur,published_map,Territory Match,141,,,,,,new,no (no freight rate for this town)
+HPL,ANANTAPUR,Andhra Pradesh_tirupati,Tirupati,published_map,Territory Match,227,,,,,,new,yes
+HPL,ANKLESHWAR,Gujarat_Vadodara,Vadodara,published_map,Territory Match,78,,,,,,new,yes
+HPL,ANNAND,Gujarat_Vadodara,Vadodara,published_map,Territory Match,38,,,,,,new,no (no freight rate for this town)
+HPL,ASANGAON,Maharashtra_Mumbai,Mumbai,published_map,Territory Match,60,,,,,,new,no (no freight rate for this town)
+HPL,BAHADURGARH,Haryana_Gurgaon,Gurugram,published_map,Territory Match,27,,,,,,new,yes
+HPL,BARAMATI,Maharashtra_Pune,Pune,published_map,Territory Match,87,,,,,,new,no (no freight rate for this town)
+HPL,BARJORA,West Bengal_Asansol,Asansol,published_map,Territory Match,42,,,,,,new,yes
+HPL,BARMER,Rajasthan_Jodhpur,Jodhpur,published_map,Territory Match,171,,,,Rajasthan_Jodhpur,published_map,unchanged,yes
+HPL,BARSI,Maharashtra_Kolhapur,Kolhapur,published_map,Territory Match,231,,,,,,new,no (no freight rate for this town)
+HPL,BAWAL,Haryana_Gurgaon,Gurugram,published_map,Territory Match,61,,,,,,new,no (no freight rate for this town)
+HPL,BEAWAR,Rajasthan_Jodhpur,Jodhpur,published_map,Territory Match,132,,,,Rajasthan_Jodhpur,published_map,unchanged,yes
+HPL,BEED,Maharashtra_Aurangabad,Aurangabad,published_map,Territory Match,108,,,,Maharashtra_Aurangabad,published_map,unchanged,yes
+HPL,BEHROR,Rajasthan_Bhiwadi,Bhiwadi,published_map,Territory Match,67,,,,,,new,no (no freight rate for this town)
+HPL,BELGAUM,Karnataka_Mangalore,Mangaluru,published_map,Territory Match,329,,,,,,new,no (no freight rate for this town)
+HPL,BERHAMPUR,Orissa_Bhubaneswar,Bhubaneswar,published_map,Territory Match,153,,,,,,new,yes
+HPL,BHADOHI,Uttar Pradesh_Varanasi,Varanasi,published_map,Territory Match,45,,,,,,new,no (no freight rate for this town)
+HPL,BHARATPUR,Rajasthan_Jaipur,Jaipur,published_map,Territory Match,172,,,,Rajasthan_Jaipur,published_map,unchanged,yes
+HPL,BHARUCH,Gujarat_Vadodara,Vadodara,published_map,Territory Match,71,,,,Gujarat_Vadodara,published_map,unchanged,yes
+HPL,BHATINDA,Punjab_Ludhiana,Ludhiana,published_map,Territory Match,118,,,,Punjab_Ludhiana,published_map,unchanged,yes
+HPL,BHILWARA,Rajasthan_Kota,Kota,published_map,Territory Match,122,,,,Rajasthan_Kota,published_map,unchanged,yes
+HPL,BHIND,Madhya Pradesh_Gwalior,Gwalior,published_map,Territory Match,72,,,,Madhya Pradesh_Gwalior,published_map,unchanged,yes
+HPL,BHINMAL,Rajasthan_Jodhpur,Jodhpur,published_map,Territory Match,159,,,,,,new,no (no freight rate for this town)
+HPL,BHIWANI,Haryana_Panipat,Panipat,published_map,Territory Match,104,,,,Haryana_Panipat,published_map,unchanged,yes
+HPL,BIDAR,Karnataka_Bellary,Ballari,published_map,Territory Match,314,,,,Karnataka_Bellary,published_map,unchanged,no (no freight rate for this town)
+HPL,BIKANER,Rajasthan_Jodhpur,Jodhpur,published_map,Territory Match,197,,,,Rajasthan_Jodhpur,published_map,unchanged,yes
+HPL,BILASPUR,Chattisgarh,Chhattisgarh (state-wide zone),state_zone,Territory Match,,,,,Himachal Pradesh_Baddi,published_map,zone change (corrects a wrong live mapping),yes
+HPL,BORIVALLI,Maharashtra_Mumbai,Mumbai,published_map,Territory Match,18,,,,,,new,no (no freight rate for this town)
+HPL,BUNDHI,Rajasthan_Kota,Kota,published_map,Territory Match,35,,,,,,new,no (no freight rate for this town)
+HPL,BURHANPUR,Madhya Pradesh_Indore,Indore,published_map,Territory Match,162,,,,Madhya Pradesh_Indore,published_map,unchanged,yes
+HPL,BYRNIHAT,Meghalaya & NE States,NE states (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,CALICUT,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,CHALISGAON,Maharashtra_Jalgaon,Jalgaon,published_map,Territory Match,83,,,,,,new,no (no freight rate for this town)
+HPL,CHINDWARA,Madhya Pradesh_Jabalpur,Jabalpur,published_map,Territory Match,161,,,,Madhya Pradesh_Jabalpur,published_map,unchanged,yes
+HPL,CHITTOOR,Andhra Pradesh_tirupati,Tirupati,published_map,Territory Match,59,,,,Andhra Pradesh_tirupati,published_map,unchanged,yes
+HPL,CHITTOREGARH,Rajasthan_Kota,Kota,published_map,Territory Match,127,,,,,,new,no (no freight rate for this town)
+HPL,COCHIN,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,CUDDAPAH,Andhra Pradesh_tirupati,Tirupati,published_map,Territory Match,114,,,,,,new,yes
+HPL,CUTTACK,Orissa_Bhubaneswar,Bhubaneswar,published_map,Territory Match,22,,,,Orissa_Bhubaneswar,published_map,unchanged,no (no freight rate for this town)
+HPL,DAMTAL,Himachal Pradesh_Baddi,Baddi,published_map,Territory Match,177,,,,,,new,no (no freight rate for this town)
+HPL,DEGLOOR,Maharashtra_Aurangabad,Aurangabad,published_map,Territory Match,277,,,,,,new,no (no freight rate for this town)
+HPL,DEHRADUN,Uttarakhand_Haridwar,Haridwar,published_map,Territory Match,44,,,,Uttarakhand_Haridwar,published_map,unchanged,yes
+HPL,DHANBAD,Jharkhand_Ranchi,Jharkhand (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,DHAR,Madhya Pradesh_Indore,Indore,published_map,Territory Match,57,,,,Madhya Pradesh_Indore,published_map,unchanged,yes
+HPL,DHARUHERA,Haryana_Gurgaon,Gurugram,published_map,Territory Match,36,,,,,,new,no (no freight rate for this town)
+HPL,DHOLPUR,Rajasthan_Jaipur,Jaipur,published_map,Territory Match,209,,,,Rajasthan_Jaipur,published_map,unchanged,yes
+HPL,DHORAJI,Gujarat_Rajkot,Rajkot,published_map,Territory Match,71,,,,,,new,no (no freight rate for this town)
+HPL,DHULE,Maharashtra_Jalgaon,Jalgaon,published_map,Territory Match,83,,,,Maharashtra_Jalgaon,published_map,unchanged,yes
+HPL,DIBIYAPUR,Uttar Pradesh_Kanpur,Kanpur,published_map,Territory Match,82,,,,,,new,no (no freight rate for this town)
+HPL,DIBRUGARH,Assam,Assam (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,DIMAPUR,Meghalaya & NE States,NE states (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,DISPUR,Assam,Assam (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,DURG,Chattisgarh,Chhattisgarh (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,DURGAPUR,West Bengal_Asansol,Asansol,published_map,Territory Match,38,,,,,,new,yes
+HPL,ELURU,Andhra Pradesh_Guntur,Guntur,published_map,Territory Match,83,,,,Andhra Pradesh_Guntur,published_map,unchanged,yes
+HPL,ERODE,Tamil Nadu_Coimbatore,Coimbatore,published_map,Territory Match,91,,,,Tamil Nadu_Coimbatore,published_map,unchanged,yes
+HPL,ETAWAH,Uttar Pradesh_Kanpur,Kanpur,published_map,Territory Match,137,,,,Uttar Pradesh_Kanpur,published_map,unchanged,yes
+HPL,FATEHPUR,Uttar Pradesh_Kanpur,Kanpur,published_map,Territory Match,76,,,,Uttar Pradesh_Kanpur,published_map,unchanged,yes
+HPL,FAZILKA,Punjab_Ludhiana,Ludhiana,published_map,Territory Match,184,,,,Punjab_Ludhiana,published_map,unchanged,yes
+HPL,FIROZPUR,Punjab_Ludhiana,Ludhiana,published_map,Territory Match,118,,,,,,new,no (no freight rate for this town)
+HPL,GADARWARA,Madhya Pradesh_Jabalpur,Jabalpur,published_map,Territory Match,122,,,,,,new,no (no freight rate for this town)
+HPL,GADCHIROLI,Maharashtra_Nagpur,Nagpur,published_map,Territory Match,144,,,,,,new,no (no freight rate for this town)
+HPL,GANGTOK (SIKKIM),West Bengal_Siliguri,Siliguri,inferred_location,Inferred Location Match,71,yes,,,,,new,no (no freight rate for this town)
+HPL,GAYA,Bihar,Bihar (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,GAZIABAD/NOIDA,Uttar Pradesh_Noida,Noida,published_map,Territory Match,0,,,,Uttar Pradesh_Noida,published_map,unchanged,yes
+HPL,GHAZIPUR,Uttar Pradesh_Varanasi,Varanasi,published_map,Territory Match,65,,,,Uttar Pradesh_Varanasi,published_map,unchanged,yes
+HPL,GODHRA,Gujarat_Vadodara,Vadodara,published_map,Territory Match,67,,,,,,new,no (no freight rate for this town)
+HPL,GONDIA,Maharashtra_Nagpur,Nagpur,published_map,Territory Match,120,,,,Maharashtra_Nagpur,published_map,unchanged,yes
+HPL,GORAKHPUR,Uttar Pradesh_Varanasi,Varanasi,published_map,Territory Match,165,,,,Uttar Pradesh_Varanasi,published_map,unchanged,yes
+HPL,GUNA,Madhya Pradesh_Bhopal,Bhopal,published_map,Territory Match,155,,,,Madhya Pradesh_Bhopal,published_map,unchanged,yes
+HPL,GUWAHATI,Assam,Assam (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,HALDAWANI,Uttarakhand_Sitarganj,Sitarganj,published_map,Territory Match,37,,,,,,new,no (no freight rate for this town)
+HPL,HALDIA,West Bengal_Howrah,Howrah,published_map,Territory Match,61,,,,,,new,yes
+HPL,HALOL,Gujarat_Vadodara,Vadodara,published_map,Territory Match,35,,,,,,new,yes
+HPL,HALVAD,Gujarat_Rajkot,Rajkot,published_map,Territory Match,90,,,,,,new,no (no freight rate for this town)
+HPL,HATHRAS,Uttar Pradesh_Mathura,Mathura,published_map,Territory Match,39,,,,Uttar Pradesh_Mathura,published_map,unchanged,yes
+HPL,HIMMATNAGAR,Gujarat_Mehsana,Mahesana,published_map,Territory Match,59,,,,,,new,no (no freight rate for this town)
+HPL,HINGANGHAT,Maharashtra_Nagpur,Nagpur,published_map,Territory Match,71,,,,,,new,no (no freight rate for this town)
+HPL,HISSAR,Haryana_Panipat,Panipat,published_map,Territory Match,124,,,,,,new,no (no freight rate for this town)
+HPL,HOSUR,Tamil Nadu_Coimbatore,Coimbatore,published_map,Territory Match,214,,,,,,new,yes
+HPL,HUBLI,Karnataka_Mangalore,Mangaluru,published_map,Territory Match,272,,,,,,new,yes
+HPL,IDUKKI,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,IMPHAL,Meghalaya & NE States,NE states (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,JAGADHARI,Haryana_Panipat,Panipat,published_map,Territory Match,93,,,,,,new,no (no freight rate for this town)
+HPL,JAGDISHPUR,Uttar Pradesh_Varanasi,Varanasi,published_map,Territory Match,293,,,,,,new,yes
+HPL,JALANDHAR,Punjab_Amritsar,Amritsar,published_map,Territory Match,74,,,,Punjab_Amritsar,published_map,unchanged,yes
+HPL,JALNA,Maharashtra_Aurangabad,Aurangabad,published_map,Territory Match,57,,,,Maharashtra_Aurangabad,published_map,unchanged,yes
+HPL,JAM KHAMBH,Gujarat_Rajkot,Rajkot,published_map,Territory Match,118,,,,,,new,no (no freight rate for this town)
+HPL,JAMNAGAR,Gujarat_Rajkot,Rajkot,published_map,Territory Match,77,,,,Gujarat_Rajkot,published_map,unchanged,yes
+HPL,JAMSHEDPUR,Jharkhand_Ranchi,Jharkhand (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,JETPUR,Gujarat_Rajkot,Rajkot,published_map,Territory Match,62,,,,,,new,no (no freight rate for this town)
+HPL,JEYPORE,Orissa_Bhubaneswar,Bhubaneswar,published_map,Territory Match,376,,,,,,new,no (no freight rate for this town)
+HPL,JUNAGADH,Gujarat_Rajkot,Rajkot,published_map,Territory Match,92,,,,,,new,yes
+HPL,KADI,Gujarat_Mehsana,Mahesana,published_map,Territory Match,34,,,,,,new,yes
+HPL,KAIMUR,Bihar,Bihar (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,KAITHAL,Haryana_Panipat,Panipat,published_map,Territory Match,72,,,,Haryana_Panipat,published_map,unchanged,yes
+HPL,KAKINADA,Andhra Pradesh_Vizag,Visakhapatnam,published_map,Territory Match,130,,,,Andhra Pradesh_Vizag,published_map,unchanged,yes
+HPL,KALA AMB,Himachal Pradesh_Baddi,Baddi,published_map,Territory Match,65,,,,,,new,no (no freight rate for this town)
+HPL,KALOL,Gujarat_Vadodara,Vadodara,published_map,Territory Match,128,,,,,,new,yes
+HPL,KANHANGAD,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,KANNUR,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,KARAIKAL,Pondicherry,Puducherry,published_map,Territory Match,113,,,,,,new,yes
+HPL,KARNAL,Haryana_Panipat,Panipat,published_map,Territory Match,34,,,,Haryana_Panipat,published_map,unchanged,yes
+HPL,KARUR,Tamil Nadu_Madurai,Madurai,published_map,Territory Match,116,,,,Tamil Nadu_Madurai,published_map,unchanged,yes
+HPL,KASHIPUR,Uttarakhand_Sitarganj,Sitarganj,published_map,Territory Match,79,,,,,,new,yes
+HPL,KASORGOD,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,KATIHAR,Bihar,Bihar (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,KATNI,Madhya Pradesh_Rewa,Rewa,published_map,Territory Match,119,,,,Madhya Pradesh_Rewa,published_map,unchanged,yes
+HPL,KHAMGAON,Maharashtra_Jalgaon,Jalgaon,published_map,Territory Match,109,,,,,,new,no (no freight rate for this town)
+HPL,KHAMMAM,Telangana_Suryapet,Suriapet,published_map,Territory Match,57,,,,Telangana_Suryapet,published_map,unchanged,no (no freight rate for this town)
+HPL,KHANDWA,Madhya Pradesh_Indore,Indore,published_map,Territory Match,113,,,,,,new,yes
+HPL,KHARGONE,Madhya Pradesh_Indore,Indore,published_map,Territory Match,102,,,,,,new,no (no freight rate for this town)
+HPL,KHEDA,Gujarat_Ahmedabad,Ahmedabad,published_map,Territory Match,32,,,,Gujarat_Ahmedabad,published_map,unchanged,yes
+HPL,KHOPOLI,Maharashtra_Mumbai,Mumbai,published_map,Territory Match,58,,,,,,new,yes
+HPL,KOLAR,Karnataka_Bangalore,Bengaluru,published_map,Territory Match,61,,,,Karnataka_Bangalore,published_map,unchanged,yes
+HPL,KOLKATA,West Bengal_Howrah,Howrah,published_map,Territory Match,5,,,,West Bengal_Howrah,published_map,unchanged,no (no freight rate for this town)
+HPL,KOLLAM,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,KOTTAYAM,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,KUDAL,Maharashtra_Kolhapur,Kolhapur,published_map,Territory Match,96,,,,,,new,no (no freight rate for this town)
+HPL,KUNDLI,Haryana_Panipat,Panipat,published_map,Territory Match,60,,,,,,new,no (no freight rate for this town)
+HPL,KURNOOL,Andhra Pradesh_Guntur,Guntur,published_map,Territory Match,264,,,,Andhra Pradesh_Guntur,published_map,unchanged,yes
+HPL,KURUKSHETRA,Haryana_Panipat,Panipat,published_map,Territory Match,66,,,,Haryana_Panipat,published_map,unchanged,yes
+HPL,LASALGAON/CHALISGAON,Maharashtra_Nashik,Nashik,inferred_location,Inferred Location Match,50,,,,,,new,no (no freight rate for this town)
+HPL,LATUR,Maharashtra_Kolhapur,Kolhapur,published_map,Territory Match,312,,,,Maharashtra_Kolhapur,published_map,unchanged,yes
+HPL,LUCKNOW,Uttar Pradesh_Kanpur,Kanpur,published_map,Territory Match,71,,,,Uttar Pradesh_Kanpur,published_map,unchanged,yes
+HPL,MAHBOOBNAGAR,Telangana_Hyderabad,Hyderabad,published_map,Territory Match,87,,,,,,new,no (no freight rate for this town)
+HPL,MAHUVA,Gujarat_Bhavnagar,Bhavnagar,published_map,Territory Match,85,,,,,,new,yes
+HPL,MANDSAUR,Madhya Pradesh_Indore,Indore,published_map,Territory Match,170,,,,Madhya Pradesh_Indore,published_map,unchanged,no (no freight rate for this town)
+HPL,MEDAK,Telangana_Hyderabad,Hyderabad,published_map,Territory Match,76,,,,Telangana_Hyderabad,published_map,unchanged,yes
+HPL,MEERUT,Uttar Pradesh_Noida,Noida,published_map,Territory Match,58,,,,Uttar Pradesh_Noida,published_map,unchanged,yes
+HPL,MODINAGAR,Uttar Pradesh_Noida,Noida,published_map,Territory Match,37,,,,,,new,no (no freight rate for this town)
+HPL,MORADABAD,Uttar Pradesh_Bareilly,Bareilly,published_map,Territory Match,83,,,,Uttar Pradesh_Bareilly,published_map,unchanged,yes
+HPL,MORBI,Gujarat_Rajkot,Rajkot,published_map,Territory Match,59,,,,Gujarat_Rajkot,published_map,unchanged,yes
+HPL,MUDHOL,Karnataka_Bellary,Ballari,published_map,Territory Match,220,,,,,,new,no (no freight rate for this town)
+HPL,MUNDRA,Gujarat_Gandhidham,Gandhidham,published_map,Territory Match,50,,,,,,new,yes
+HPL,MUZAFFARNAGAR,Uttar Pradesh_Noida,Noida,published_map,Territory Match,106,,,,Uttar Pradesh_Noida,published_map,unchanged,yes
+HPL,MYSORE,Karnataka_Bangalore,Bengaluru,published_map,Territory Match,128,,,,,,new,yes
+HPL,Machlipatnam,Andhra Pradesh_Guntur,Guntur,published_map,Territory Match,74,,,,,,new,no (no freight rate for this town)
+HPL,NAGAUR,Rajasthan_Jodhpur,Jodhpur,published_map,Territory Match,127,,,,Rajasthan_Jodhpur,published_map,unchanged,yes
+HPL,NALANDA,Bihar,Bihar (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,NALGONDA,Telangana_Suryapet,Suriapet,published_map,Territory Match,39,,,,Telangana_Suryapet,published_map,unchanged,yes
+HPL,NAMAKKAL,Tamil Nadu_Madurai,Madurai,published_map,Territory Match,145,,,,Tamil Nadu_Madurai,published_map,unchanged,yes
+HPL,NANDED,Maharashtra_Aurangabad,Aurangabad,published_map,Territory Match,222,,,,Maharashtra_Aurangabad,published_map,unchanged,yes
+HPL,NANDYAL,Andhra Pradesh_Guntur,Guntur,published_map,Territory Match,230,,,,Andhra Pradesh_Guntur,published_map,unchanged,yes
+HPL,NARSARAOPET,Andhra Pradesh_Guntur,Guntur,published_map,Territory Match,44,,,,,,new,no (no freight rate for this town)
+HPL,NARWANA,Haryana_Panipat,Panipat,published_map,Territory Match,85,,,,,,new,no (no freight rate for this town)
+HPL,NEEMUCH,Madhya Pradesh_Indore,Indore,published_map,Territory Match,218,,,,Madhya Pradesh_Indore,published_map,unchanged,yes
+HPL,NELLORE,Andhra Pradesh_tirupati,Tirupati,published_map,Territory Match,109,,,,,,new,yes
+HPL,NOKHA,Rajasthan_Jodhpur,Jodhpur,published_map,Territory Match,151,,,,,,new,yes
+HPL,ONGOLE,Andhra Pradesh_Guntur,Guntur,published_map,Territory Match,99,,,,,,new,yes
+HPL,PADRA,Gujarat_Vadodara,Vadodara,published_map,Territory Match,14,,,,,,new,no (no freight rate for this town)
+HPL,PALANPUR,Gujarat_Mehsana,Mahesana,published_map,Territory Match,64,,,,,,new,no (no freight rate for this town)
+HPL,PALEJ,Gujarat_Vadodara,Vadodara,published_map,Territory Match,45,,,,,,new,no (no freight rate for this town)
+HPL,PALGHAT,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,PALI,Rajasthan_Jodhpur,Jodhpur,published_map,Territory Match,64,,,,Rajasthan_Jodhpur,published_map,unchanged,yes
+HPL,PAONTA SAHIB,Himachal Pradesh_Baddi,Baddi,published_map,Territory Match,99,,,,,,new,no (no freight rate for this town)
+HPL,PARBHANI,Maharashtra_Aurangabad,Aurangabad,published_map,Territory Match,164,,,,Maharashtra_Aurangabad,published_map,unchanged,yes
+HPL,PARWANU,Himachal Pradesh_Baddi,Baddi,published_map,Territory Match,21,,,,,,new,no (no freight rate for this town)
+HPL,PATHANAMTH,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,PATNA,Bihar,Bihar (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,PHALODI,Rajasthan_Jodhpur,Jodhpur,published_map,Territory Match,115,,,,Rajasthan_Jodhpur,published_map,unchanged,yes
+HPL,PIDUGURALLA,Andhra Pradesh_Guntur,Guntur,published_map,Territory Match,64,,,,,,new,no (no freight rate for this town)
+HPL,PORBANDAR,Gujarat_Rajkot,Rajkot,published_map,Territory Match,142,,,,Gujarat_Rajkot,published_map,unchanged,yes
+HPL,RAI BAREILLY,Uttar Pradesh_Kanpur,Kanpur,inferred_location,Inferred Location Match,92,,,,,,new,no (no freight rate for this town)
+HPL,RAIGAD,Maharashtra_Mumbai,Mumbai,published_map,Territory Match,62,,,,Maharashtra_Mumbai,published_map,unchanged,no (no freight rate for this town)
+HPL,RAIGARH,Chattisgarh,Chhattisgarh (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,RAIPUR,Chattisgarh,Chhattisgarh (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,RAJMUNDHRY,Andhra Pradesh_Vizag,Visakhapatnam,published_map,Territory Match,169,,,,,,new,no (no freight rate for this town)
+HPL,RAJNANDGAON,Chattisgarh,Chhattisgarh (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,RAJPALAYAM,Tamil Nadu_Madurai,Madurai,published_map,Territory Match,81,,,,,,new,no (no freight rate for this town)
+HPL,RAJPURA,Punjab_Ludhiana,Ludhiana,published_map,Territory Match,86,,,,,,new,yes
+HPL,RANIA,Haryana_Panipat,Panipat,published_map,Territory Match,207,,,,,,new,no (no freight rate for this town)
+HPL,RANIPET,Tamil Nadu_Chennai,Chennai,published_map,Territory Match,104,,,,Tamil Nadu_Chennai,published_map,unchanged,yes
+HPL,RATHANGARH,Rajasthan_Bhiwadi,Bhiwadi,published_map,Territory Match,220,,,,,,new,no (no freight rate for this town)
+HPL,RATLAM,Madhya Pradesh_Indore,Indore,published_map,Territory Match,106,,,,Madhya Pradesh_Indore,published_map,unchanged,yes
+HPL,RATNAGARI,Maharashtra_Kolhapur,Kolhapur,published_map,Territory Match,103,,,,,,new,no (no freight rate for this town)
+HPL,REWARI,Haryana_Gurgaon,Gurugram,published_map,Territory Match,49,,,,Haryana_Gurgaon,published_map,unchanged,yes
+HPL,ROHA,Maharashtra_Mumbai,Mumbai,published_map,Territory Match,75,,,,,,new,no (no freight rate for this town)
+HPL,ROHTAK,Haryana_Panipat,Panipat,published_map,Territory Match,66,,,,Haryana_Panipat,published_map,unchanged,yes
+HPL,ROORKEE,Uttarakhand_Haridwar,Haridwar,published_map,Territory Match,27,,,,,,new,yes
+HPL,ROURKELA,Orissa_Bargarh,Bargarh,published_map,Territory Match,162,,,,,,new,no (no freight rate for this town)
+HPL,RUDERPUR,Uttarakhand_Sitarganj,Sitarganj,published_map,Territory Match,30,,,,,,new,no (no freight rate for this town)
+HPL,SAHARANPUR,Uttar Pradesh_Noida,Noida,published_map,Territory Match,156,,,,Uttar Pradesh_Noida,published_map,unchanged,yes
+HPL,SALEM,Tamil Nadu_Coimbatore,Coimbatore,published_map,Territory Match,148,,,,Tamil Nadu_Coimbatore,published_map,unchanged,yes
+HPL,SAMBALPUR,Orissa_Bargarh,Bargarh,published_map,Territory Match,40,,,,Orissa_Bargarh,published_map,unchanged,yes
+HPL,SAMPLA,Haryana_Panipat,Panipat,published_map,Territory Match,70,,,,,,new,no (no freight rate for this town)
+HPL,SANAND,Gujarat_Ahmedabad,Ahmedabad,published_map,Territory Match,21,,,,,,new,yes
+HPL,SANGLI,Maharashtra_Kolhapur,Kolhapur,published_map,Territory Match,40,,,,Maharashtra_Kolhapur,published_map,unchanged,yes
+HPL,SANSARPUR TERRACE,Himachal Pradesh_Baddi,Baddi,published_map,Territory Match,137,,,,,,new,no (no freight rate for this town)
+HPL,SANTEJ,Gujarat_Ahmedabad,Ahmedabad,published_map,Territory Match,15,,,,,,new,no (no freight rate for this town)
+HPL,SATARA,Maharashtra_Kolhapur,Kolhapur,published_map,Territory Match,113,,,,Maharashtra_Kolhapur,published_map,unchanged,yes
+HPL,SATNA,Madhya Pradesh_Rewa,Rewa,published_map,Territory Match,47,,,,Madhya Pradesh_Rewa,published_map,unchanged,yes
+HPL,SAVLI,Gujarat_Vadodara,Vadodara,published_map,Territory Match,29,,,,,,new,yes
+HPL,SHAJAPUR,Madhya Pradesh_Bhopal,Bhopal,published_map,Territory Match,116,,,,Madhya Pradesh_Bhopal,published_map,unchanged,no (no freight rate for this town)
+HPL,SHILLONG,Meghalaya & NE States,NE states (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,SHIMOGA,Karnataka_Mangalore,Mangaluru,published_map,Territory Match,137,,,,Karnataka_Mangalore,published_map,unchanged,yes
+HPL,SHIVPURI,Madhya Pradesh_Gwalior,Gwalior,published_map,Territory Match,103,,,,Madhya Pradesh_Gwalior,published_map,unchanged,yes
+HPL,SIKAR,Rajasthan_Jaipur,Jaipur,published_map,Territory Match,100,,,,Rajasthan_Jaipur,published_map,unchanged,yes
+HPL,SILCHAR,Assam,Assam (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,SILIGUDI,West Bengal_Siliguri,Siliguri,published_map,Territory Match,0,,,,,,new,no (no freight rate for this town)
+HPL,SILVASSA / DADRA & NAGAR HAVELI,Dadra,Silvassa,published_map,Territory Match,0,,,,Dadra,published_map,unchanged,yes
+HPL,SIROHI,Rajasthan_Kota,Kota,published_map,Territory Match,303,,,,Rajasthan_Kota,published_map,unchanged,yes
+HPL,SIRSA,Haryana_Panipat,Panipat,published_map,Territory Match,188,,,,Haryana_Panipat,published_map,unchanged,yes
+HPL,SIVAKASI,Tamil Nadu_Madurai,Madurai,published_map,Territory Match,63,,,,,,new,no (no freight rate for this town)
+HPL,SIVSAGAR,Assam,Assam (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,SOHAGPUR,Madhya Pradesh_Bhopal,Bhopal,published_map,Territory Match,102,,,,,,new,no (no freight rate for this town)
+HPL,SOLAN,Himachal Pradesh_Baddi,Baddi,published_map,Territory Match,31,,,,Himachal Pradesh_Baddi,published_map,unchanged,yes
+HPL,SOLAPUR,Maharashtra_Kolhapur,Kolhapur,published_map,Territory Match,209,,,,Maharashtra_Kolhapur,published_map,unchanged,yes
+HPL,SONEPAT,Haryana_Panipat,Panipat,published_map,Territory Match,44,,,,,,new,no (no freight rate for this town)
+HPL,SRIGANGANAGAR,Rajasthan_Bhiwadi,Bhiwadi,published_map,Territory Match,347,,,,,,new,no (no freight rate for this town)
+HPL,SRIKAKULAM,Andhra Pradesh_Vizag,Visakhapatnam,published_map,Territory Match,101,,,,Andhra Pradesh_Vizag,published_map,unchanged,yes
+HPL,SRINAGAR,J&K_Jammu,Jammu,published_map,Territory Match,150,,,,J&K_Jammu,published_map,unchanged,yes
+HPL,SURENDRANAGAR,Gujarat_Ahmedabad,Ahmedabad,published_map,Territory Match,102,,,,Gujarat_Ahmedabad,published_map,unchanged,yes
+HPL,TALOJA,Maharashtra_Mumbai,Mumbai,published_map,Territory Match,23,,,,,,new,no (no freight rate for this town)
+HPL,TARAPUR,Maharashtra_Mumbai,Mumbai,published_map,Territory Match,91,,,,,,new,no (no freight rate for this town)
+HPL,THANE,Maharashtra_Mumbai,Mumbai,published_map,Territory Match,16,,,,Maharashtra_Mumbai,published_map,unchanged,no (no freight rate for this town)
+HPL,THRISSUR,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,TINSUKIA,Assam,Assam (state-wide zone),state_zone,Territory Match,,,,,,,new,no (no freight rate for this town)
+HPL,TIRUPATHI,Andhra Pradesh_tirupati,Tirupati,published_map,Territory Match,0,,,,,,new,no (no freight rate for this town)
+HPL,TIRUPUR,Tamil Nadu_Coimbatore,Coimbatore,published_map,Territory Match,44,,,,,,new,no (no freight rate for this town)
+HPL,TRIVANDRUM,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+HPL,TUMKUR,Karnataka_Bangalore,Bengaluru,published_map,Territory Match,67,,,,,,new,yes
+HPL,TUTICORIN,Tamil Nadu_Madurai,Madurai,published_map,Territory Match,128,,,,,,new,no (no freight rate for this town)
+HPL,UDAIPUR,Rajasthan_Kota,Kota,published_map,Territory Match,224,,,,Rajasthan_Kota,published_map,unchanged,yes
+HPL,UJJAIN,Madhya Pradesh_Indore,Indore,published_map,Territory Match,52,,,,Madhya Pradesh_Indore,published_map,unchanged,yes
+HPL,UMBERGAON,Gujarat_Surat,Surat,published_map,Territory Match,105,,,,,,new,no (no freight rate for this town)
+HPL,VALSAD,Gujarat_Surat,Surat,published_map,Territory Match,66,,,,Gujarat_Surat,published_map,unchanged,yes
+HPL,VAPI,Gujarat_Surat,Surat,published_map,Territory Match,92,,,,,,new,no (no freight rate for this town)
+HPL,VERAWAL,Gujarat_Rajkot,Rajkot,published_map,Territory Match,160,,,,,,new,no (no freight rate for this town)
+HPL,VIJAYAPURA,Karnataka_Bellary,Ballari,published_map,Territory Match,227,,,,,,new,no (no freight rate for this town)
+HPL,VIJAYWADA,Andhra Pradesh_Guntur,Guntur,published_map,Territory Match,31,,,,,,new,no (no freight rate for this town)
+HPL,VILLUPURAM,Tamil Nadu_Chennai,Chennai,published_map,Territory Match,154,,,,,,new,yes
+HPL,VIRAMGAM,Gujarat_Ahmedabad,Ahmedabad,published_map,Territory Match,56,,,,,,new,no (no freight rate for this town)
+HPL,VISNAGAR,Gujarat_Mehsana,Mahesana,published_map,Territory Match,20,,,,,,new,no (no freight rate for this town)
+HPL,WAGHODIA,Gujarat_Vadodara,Vadodara,published_map,Territory Match,20,,,,,,new,no (no freight rate for this town)
+HPL,WAI,Maharashtra_Kolhapur,Kolhapur,published_map,Territory Match,144,,,,,,new,yes
+HPL,WANI,Maharashtra_Nagpur,Nagpur,published_map,Territory Match,122,,,,,,new,no (no freight rate for this town)
+HPL,WARANGAL,Telangana_Hyderabad,Hyderabad,published_map,Territory Match,138,,,,,,new,yes
+HPL,WARDHA,Maharashtra_Nagpur,Nagpur,published_map,Territory Match,68,,,,,,new,yes
+HPL,YAMUNANAGAR,Haryana_Panipat,Panipat,published_map,Territory Match,88,,,,Haryana_Panipat,published_map,unchanged,yes
+HPL,YAWATMAL,Maharashtra_Nagpur,Nagpur,published_map,Territory Match,130,,,,,,new,no (no freight rate for this town)
+IOCL,ABU ROAD,Udaipur,Udaipur,inferred_location,Inferred Location Match,95,,yes,,,,new,yes
+IOCL,AGRA,Mathura,Mathura,inferred_location,Inferred Location Match,49,,yes,,Mathura,inferred_via_hpl,relabel only,yes
+IOCL,AJMER,Jaipur,Jaipur,inferred_location,Inferred Location Match,125,,yes,,Jaipur,inferred_via_hpl,relabel only,yes
+IOCL,ALAPPUZHA,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,ALIGARH,Mathura,Mathura,inferred_location,Inferred Location Match,58,,yes,,Mathura,inferred_via_hpl,relabel only,yes
+IOCL,ALLAHABAD,Chandauli,Chandauli,inferred_location,Inferred Location Match,145,,yes,,,,new,yes
+IOCL,AMBALA,Panipat,Panipat,inferred_location,Inferred Location Match,109,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+IOCL,AMRAWATI,Nagpur,Nagpur,inferred_location,Inferred Location Match,141,,yes,,,,new,yes
+IOCL,AMRITSAR,Jalandhar,Jalandhar,inferred_location,Inferred Location Match,74,,yes,,,,new,yes
+IOCL,ANANTAPUR,Chittoor,Chittoor,inferred_location,Inferred Location Match,229,,yes,,,,new,yes
+IOCL,ANNAND,Vadodara,Vadodara,inferred_location,Inferred Location Match,38,,yes,,,,new,yes
+IOCL,ASANGAON,Mumbai,Mumbai,inferred_location,Inferred Location Match,60,,yes,,,,new,yes
+IOCL,BADDI,Solan,Solan,inferred_location,Inferred Location Match,31,,yes,,,,new,yes
+IOCL,BAHADURGARH,Gurgaon,Gurugram,inferred_location,Inferred Location Match,27,,yes,,,,new,yes
+IOCL,BARAMATI,Pune,Pune,inferred_location,Inferred Location Match,87,,yes,,,,new,yes
+IOCL,BARJORA,Paschim Bardhaman,Barddhaman,inferred_location,Inferred Location Match,61,,yes,,,,new,yes
+IOCL,BARMER,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,171,,yes,,Jodhpur,inferred_via_hpl,relabel only,yes
+IOCL,BAWAL,Gurgaon,Gurugram,inferred_location,Inferred Location Match,61,,yes,,,,new,yes
+IOCL,BEED,Aurangabad,Aurangabad,inferred_location,Inferred Location Match,108,,yes,,Aurangabad,inferred_via_hpl,relabel only,yes
+IOCL,BEHROR,Alwar (Bhiwadi),Bhiwadi,inferred_location,Inferred Location Match,67,,yes,,,,new,yes
+IOCL,BELGAUM,Dharwad,Dharwad,inferred_location,Inferred Location Match,69,,yes,,,,new,yes
+IOCL,BERHAMPUR,Cuttack,Cuttack,inferred_location,Inferred Location Match,171,,yes,,,,new,yes
+IOCL,BHADOHI,Chandauli,Chandauli,inferred_location,Inferred Location Match,72,,yes,,,,new,yes
+IOCL,BHATINDA,Ludhiana,Ludhiana,inferred_location,Inferred Location Match,118,,yes,,Ludhiana,inferred_via_hpl,relabel only,yes
+IOCL,BHAVNAGAR,Surat,Surat,inferred_location,Inferred Location Match,94,,,,,,new,yes
+IOCL,BHILWARA,Udaipur,Udaipur,inferred_location,Inferred Location Match,126,,yes,,,,new,yes
+IOCL,BHIND,Gwalior,Gwalior,inferred_location,Inferred Location Match,72,,yes,,Gwalior,inferred_via_hpl,relabel only,yes
+IOCL,BHIWADI,Alwar (Bhiwadi),Bhiwadi,inferred_location,Inferred Location Match,0,,,,,,new,yes
+IOCL,BHUBANESWAR,Cuttack,Cuttack,inferred_location,Inferred Location Match,22,,yes,,,,new,yes
+IOCL,BIDAR,Rangareddy,Rangareddi,inferred_location,Inferred Location Match,98,yes,,,,,new,yes
+IOCL,BIKANER,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,197,,yes,,Jodhpur,inferred_via_hpl,relabel only,yes
+IOCL,BILASPUR,Chattisgarh,Chhattisgarh (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,BORIVALLI,Mumbai,Mumbai,inferred_location,Inferred Location Match,18,,yes,,,,new,yes
+IOCL,BURHANPUR,Indore,Indore,inferred_location,Inferred Location Match,162,,yes,,Indore,inferred_via_hpl,relabel only,yes
+IOCL,BYRNIHAT,Guwahati,Guwahati,inferred_location,Inferred Location Match,20,yes,,,,,new,yes
+IOCL,CALICUT,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,CHINDWARA,Jabalpur,Jabalpur,inferred_location,Inferred Location Match,161,,yes,,Jabalpur,inferred_via_hpl,relabel only,yes
+IOCL,CHITTOREGARH,Udaipur,Udaipur,inferred_location,Inferred Location Match,98,,yes,,,,new,yes
+IOCL,CUDDAPAH,Chittoor,Chittoor,inferred_location,Inferred Location Match,144,,yes,,,,new,yes
+IOCL,DEGLOOR,Aurangabad,Aurangabad,inferred_location,Inferred Location Match,277,,yes,,,,new,yes
+IOCL,DEHRADUN,Haridwar,Haridwar,inferred_location,Inferred Location Match,44,,yes,,Haridwar,inferred_via_hpl,relabel only,yes
+IOCL,DHANBAD,Jharkhand,Jharkhand (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,DHAR,Indore,Indore,inferred_location,Inferred Location Match,57,,yes,,Indore,inferred_via_hpl,relabel only,yes
+IOCL,DHARUHERA,Gurgaon,Gurugram,inferred_location,Inferred Location Match,36,,yes,,,,new,yes
+IOCL,DHORAJI,Rajkot,Rajkot,inferred_location,Inferred Location Match,71,,yes,,,,new,yes
+IOCL,DHULE,Jalgaon,Jalgaon,inferred_location,Inferred Location Match,83,,yes,,Jalgaon,inferred_via_hpl,relabel only,yes
+IOCL,DISPUR,Guwahati,Guwahati,inferred_location,Inferred Location Match,8,,,,,,new,yes
+IOCL,DURG,Chattisgarh,Chhattisgarh (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,DURGAPUR,Paschim Bardhaman,Barddhaman,inferred_location,Inferred Location Match,63,,yes,,,,new,yes
+IOCL,ELURU,Guntur,Guntur,inferred_location,Inferred Location Match,83,,yes,,Guntur,inferred_via_hpl,relabel only,yes
+IOCL,ERODE,Salem,Salem,inferred_location,Inferred Location Match,58,,yes,,Coimbatore,inferred_via_hpl,zone change,yes
+IOCL,ETAWAH,Kanpur,Kanpur,inferred_location,Inferred Location Match,137,,yes,,Kanpur,inferred_via_hpl,relabel only,yes
+IOCL,FATEHPUR,Kanpur,Kanpur,inferred_location,Inferred Location Match,76,,yes,,Kanpur,inferred_via_hpl,relabel only,yes
+IOCL,GADARWARA,Jabalpur,Jabalpur,inferred_location,Inferred Location Match,122,,yes,,,,new,yes
+IOCL,GADCHIROLI,Nagpur,Nagpur,inferred_location,Inferred Location Match,144,,yes,,,,new,yes
+IOCL,GANGTOK (SIKKIM),Jalpaiguri,Jalpaiguri,inferred_location,Inferred Location Match,91,yes,,,,,new,yes
+IOCL,GAYA,Bihar,Bihar (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,GHAZIPUR,Chandauli,Chandauli,inferred_location,Inferred Location Match,48,,yes,,,,new,yes
+IOCL,GODHRA,Vadodara,Vadodara,inferred_location,Inferred Location Match,67,,yes,,,,new,yes
+IOCL,GONDIA,Nagpur,Nagpur,inferred_location,Inferred Location Match,120,,yes,,Nagpur,inferred_via_hpl,relabel only,yes
+IOCL,GORAKHPUR,Chandauli,Chandauli,inferred_location,Inferred Location Match,168,,yes,,,,new,yes
+IOCL,GUNA,Bhopal,Bhopal,inferred_location,Inferred Location Match,155,,yes,,Bhopal,inferred_via_hpl,relabel only,yes
+IOCL,HALDAWANI,Udham Singh Nagar,Rudrapur,inferred_location,Inferred Location Match,30,,yes,,,,new,yes
+IOCL,HALDIA,Howrah,Howrah,inferred_location,Inferred Location Match,61,,yes,,,,new,yes
+IOCL,HALOL,Vadodara,Vadodara,inferred_location,Inferred Location Match,35,,yes,,,,new,yes
+IOCL,HALVAD,Rajkot,Rajkot,inferred_location,Inferred Location Match,90,,yes,,,,new,yes
+IOCL,HATHRAS,Mathura,Mathura,inferred_location,Inferred Location Match,39,,yes,,Mathura,inferred_via_hpl,relabel only,yes
+IOCL,HIMMATNAGAR,Mehsana,Mahesana,inferred_location,Inferred Location Match,59,,yes,,,,new,yes
+IOCL,HINGANGHAT,Nagpur,Nagpur,inferred_location,Inferred Location Match,71,,yes,,,,new,yes
+IOCL,HISSAR,Panipat,Panipat,inferred_location,Inferred Location Match,124,,yes,,,,new,yes
+IOCL,HOSUR,Salem,Salem,inferred_location,Inferred Location Match,125,,yes,,,,new,yes
+IOCL,HUBLI,Dharwad,Dharwad,inferred_location,Inferred Location Match,18,,yes,,,,new,yes
+IOCL,IDUKKI,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,JAGADHARI,Panipat,Panipat,inferred_location,Inferred Location Match,93,,yes,,,,new,yes
+IOCL,JALNA,Aurangabad,Aurangabad,inferred_location,Inferred Location Match,57,,yes,,Aurangabad,inferred_via_hpl,relabel only,yes
+IOCL,JAMSHEDPUR,Jharkhand,Jharkhand (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,JETPUR,Rajkot,Rajkot,inferred_location,Inferred Location Match,62,,yes,,,,new,yes
+IOCL,JUNAGADH,Rajkot,Rajkot,inferred_location,Inferred Location Match,92,,yes,,,,new,yes
+IOCL,KADI,Mehsana,Mahesana,inferred_location,Inferred Location Match,34,,yes,,,,new,yes
+IOCL,KAIMUR,Bihar,Bihar (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,KAITHAL,Panipat,Panipat,inferred_location,Inferred Location Match,72,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+IOCL,KAKINADA,Visak,Visakhapatnam,inferred_location,Inferred Location Match,130,,yes,,Visak,inferred_via_hpl,relabel only,yes
+IOCL,KALA AMB,Solan,Solan,inferred_location,Inferred Location Match,47,,yes,,,,new,yes
+IOCL,KANHANGAD,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,KANNUR,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,KARAIKAL,Pondicherry,Puducherry,inferred_location,Inferred Location Match,113,,yes,,,,new,yes
+IOCL,KARNAL,Panipat,Panipat,inferred_location,Inferred Location Match,34,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+IOCL,KASHIPUR,Udham Singh Nagar,Rudrapur,inferred_location,Inferred Location Match,50,,yes,,,,new,yes
+IOCL,KASORGOD,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,KATIHAR,Bihar,Bihar (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,KHAMGAON,Jalgaon,Jalgaon,inferred_location,Inferred Location Match,109,,yes,,,,new,yes
+IOCL,KHAMMAM,Suryapet,Suriapet,inferred_location,Inferred Location Match,57,,yes,,Suryapet,inferred_via_hpl,relabel only,yes
+IOCL,KHANDWA,Indore,Indore,inferred_location,Inferred Location Match,113,,yes,,,,new,yes
+IOCL,KHARGONE,Indore,Indore,inferred_location,Inferred Location Match,102,,yes,,,,new,yes
+IOCL,KHEDA,Ahmedabad,Ahmedabad,inferred_location,Inferred Location Match,32,,yes,,Ahmedabad,inferred_via_hpl,relabel only,yes
+IOCL,KHOPOLI,Mumbai,Mumbai,inferred_location,Inferred Location Match,58,,yes,,,,new,yes
+IOCL,KOLAR,Bangalore,Bengaluru,inferred_location,Inferred Location Match,61,,yes,,Bangalore,inferred_via_hpl,relabel only,yes
+IOCL,KOLLAM,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,KOTTAYAM,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,KUDAL,Kolhapur,Kolhapur,inferred_location,Inferred Location Match,96,,yes,,,,new,yes
+IOCL,KURNOOL,Guntur,Guntur,inferred_location,Inferred Location Match,264,,yes,,Guntur,inferred_via_hpl,relabel only,yes
+IOCL,KURUKSHETRA,Panipat,Panipat,inferred_location,Inferred Location Match,66,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+IOCL,LASALGAON/CHALISGAON,Nashik,Nashik,inferred_location,Inferred Location Match,50,,,,,,new,yes
+IOCL,LUCKNOW,Kanpur,Kanpur,inferred_location,Inferred Location Match,71,,yes,,Kanpur,inferred_via_hpl,relabel only,yes
+IOCL,MAHBOOBNAGAR,Rangareddy,Rangareddi,inferred_location,Inferred Location Match,63,,yes,,,,new,yes
+IOCL,MAHUVA,Surat,Surat,inferred_location,Inferred Location Match,111,,,,,,new,yes
+IOCL,MANDSAUR,Indore,Indore,inferred_location,Inferred Location Match,170,,yes,,Indore,inferred_via_hpl,relabel only,yes
+IOCL,MEDAK,Rangareddy,Rangareddi,inferred_location,Inferred Location Match,86,,yes,,,,new,yes
+IOCL,MEERUT,Gautam Budh nagar,Noida,inferred_location,Inferred Location Match,58,,yes,,,,new,yes
+IOCL,MODINAGAR,Gautam Budh nagar,Noida,inferred_location,Inferred Location Match,37,,yes,,,,new,yes
+IOCL,MORADABAD,Bareilly,Bareilly,inferred_location,Inferred Location Match,83,,yes,,Bareilly,inferred_via_hpl,relabel only,yes
+IOCL,MORBI,Rajkot,Rajkot,inferred_location,Inferred Location Match,59,,yes,,Rajkot,inferred_via_hpl,relabel only,yes
+IOCL,MUDHOL,Dharwad,Dharwad,inferred_location,Inferred Location Match,101,,,,,,new,yes
+IOCL,MUNDRA,Gandhidham,Gandhidham,inferred_location,Inferred Location Match,50,,,,,,new,yes
+IOCL,MUZAFFARNAGAR,Gautam Budh nagar,Noida,inferred_location,Inferred Location Match,106,,yes,,,,new,yes
+IOCL,MYSORE,Bangalore,Bengaluru,inferred_location,Inferred Location Match,128,,yes,,,,new,yes
+IOCL,Machlipatnam,Guntur,Guntur,inferred_location,Inferred Location Match,74,,yes,,,,new,yes
+IOCL,NAGAUR,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,127,,yes,,Jodhpur,inferred_via_hpl,relabel only,yes
+IOCL,NALANDA,Bihar,Bihar (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,NALGONDA,Suryapet,Suriapet,inferred_location,Inferred Location Match,39,,yes,,Suryapet,inferred_via_hpl,relabel only,yes
+IOCL,NANDED,Aurangabad,Aurangabad,inferred_location,Inferred Location Match,222,,yes,,Aurangabad,inferred_via_hpl,relabel only,yes
+IOCL,NANDYAL,Guntur,Guntur,inferred_location,Inferred Location Match,230,,yes,,Guntur,inferred_via_hpl,relabel only,yes
+IOCL,NARSARAOPET,Guntur,Guntur,inferred_location,Inferred Location Match,44,,yes,,,,new,yes
+IOCL,NARWANA,Panipat,Panipat,inferred_location,Inferred Location Match,85,,yes,,,,new,yes
+IOCL,NEEMUCH,Indore,Indore,inferred_location,Inferred Location Match,218,,yes,,Indore,inferred_via_hpl,relabel only,yes
+IOCL,NELLORE,Chittoor,Chittoor,inferred_location,Inferred Location Match,168,,yes,,,,new,yes
+IOCL,NOKHA,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,151,,yes,,,,new,yes
+IOCL,ONGOLE,Guntur,Guntur,inferred_location,Inferred Location Match,99,,yes,,,,new,yes
+IOCL,PADRA,Vadodara,Vadodara,inferred_location,Inferred Location Match,14,,yes,,,,new,yes
+IOCL,PALANPUR,Mehsana,Mahesana,inferred_location,Inferred Location Match,64,,yes,,,,new,yes
+IOCL,PALEJ,Vadodara,Vadodara,inferred_location,Inferred Location Match,45,,yes,,,,new,yes
+IOCL,PALGHAT,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,PALI,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,64,,yes,,Jodhpur,inferred_via_hpl,relabel only,yes
+IOCL,PAONTA SAHIB,Solan,Solan,inferred_location,Inferred Location Match,72,,yes,,,,new,yes
+IOCL,PARBHANI,Aurangabad,Aurangabad,inferred_location,Inferred Location Match,164,,yes,,Aurangabad,inferred_via_hpl,relabel only,yes
+IOCL,PARWANU,Solan,Solan,inferred_location,Inferred Location Match,16,,yes,,,,new,yes
+IOCL,PATHANAMTH,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,PHALODI,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,115,,yes,,Jodhpur,inferred_via_hpl,relabel only,yes
+IOCL,PIDUGURALLA,Guntur,Guntur,inferred_location,Inferred Location Match,64,,yes,,,,new,yes
+IOCL,PORBANDAR,Rajkot,Rajkot,inferred_location,Inferred Location Match,142,,yes,,Rajkot,inferred_via_hpl,relabel only,yes
+IOCL,RAI BAREILLY,Kanpur,Kanpur,inferred_location,Inferred Location Match,92,,,,,,new,yes
+IOCL,RAIGAD,Mumbai,Mumbai,inferred_location,Inferred Location Match,62,,yes,,Mumbai,inferred_via_hpl,relabel only,yes
+IOCL,RAIGARH,Chattisgarh,Chhattisgarh (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,RAJNANDGAON,Chattisgarh,Chhattisgarh (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,RAJPALAYAM,Madurai,Madurai,inferred_location,Inferred Location Match,81,,yes,,,,new,yes
+IOCL,RAJPURA,Ludhiana,Ludhiana,inferred_location,Inferred Location Match,86,,yes,,,,new,yes
+IOCL,RANIPET,Chennai,Chennai,inferred_location,Inferred Location Match,104,,yes,,Chennai,inferred_via_hpl,relabel only,yes
+IOCL,RATLAM,Indore,Indore,inferred_location,Inferred Location Match,106,,yes,,Indore,inferred_via_hpl,relabel only,yes
+IOCL,RATNAGARI,Kolhapur,Kolhapur,inferred_location,Inferred Location Match,103,,yes,,,,new,yes
+IOCL,REWARI,Gurgaon,Gurugram,inferred_location,Inferred Location Match,49,,yes,,Gurgaon,inferred_via_hpl,relabel only,yes
+IOCL,ROHA,Mumbai,Mumbai,inferred_location,Inferred Location Match,75,,yes,,,,new,yes
+IOCL,ROORKEE,Haridwar,Haridwar,inferred_location,Inferred Location Match,27,,yes,,,,new,yes
+IOCL,ROURKELA,Bargarh,Bargarh,inferred_location,Inferred Location Match,162,,yes,,,,new,yes
+IOCL,RUDERPUR,Udham Singh Nagar,Rudrapur,inferred_location,Inferred Location Match,0,,,,,,new,yes
+IOCL,SAHARANPUR,Gautam Budh nagar,Noida,inferred_location,Inferred Location Match,156,,yes,,,,new,yes
+IOCL,SAMBALPUR,Bargarh,Bargarh,inferred_location,Inferred Location Match,40,,yes,,Bargarh,inferred_via_hpl,relabel only,yes
+IOCL,SANAND,Ahmedabad,Ahmedabad,inferred_location,Inferred Location Match,21,,yes,,,,new,yes
+IOCL,SANGLI,Kolhapur,Kolhapur,inferred_location,Inferred Location Match,40,,yes,,Kolhapur,inferred_via_hpl,relabel only,yes
+IOCL,SANTEJ,Ahmedabad,Ahmedabad,inferred_location,Inferred Location Match,15,,yes,,,,new,yes
+IOCL,SATNA,Rewa,Rewa,inferred_location,Inferred Location Match,47,,yes,,Rewa,inferred_via_hpl,relabel only,yes
+IOCL,SAVLI,Vadodara,Vadodara,inferred_location,Inferred Location Match,29,,yes,,,,new,yes
+IOCL,SHILLONG,Guwahati,Guwahati,inferred_location,Inferred Location Match,70,yes,,,,,new,yes
+IOCL,SHIMOGA,Mangalore,Mangaluru,inferred_location,Inferred Location Match,137,,yes,,Mangalore,inferred_via_hpl,relabel only,yes
+IOCL,SHIVPURI,Gwalior,Gwalior,inferred_location,Inferred Location Match,103,,yes,,Gwalior,inferred_via_hpl,relabel only,yes
+IOCL,SIKAR,Jaipur,Jaipur,inferred_location,Inferred Location Match,100,,yes,,Jaipur,inferred_via_hpl,relabel only,yes
+IOCL,SILIGUDI,Jalpaiguri,Jalpaiguri,inferred_location,Inferred Location Match,37,,yes,,,,new,yes
+IOCL,SIROHI,Udaipur,Udaipur,inferred_location,Inferred Location Match,94,,yes,,,,new,yes
+IOCL,SIRSA,Panipat,Panipat,inferred_location,Inferred Location Match,188,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+IOCL,SITARGANJ,Udham Singh Nagar,Rudrapur,inferred_location,Inferred Location Match,30,,yes,,,,new,yes
+IOCL,SIVAKASI,Madurai,Madurai,inferred_location,Inferred Location Match,63,,yes,,,,new,yes
+IOCL,SOHAGPUR,Bhopal,Bhopal,inferred_location,Inferred Location Match,102,,yes,,,,new,yes
+IOCL,SOLAPUR,Kolhapur,Kolhapur,inferred_location,Inferred Location Match,209,,yes,,Kolhapur,inferred_via_hpl,relabel only,yes
+IOCL,SONEPAT,Panipat,Panipat,inferred_location,Inferred Location Match,44,,yes,,,,new,yes
+IOCL,SRIGANGANAGAR,Alwar (Bhiwadi),Bhiwadi,inferred_location,Inferred Location Match,347,,yes,,,,new,yes
+IOCL,SRIKAKULAM,Visak,Visakhapatnam,inferred_location,Inferred Location Match,101,,yes,,Visak,inferred_via_hpl,relabel only,yes
+IOCL,SRINAGAR,Jammu,Jammu,inferred_location,Inferred Location Match,150,,yes,,Jammu,inferred_via_hpl,relabel only,yes
+IOCL,TALOJA,Mumbai,Mumbai,inferred_location,Inferred Location Match,23,,yes,,,,new,yes
+IOCL,TARAPUR,Mumbai,Mumbai,inferred_location,Inferred Location Match,91,,yes,,,,new,yes
+IOCL,THANE,Mumbai,Mumbai,inferred_location,Inferred Location Match,16,,yes,,Mumbai,inferred_via_hpl,relabel only,yes
+IOCL,THRISSUR,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,TIRUPATHI,Chittoor,Chittoor,inferred_location,Inferred Location Match,59,,yes,,,,new,yes
+IOCL,TIRUPUR,Coimbatore,Coimbatore,inferred_location,Inferred Location Match,44,,yes,,,,new,yes
+IOCL,TRIVANDRUM,Kerala,Kerala (state-wide zone),state_zone,Territory Match,,,,,,,new,yes
+IOCL,TUMKUR,Bangalore,Bengaluru,inferred_location,Inferred Location Match,67,,yes,,,,new,yes
+IOCL,TUTICORIN,Madurai,Madurai,inferred_location,Inferred Location Match,128,,yes,,,,new,yes
+IOCL,UJJAIN,Indore,Indore,inferred_location,Inferred Location Match,52,,yes,,Indore,inferred_via_hpl,relabel only,yes
+IOCL,UMBERGAON,Surat,Surat,inferred_location,Inferred Location Match,105,,yes,,,,new,yes
+IOCL,VALSAD,Surat,Surat,inferred_location,Inferred Location Match,66,,yes,,Surat,inferred_via_hpl,relabel only,yes
+IOCL,VAPI,Surat,Surat,inferred_location,Inferred Location Match,92,,yes,,,,new,yes
+IOCL,VARANASI,Chandauli,Chandauli,inferred_location,Inferred Location Match,27,,yes,,,,new,yes
+IOCL,VERAWAL,Rajkot,Rajkot,inferred_location,Inferred Location Match,160,,yes,,,,new,yes
+IOCL,VIJAYWADA,Guntur,Guntur,inferred_location,Inferred Location Match,31,,yes,,,,new,yes
+IOCL,VIRAMGAM,Ahmedabad,Ahmedabad,inferred_location,Inferred Location Match,56,,yes,,,,new,yes
+IOCL,VISNAGAR,Mehsana,Mahesana,inferred_location,Inferred Location Match,20,,yes,,,,new,yes
+IOCL,WAGHODIA,Vadodara,Vadodara,inferred_location,Inferred Location Match,20,,yes,,,,new,yes
+IOCL,WANI,Nagpur,Nagpur,inferred_location,Inferred Location Match,122,,yes,,,,new,yes
+IOCL,WARDHA,Nagpur,Nagpur,inferred_location,Inferred Location Match,68,,yes,,,,new,yes
+IOCL,YAMUNANAGAR,Panipat,Panipat,inferred_location,Inferred Location Match,88,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+IOCL,YAWATMAL,Nagpur,Nagpur,inferred_location,Inferred Location Match,130,,yes,,,,new,yes
+OPaL,ABU ROAD,Udaipur,Udaipur,inferred_location,Inferred Location Match,95,,yes,,,,new,yes
+OPaL,AJMER,Jaipur,Jaipur,inferred_location,Inferred Location Match,125,,yes,,Jaipur,inferred_via_hpl,relabel only,yes
+OPaL,ALAPPUZHA,Cochin,Kochi,inferred_location,Inferred Location Match,51,,,,,,new,yes
+OPaL,ALIGARH,Agra,Agra,inferred_location,Inferred Location Match,78,,yes,,,,new,yes
+OPaL,ALLAHABAD,Varanasi,Varanasi,inferred_location,Inferred Location Match,118,,yes,,,,new,no (no freight rate for this town)
+OPaL,ALWAR,Bhiwadi,Bhiwadi,inferred_location,Inferred Location Match,76,,yes,,Bhiwadi,inferred_via_hpl,relabel only,yes
+OPaL,AMBALA,Panipat,Panipat,inferred_location,Inferred Location Match,109,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+OPaL,AMRAWATI,Nagpur,Nagpur,inferred_location,Inferred Location Match,141,,yes,,,,new,no (no freight rate for this town)
+OPaL,ANKLESHWAR,Dahej,Dahej,inferred_location,Inferred Location Match,42,,yes,,,,new,yes
+OPaL,ANNAND,Vadodara,Vadodara,inferred_location,Inferred Location Match,38,,yes,,,,new,no (no freight rate for this town)
+OPaL,ASANGAON,Bhiwandi,Bhiwandi,inferred_location,Inferred Location Match,30,,yes,,,,new,yes
+OPaL,BAHADURGARH,Gurgaon,Gurugram,inferred_location,Inferred Location Match,27,,yes,,,,new,yes
+OPaL,BARAMATI,Pune,Pune,inferred_location,Inferred Location Match,87,,yes,,,,new,no (no freight rate for this town)
+OPaL,BAREILLY,Rudrapur,Rudrapur,inferred_location,Inferred Location Match,68,yes,,,,,new,yes
+OPaL,BARJORA,Puruliya,Puruliya,inferred_location,Inferred Location Match,95,,,,,,new,yes
+OPaL,BARMER,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,171,,yes,,Jodhpur,inferred_via_hpl,relabel only,yes
+OPaL,BARSI,Solapur,Sholapur,inferred_location,Inferred Location Match,67,,yes,,,,new,no (no freight rate for this town)
+OPaL,BAWAL,Gurgaon,Gurugram,inferred_location,Inferred Location Match,61,,yes,,,,new,no (no freight rate for this town)
+OPaL,BEED,Aurangabad (MH),Aurangabad,inferred_location,Inferred Location Match,108,,yes,,Aurangabad (MH),inferred_via_hpl,relabel only,yes
+OPaL,BEHROR,Bhiwadi,Bhiwadi,inferred_location,Inferred Location Match,67,,yes,,,,new,yes
+OPaL,BELGAUM,Hubli,Hubballi,inferred_location,Inferred Location Match,88,,yes,,,,new,yes
+OPaL,BERHAMPUR,Cuttack,Cuttack,inferred_location,Inferred Location Match,171,,yes,,,,new,no (no freight rate for this town)
+OPaL,BHADOHI,Varanasi,Varanasi,inferred_location,Inferred Location Match,45,,yes,,,,new,yes
+OPaL,BHARUCH,Dahej,Dahej,inferred_location,Inferred Location Match,40,,yes,,Vadodara,inferred_via_hpl,zone change,yes
+OPaL,BHATINDA,Ludhiana,Ludhiana,inferred_location,Inferred Location Match,118,,yes,,Ludhiana,inferred_via_hpl,relabel only,yes
+OPaL,BHILWARA,Kota,Kota,inferred_location,Inferred Location Match,122,,yes,,Kota,inferred_via_hpl,relabel only,yes
+OPaL,BHIND,Gwalior,Gwalior,inferred_location,Inferred Location Match,72,,yes,,Gwalior,inferred_via_hpl,relabel only,yes
+OPaL,BHUBANESWAR,Cuttack,Cuttack,inferred_location,Inferred Location Match,22,,yes,,,,new,yes
+OPaL,BIDAR,Gulbarga,Kalaburagi,inferred_location,Inferred Location Match,96,,yes,,Bellary,inferred_via_hpl,zone change,no (no freight rate for this town)
+OPaL,BIKANER,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,197,,yes,,Jodhpur,inferred_via_hpl,relabel only,yes
+OPaL,BORIVALLI,Mumbai,Mumbai,inferred_location,Inferred Location Match,18,,yes,,,,new,no (no freight rate for this town)
+OPaL,BURHANPUR,Indore,Indore,inferred_location,Inferred Location Match,162,,yes,,Indore,inferred_via_hpl,relabel only,yes
+OPaL,CHINDWARA,Jabalpur,Jabalpur,inferred_location,Inferred Location Match,161,,yes,,Jabalpur,inferred_via_hpl,relabel only,yes
+OPaL,CHITTOOR,Tirupathi,Tirupati,inferred_location,Inferred Location Match,59,,yes,,,,new,yes
+OPaL,CHITTOREGARH,Udaipur,Udaipur,inferred_location,Inferred Location Match,98,,yes,,,,new,no (no freight rate for this town)
+OPaL,DHANBAD,Puruliya,Puruliya,inferred_location,Inferred Location Match,52,yes,,,,,new,no (no freight rate for this town)
+OPaL,DHAR,Indore,Indore,inferred_location,Inferred Location Match,57,,yes,,Indore,inferred_via_hpl,relabel only,yes
+OPaL,DHARUHERA,Gurgaon,Gurugram,inferred_location,Inferred Location Match,36,,yes,,,,new,no (no freight rate for this town)
+OPaL,DHORAJI,Rajkot,Rajkot,inferred_location,Inferred Location Match,71,,yes,,,,new,yes
+OPaL,DHULE,Jalgaon,Jalgaon,inferred_location,Inferred Location Match,83,,yes,,Jalgaon,inferred_via_hpl,relabel only,yes
+OPaL,DISPUR,Guwahati,Guwahati,inferred_location,Inferred Location Match,8,,,,,,new,no (no freight rate for this town)
+OPaL,DURG,Raipur,Raipur,inferred_location,Inferred Location Match,37,,,,,,new,yes
+OPaL,DURGAPUR,Puruliya,Puruliya,inferred_location,Inferred Location Match,99,,,,,,new,yes
+OPaL,ELURU,Vijaywada/Guntur,Vijayawada,inferred_location,Inferred Location Match,54,,yes,,,,new,yes
+OPaL,FATEHPUR,Kanpur,Kanpur,inferred_location,Inferred Location Match,76,,yes,,Kanpur,inferred_via_hpl,relabel only,yes
+OPaL,FAZILKA,Ludhiana,Ludhiana,inferred_location,Inferred Location Match,184,,yes,,Ludhiana,inferred_via_hpl,relabel only,yes
+OPaL,FIROZPUR,Ludhiana,Ludhiana,inferred_location,Inferred Location Match,118,,yes,,,,new,no (no freight rate for this town)
+OPaL,GADARWARA,Jabalpur,Jabalpur,inferred_location,Inferred Location Match,122,,yes,,,,new,yes
+OPaL,GADCHIROLI,Nagpur,Nagpur,inferred_location,Inferred Location Match,144,,yes,,,,new,no (no freight rate for this town)
+OPaL,GAYA,Patna,Patna,inferred_location,Inferred Location Match,90,,,,,,new,yes
+OPaL,GHAZIPUR,Varanasi,Varanasi,inferred_location,Inferred Location Match,65,,yes,,Varanasi,inferred_via_hpl,relabel only,yes
+OPaL,GODHRA,Vadodara,Vadodara,inferred_location,Inferred Location Match,67,,yes,,,,new,yes
+OPaL,GONDIA,Nagpur,Nagpur,inferred_location,Inferred Location Match,120,,yes,,Nagpur,inferred_via_hpl,relabel only,yes
+OPaL,GORAKHPUR,Varanasi,Varanasi,inferred_location,Inferred Location Match,165,,yes,,Varanasi,inferred_via_hpl,relabel only,yes
+OPaL,GUNTUR,Vijaywada/Guntur,Vijayawada,inferred_location,Inferred Location Match,31,,yes,,,,new,yes
+OPaL,HALDAWANI,Rudrapur,Rudrapur,inferred_location,Inferred Location Match,30,,yes,,,,new,no (no freight rate for this town)
+OPaL,HALDIA,Kolkata,Kolkata,inferred_location,Inferred Location Match,62,,yes,,,,new,yes
+OPaL,HALOL,Vadodara,Vadodara,inferred_location,Inferred Location Match,35,,yes,,,,new,yes
+OPaL,HALVAD,Rajkot,Rajkot,inferred_location,Inferred Location Match,90,,yes,,,,new,no (no freight rate for this town)
+OPaL,HARIDWAR,Dehradun,Dehradun,inferred_location,Inferred Location Match,44,,yes,,,,new,yes
+OPaL,HATHRAS,Agra,Agra,inferred_location,Inferred Location Match,46,,yes,,,,new,yes
+OPaL,HINGANGHAT,Nagpur,Nagpur,inferred_location,Inferred Location Match,71,,yes,,,,new,yes
+OPaL,HISSAR,Panipat,Panipat,inferred_location,Inferred Location Match,124,,yes,,,,new,no (no freight rate for this town)
+OPaL,IDUKKI,Cochin,Kochi,inferred_location,Inferred Location Match,78,,,,,,new,no (no freight rate for this town)
+OPaL,JAGADHARI,Panipat,Panipat,inferred_location,Inferred Location Match,93,,yes,,,,new,no (no freight rate for this town)
+OPaL,JALANDHAR,Ludhiana,Ludhiana,inferred_location,Inferred Location Match,53,,,,,,new,yes
+OPaL,JALNA,Aurangabad (MH),Aurangabad,inferred_location,Inferred Location Match,57,,yes,,Aurangabad (MH),inferred_via_hpl,relabel only,yes
+OPaL,JETPUR,Rajkot,Rajkot,inferred_location,Inferred Location Match,62,,yes,,,,new,no (no freight rate for this town)
+OPaL,JUNAGADH,Rajkot,Rajkot,inferred_location,Inferred Location Match,92,,yes,,,,new,yes
+OPaL,KADI,Kalol (Mehsana),Kalol,inferred_location,Inferred Location Match,17,,,,,,new,yes
+OPaL,KAIMUR,Varanasi,Varanasi,inferred_location,Inferred Location Match,67,yes,,,,,new,no (no freight rate for this town)
+OPaL,KAITHAL,Panipat,Panipat,inferred_location,Inferred Location Match,72,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+OPaL,KAKINADA,Vishakhapatnam,Visakhapatnam,inferred_location,Inferred Location Match,130,,yes,,,,new,yes
+OPaL,KALA AMB,Kalaamb,Kala Amb,inferred_location,Inferred Location Match,0,,,,,,new,no (no freight rate for this town)
+OPaL,KANNUR,Calicut,Kozhikode,inferred_location,Inferred Location Match,83,,,,,,new,yes
+OPaL,KARAIKAL,Pondichery,Puducherry,inferred_location,Inferred Location Match,113,,yes,,,,new,yes
+OPaL,KARNAL,Panipat,Panipat,inferred_location,Inferred Location Match,34,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+OPaL,KASHIPUR,Rudrapur,Rudrapur,inferred_location,Inferred Location Match,50,,yes,,,,new,yes
+OPaL,KASORGOD,Mangalore,Mangaluru,inferred_location,Inferred Location Match,49,yes,,,,,new,no (no freight rate for this town)
+OPaL,KATHUA,Jammu,Jammu,inferred_location,Inferred Location Match,74,,,,,,new,yes
+OPaL,KHAMGAON,Jalgaon,Jalgaon,inferred_location,Inferred Location Match,109,,yes,,,,new,yes
+OPaL,KHAMMAM,Suryapet,Suriapet,inferred_location,Inferred Location Match,57,,yes,,Suryapet,inferred_via_hpl,relabel only,yes
+OPaL,KHANDWA,Indore,Indore,inferred_location,Inferred Location Match,113,,yes,,,,new,yes
+OPaL,KHARGONE,Indore,Indore,inferred_location,Inferred Location Match,102,,yes,,,,new,yes
+OPaL,KHEDA,Ahmedabad,Ahmedabad,inferred_location,Inferred Location Match,32,,yes,,Ahmedabad,inferred_via_hpl,relabel only,yes
+OPaL,KHOPOLI,Navi Mumbai,Navi Mumbai,inferred_location,Inferred Location Match,45,,yes,,,,new,yes
+OPaL,KOLAR,Bengaluru,Bengaluru,inferred_location,Inferred Location Match,61,,yes,,Bengaluru,inferred_via_hpl,relabel only,yes
+OPaL,KOLLAM,Trivandrum,Thiruvananthapuram,inferred_location,Inferred Location Match,60,,,,,,new,yes
+OPaL,KOTTAYAM,Cochin,Kochi,inferred_location,Inferred Location Match,49,,,,,,new,yes
+OPaL,KUDAL,Kolhapur,Kolhapur,inferred_location,Inferred Location Match,96,,yes,,,,new,yes
+OPaL,KURNOOL,Nandyal,Nandyal,inferred_location,Inferred Location Match,62,,yes,,,,new,yes
+OPaL,KURUKSHETRA,Panipat,Panipat,inferred_location,Inferred Location Match,66,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+OPaL,LASALGAON/CHALISGAON,Nashik,Nashik,inferred_location,Inferred Location Match,50,,,,,,new,no (no freight rate for this town)
+OPaL,LATUR,Solapur,Sholapur,inferred_location,Inferred Location Match,107,,yes,,Kolhapur,inferred_via_hpl,zone change,yes
+OPaL,LUCKNOW,Kanpur,Kanpur,inferred_location,Inferred Location Match,71,,yes,,Kanpur,inferred_via_hpl,relabel only,yes
+OPaL,MAHBOOBNAGAR,Hyderabad,Hyderabad,inferred_location,Inferred Location Match,87,,yes,,,,new,no (no freight rate for this town)
+OPaL,MAHUVA,Bhavnagar,Bhavnagar,inferred_location,Inferred Location Match,85,,yes,,,,new,yes
+OPaL,MANDSAUR,Indore,Indore,inferred_location,Inferred Location Match,170,,yes,,Indore,inferred_via_hpl,relabel only,yes
+OPaL,MATHURA,Agra,Agra,inferred_location,Inferred Location Match,49,,yes,,,,new,yes
+OPaL,MEDAK,Hyderabad,Hyderabad,inferred_location,Inferred Location Match,76,,yes,,Hyderabad,inferred_via_hpl,relabel only,yes
+OPaL,MEERUT,Ghaziabad/Dadri,Ghaziabad,inferred_location,Inferred Location Match,44,,yes,,,,new,yes
+OPaL,MODINAGAR,Ghaziabad/Dadri,Ghaziabad,inferred_location,Inferred Location Match,23,,yes,,,,new,no (no freight rate for this town)
+OPaL,MORADABAD,Rudrapur,Rudrapur,inferred_location,Inferred Location Match,63,yes,,,,,new,yes
+OPaL,MORBI,Rajkot,Rajkot,inferred_location,Inferred Location Match,59,,yes,,Rajkot,inferred_via_hpl,relabel only,yes
+OPaL,MUNDRA,Gandhidham,Gandhidham,inferred_location,Inferred Location Match,50,,,,,,new,yes
+OPaL,MUZAFFARNAGAR,Saharanpur,Saharanpur,inferred_location,Inferred Location Match,57,,yes,,,,new,yes
+OPaL,MYSORE,Bengaluru,Bengaluru,inferred_location,Inferred Location Match,128,,yes,,,,new,no (no freight rate for this town)
+OPaL,Machlipatnam,Vijaywada/Guntur,Vijayawada,inferred_location,Inferred Location Match,63,,yes,,,,new,no (no freight rate for this town)
+OPaL,NAGAUR,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,127,,yes,,Jodhpur,inferred_via_hpl,relabel only,yes
+OPaL,NALANDA,Patna,Patna,inferred_location,Inferred Location Match,59,,,,,,new,no (no freight rate for this town)
+OPaL,NALGONDA,Suryapet,Suriapet,inferred_location,Inferred Location Match,39,,yes,,Suryapet,inferred_via_hpl,relabel only,yes
+OPaL,NAMAKKAL,Karur,Karur,inferred_location,Inferred Location Match,31,,yes,,Madurai,inferred_via_hpl,zone change,yes
+OPaL,NANDED,Aurangabad (MH),Aurangabad,inferred_location,Inferred Location Match,222,,yes,,Aurangabad (MH),inferred_via_hpl,relabel only,yes
+OPaL,NARSARAOPET,Vijaywada/Guntur,Vijayawada,inferred_location,Inferred Location Match,71,,yes,,,,new,no (no freight rate for this town)
+OPaL,NARWANA,Panipat,Panipat,inferred_location,Inferred Location Match,85,,yes,,,,new,no (no freight rate for this town)
+OPaL,NEEMUCH,Indore,Indore,inferred_location,Inferred Location Match,218,,yes,,Indore,inferred_via_hpl,relabel only,yes
+OPaL,NELLORE,Tirupathi,Tirupati,inferred_location,Inferred Location Match,109,,yes,,,,new,yes
+OPaL,NOKHA,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,151,,yes,,,,new,yes
+OPaL,ONGOLE,Vijaywada/Guntur,Vijayawada,inferred_location,Inferred Location Match,129,,yes,,,,new,yes
+OPaL,PADRA,Vadodara,Vadodara,inferred_location,Inferred Location Match,14,,yes,,,,new,yes
+OPaL,PALANPUR,Kalol (Mehsana),Kalol,inferred_location,Inferred Location Match,103,,,,,,new,yes
+OPaL,PALEJ,Vadodara,Vadodara,inferred_location,Inferred Location Match,45,,yes,,,,new,yes
+OPaL,PALGHAT,Coimbatore,Coimbatore,inferred_location,Inferred Location Match,43,yes,,,,,new,no (no freight rate for this town)
+OPaL,PALI,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,64,,yes,,Jodhpur,inferred_via_hpl,relabel only,yes
+OPaL,PAONTA SAHIB,Kalaamb,Kala Amb,inferred_location,Inferred Location Match,40,,yes,,,,new,no (no freight rate for this town)
+OPaL,PARBHANI,Aurangabad (MH),Aurangabad,inferred_location,Inferred Location Match,164,,yes,,Aurangabad (MH),inferred_via_hpl,relabel only,yes
+OPaL,PARWANU,Baddi,Baddi,inferred_location,Inferred Location Match,21,,yes,,,,new,no (no freight rate for this town)
+OPaL,PHALODI,Jodhpur,Jodhpur,inferred_location,Inferred Location Match,115,,yes,,Jodhpur,inferred_via_hpl,relabel only,yes
+OPaL,PIDUGURALLA,Vijaywada/Guntur,Vijayawada,inferred_location,Inferred Location Match,81,,yes,,,,new,no (no freight rate for this town)
+OPaL,PONDICHERRY,Pondichery,Puducherry,inferred_location,Inferred Location Match,0,,,,,,new,yes
+OPaL,PORBANDAR,Rajkot,Rajkot,inferred_location,Inferred Location Match,142,,yes,,Rajkot,inferred_via_hpl,relabel only,yes
+OPaL,RAI BAREILLY,Kanpur,Kanpur,inferred_location,Inferred Location Match,92,,,,,,new,no (no freight rate for this town)
+OPaL,RAIGAD,Mumbai,Mumbai,inferred_location,Inferred Location Match,62,,yes,yes,Mumbai,inferred_via_hpl,relabel only,yes
+OPaL,RAJNANDGAON,Raipur,Raipur,inferred_location,Inferred Location Match,64,,,,,,new,no (no freight rate for this town)
+OPaL,RAJPALAYAM,Madurai,Madurai,inferred_location,Inferred Location Match,81,,yes,,,,new,no (no freight rate for this town)
+OPaL,RAJPURA,Ludhiana,Ludhiana,inferred_location,Inferred Location Match,86,,yes,,,,new,yes
+OPaL,RANIPET,Chennai,Chennai,inferred_location,Inferred Location Match,104,,yes,,Chennai,inferred_via_hpl,relabel only,yes
+OPaL,RATLAM,Indore,Indore,inferred_location,Inferred Location Match,106,,yes,,Indore,inferred_via_hpl,relabel only,yes
+OPaL,RATNAGARI,Kolhapur,Kolhapur,inferred_location,Inferred Location Match,103,,yes,,,,new,no (no freight rate for this town)
+OPaL,REWARI,Gurgaon,Gurugram,inferred_location,Inferred Location Match,49,,yes,,Gurgaon,inferred_via_hpl,relabel only,yes
+OPaL,ROHA,Navi Mumbai,Navi Mumbai,inferred_location,Inferred Location Match,68,,yes,,,,new,yes
+OPaL,ROORKEE,Dehradun,Dehradun,inferred_location,Inferred Location Match,53,,yes,,,,new,yes
+OPaL,ROURKELA,Bargarh,Bargarh,inferred_location,Inferred Location Match,162,,yes,,,,new,yes
+OPaL,RUDERPUR,Rudrapur,Rudrapur,inferred_location,Inferred Location Match,0,,,,,,new,no (no freight rate for this town)
+OPaL,SAMBALPUR,Bargarh,Bargarh,inferred_location,Inferred Location Match,40,,yes,,Bargarh,inferred_via_hpl,relabel only,yes
+OPaL,SANAND,Ahmedabad,Ahmedabad,inferred_location,Inferred Location Match,21,,yes,,,,new,yes
+OPaL,SANGLI,Kolhapur,Kolhapur,inferred_location,Inferred Location Match,40,,yes,,Kolhapur,inferred_via_hpl,relabel only,yes
+OPaL,SANTEJ,Ahmedabad,Ahmedabad,inferred_location,Inferred Location Match,15,,yes,,,,new,no (no freight rate for this town)
+OPaL,SAVLI,Vadodara,Vadodara,inferred_location,Inferred Location Match,29,,yes,,,,new,yes
+OPaL,SHILLONG,Byrnihat,Barni Hat,inferred_location,Inferred Location Match,53,,,,,,new,no (no freight rate for this town)
+OPaL,SHIMOGA,Mangalore,Mangaluru,inferred_location,Inferred Location Match,137,,yes,,Mangalore,inferred_via_hpl,relabel only,no (no freight rate for this town)
+OPaL,SHIVPURI,Gwalior,Gwalior,inferred_location,Inferred Location Match,103,,yes,,Gwalior,inferred_via_hpl,relabel only,yes
+OPaL,SIKAR,Jaipur,Jaipur,inferred_location,Inferred Location Match,100,,yes,,Jaipur,inferred_via_hpl,relabel only,yes
+OPaL,SILIGUDI,Jalpaiguri,Jalpaiguri,inferred_location,Inferred Location Match,37,,yes,,,,new,no (no freight rate for this town)
+OPaL,SIROHI,Udaipur,Udaipur,inferred_location,Inferred Location Match,94,,yes,,Kota,inferred_via_hpl,zone change,yes
+OPaL,SIRSA,Panipat,Panipat,inferred_location,Inferred Location Match,188,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+OPaL,SITARGANJ,Rudrapur,Rudrapur,inferred_location,Inferred Location Match,30,,yes,,,,new,yes
+OPaL,SIVAKASI,Madurai,Madurai,inferred_location,Inferred Location Match,63,,yes,,,,new,yes
+OPaL,SOHAGPUR,Bhopal,Bhopal,inferred_location,Inferred Location Match,102,,yes,,,,new,no (no freight rate for this town)
+OPaL,SOLAN,Baddi,Baddi,inferred_location,Inferred Location Match,31,,yes,,Baddi,inferred_via_hpl,relabel only,yes
+OPaL,SONEPAT,Panipat,Panipat,inferred_location,Inferred Location Match,44,,yes,,,,new,no (no freight rate for this town)
+OPaL,SRIGANGANAGAR,Bhiwadi,Bhiwadi,inferred_location,Inferred Location Match,347,,yes,,,,new,no (no freight rate for this town)
+OPaL,SRIKAKULAM,Vishakhapatnam,Visakhapatnam,inferred_location,Inferred Location Match,101,,yes,,,,new,yes
+OPaL,TALOJA,Navi Mumbai,Navi Mumbai,inferred_location,Inferred Location Match,10,,yes,,,,new,yes
+OPaL,TARAPUR,Bhiwandi,Bhiwandi,inferred_location,Inferred Location Match,74,,yes,,,,new,yes
+OPaL,THANE,Mumbai,Mumbai,inferred_location,Inferred Location Match,16,,yes,yes,Mumbai,inferred_via_hpl,relabel only,yes
+OPaL,THRISSUR,Cochin,Kochi,inferred_location,Inferred Location Match,64,,,,,,new,yes
+OPaL,TIRUPUR,Coimbatore,Coimbatore,inferred_location,Inferred Location Match,44,,yes,,,,new,yes
+OPaL,TRICHY,Karur,Karur,inferred_location,Inferred Location Match,69,,,,,,new,no (no freight rate for this town)
+OPaL,TUMKUR,Bengaluru,Bengaluru,inferred_location,Inferred Location Match,67,,yes,,,,new,no (no freight rate for this town)
+OPaL,UJJAIN,Indore,Indore,inferred_location,Inferred Location Match,52,,yes,,Indore,inferred_via_hpl,relabel only,yes
+OPaL,UMBERGAON,Valsad,Valsad,inferred_location,Inferred Location Match,41,,yes,,,,new,yes
+OPaL,VAPI,Valsad,Valsad,inferred_location,Inferred Location Match,27,,yes,,,,new,yes
+OPaL,VERAWAL,Rajkot,Rajkot,inferred_location,Inferred Location Match,160,,yes,,,,new,no (no freight rate for this town)
+OPaL,VIJAYAPURA,Gulbarga,Kalaburagi,inferred_location,Inferred Location Match,132,,yes,,,,new,yes
+OPaL,VIRAMGAM,Kalol (Mehsana),Kalol,inferred_location,Inferred Location Match,47,,yes,,,,new,yes
+OPaL,VISNAGAR,Kalol (Mehsana),Kalol,inferred_location,Inferred Location Match,51,,,,,,new,yes
+OPaL,VIZAG,Vishakhapatnam,Visakhapatnam,inferred_location,Inferred Location Match,0,,,,,,new,yes
+OPaL,WAGHODIA,Vadodara,Vadodara,inferred_location,Inferred Location Match,20,,yes,,,,new,yes
+OPaL,WANI,Nagpur,Nagpur,inferred_location,Inferred Location Match,122,,yes,,,,new,no (no freight rate for this town)
+OPaL,WARDHA,Nagpur,Nagpur,inferred_location,Inferred Location Match,68,,yes,,,,new,no (no freight rate for this town)
+OPaL,YAMUNANAGAR,Panipat,Panipat,inferred_location,Inferred Location Match,88,,yes,,Panipat,inferred_via_hpl,relabel only,yes
+OPaL,YAWATMAL,Nagpur,Nagpur,inferred_location,Inferred Location Match,130,,yes,,,,new,no (no freight rate for this town)
+RIL,ABU ROAD,UDAIPUR,Udaipur,inferred_location,Inferred Location Match,95,,yes,,,,new,yes
+RIL,AJMER,JAIPUR,Jaipur,inferred_location,Inferred Location Match,125,,yes,,JAIPUR,inferred_via_hpl,relabel only,yes
+RIL,ALAPPUZHA,COCHIN,Kochi,inferred_location,Inferred Location Match,51,,,,,,new,yes
+RIL,ALIGARH,AGRA,Agra,inferred_location,Inferred Location Match,78,,yes,,,,new,yes
+RIL,ALLAHABAD,VARANASI,Varanasi,inferred_location,Inferred Location Match,118,,yes,,,,new,yes
+RIL,ALWAR,BHIWADI,Bhiwadi,inferred_location,Inferred Location Match,76,,yes,,BHIWADI,inferred_via_hpl,relabel only,yes
+RIL,AMBALA,PANIPAT,Panipat,inferred_location,Inferred Location Match,109,,yes,,PANIPAT,inferred_via_hpl,relabel only,yes
+RIL,AMRAWATI,NAGPUR,Nagpur,inferred_location,Inferred Location Match,141,,yes,,,,new,yes
+RIL,ANNAND,BARODA,Vadodara,inferred_location,Inferred Location Match,38,,yes,,,,new,yes
+RIL,ASANGAON,MUMBAI,Mumbai,inferred_location,Inferred Location Match,60,,yes,,,,new,yes
+RIL,BAREILLY,RUDRAPUR,Rudrapur,inferred_location,Inferred Location Match,68,yes,,,,,new,yes
+RIL,BARJORA,PURULIA,Puruliya,inferred_location,Inferred Location Match,95,,,,,,new,yes
+RIL,BARMER,JODHPUR,Jodhpur,inferred_location,Inferred Location Match,171,,yes,,JODHPUR,inferred_via_hpl,relabel only,yes
+RIL,BARSI,SOLAPUR,Sholapur,inferred_location,Inferred Location Match,67,,yes,,,,new,yes
+RIL,BAWAL,BHIWADI,Bhiwadi,inferred_location,Inferred Location Match,31,yes,,,,,new,yes
+RIL,BEED,AURANGBDMH,Aurangabad,inferred_location,Inferred Location Match,108,,yes,,,,new,yes
+RIL,BEHROR,BHIWADI,Bhiwadi,inferred_location,Inferred Location Match,67,,yes,,,,new,yes
+RIL,BELGAUM,HUBLI,Hubballi,inferred_location,Inferred Location Match,88,,yes,,,,new,yes
+RIL,BERHAMPUR,CUTTACK,Cuttack,inferred_location,Inferred Location Match,171,,yes,,,,new,yes
+RIL,BHADOHI,VARANASI,Varanasi,inferred_location,Inferred Location Match,45,,yes,,,,new,yes
+RIL,BHATINDA,LUDHIANA,Ludhiana,inferred_location,Inferred Location Match,118,,yes,,LUDHIANA,inferred_via_hpl,relabel only,yes
+RIL,BHILWARA,KOTA,Kota,inferred_location,Inferred Location Match,122,,yes,,KOTA,inferred_via_hpl,relabel only,yes
+RIL,BHIND,GWALIOR,Gwalior,inferred_location,Inferred Location Match,72,,yes,,GWALIOR,inferred_via_hpl,relabel only,yes
+RIL,BHIWANI,PANIPAT,Panipat,inferred_location,Inferred Location Match,104,,yes,,PANIPAT,inferred_via_hpl,relabel only,yes
+RIL,BHUBANESWAR,CUTTACK,Cuttack,inferred_location,Inferred Location Match,22,,yes,,,,new,yes
+RIL,BIDAR,HYDERABAD,Hyderabad,inferred_location,Inferred Location Match,115,yes,,,BELLARY,inferred_via_hpl,zone change,yes
+RIL,BIKANER,JODHPUR,Jodhpur,inferred_location,Inferred Location Match,197,,yes,,JODHPUR,inferred_via_hpl,relabel only,yes
+RIL,BORIVALLI,MUMBAI,Mumbai,inferred_location,Inferred Location Match,18,,yes,,,,new,yes
+RIL,BURHANPUR,INDORE,Indore,inferred_location,Inferred Location Match,162,,yes,,INDORE,inferred_via_hpl,relabel only,yes
+RIL,BYRNIHAT,GUWAHATI,Guwahati,inferred_location,Inferred Location Match,20,yes,,,,,new,yes
+RIL,CHANDIGARH,BADDI,Baddi,inferred_location,Inferred Location Match,25,yes,,,,,new,yes
+RIL,CHINDWARA,JABALPUR,Jabalpur,inferred_location,Inferred Location Match,161,,yes,,JABALPUR,inferred_via_hpl,relabel only,yes
+RIL,CHITTOOR,TIRUPATHI,Tirupati,inferred_location,Inferred Location Match,59,,yes,,,,new,yes
+RIL,CHITTOREGARH,UDAIPUR,Udaipur,inferred_location,Inferred Location Match,98,,yes,,,,new,yes
+RIL,DHANBAD,PURULIA,Puruliya,inferred_location,Inferred Location Match,52,yes,,,,,new,yes
+RIL,DHAR,INDORE,Indore,inferred_location,Inferred Location Match,57,,yes,,INDORE,inferred_via_hpl,relabel only,yes
+RIL,DHARUHERA,BHIWADI,Bhiwadi,inferred_location,Inferred Location Match,6,,,,,,new,yes
+RIL,DHORAJI,RAJKOT,Rajkot,inferred_location,Inferred Location Match,71,,yes,,,,new,yes
+RIL,DHULE,JALGAON,Jalgaon,inferred_location,Inferred Location Match,83,,yes,,JALGAON,inferred_via_hpl,relabel only,yes
+RIL,DISPUR,GUWAHATI,Guwahati,inferred_location,Inferred Location Match,8,,,,,,new,yes
+RIL,DURG,RAIPUR,Raipur,inferred_location,Inferred Location Match,37,,,,,,new,yes
+RIL,DURGAPUR,PURULIA,Puruliya,inferred_location,Inferred Location Match,99,,,,,,new,yes
+RIL,ELURU,VIJAYAWADA,Vijayawada,inferred_location,Inferred Location Match,54,,yes,,,,new,yes
+RIL,FARIDABAD,DELHI,New Delhi,inferred_location,Inferred Location Match,25,yes,,,,,new,yes
+RIL,FATEHPUR,KANPUR,Kanpur,inferred_location,Inferred Location Match,76,,yes,,KANPUR,inferred_via_hpl,relabel only,yes
+RIL,FAZILKA,LUDHIANA,Ludhiana,inferred_location,Inferred Location Match,184,,yes,,LUDHIANA,inferred_via_hpl,relabel only,yes
+RIL,FIROZPUR,LUDHIANA,Ludhiana,inferred_location,Inferred Location Match,118,,yes,,,,new,yes
+RIL,GADARWARA,JABALPUR,Jabalpur,inferred_location,Inferred Location Match,122,,yes,,,,new,yes
+RIL,GADCHIROLI,NAGPUR,Nagpur,inferred_location,Inferred Location Match,144,,yes,,,,new,yes
+RIL,GANGTOK (SIKKIM),JALPAIGURI,Jalpaiguri,inferred_location,Inferred Location Match,91,yes,,,,,new,yes
+RIL,GAYA,PATNA,Patna,inferred_location,Inferred Location Match,90,,,,,,new,yes
+RIL,GAZIABAD/NOIDA,DELHI,New Delhi,inferred_location,Inferred Location Match,12,yes,,,,,new,yes
+RIL,GHAZIPUR,VARANASI,Varanasi,inferred_location,Inferred Location Match,65,,yes,,VARANASI,inferred_via_hpl,relabel only,yes
+RIL,GODHRA,BARODA,Vadodara,inferred_location,Inferred Location Match,67,,yes,,,,new,yes
+RIL,GONDIA,NAGPUR,Nagpur,inferred_location,Inferred Location Match,120,,yes,,NAGPUR,inferred_via_hpl,relabel only,yes
+RIL,GORAKHPUR,VARANASI,Varanasi,inferred_location,Inferred Location Match,165,,yes,,VARANASI,inferred_via_hpl,relabel only,yes
+RIL,GUNTUR,VIJAYAWADA,Vijayawada,inferred_location,Inferred Location Match,31,,yes,,,,new,yes
+RIL,HALDAWANI,RUDRAPUR,Rudrapur,inferred_location,Inferred Location Match,30,,yes,,,,new,yes
+RIL,HALDIA,CALCUTTA,Kolkata,inferred_location,Inferred Location Match,62,,yes,,,,new,yes
+RIL,HALOL,BARODA,Vadodara,inferred_location,Inferred Location Match,35,,yes,,,,new,yes
+RIL,HALVAD,RAJKOT,Rajkot,inferred_location,Inferred Location Match,90,,yes,,,,new,yes
+RIL,HARIDWAR,DEHRADUN,Dehradun,inferred_location,Inferred Location Match,44,,yes,,,,new,yes
+RIL,HATHRAS,AGRA,Agra,inferred_location,Inferred Location Match,46,,yes,,,,new,yes
+RIL,HIMMATNAGAR,AHMEDABAD,Ahmedabad,inferred_location,Inferred Location Match,75,,,,,,new,yes
+RIL,HINGANGHAT,NAGPUR,Nagpur,inferred_location,Inferred Location Match,71,,yes,,,,new,yes
+RIL,HISSAR,PANIPAT,Panipat,inferred_location,Inferred Location Match,124,,yes,,,,new,yes
+RIL,HOSUR,HOSUR-TK,Hosur,inferred_location,Inferred Location Match,0,,,,,,new,yes
+RIL,IDUKKI,COCHIN,Kochi,inferred_location,Inferred Location Match,78,,,,,,new,yes
+RIL,JAGADHARI,PANIPAT,Panipat,inferred_location,Inferred Location Match,93,,yes,,,,new,yes
+RIL,JALANDHAR,LUDHIANA,Ludhiana,inferred_location,Inferred Location Match,53,,,,,,new,yes
+RIL,JALNA,AURANGBDMH,Aurangabad,inferred_location,Inferred Location Match,57,,yes,,,,new,yes
+RIL,JETPUR,RAJKOT,Rajkot,inferred_location,Inferred Location Match,62,,yes,,,,new,yes
+RIL,JUNAGADH,RAJKOT,Rajkot,inferred_location,Inferred Location Match,92,,yes,,,,new,yes
+RIL,KADI,AHMEDABAD,Ahmedabad,inferred_location,Inferred Location Match,40,,,,,,new,yes
+RIL,KAIMUR,VARANASI,Varanasi,inferred_location,Inferred Location Match,67,yes,,,,,new,yes
+RIL,KAITHAL,PANIPAT,Panipat,inferred_location,Inferred Location Match,72,,yes,,PANIPAT,inferred_via_hpl,relabel only,yes
+RIL,KAKINADA,VISHAKAPATNAM,Visakhapatnam,inferred_location,Inferred Location Match,130,,yes,,,,new,yes
+RIL,KALA AMB,BADDI,Baddi,inferred_location,Inferred Location Match,65,,yes,,,,new,yes
+RIL,KANNUR,CALICUT,Kozhikode,inferred_location,Inferred Location Match,83,,,,,,new,yes
+RIL,KARAIKAL,PONDICHERY,Puducherry,inferred_location,Inferred Location Match,113,,yes,,,,new,yes
+RIL,KARNAL,PANIPAT,Panipat,inferred_location,Inferred Location Match,34,,yes,,PANIPAT,inferred_via_hpl,relabel only,yes
+RIL,KASHIPUR,RUDRAPUR,Rudrapur,inferred_location,Inferred Location Match,50,,yes,,,,new,yes
+RIL,KASORGOD,MANGALORE,Mangaluru,inferred_location,Inferred Location Match,49,yes,,,,,new,yes
+RIL,KATHUA,JAMMU,Jammu,inferred_location,Inferred Location Match,74,,,,,,new,yes
+RIL,KHAMGAON,JALGAON,Jalgaon,inferred_location,Inferred Location Match,109,,yes,,,,new,yes
+RIL,KHAMMAM,SURYAPET,Suriapet,inferred_location,Inferred Location Match,57,,yes,,SURYAPET,inferred_via_hpl,relabel only,yes
+RIL,KHANDWA,INDORE,Indore,inferred_location,Inferred Location Match,113,,yes,,,,new,yes
+RIL,KHARGONE,INDORE,Indore,inferred_location,Inferred Location Match,102,,yes,,,,new,yes
+RIL,KHEDA,AHMEDABAD,Ahmedabad,inferred_location,Inferred Location Match,32,,yes,,AHMEDABAD,inferred_via_hpl,relabel only,yes
+RIL,KHOPOLI,MUMBAI,Mumbai,inferred_location,Inferred Location Match,58,,yes,,,,new,yes
+RIL,KOLAR,BENGALURU,Bengaluru,inferred_location,Inferred Location Match,61,,yes,,BENGALURU,inferred_via_hpl,relabel only,yes
+RIL,KOLLAM,TRIVANDRUM,Thiruvananthapuram,inferred_location,Inferred Location Match,60,,,,,,new,yes
+RIL,KOTTAYAM,COCHIN,Kochi,inferred_location,Inferred Location Match,49,,,,,,new,yes
+RIL,KUDAL,KOLHAPUR,Kolhapur,inferred_location,Inferred Location Match,96,,yes,,,,new,yes
+RIL,KUNDLI,PANIPAT,Panipat,inferred_location,Inferred Location Match,60,,yes,,,,new,yes
+RIL,KURNOOL,NANDYAL,Nandyal,inferred_location,Inferred Location Match,62,,yes,,,,new,yes
+RIL,KURUKSHETRA,PANIPAT,Panipat,inferred_location,Inferred Location Match,66,,yes,,PANIPAT,inferred_via_hpl,relabel only,yes
+RIL,LASALGAON/CHALISGAON,NASHIK,Nashik,inferred_location,Inferred Location Match,50,,,,,,new,yes
+RIL,LATUR,SOLAPUR,Sholapur,inferred_location,Inferred Location Match,107,,yes,,KOLHAPUR,inferred_via_hpl,zone change,yes
+RIL,LUCKNOW,KANPUR,Kanpur,inferred_location,Inferred Location Match,71,,yes,,KANPUR,inferred_via_hpl,relabel only,yes
+RIL,MAHBOOBNAGAR,HYDERABAD,Hyderabad,inferred_location,Inferred Location Match,87,,yes,,,,new,yes
+RIL,MAHUVA,BHAVNAGAR,Bhavnagar,inferred_location,Inferred Location Match,85,,yes,,,,new,yes
+RIL,MANDSAUR,INDORE,Indore,inferred_location,Inferred Location Match,170,,yes,,INDORE,inferred_via_hpl,relabel only,yes
+RIL,MATHURA,AGRA,Agra,inferred_location,Inferred Location Match,49,,yes,,,,new,yes
+RIL,MEDAK,HYDERABAD,Hyderabad,inferred_location,Inferred Location Match,76,,yes,,HYDERABAD,inferred_via_hpl,relabel only,yes
+RIL,MEERUT,DELHI,New Delhi,inferred_location,Inferred Location Match,62,yes,,,,,new,yes
+RIL,MEHSANA,AHMEDABAD,Ahmedabad,inferred_location,Inferred Location Match,67,,,,,,new,yes
+RIL,MODINAGAR,DELHI,New Delhi,inferred_location,Inferred Location Match,42,yes,,,,,new,yes
+RIL,MORADABAD,RUDRAPUR,Rudrapur,inferred_location,Inferred Location Match,63,yes,,,,,new,yes
+RIL,MORBI,RAJKOT,Rajkot,inferred_location,Inferred Location Match,59,,yes,,RAJKOT,inferred_via_hpl,relabel only,yes
+RIL,MUDHOL,HUBLI,Hubballi,inferred_location,Inferred Location Match,111,,,,,,new,yes
+RIL,MUNDRA,GANDHIDHAM,Gandhidham,inferred_location,Inferred Location Match,50,,,,,,new,yes
+RIL,MUZAFFARNAGAR,PANIPAT,Panipat,inferred_location,Inferred Location Match,72,yes,,,,,new,yes
+RIL,Machlipatnam,VIJAYAWADA,Vijayawada,inferred_location,Inferred Location Match,63,,yes,,,,new,yes
+RIL,NAGAUR,JODHPUR,Jodhpur,inferred_location,Inferred Location Match,127,,yes,,JODHPUR,inferred_via_hpl,relabel only,yes
+RIL,NALANDA,PATNA,Patna,inferred_location,Inferred Location Match,59,,,,,,new,yes
+RIL,NALGONDA,SURYAPET,Suriapet,inferred_location,Inferred Location Match,39,,yes,,SURYAPET,inferred_via_hpl,relabel only,yes
+RIL,NAMAKKAL,KARUR,Karur,inferred_location,Inferred Location Match,31,,yes,,MADURAI,inferred_via_hpl,zone change,yes
+RIL,NANDED,AURANGBDMH,Aurangabad,inferred_location,Inferred Location Match,222,,yes,,,,new,yes
+RIL,NARSARAOPET,VIJAYAWADA,Vijayawada,inferred_location,Inferred Location Match,71,,yes,,,,new,yes
+RIL,NARWANA,PANIPAT,Panipat,inferred_location,Inferred Location Match,85,,yes,,,,new,yes
+RIL,NEEMUCH,INDORE,Indore,inferred_location,Inferred Location Match,218,,yes,,INDORE,inferred_via_hpl,relabel only,yes
+RIL,NELLORE,TIRUPATHI,Tirupati,inferred_location,Inferred Location Match,109,,yes,,,,new,yes
+RIL,NOKHA,JODHPUR,Jodhpur,inferred_location,Inferred Location Match,151,,yes,,,,new,yes
+RIL,ONGOLE,VIJAYAWADA,Vijayawada,inferred_location,Inferred Location Match,129,,yes,,,,new,yes
+RIL,PADRA,BARODA,Vadodara,inferred_location,Inferred Location Match,14,,yes,,,,new,yes
+RIL,PALEJ,BARODA,Vadodara,inferred_location,Inferred Location Match,45,,yes,,,,new,yes
+RIL,PALGHAT,COIMBATORE,Coimbatore,inferred_location,Inferred Location Match,43,yes,,,,,new,yes
+RIL,PALI,JODHPUR,Jodhpur,inferred_location,Inferred Location Match,64,,yes,,JODHPUR,inferred_via_hpl,relabel only,yes
+RIL,PAONTA SAHIB,BADDI,Baddi,inferred_location,Inferred Location Match,99,,yes,,,,new,yes
+RIL,PARBHANI,AURANGBDMH,Aurangabad,inferred_location,Inferred Location Match,164,,yes,,,,new,yes
+RIL,PARWANU,BADDI,Baddi,inferred_location,Inferred Location Match,21,,yes,,,,new,yes
+RIL,PHALODI,JODHPUR,Jodhpur,inferred_location,Inferred Location Match,115,,yes,,JODHPUR,inferred_via_hpl,relabel only,yes
+RIL,PIDUGURALLA,VIJAYAWADA,Vijayawada,inferred_location,Inferred Location Match,81,,yes,,,,new,yes
+RIL,PONDICHERRY,PONDICHERY,Puducherry,inferred_location,Inferred Location Match,0,,,,,,new,yes
+RIL,PORBANDAR,RAJKOT,Rajkot,inferred_location,Inferred Location Match,142,,yes,,RAJKOT,inferred_via_hpl,relabel only,yes
+RIL,RAI BAREILLY,KANPUR,Kanpur,inferred_location,Inferred Location Match,92,,,,,,new,yes
+RIL,RAIGAD,MUMBAI,Mumbai,inferred_location,Inferred Location Match,62,,yes,,MUMBAI,inferred_via_hpl,relabel only,yes
+RIL,RAJNANDGAON,RAIPUR,Raipur,inferred_location,Inferred Location Match,64,,,,,,new,yes
+RIL,RAJPALAYAM,MADURAI,Madurai,inferred_location,Inferred Location Match,81,,yes,,,,new,yes
+RIL,RAJPURA,LUDHIANA,Ludhiana,inferred_location,Inferred Location Match,86,,yes,,,,new,yes
+RIL,RANIPET,CHENNAI,Chennai,inferred_location,Inferred Location Match,104,,yes,,CHENNAI,inferred_via_hpl,relabel only,yes
+RIL,RATLAM,INDORE,Indore,inferred_location,Inferred Location Match,106,,yes,,INDORE,inferred_via_hpl,relabel only,yes
+RIL,RATNAGARI,KOLHAPUR,Kolhapur,inferred_location,Inferred Location Match,103,,yes,,,,new,yes
+RIL,REWARI,BHIWADI,Bhiwadi,inferred_location,Inferred Location Match,24,yes,,,,,new,yes
+RIL,ROHA,MUMBAI,Mumbai,inferred_location,Inferred Location Match,75,,yes,,,,new,yes
+RIL,ROHTAK,PANIPAT,Panipat,inferred_location,Inferred Location Match,66,,yes,,PANIPAT,inferred_via_hpl,relabel only,yes
+RIL,ROORKEE,DEHRADUN,Dehradun,inferred_location,Inferred Location Match,53,,yes,,,,new,yes
+RIL,ROURKELA,BARGARH,Bargarh,inferred_location,Inferred Location Match,162,,yes,,,,new,yes
+RIL,RUDERPUR,RUDRAPUR,Rudrapur,inferred_location,Inferred Location Match,0,,,,,,new,yes
+RIL,SAHARANPUR,DEHRADUN,Dehradun,inferred_location,Inferred Location Match,61,yes,,,,,new,yes
+RIL,SAMBALPUR,BARGARH,Bargarh,inferred_location,Inferred Location Match,40,,yes,,BARGARH,inferred_via_hpl,relabel only,yes
+RIL,SAMPLA,PANIPAT,Panipat,inferred_location,Inferred Location Match,70,,yes,,,,new,yes
+RIL,SANAND,AHMEDABAD,Ahmedabad,inferred_location,Inferred Location Match,21,,yes,,,,new,yes
+RIL,SANGLI,KOLHAPUR,Kolhapur,inferred_location,Inferred Location Match,40,,yes,,KOLHAPUR,inferred_via_hpl,relabel only,yes
+RIL,SANTEJ,AHMEDABAD,Ahmedabad,inferred_location,Inferred Location Match,15,,yes,,,,new,yes
+RIL,SATNA,REWA,Rewa,inferred_location,Inferred Location Match,47,,yes,,REWA,inferred_via_hpl,relabel only,yes
+RIL,SAVLI,BARODA,Vadodara,inferred_location,Inferred Location Match,29,,yes,,,,new,yes
+RIL,SHILLONG,GUWAHATI,Guwahati,inferred_location,Inferred Location Match,70,yes,,,,,new,yes
+RIL,SHIMOGA,MANGALORE,Mangaluru,inferred_location,Inferred Location Match,137,,yes,,MANGALORE,inferred_via_hpl,relabel only,yes
+RIL,SHIVPURI,GWALIOR,Gwalior,inferred_location,Inferred Location Match,103,,yes,,GWALIOR,inferred_via_hpl,relabel only,yes
+RIL,SIKAR,JAIPUR,Jaipur,inferred_location,Inferred Location Match,100,,yes,,JAIPUR,inferred_via_hpl,relabel only,yes
+RIL,SILIGUDI,JALPAIGURI,Jalpaiguri,inferred_location,Inferred Location Match,37,,yes,,,,new,yes
+RIL,SIROHI,UDAIPUR,Udaipur,inferred_location,Inferred Location Match,94,,yes,,KOTA,inferred_via_hpl,zone change,yes
+RIL,SIRSA,PANIPAT,Panipat,inferred_location,Inferred Location Match,188,,yes,,PANIPAT,inferred_via_hpl,relabel only,yes
+RIL,SITARGANJ,RUDRAPUR,Rudrapur,inferred_location,Inferred Location Match,30,,yes,,,,new,yes
+RIL,SIVAKASI,MADURAI,Madurai,inferred_location,Inferred Location Match,63,,yes,,,,new,yes
+RIL,SOHAGPUR,BHOPAL,Bhopal,inferred_location,Inferred Location Match,102,,yes,,,,new,yes
+RIL,SOLAN,BADDI,Baddi,inferred_location,Inferred Location Match,31,,yes,,BADDI,inferred_via_hpl,relabel only,yes
+RIL,SONEPAT,PANIPAT,Panipat,inferred_location,Inferred Location Match,44,,yes,,,,new,yes
+RIL,SRIGANGANAGAR,BHIWADI,Bhiwadi,inferred_location,Inferred Location Match,347,,yes,,,,new,yes
+RIL,SRIKAKULAM,VISHAKAPATNAM,Visakhapatnam,inferred_location,Inferred Location Match,101,,yes,,,,new,yes
+RIL,TALOJA,MUMBAI,Mumbai,inferred_location,Inferred Location Match,23,,yes,,,,new,yes
+RIL,TARAPUR,MUMBAI,Mumbai,inferred_location,Inferred Location Match,91,,yes,,,,new,yes
+RIL,THANE,MUMBAI,Mumbai,inferred_location,Inferred Location Match,16,,yes,,MUMBAI,inferred_via_hpl,relabel only,yes
+RIL,THRISSUR,COCHIN,Kochi,inferred_location,Inferred Location Match,64,,,,,,new,yes
+RIL,TIRUPUR,COIMBATORE,Coimbatore,inferred_location,Inferred Location Match,44,,yes,,,,new,yes
+RIL,TRICHY,KARUR,Karur,inferred_location,Inferred Location Match,69,,,,,,new,yes
+RIL,TUMKUR,BENGALURU,Bengaluru,inferred_location,Inferred Location Match,67,,yes,,,,new,yes
+RIL,UJJAIN,INDORE,Indore,inferred_location,Inferred Location Match,52,,yes,,INDORE,inferred_via_hpl,relabel only,yes
+RIL,UMBERGAON,SURAT,Surat,inferred_location,Inferred Location Match,105,,yes,,,,new,yes
+RIL,VALSAD,SURAT,Surat,inferred_location,Inferred Location Match,66,,yes,,SURAT,inferred_via_hpl,relabel only,yes
+RIL,VAPI,SURAT,Surat,inferred_location,Inferred Location Match,92,,yes,,,,new,yes
+RIL,VERAWAL,RAJKOT,Rajkot,inferred_location,Inferred Location Match,160,,yes,,,,new,yes
+RIL,VIJAYWADA,VIJAYAWADA,Vijayawada,inferred_location,Inferred Location Match,0,,,,,,new,yes
+RIL,VIRAMGAM,AHMEDABAD,Ahmedabad,inferred_location,Inferred Location Match,56,,yes,,,,new,yes
+RIL,VISNAGAR,AHMEDABAD,Ahmedabad,inferred_location,Inferred Location Match,75,,,,,,new,yes
+RIL,VIZAG,VISHAKAPATNAM,Visakhapatnam,inferred_location,Inferred Location Match,0,,,,,,new,yes
+RIL,WAGHODIA,BARODA,Vadodara,inferred_location,Inferred Location Match,20,,yes,,,,new,yes
+RIL,WAI,SATARA,Satara,inferred_location,Inferred Location Match,32,,yes,,,,new,yes
+RIL,WANI,NAGPUR,Nagpur,inferred_location,Inferred Location Match,122,,yes,,,,new,yes
+RIL,WARDHA,NAGPUR,Nagpur,inferred_location,Inferred Location Match,68,,yes,,,,new,yes
+RIL,YAMUNANAGAR,PANIPAT,Panipat,inferred_location,Inferred Location Match,88,,yes,,PANIPAT,inferred_via_hpl,relabel only,yes
+RIL,YAWATMAL,NAGPUR,Nagpur,inferred_location,Inferred Location Match,130,,yes,,,,new,yes

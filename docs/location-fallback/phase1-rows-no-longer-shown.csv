@@ -1,0 +1,3 @@
+﻿Town,State,Competitor,Current tier,Current zone,Live zone km from town,Proposed outcome,Reason it is removed,Nearest zone (not approved),Nearest zone km
+Latur,Maharashtra,IOCL,inferred_via_hpl,Kolhapur,312,not published,"live zone 312 km away, beyond HPL's own 95th-percentile reach (225 km); no state-side zone within reach",Aurangabad,209
+Latur,Maharashtra,HMEL,inferred_via_hpl,Kolhapur,312,not published,"live zone 312 km away, beyond HPL's own 95th-percentile reach (225 km); no state-side zone within reach",Aurangabad,209

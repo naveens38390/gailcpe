@@ -237,6 +237,25 @@ new round is published. Passing does not replace looking at the screens — foll
 
 After the restart, verify Bhiwandi Ex Depot (GAIL 1,40,420 · IOCL 1,39,296 · RIL 1,38,870 · HMEL 1,39,290 · OPaL 1,39,836) on Compare, then the Deal page on both bases (IOCL leads Ex Works, RIL leads Ex Depot). Depot matching is exact/alias/evidence only, so most towns show "Not published" for some producers; that is expected. Build the APK only after this.
 
+### Location fallback release (decision 0010)
+
+A database that already holds a round receives the HPL Annexure V fix and the Ex-Works fallback
+through two compare-and-set migrations, never through `seed`. Follow
+`docs/location-fallback/12-deployment-checklist.md` step by step; in short, after the ex-depot release
+is complete and the new API is live:
+
+```bash
+MONGODB_URI=<prod> npm run fix-hpl-territory            # M0 dry run, then -- --apply; restart
+npm run verify-release -- --stage pre-fallback
+MONGODB_URI=<prod> npm run load-equivalence             # M1 dry run, then -- --apply; restart
+npm run verify-release -- --stage post-fallback --with-deal
+```
+
+**Load the depot data from the depot release commit (`c88cb792`), never from this release's.**
+This release's `price_index.json` carries 699 fallback zones that only `load-equivalence` may write;
+`load-depot` now refuses them, but the order is the real guard. Rollback: `docs/rollback-runbook.md` §7–9.
+`npm run verify-workbook` checks this checkout's data against the client-approved workbook offline.
+
 ---
 
 ## 5. Start and check the API
@@ -344,6 +363,9 @@ py -3 breakage_suite.py
 | `e2e-pdf-to-api` | does it survive all the way to an HTTP response |
 | `verify_against_pdf` | do sampled cells match the page, read by a third library |
 | `breakage_suite` | do the gates still stop a deliberately broken build |
+| `workbook-verify` (`npm run verify-workbook`) | does the data reproduce the client-approved Competitor Presence workbook, all 313 locations × 5 competitors |
+| `equivalence-verify` (`npm run verify-equivalence -- <post-M0 dir>`) | does the fallback change only what the approved table explains (exact, depot unchanged; kill-switch) |
+| `break_test.py`, `equivalence_build.py` (`backend/etl`) | do the location gates stop a bad fallback table; do its distances follow from `geodata.json` |
 
 `e2e-pdf-to-api` refuses to run against a URI ending in the production database
 name, and needs the round already seeded into the isolated one.

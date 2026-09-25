@@ -51,5 +51,18 @@ below — this list is what to look at with your own eyes, on the real app.
 - [ ] Log in; run one Ex Works comparison, one Ex Depot comparison, one Deal simulation
 - [ ] Confirm it points at the production API, and the version shown matches the release
 
+## Location fallback (decision 0010) — after `verify-release --stage post-fallback` passes
+
+Compare, Ex Works, grade B52A003 (the client-approved workbook `docs/client-review/Competitor_Presence_and_Fallback_Mapping.xlsx` is the reference):
+- [ ] **Abu Road:** IOCL, RIL, HMEL, OPaL show "Inferred Location Match: priced at Udaipur, 95 km from ABU ROAD. Confirm before quoting."; HPL shows "Territory Match: from HPL's own territory list"; GAIL shows no location line
+- [ ] **Ahmednagar:** four cards show "Retained Existing Mapping: priced at Pune, 113 km … — the zone already in use"
+- [ ] **Alappuzha:** IOCL and HPL show "Territory Match: … Kerala zone covers the whole state"
+- [ ] **Bidar:** three cards say "across a state border"; OPaL says "Basic price is from Gulbarga. No freight rate is published to BIDAR, so this producer is not compared."
+- [ ] **Bhiwandi:** no location line on any card; figures as in the ex-depot section above
+- [ ] **Bilaspur:** HPL Territory Match, Chattisgarh · **Latur:** IOCL and HMEL not compared
+- [ ] Switch to Ex Depot at Abu Road: no location-match line on any card
+- [ ] Deal at Abu Road: a caveat names the inferred zones; confidence is not "high"
+- [ ] 390 px: the caveat wraps, no horizontal scroll
+
 ## If anything here fails
-See `docs/rollback-runbook.md`.
+See `docs/rollback-runbook.md` (location fallback: §7–9).

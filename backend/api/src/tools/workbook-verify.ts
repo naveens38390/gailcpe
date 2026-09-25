@@ -21,13 +21,16 @@
  */
 
 import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import ExcelJS from "exceljs";
 
 import { compare, useSpellings, type Dataset } from "../core/pricing";
 import type { Producer } from "../core/types";
 
 export const COMPETITORS: Producer[] = ["IOCL", "RIL", "HMEL", "HPL", "OPaL"];
-export const WORKBOOK_DEFAULT = "D:/Gail2/gailcpe/docs/client-review/Competitor_Presence_and_Fallback_Mapping.xlsx";
+/** Repo-relative, so a clean clone of the release commit finds the approved workbook. */
+export const WORKBOOK_DEFAULT = join(__dirname, "..", "..", "..", "..", "docs", "client-review", "Competitor_Presence_and_Fallback_Mapping.xlsx");
+const DATA_DEFAULT = join(__dirname, "..", "..", "..", "data", "normalized");
 
 export type Classification =
   | "Exact Published Match"
@@ -110,8 +113,14 @@ export interface ValidationResult {
   counts: Record<Classification, number>;
 }
 
+type MatchQuote = {
+  producer: string;
+  zone: string | null;
+  locationMatch?: { group: string; label: string; distanceKm?: number };
+};
+
 /** The workbook classification the engine's quote corresponds to. */
-function engineClassification(q: { zone: string | null; locationMatch?: { group: string; label: string } }): Classification {
+export function engineClassification(q: { zone: string | null; locationMatch?: { group: string; label: string } }): Classification {
   if (!q.zone || !q.locationMatch) return "No Approved Mapping";
   if (q.locationMatch.group === "exact") return "Exact Published Match";
   return q.locationMatch.label as Classification;
@@ -136,28 +145,8 @@ export function validateAgainstWorkbook(data: Dataset, wb: ApprovedWorkbook): Va
     // Zone resolution does not depend on the grade; one comparison per location, ex works
     // (the workbook describes the Ex-Works fallback only).
     const c = compare(data, "B52A003", location, 1, "cash", undefined, undefined, "ex_works");
-    const gail = c.quotes.find((q) => q.producer === "GAIL");
-    if (!gail?.zone || gail.locationMatch?.group !== "exact") miss(`GAIL ${location}: not an exact match in the engine`);
-
-    for (const competitor of COMPETITORS) {
-      checked++;
-      const key = `${competitor}|${location}`;
-      const expected = wb.cells.get(key);
-      const q = c.quotes.find((x) => x.producer === competitor);
-      if (!expected) { miss(`${key}: not in the workbook at all`); continue; }
-      if (!q) { miss(`${key}: the engine produced no quote`); continue; }
-
-      const got = engineClassification(q);
-      counts[got]++;
-      if (got !== expected.classification) {
-        miss(`${key}: workbook says ${expected.classification}, engine says ${got} (${q.zone ?? "no zone"})`);
-        continue;
-      }
-      if (expected.classification === "Exact Published Match" || expected.classification === "No Approved Mapping") continue;
-      if (q.zone !== expected.zone) miss(`${key}: workbook maps to ${expected.zone}, engine to ${q.zone}`);
-      const km = q.locationMatch?.distanceKm ?? null;
-      if (km !== expected.km) miss(`${key}: workbook distance ${expected.km ?? "none"} km, engine ${km ?? "none"} km`);
-    }
+    checked += COMPETITORS.length;
+    mismatches.push(...checkLocation(location, c.quotes, wb, counts));
   }
 
   const summaryChecks: Array<[string, number]> = [
@@ -174,6 +163,40 @@ export function validateAgainstWorkbook(data: Dataset, wb: ApprovedWorkbook): Va
   }
 
   return { checked, mismatches, counts };
+}
+
+/**
+ * One location's six quotes (from the engine, or from a live API response) against the
+ * workbook: GAIL exact, and each competitor's classification, mapped zone and distance.
+ * Adds each competitor's classification to `counts` when given.
+ */
+export function checkLocation(
+  location: string,
+  quotes: MatchQuote[],
+  wb: ApprovedWorkbook,
+  counts?: Record<Classification, number>,
+): string[] {
+  const out: string[] = [];
+  const gail = quotes.find((q) => q.producer === "GAIL");
+  if (!gail?.zone || gail.locationMatch?.group !== "exact") out.push(`GAIL ${location}: not an exact match`);
+  for (const competitor of COMPETITORS) {
+    const key = `${competitor}|${location}`;
+    const expected = wb.cells.get(key);
+    const q = quotes.find((x) => x.producer === competitor);
+    if (!expected) { out.push(`${key}: not in the workbook at all`); continue; }
+    if (!q) { out.push(`${key}: no quote returned`); continue; }
+    const got = engineClassification(q);
+    if (counts) counts[got]++;
+    if (got !== expected.classification) {
+      out.push(`${key}: workbook says ${expected.classification}, got ${got} (${q.zone ?? "no zone"})`);
+      continue;
+    }
+    if (expected.classification === "Exact Published Match" || expected.classification === "No Approved Mapping") continue;
+    if (q.zone !== expected.zone) out.push(`${key}: workbook maps to ${expected.zone}, got ${q.zone}`);
+    const km = q.locationMatch?.distanceKm ?? null;
+    if (km !== expected.km) out.push(`${key}: workbook distance ${expected.km ?? "none"} km, got ${km ?? "none"} km`);
+  }
+  return out;
 }
 
 export function loadStagedDataset(dir: string): Dataset {
@@ -202,7 +225,7 @@ export function printResult(result: ValidationResult): void {
 }
 
 async function main() {
-  const dir = process.argv[2] ?? "D:/Gail2/gailcpe/backend/data/normalized";
+  const dir = process.argv[2] ?? DATA_DEFAULT;
   const path = process.argv[3] ?? WORKBOOK_DEFAULT;
   console.log(`workbook: ${path}\ndata:     ${dir}\n`);
   const wb = await readApprovedWorkbook(path);
