@@ -149,9 +149,16 @@ class Resolver:
 
     def __init__(self, producer: str, names: list[str],
                  aliases: dict[str, str] | None = None,
-                 gail_state: dict[str, str] | None = None):
+                 gail_state: dict[str, str] | None = None,
+                 evidence_over_exact: bool = False):
         self.producer = producer
         self.names = names
+        # Price zones: evidence is re-matched against every round's new prices, so a
+        # coincidence can pass (R25) — it must not displace the producer's own zone of
+        # the same name. Freight books do not change each round, and freight evidence
+        # records how the zonal team actually bills a town (HPL Pune at the LONAVALE
+        # rate, four agreeing rows), so freight resolvers keep evidence first.
+        self._evidence_over_exact = evidence_over_exact
         self._by_key: dict[str, str] = {}
         for name in names:
             self._by_key.setdefault(normalise(name), name)
@@ -202,8 +209,12 @@ class Resolver:
         """(producer's name for this place, how we got there)."""
         key = normalise(gail_location)
         # Evidence outranks hand-written aliases: it is a price this producer
-        # actually published, matched to the zone that published it.
-        if key in self._evidence:
+        # actually published, matched to the zone that published it. For price
+        # zones it never outranks the producer's own zone of the same name, though:
+        # evidence is one workbook price equal to one zone's price, and a coincidence
+        # passes that test (R25: HPL's Daman depot zone lost to Karnataka_Bellary
+        # when the workbook's Daman price equalled Bellary's).
+        if key in self._evidence and (self._evidence_over_exact or key not in self._by_key):
             return self._evidence[key], "evidence"
         if key in self._aliases:
             target = self._aliases[key]

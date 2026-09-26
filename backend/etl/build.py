@@ -679,7 +679,7 @@ def main() -> None:
     # HMEL and HPL both deliver to Goa, but bill it as "Panaji". A second,
     # ad-hoc lookup path is how one of them silently reports "no freight".
     freight_resolvers = {
-        producer: Resolver(producer, sorted({e["destination"] for e in book}))
+        producer: Resolver(producer, sorted({e["destination"] for e in book}), evidence_over_exact=True)
         for producer, book in freights.items()
     }
     freight_evidence = derive_freight_aliases(freights, mzo.expectations(src["mzo"]))
