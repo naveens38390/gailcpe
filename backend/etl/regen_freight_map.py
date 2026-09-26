@@ -39,7 +39,7 @@ def build_map(books: dict[str, list[dict]], gail_locations: list[str],
               haldia_territory, mzo_rows) -> dict:
     """Exactly what build.py does for freight_map, plus the tier of each hit."""
     resolvers = {
-        producer: Resolver(producer, sorted({e["destination"] for e in book}))
+        producer: Resolver(producer, sorted({e["destination"] for e in book}), evidence_over_exact=True)
         for producer, book in books.items()
     }
     evidence = derive_freight_aliases(books, mzo_rows)
