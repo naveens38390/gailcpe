@@ -71,6 +71,23 @@ export class FreightCircularsService {
     private notifications: NotificationsService,
   ) {}
 
+  /** Remove a freight draft that was never published, with its rows. A published one stays. */
+  async discardUnpublished(draftId: string, userId: string) {
+    const draft = await this.drafts.findById(draftId);
+    if (!draft) return { discarded: false };
+    if (draft.status === "published") {
+      throw new BadRequestException("That draft has been published; a published circular is kept as history.");
+    }
+    const rows = await this.draftRows.deleteMany({ draft: draft._id });
+    await draft.deleteOne();
+    await this.auditLog.log(userId, "freight_circular.discard", "freight_circular", draftId, {
+      producer: draft.producer,
+      status: draft.status,
+      rows: rows.deletedCount,
+    });
+    return { discarded: true, rows: rows.deletedCount };
+  }
+
   async list(status?: string) {
     return this.drafts
       .find(status ? { status } : {})

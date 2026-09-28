@@ -21,6 +21,8 @@ import { extractFreightPdf, type FreightPdfExtractResult } from "./freight-pdf-e
 import { PriceCircularsService } from "../price-circulars/price-circulars.service";
 import { FreightCircularsService } from "../freight-circulars/freight-circulars.service";
 import { UploadCircularDto } from "./dto/upload-circular.dto";
+import { ReferenceDetectorService } from "./reference-detector.service";
+import { AuditLogService } from "../audit-log/audit-log.service";
 
 /**
  * Circular Repository.
@@ -42,7 +44,82 @@ export class CircularsService {
     private store: CircularStoreService,
     private priceCirculars: PriceCircularsService,
     private freightCirculars: FreightCircularsService,
+    private detector: ReferenceDetectorService,
+    private auditLog: AuditLogService,
   ) {}
+
+  /**
+   * File a whole round's documents in one go. Each document's producer, effective date, kind and
+   * reference are read out of it; one that cannot be read with certainty is reported back as
+   * needing input rather than filed with a guess. A document already on file for the same
+   * producer, round and file name is skipped.
+   */
+  async bulkUpload(files: { buffer: Buffer; originalname?: string }[], userId?: string) {
+    if (!files?.length) throw new BadRequestException("Attach the circulars as `files`.");
+    const data = await this.dataset.load();
+    const producers = Object.keys(data.priceIndex.producers);
+    const onFile = [
+      ...(await this.prices.find({}, { producer: 1, effectiveDate: 1, sourceFilename: 1 }).lean()),
+      ...(await this.freight.find({}, { producer: 1, effectiveDate: 1, sourceFilename: 1 }).lean()),
+    ];
+    const results: Array<Record<string, unknown>> = [];
+    for (const file of files) {
+      const filename = file.originalname ?? "document";
+      const meta = await this.detector.detectAll(file.buffer, filename, producers);
+      const base = { filename, producer: meta.producer, effectiveDate: meta.effectiveDate, kind: meta.kind, reference: meta.reference, secondary: meta.secondary, notes: meta.notes };
+      if (!meta.producer || !meta.effectiveDate) {
+        results.push({ ...base, status: "needs_input", message: "Producer or effective date could not be read; file this one from the single-document form." });
+        continue;
+      }
+      const dup = onFile.find((c) => c.producer === meta.producer && c.sourceFilename === filename &&
+        new Date(c.effectiveDate).toISOString().slice(0, 10) === meta.effectiveDate);
+      if (dup) {
+        results.push({ ...base, status: "already_filed", id: String(dup._id), message: "Already on file for this producer and round." });
+        continue;
+      }
+      // GAIL prints no circular number; the file name is the most honest reference available.
+      const reference = meta.reference ?? filename.replace(/\.[a-z0-9]+$/i, "");
+      try {
+        const filed = await this.upload({ kind: meta.kind, producer: meta.producer, reference, effectiveDate: meta.effectiveDate } as UploadCircularDto, file, userId);
+        if (meta.secondary && meta.kind === "price") await this.prices.updateOne({ _id: new Types.ObjectId(filed.id) }, { $set: { secondary: true } });
+        results.push({ ...base, reference, status: "filed", id: filed.id });
+      } catch (e) {
+        results.push({ ...base, status: "error", message: e instanceof Error ? e.message : String(e) });
+      }
+    }
+    return {
+      results,
+      filed: results.filter((r) => r.status === "filed").length,
+      needsInput: results.filter((r) => r.status === "needs_input").length,
+      alreadyFiled: results.filter((r) => r.status === "already_filed").length,
+      errors: results.filter((r) => r.status === "error").length,
+    };
+  }
+
+  /**
+   * Delete a filed circular that was never published: the record, its unpublished draft (with
+   * its rows) and the stored documents. A published circular is history and cannot be deleted.
+   */
+  async deleteFiled(id: string, userId: string) {
+    const price = await this.prices.findById(id);
+    const record: any = price ?? (await this.freight.findById(id));
+    if (!record) throw new NotFoundException("No such circular.");
+    if (record.status !== "draft") {
+      throw new BadRequestException("Only a filed circular that has not been published can be deleted.");
+    }
+    let draft: unknown = null;
+    if (record.draft) {
+      draft = price
+        ? await this.priceCirculars.discardUnpublished(String(record.draft), userId)
+        : await this.freightCirculars.discardUnpublished(String(record.draft), userId);
+    }
+    const removed = [await this.store.remove(record.sourceKey), await this.store.remove(record.extractKey)].filter(Boolean).length;
+    await record.deleteOne();
+    await this.auditLog.log(userId, price ? "price_circular.delete_filed" : "freight_circular.delete_filed", price ? "price_circular" : "freight_circular", id, {
+      producer: record.producer, reference: record.reference, effectiveDate: record.effectiveDate, sourceFilename: record.sourceFilename, documentsRemoved: removed,
+    });
+    return { deleted: true, id, documentsRemoved: removed, draft };
+  }
 
   /**
    * Take receipt of a circular document.
@@ -142,6 +219,18 @@ export class CircularsService {
     const extract = parseExtract(parsedJson, circular.producer);
 
     const round = circular.effectiveDate.toISOString().slice(0, 10);
+    // A reading for another round attached to this circular would publish that round's prices
+    // under this one's date. Refuse it rather than trust the record.
+    if (extract.effectiveDate && extract.effectiveDate.slice(0, 10) !== round) {
+      throw new BadRequestException(
+        `That reading is for ${extract.effectiveDate.slice(0, 10)}, but this circular is filed for ${round}.`,
+      );
+    }
+    if (circular.secondary) {
+      throw new BadRequestException(
+        "This document is filed for the record only; its prices travel with the producer's main circular for the round.",
+      );
+    }
     const stored = await this.store.put(file, round, { allowJson: true });
 
     const result = await this.priceCirculars.createFromExtract({
@@ -152,6 +241,7 @@ export class CircularsService {
       userId: userId ?? "",
       zones: extract.zones,
       basis: extract.basis,
+      depotZones: extract.depotZones,
     });
 
     circular.extractKey = stored.key;
@@ -167,6 +257,7 @@ export class CircularsService {
       reference: circular.reference,
       effectiveDate: round,
       rowCount: result.rowCount,
+      depotRowCount: extract.depotRowCount,
       changedRowCount: result.changedRowCount,
       addedCount: result.addedCount,
       added: result.added,

@@ -354,6 +354,23 @@ export const api = {
   attachCircularExtract: (id: string, form: FormData) =>
     upload<CircularExtractResult>(`/circulars/${encodeURIComponent(id)}/extract`, form),
 
+  /** File a whole round's circulars at once; each one's producer, date and reference are read from it. */
+  bulkUploadCirculars: (form: FormData) =>
+    upload<BulkUploadResult>("/circulars/bulk-upload", form, 300_000),
+
+  /** Delete a filed circular that has not been published (with its unpublished draft). */
+  deleteCircular: (id: string) =>
+    request<{ deleted: boolean }>(`/circulars/${encodeURIComponent(id)}`, { method: "DELETE" }),
+
+  /** What Publish All would publish, and why any draft is held back. */
+  publishAllPreview: () => request<PublishAllPreview>("/price-circulars/publish-all/preview"),
+
+  /** Start Publish All; it runs on the server, so poll `publishAllStatus` for progress. */
+  startPublishAll: () => request<PublishAllJob>("/price-circulars/publish-all", { method: "POST" }),
+
+  publishAllStatus: (jobId: string) =>
+    request<PublishAllJob>(`/price-circulars/publish-all/${encodeURIComponent(jobId)}`),
+
   /** Where the stored source document can be opened from. */
   circularSourceUrl: (id: string) =>
     `${API_BASE_URL}/circulars/${encodeURIComponent(id)}/source`,
@@ -762,6 +779,56 @@ export interface LocationMatch {
 /** How much of an answer a grade can produce, given what the circulars hold. */
 export type GradeAvailabilityKind = "comparable" | "gail_only" | "no_gail_price";
 
+export interface BulkUploadItem {
+  filename: string;
+  status: "filed" | "needs_input" | "already_filed" | "error";
+  producer: string | null;
+  effectiveDate: string | null;
+  kind: "price" | "freight";
+  reference: string | null;
+  secondary: boolean;
+  notes: string[];
+  message?: string;
+  id?: string;
+}
+
+export interface BulkUploadResult {
+  results: BulkUploadItem[];
+  filed: number;
+  needsInput: number;
+  alreadyFiled: number;
+  errors: number;
+}
+
+export interface PublishAllItem {
+  draftId: string;
+  producer: string;
+  circularNumber: string;
+  effectiveDate: string;
+  status: string;
+  rowCount: number;
+  changedRowCount: number;
+  depotRowCount: number;
+  liveRowCount: number;
+  ready: boolean;
+  problems: string[];
+}
+
+export interface PublishAllPreview {
+  items: PublishAllItem[];
+  ready: number;
+  held: number;
+}
+
+export interface PublishAllJob {
+  id: string;
+  state: "running" | "done" | "done_with_errors";
+  total: number;
+  done: number;
+  results: { draftId: string; producer: string; ok: boolean; message: string }[];
+  held: { draftId: string; producer: string; problems: string[] }[];
+}
+
 export interface CatalogGrade {
   gailGrade: string;
   polymer: string;
@@ -1120,6 +1187,8 @@ export interface CircularRecord extends Record<string, unknown> {
   extractedAt?: string;
   /** The draft its extract generated, once one exists. */
   draft?: string;
+  /** Filed for the record only (GAIL Stock Point, OPaL CSA): its prices come with the main circular. */
+  secondary?: boolean;
 }
 
 export interface CircularList {

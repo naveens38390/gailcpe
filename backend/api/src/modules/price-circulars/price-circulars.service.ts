@@ -39,6 +39,17 @@ function oid(id: string): Types.ObjectId {
   return new Types.ObjectId(id);
 }
 
+export interface PublishAllJob {
+  id: string;
+  state: "running" | "done" | "done_with_errors";
+  startedAt: Date;
+  finishedAt?: Date;
+  total: number;
+  done: number;
+  results: { draftId: string; producer: string; ok: boolean; message: string; circularId?: string }[];
+  held: { draftId: string; producer: string; problems: string[] }[];
+}
+
 /**
  * Price Circular Management — "many rows, one revision".
  *
@@ -150,6 +161,8 @@ export class PriceCircularsService {
     userId: string;
     zones: Record<string, Record<string, number>>;
     basis?: string;
+    /** The producer's Ex Depot (stock point) book for the same round, published with the circular. */
+    depotZones?: Record<string, Record<string, number>>;
   }) {
     const data = await this.dataset.load();
     const live =
@@ -170,6 +183,8 @@ export class PriceCircularsService {
       createdBy: params.userId,
       rowCount: 0,
       changedRowCount: 0,
+      depotZones: params.depotZones,
+      depotRowCount: Object.values(params.depotZones ?? {}).reduce((n, g) => n + Object.keys(g).length, 0),
     });
 
     const rows: Array<{
@@ -318,7 +333,12 @@ export class PriceCircularsService {
   async publish(draftId: string, userId: string) {
     const draft = await this.requireStatus(draftId, ["approved"], "published");
     this.assertNotOwner(draft, userId, "publish");
+    return this.writePublished(draft, userId);
+  }
 
+  /** The publish itself, shared by the one-draft path and Publish All. */
+  private async writePublished(draft: any, userId: string) {
+    const draftId = String(draft._id);
     const rows = await this.draftRows.find({ draft: oid(draftId) }).lean();
     if (!rows.length) throw new BadRequestException("This draft has no rows.");
 
@@ -347,6 +367,17 @@ export class PriceCircularsService {
     for (let i = 0; i < entryRows.length; i += 5000) {
       await this.entries.insertMany(entryRows.slice(i, i + 5000), { ordered: false });
     }
+    // The Ex Depot book travels with the circular, so publishing does not leave the round with no
+    // depot prices until a separate load runs (R27). Only rows tagged ex_depot, linked to this circular.
+    const depotRows: any[] = [];
+    for (const [zone, grades] of Object.entries<Record<string, number>>(draft.depotZones ?? {})) {
+      for (const [grade, price] of Object.entries(grades)) {
+        depotRows.push({ circular: circular._id, producer: draft.producer, effectiveDate: draft.effectiveDate, zone, grade, price, basis: "ex_depot" });
+      }
+    }
+    for (let i = 0; i < depotRows.length; i += 5000) {
+      await this.entries.insertMany(depotRows.slice(i, i + 5000), { ordered: false });
+    }
 
     draft.status = "published";
     draft.publishedBy = new Types.ObjectId(userId);
@@ -360,6 +391,7 @@ export class PriceCircularsService {
       circularId: String(circular._id),
       zones: circular.stats.zones,
       prices: rows.length,
+      depotPrices: depotRows.length,
     });
     await this.notifications.notify(
       userId,
@@ -399,6 +431,119 @@ export class PriceCircularsService {
       reason,
     });
     return { circular: target, reason, rolledBackBy: userId };
+  }
+
+  /** Remove a draft that was never published, with its rows. A published one is history and stays. */
+  async discardUnpublished(draftId: string, userId: string) {
+    const draft = await this.drafts.findById(draftId);
+    if (!draft) return { discarded: false };
+    if (draft.status === "published") {
+      throw new BadRequestException("That draft has been published; a published circular is kept as history.");
+    }
+    const rows = await this.draftRows.deleteMany({ draft: draft._id });
+    await draft.deleteOne();
+    await this.auditLog.log(userId, "price_circular.discard", "price_circular", draftId, {
+      circularNumber: draft.circularNumber,
+      producer: draft.producer,
+      status: draft.status,
+      rows: rows.deletedCount,
+    });
+    return { discarded: true, rows: rows.deletedCount };
+  }
+
+  // ---- Publish All --------------------------------------------------------------------------
+  //
+  // One click publishes every ready draft of a round: each goes draft -> review -> approved ->
+  // published in one go, and each step is still written to the audit log. The four-eyes rule of
+  // the one-draft path does not apply here, by client decision; instead every draft must pass
+  // the checks below, and one that does not is left unpublished with the reason shown.
+
+  private jobs = new Map<string, PublishAllJob>();
+
+  /** What Publish All would do, draft by draft, and why any draft would be held back. */
+  async publishAllPreview() {
+    const drafts = await this.drafts.find({ status: { $in: ["draft", "review", "approved"] } }).sort({ producer: 1 }).lean();
+    const data = await this.dataset.load();
+    const known = new Set(Object.keys(data.priceIndex.producers));
+    const active = await this.circulars.find({ status: "active" }, { producer: 1, effectiveDate: 1 }).lean();
+    const now = Date.now();
+    const items = drafts.map((d) => {
+      const problems: string[] = [];
+      const round = new Date(d.effectiveDate).toISOString().slice(0, 10);
+      if (!known.has(d.producer)) problems.push(`"${d.producer}" is not a producer code the pricing engine carries (codes are case-sensitive).`);
+      const same = drafts.filter((x) => x.producer === d.producer && new Date(x.effectiveDate).getTime() === new Date(d.effectiveDate).getTime());
+      if (same.length > 1) problems.push(`${same.length} drafts for ${d.producer} on ${round}: keep one (delete the others) so the round is published once.`);
+      const live = active.filter((c) => c.producer === d.producer).map((c) => new Date(c.effectiveDate).getTime());
+      const liveRound = live.length ? Math.max(...live) : null;
+      if (liveRound !== null && new Date(d.effectiveDate).getTime() === liveRound) problems.push(`${d.producer} ${round} is already the published round.`);
+      if (liveRound !== null && new Date(d.effectiveDate).getTime() < liveRound) problems.push(`${round} is older than ${d.producer}'s published round ${new Date(liveRound).toISOString().slice(0, 10)}.`);
+      if (new Date(d.effectiveDate).getTime() > now + 62 * 86_400_000) problems.push(`${round} is more than two months ahead; check the effective date.`);
+      if (!d.rowCount) problems.push("The draft has no prices.");
+      const liveBook = data.priceIndex.producers[d.producer as keyof typeof data.priceIndex.producers];
+      const liveRows = liveBook ? Object.values(liveBook.zones).reduce((n, g) => n + Object.keys(g).length, 0) : 0;
+      if (liveRows && d.rowCount && (d.rowCount < liveRows * 0.7 || d.rowCount > liveRows * 1.5)) {
+        problems.push(`${d.rowCount.toLocaleString("en-IN")} prices against ${liveRows.toLocaleString("en-IN")} in the published book: check the reading covers the whole circular.`);
+      }
+      return {
+        draftId: String(d._id), producer: d.producer, circularNumber: d.circularNumber, effectiveDate: round,
+        status: d.status, rowCount: d.rowCount, changedRowCount: d.changedRowCount, depotRowCount: (d as any).depotRowCount ?? 0,
+        liveRowCount: liveRows, ready: problems.length === 0, problems,
+      };
+    });
+    return { items, ready: items.filter((i) => i.ready).length, held: items.filter((i) => !i.ready).length };
+  }
+
+  /** Start publishing every ready draft; returns a job to poll (a round takes longer than one request may wait). */
+  async startPublishAll(userId: string) {
+    const preview = await this.publishAllPreview();
+    const ready = preview.items.filter((i) => i.ready);
+    if (!ready.length) throw new BadRequestException("No draft is ready to publish.");
+    if ([...this.jobs.values()].some((j) => j.state === "running")) throw new BadRequestException("A Publish All is already running.");
+    const id = new Types.ObjectId().toHexString();
+    const job: PublishAllJob = { id, state: "running", startedAt: new Date(), total: ready.length, done: 0, results: [], held: preview.items.filter((i) => !i.ready) };
+    this.jobs.set(id, job);
+    void this.runPublishAll(job, ready.map((i) => i.draftId), userId);
+    return job;
+  }
+
+  publishAllStatus(jobId: string) {
+    const job = this.jobs.get(jobId);
+    if (!job) throw new NotFoundException("No such Publish All job (the service may have restarted; check the circulars list).");
+    return job;
+  }
+
+  private async runPublishAll(job: PublishAllJob, draftIds: string[], userId: string) {
+    for (const id of draftIds) {
+      const draft = await this.drafts.findById(id);
+      if (!draft || !["draft", "review", "approved"].includes(draft.status)) {
+        job.results.push({ draftId: id, producer: draft?.producer ?? "?", ok: false, message: "Changed since the preview; left alone." });
+        job.done++;
+        continue;
+      }
+      try {
+        const note = "Publish All";
+        if (draft.status === "draft") {
+          draft.status = "review"; draft.submittedAt = new Date(); await draft.save();
+          await this.auditLog.log(userId, "price_circular.submit", "price_circular", id, { circularNumber: draft.circularNumber, via: note });
+        }
+        if (draft.status === "review") {
+          draft.status = "approved"; draft.reviewedBy = new Types.ObjectId(userId); draft.reviewedAt = new Date(); draft.reviewNote = note; await draft.save();
+          await this.auditLog.log(userId, "price_circular.review", "price_circular", id, { approved: true, note });
+        }
+        const { circular } = await this.writePublished(draft, userId);
+        job.results.push({ draftId: id, producer: draft.producer, ok: true, message: `${draft.circularNumber}: ${circular.stats.prices} prices`, circularId: String(circular._id) });
+      } catch (e) {
+        job.results.push({ draftId: id, producer: draft.producer, ok: false, message: e instanceof Error ? e.message : String(e) });
+      }
+      job.done++;
+    }
+    job.state = job.results.every((r) => r.ok) ? "done" : "done_with_errors";
+    job.finishedAt = new Date();
+    await this.auditLog.log(userId, "price_circular.publish_all", "price_circular", job.id, {
+      published: job.results.filter((r) => r.ok).map((r) => r.producer),
+      failed: job.results.filter((r) => !r.ok).map((r) => `${r.producer}: ${r.message}`),
+      held: job.held.map((h) => `${h.producer}: ${h.problems.join(" ")}`),
+    });
   }
 
   private async recomputeChangedCount(draftId: Types.ObjectId) {

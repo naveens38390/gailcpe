@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
 import { api, type GradeDetail, type GradeHit } from "../../services/api";
 import { Field, Input } from "../../components/inputs";
+import { SelectField, type Option } from "../../components/select";
+import { useCatalog } from "../../context/catalog";
 import { theme } from "../../theme";
 import { Card, Caveat, Empty, ErrorNote, Loading, Pill, SectionTitle } from "../../components/ui";
 import { makeStyles, useTheme } from "../../context/theme";
@@ -22,6 +24,24 @@ export default function GradesScreen() {
   const [detail, setDetail] = useState<GradeDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [picked, setPicked] = useState("");
+  const { catalog, loading: catalogLoading } = useCatalog();
+
+  // Every GAIL grade the catalog carries, to pick from instead of typing a code.
+  const gradeOptions: Option[] = useMemo(
+    () =>
+      (catalog?.grades ?? [])
+        .map((g) => ({
+          value: g.gailGrade,
+          label: g.gailGrade,
+          detail: [g.polymer, g.application, g.characteristic].filter(Boolean).join(" · "),
+          badge: g.competitors?.length ? `${g.competitors.length} competitors` : "GAIL only",
+          badgeTone: (g.competitors?.length ? "success" : "neutral") as Option["badgeTone"],
+          keywords: [g.section, g.application, ...(g.competitors ?? [])].filter(Boolean).join(" "),
+        }))
+        .sort((a, b) => a.value.localeCompare(b.value)),
+    [catalog],
+  );
 
   async function search(value: string) {
     setTerm(value);
@@ -58,8 +78,23 @@ export default function GradesScreen() {
     >
       <Card>
         <SectionTitle>Find a grade</SectionTitle>
+        <SelectField
+          label="Choose a GAIL grade"
+          placeholder="Select from the list"
+          hint="Every GAIL grade, with how many competitors carry an equivalent"
+          value={picked}
+          options={gradeOptions}
+          onChange={(v) => {
+            setPicked(v);
+            setTerm("");
+            setHits([]);
+            open(v);
+          }}
+          loading={catalogLoading}
+          emptyText="No grades are loaded."
+        />
         <Field
-          label="Grade or application"
+          label="Or search: grade or application"
           hint="Try a GAIL code, a competitor code, or what it is used for"
         >
           <Input
@@ -106,7 +141,7 @@ export default function GradesScreen() {
           <Card>
             <View style={styles.detailHead}>
               <Text style={styles.detailGrade}>{detail.gailGrade}</Text>
-              <Pressable onPress={() => setDetail(null)} hitSlop={12}>
+              <Pressable onPress={() => { setDetail(null); setPicked(""); }} hitSlop={12}>
                 <Text style={styles.back}>Back</Text>
               </Pressable>
             </View>
