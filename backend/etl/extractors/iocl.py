@@ -124,18 +124,62 @@ def prices(path: str) -> dict[str, dict[str, dict[str, float]]]:
 
 
 def upliftment_slabs(path: str) -> list[dict]:
-    """Annexure II monthly upliftment incentive, as (from, to, rate) rows."""
-    slabs: list[dict] = []
-    collecting = False
-    for row in rows(path, pages=[7]):
-        if row.text.startswith("Quantity Uplifted"):
-            collecting = True
+    """Annexure II monthly upliftment incentive, as (from, to, rate) rows.
+
+    Found by its "Quantity Uplifted" heading, not by page number: the 16 Sep 2026
+    circular gained a page (PE Compound delivered prices) ahead of Annexure II, the
+    table moved from page 7 to page 8, and a fixed page read it silently as "no
+    slabs". Reading stops at the end of the heading's page, so Annexure IV's
+    numbered zone rows ("1 Jammu 1234") can never be taken for slabs.
+
+    A slab can render split over two text rows — since 1 Sep 2026 the 10-25 MT row
+    prints its rate a fraction above its range ("550" / "10 25"), and reading only
+    whole rows dropped it, so the lower slab's rate applied to 10-25 MT. A range row
+    with no rate takes a lone rate from the row directly above or below it.
+
+    Stops the build if nothing is read, or if the slabs are not contiguous (each
+    starting where the previous ended, the last open-ended): a missing incentive
+    or a lost row must be confirmed by a person, never assumed.
+    """
+    cells: list[list[str]] = []
+    table_page = None
+    for row in rows(path):
+        if table_page is None:
+            if row.text.startswith("Quantity Uplifted"):
+                table_page = row.page
             continue
-        if not collecting:
-            continue
+        if row.page != table_page:
+            break
         parts = row.text.split()
-        if len(parts) == 3 and parts[0].isdigit():
-            low = float(parts[0])
-            high = None if parts[1] == "-" else float(parts[1])
-            slabs.append({"from_mt": low, "to_mt": high, "rate_per_mt": float(parts[2])})
-    return slabs
+        if parts and all(p.isdigit() or p == "-" for p in parts):
+            cells.append(parts)
+
+    number = lambda p: None if p == "-" else float(p)
+    used: set[int] = set()
+    slabs: list[dict] = []
+    for i, parts in enumerate(cells):
+        if len(parts) == 3:
+            slabs.append({"from_mt": float(parts[0]), "to_mt": number(parts[1]), "rate_per_mt": float(parts[2])})
+        elif len(parts) == 2:
+            lone = next((j for j in (i - 1, i + 1) if 0 <= j < len(cells) and len(cells[j]) == 1 and j not in used), None)
+            if lone is not None:
+                used.add(lone)
+                slabs.append({"from_mt": float(parts[0]), "to_mt": number(parts[1]), "rate_per_mt": float(cells[lone][0])})
+
+    ordered = sorted(slabs, key=lambda s: s["from_mt"])
+    contiguous = bool(ordered) and ordered[-1]["to_mt"] is None and all(
+        a["to_mt"] == b["from_mt"] for a, b in zip(ordered, ordered[1:]))
+    if not contiguous:
+        if not table_page:
+            found = "missing (no 'Quantity Uplifted' table on any page)"
+        elif not ordered:
+            found = "empty"
+        else:
+            bands = [f"{s['from_mt']:g}-{'' if s['to_mt'] is None else format(s['to_mt'], 'g')}" for s in ordered]
+            found = "not contiguous: " + ", ".join(bands)
+        raise SystemExit(
+            f"\nIOCL: Monthly Upliftment Incentive slabs from {path} are {found}."
+            "\nCheck Annexure II of the circular: the scheme may have changed, or a row was"
+            "\nnot read. Do not continue until one of those is confirmed."
+        )
+    return ordered
