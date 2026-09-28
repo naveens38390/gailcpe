@@ -84,6 +84,8 @@ export class PriceCircularsController {
   @Post("rollback")
   @ApiOperation({ summary: "Reactivate a previously-published circular for a producer" })
   rollback(@Body() dto: RollbackCircularDto, @Req() req: any) {
-    return this.circulars.rollbackCircular("GAIL", dto.circularId, req.user.id, dto.reason);
+    // The producer comes from the circular itself: this was hard-coded to "GAIL" (R28), so a
+    // competitor's circular could not be restored.
+    return this.circulars.rollbackCircularById(dto.circularId, req.user.id, dto.reason);
   }
 }

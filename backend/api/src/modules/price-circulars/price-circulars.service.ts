@@ -372,11 +372,23 @@ export class PriceCircularsService {
     return { draft, circular };
   }
 
+  /** The rollback endpoint: whichever producer the circular belongs to (R28). */
+  async rollbackCircularById(circularId: string, userId: string, reason: string) {
+    const target = await this.circulars.findOne({ _id: oid(circularId) }, { producer: 1 }).lean();
+    if (!target) throw new NotFoundException("No such published circular.");
+    return this.rollbackCircular(target.producer, circularId, userId, reason);
+  }
+
   /** Reactivate a previously-published circular — a real rollback of live data, not a draft. */
   async rollbackCircular(producer: string, circularId: string, userId: string, reason: string) {
     const target = await this.circulars.findOne({ _id: oid(circularId), producer });
     if (!target) throw new NotFoundException("No such published circular for this producer.");
     if (target.status === "active") throw new BadRequestException("This circular is already active.");
+    // Only a circular that was once live can be restored. A filed source document ("draft")
+    // carries no prices: making it active would leave the producer with an empty price book.
+    if (target.status !== "superseded") {
+      throw new BadRequestException("Only a previously published (superseded) circular can be restored.");
+    }
 
     await this.circulars.updateMany({ producer, status: "active" }, { status: "superseded" });
     target.status = "active";

@@ -36,7 +36,18 @@ export default function PriceCircularsScreen() {
         api.circulars(),
       ]);
       setDrafts(draftList);
-      setPublished(circulars.price.filter((c) => c.producer === "GAIL"));
+      // Every producer's published circulars, not GAIL's alone: each one can be exported, and
+      // restored (the rollback endpoint takes the producer from the circular). Filed source
+      // documents ("draft") carry no prices, so they are not listed here.
+      setPublished(
+        circulars.price
+          .filter((c) => c.status === "active" || c.status === "superseded")
+          .sort(
+            (a, b) =>
+              String(a.producer).localeCompare(String(b.producer)) ||
+              new Date(String(b.effectiveDate)).getTime() - new Date(String(a.effectiveDate)).getTime(),
+          ),
+      );
       setError(null);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not load circulars.");
@@ -98,7 +109,9 @@ export default function PriceCircularsScreen() {
         {published.map((c) => (
           <View key={String(c._id)} style={styles.row}>
             <View style={styles.rowHead}>
-              <Text style={styles.rowTitle}>{String(c.reference)}</Text>
+              <Text style={styles.rowTitle}>
+                {String(c.producer)} · {String(c.reference)}
+              </Text>
               <Pill
                 label={String(c.status).toUpperCase()}
                 color={c.status === "active" ? colors.success : colors.textFaint}
@@ -110,11 +123,11 @@ export default function PriceCircularsScreen() {
             <ExportButtons
               excel={{
                 path: `/exports/price-circular/${c._id}/excel`,
-                filename: `PriceCircular-${c.reference}.xlsx`,
+                filename: `PriceCircular-${String(c.producer)}-${String(c.reference)}.xlsx`.replace(/[\\/:*?"<>|]+/g, "-"),
               }}
               pdf={{
                 path: `/exports/price-circular/${c._id}/pdf`,
-                filename: `PriceCircular-${c.reference}.pdf`,
+                filename: `PriceCircular-${String(c.producer)}-${String(c.reference)}.pdf`.replace(/[\\/:*?"<>|]+/g, "-"),
               }}
             />
             {canPublish && c.status !== "active" ? (
