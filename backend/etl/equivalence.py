@@ -19,7 +19,7 @@ REF = Path(__file__).resolve().parent / "reference"
 # (docs/location-fallback/09-release-impact-summary.md). A different count means the table
 # was regenerated without carrying that approval through — stop rather than load a set nobody
 # has reviewed.
-EXPECTED_ROWS = 1077
+EXPECTED_ROWS = 1130
 
 SOURCE_OF_TIER = {
     "state_zone": "state_zone",
@@ -44,7 +44,7 @@ def validate(
         return [
             f"reference/location_equivalence.json has {len(equivalence)} rows, expected "
             f"{EXPECTED_ROWS} (the approved Option 3 set: 1,016 new + 60 retained-live, plus HMEL Mundra "
-            "added by the client decision of 2026-09-26). "
+            "added by the client decision of 2026-09-26, plus 53 coverage-audit rows approved 2026-09-28). "
             "Stopping rather than loading a set that does not match what was reviewed."
         ]
 

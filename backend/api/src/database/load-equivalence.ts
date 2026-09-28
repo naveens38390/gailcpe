@@ -68,7 +68,7 @@ const ACTION = "migration.m1";
 // this runs means the table was regenerated without carrying that approval through. Checked
 // in main(), not here — computeUpdates stays a pure function testable at any size, the same
 // separation equivalence.py's validate()/_row_problems() uses on the ETL side.
-export const EXPECTED_ROWS = 1077;
+export const EXPECTED_ROWS = 1130;
 
 export function computeUpdates(
   equivalence: any[],
@@ -169,7 +169,7 @@ async function main() {
   if (equivalence.length !== EXPECTED_ROWS) {
     throw new Error(
       `location_equivalence.json has ${equivalence.length} rows, expected ${EXPECTED_ROWS} ` +
-        "(the approved Option 3 set: 1,016 new + 60 retained-live, plus HMEL Mundra added by the client decision of 2026-09-26). " +
+        "(the approved Option 3 set: 1,016 new + 60 retained-live, plus HMEL Mundra added by the client decision of 2026-09-26, plus 53 coverage-audit rows approved 2026-09-28). " +
         "Stopping rather than loading a set that does not match what was reviewed.",
     );
   }

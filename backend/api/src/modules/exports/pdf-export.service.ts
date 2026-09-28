@@ -140,6 +140,31 @@ export class PdfExportService {
       40,
     );
 
+    // The Ex Depot (stock point) list shares the circular but is its own price book: its own section.
+    const depotRows = await this.priceEntries
+      .find({ circular: new Types.ObjectId(circularId), basis: "ex_depot" })
+      .sort({ zone: 1, grade: 1 })
+      .lean();
+    if (depotRows.length) {
+      doc.addPage();
+      titleBlock(
+        doc,
+        `${circular.producer} — Ex Depot (stock point) prices`,
+        `Reference ${circular.reference} · Effective ${circular.effectiveDate.toLocaleDateString("en-IN")}`,
+        `${depotRows.length.toLocaleString("en-IN")} price lines across ${new Set(depotRows.map((r) => r.zone)).size} depots`,
+      );
+      drawTable(
+        doc,
+        [
+          { header: "Depot / Location", width: 260, key: "zone" },
+          { header: "Grade", width: 110, key: "grade" },
+          { header: "Price (₹/MT)", width: 105, key: "price", align: "right", numeric: true },
+        ],
+        depotRows.map((r) => ({ zone: r.zone, grade: r.grade, price: r.price })),
+        40,
+      );
+    }
+
     return this.toBuffer(doc);
   }
 

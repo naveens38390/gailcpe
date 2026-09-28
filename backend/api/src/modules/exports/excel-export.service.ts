@@ -95,6 +95,12 @@ export class ExcelExportService {
       .find({ circular: new Types.ObjectId(circularId), basis: { $ne: "ex_depot" } })
       .sort({ zone: 1, grade: 1 })
       .lean();
+    // The Ex Depot (stock point) list is loaded against the same circular; it is its own price book,
+    // so it gets its own sheet rather than being mixed into the works/delivered one.
+    const depotRows = await this.priceEntries
+      .find({ circular: new Types.ObjectId(circularId), basis: "ex_depot" })
+      .sort({ zone: 1, grade: 1 })
+      .lean();
 
     const wb = new ExcelJS.Workbook();
     wb.creator = "GCPE";
@@ -109,6 +115,7 @@ export class ExcelExportService {
     info.addRow(["Status", circular.status]);
     info.addRow(["Zones", circular.stats?.zones ?? new Set(rows.map((r) => r.zone)).size]);
     info.addRow(["Price lines", circular.stats?.prices ?? rows.length]);
+    info.addRow(["Ex Depot price lines", depotRows.length]);
     info.addRow(["Generated", new Date().toLocaleString("en-IN")]);
     info.eachRow((row) => {
       row.getCell(1).font = { bold: true };
@@ -134,6 +141,27 @@ export class ExcelExportService {
       borderRow(row);
     }
     sheet.autoFilter = { from: { row: 4, column: 1 }, to: { row: 4, column: 5 } };
+
+    if (depotRows.length) {
+      const depot = wb.addWorksheet("Ex Depot");
+      depot.columns = [
+        { key: "zone", width: 24 },
+        { key: "grade", width: 16 },
+        { key: "price", width: 16 },
+        { key: "supplyPoint", width: 18 },
+      ];
+      titleBar(depot, 4, [
+        `${circular.producer} — Ex Depot (stock point) prices · ${circular.reference}`,
+        `Effective ${circular.effectiveDate.toLocaleDateString("en-IN")} · ${depotRows.length} lines`,
+      ]);
+      headerRow(depot, ["Depot / Location", "Grade", "Price (₹/MT)", "Supply point"]);
+      for (const r of depotRows) {
+        const row = depot.addRow([r.zone, r.grade, r.price, r.supplyPoint ?? ""]);
+        row.getCell(3).numFmt = "#,##0.00";
+        borderRow(row);
+      }
+      depot.autoFilter = { from: { row: 4, column: 1 }, to: { row: 4, column: 4 } };
+    }
 
     return wb;
   }

@@ -7,7 +7,7 @@ import { Field, Input, PrimaryButton } from "../../components/inputs";
 import { SelectField, type Option } from "../../components/select";
 import { revisionStatusColor } from "../../components/masterData";
 import { theme } from "../../theme";
-import { Card, Empty, ErrorNote, Loading, Pill, SectionTitle } from "../../components/ui";
+import { Card, Empty, ErrorNote, ExportButtons, Loading, Pill, SectionTitle } from "../../components/ui";
 import { makeStyles, useTheme } from "../../context/theme";
 
 /**
@@ -159,6 +159,16 @@ export default function FreightCircularsScreen() {
                 ? ` · ${(c.stats as Record<string, number>).destinations!.toLocaleString("en-IN")} destinations`
                 : ""}
             </Text>
+            <ExportButtons
+              excel={{
+                path: `/exports/freight-circular/${c._id}/excel`,
+                filename: `FreightCircular-${String(c.producer)}-${String(c.reference ?? c._id)}.xlsx`.replace(/[\/:*?"<>|]+/g, "-"),
+              }}
+              pdf={{
+                path: `/exports/freight-circular/${c._id}/pdf`,
+                filename: `FreightCircular-${String(c.producer)}-${String(c.reference ?? c._id)}.pdf`.replace(/[\/:*?"<>|]+/g, "-"),
+              }}
+            />
             {c.status !== "active" ? (
               <Pressable onPress={() => rollback(String(c.producer), String(c._id))}>
                 <Text style={styles.link}>Restore this version</Text>
