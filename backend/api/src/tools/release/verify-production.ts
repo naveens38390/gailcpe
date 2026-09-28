@@ -7,7 +7,9 @@
  *   MONGODB_URI=... VERIFY_OUT=<dir> npm run verify-production -- --rollback
  *
  *   --pre      before the window. Production must still equal the snapshot the
- *              deployment simulation ran on; saves VERIFY_OUT/baseline-pre.json.
+ *              deployment simulation ran on; saves VERIFY_OUT/baseline-pre.json —
+ *              only if every pre check passed, and never over an existing one
+ *              unless --force-baseline-overwrite is given (see baseline.ts).
  *   --post     after the window. Live state against the simulation's expected
  *              state and the baseline.
  *   --rollback after a rollback. What the app serves must equal the baseline:
@@ -21,14 +23,14 @@
  * values are specific to this round and come from the deployment simulation.
  */
 
-import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync } from "node:fs";
 import { config as loadEnv } from "dotenv";
 import mongoose from "mongoose";
 
 loadEnv();
 
-import { EJSON, canonical } from "../../database/release-lib";
+import { EJSON, documentHash } from "../../database/release-lib";
+import { FORCE_FLAG, assertBaselineWritable, loadBaseline, saveBaseline } from "./baseline";
 import { LocationSchema, GradeMappingSchema, ProducerSchema } from "../../database/schemas/catalog.schema";
 import {
   DiscountSchemeSchema,
@@ -68,11 +70,9 @@ const EXPECT = {
 
 const results: [string, string, string][] = [];
 const check = (name: string, ok: boolean | "warn", detail: string) => results.push([ok === "warn" ? "WARN" : ok ? "PASS" : "FAIL", name, detail]);
-const canon = (d: any) => { const c = JSON.parse(EJSON.stringify(d, { relaxed: false })); delete c.updatedAt; delete c.__v; return c; };
-// Full canonical hash (recursively sorted keys). Not JSON.stringify(x, keyArray): an array replacer is an
-// allowlist applied at EVERY depth, so it silently drops nested fields such as producerZone.HMEL.
-const hash = (d: any) => createHash("sha256").update(canonical(canon(d))).digest("hex");
-const deepHash = (d: any) => createHash("sha256").update(EJSON.stringify(canon(d), { relaxed: false })).digest("hex");
+// Nested fields included, key order and numeric BSON type ignored, updatedAt/__v ignored (release-lib).
+const hash = documentHash;
+const FORCE = process.argv.includes(FORCE_FLAG);
 const get = (o: any, p: string) => p.split(".").reduce((x, k) => x?.[k], o);
 const dayOf = (d: any) => new Date(d).toISOString().slice(0, 10);
 const sameJson = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
@@ -82,6 +82,8 @@ async function main() {
   if (!uri) throw new Error("MONGODB_URI is required");
   if (!OUT) throw new Error("VERIFY_OUT (directory for baseline-pre.json and results) is required");
   if (MODE === "pre" && !SNAP) throw new Error("VERIFY_SNAPSHOT (the simulation's snapshot directory) is required for --pre");
+  if (MODE === "pre") assertBaselineWritable(OUT, FORCE);
+  const base = MODE === "pre" ? undefined : loadBaseline(OUT);
   await mongoose.connect(uri);
   const db = mongoose.connection.db!;
   const model = (n: string, s: any): any => mongoose.models[n] ?? mongoose.model(n, s);
@@ -123,7 +125,7 @@ async function main() {
   if (MODE === "pre") {
     // production must still equal the snapshot the deployment simulation ran on
     const snap = (n: string): any[] => EJSON.parse(readFileSync(`${SNAP}/${n}.ejson`, "utf8"), { relaxed: false }) as any[];
-    const same = (live: any[], snapDocs: any[]) => { const a = new Map(live.map((d) => [String(d._id), deepHash(d)])); return snapDocs.length === live.length && snapDocs.every((d: any) => a.get(String(d._id)) === deepHash(d)); };
+    const same = (live: any[], snapDocs: any[]) => { const a = new Map(live.map((d) => [String(d._id), hash(d)])); return snapDocs.length === live.length && snapDocs.every((d: any) => a.get(String(d._id)) === hash(d)); };
     check("locations unchanged since the simulation snapshot", same(locations, snap("locations")), `${locations.length} documents`);
     check("discount schemes unchanged since the snapshot", same(discounts, snap("discountSchemes")), `${discounts.length} documents`);
     check("grade mappings unchanged since the snapshot", same(gradeMappings, snap("gradeMappings")), `${gradeMappings.length} documents`);
@@ -135,10 +137,13 @@ async function main() {
     const baseline = { takenAt: new Date().toISOString(), locationHashes: Object.fromEntries(locations.map((d: any) => [d.name, hash(d)])),
       discountHashes: discounts.map(hash).sort(), gradeMappingHashes: gradeMappings.map(hash).sort(), entryCounts, auditCount, notifCount, lastAudit, lastNotif,
       activeCircularIds: circulars.filter((c: any) => c.status === "active").map((c: any) => String(c._id)), engine };
-    writeFileSync(`${OUT}/baseline-pre.json`, JSON.stringify(baseline, null, 1));
-    check("baseline saved for --post", true, `${OUT}/baseline-pre.json`);
+    const failedChecks = results.filter((r) => r[0] === "FAIL").length;
+    if (failedChecks) check("baseline NOT saved (pre checks failed)", false, `${failedChecks} failed check(s); fix them and rerun --pre`);
+    else {
+      const saved = saveBaseline(OUT, baseline, { force: FORCE, failedChecks });
+      check("baseline saved for --post / --rollback", true, `${saved.path} (sha256 ${saved.sha256}) — copy it off the machine with the P2 backup`);
+    }
   } else {
-    const base = JSON.parse(readFileSync(`${OUT}/baseline-pre.json`, "utf8"));
     const active = circulars.filter((c: any) => c.status === "active");
     const unexpectedLocations = (except: string[]) =>
       locations.filter((d: any) => !except.includes(d.name) && base.locationHashes[d.name] !== hash(d)).map((d: any) => d.name);

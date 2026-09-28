@@ -24,8 +24,13 @@
  *   - every other backed-up circular still has its backed-up status;
  *   - every circular created since the backup is dated `--round` (no later round).
  *
- * Order per producer: restore the earlier circulars first, then supersede the
- * round's. At no point does a producer have no active circular.
+ * Order per producer: reactivate the earlier circulars, read them back, and only
+ * then supersede the round's. While both are active the app still serves the
+ * round (it serves the newest active circular), so at no point does a producer
+ * have no active circular. If any reactivation fails its compare-and-set, the
+ * ones already reactivated for that producer are put back to `superseded`, the
+ * round's circular is left active, and the run stops: that producer is exactly
+ * as before, later producers are untouched, and the result is FAIL.
  *
  * `asOf` (historical) queries resolve by date and ignore status, so for dates on
  * or after `--round` they still see the round's entries. The app never sends
@@ -37,14 +42,13 @@
 import { join } from "node:path";
 import { config as loadEnv } from "dotenv";
 import mongoose from "mongoose";
-type Db = mongoose.mongo.Db;
-type ObjectId = mongoose.mongo.ObjectId;
 
 loadEnv();
 
-import { arg, day, readBackup, redact, saveBeforeImage } from "./release-lib";
+import { arg, beforeImageDir, day, readBackup, redact, saveBeforeImage, validRound } from "./release-lib";
 
-const MIGRATIONS_DIR = process.env.GCPE_MIGRATIONS_DIR ?? join(__dirname, "..", "..", "..", "migrations");
+type Db = mongoose.mongo.Db;
+type ObjectId = mongoose.mongo.ObjectId;
 
 interface CircularRef {
   _id: ObjectId;
@@ -80,8 +84,10 @@ export async function planPriceRollback(
 ): Promise<PriceRollbackPlan> {
   const errors: string[] = [];
   const plans: ProducerPlan[] = [];
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(round)) errors.push(`--round must be YYYY-MM-DD, got "${round}"`);
+  if (!validRound(round)) errors.push(`--round must be a real date written YYYY-MM-DD, got "${round}"`);
   if (!producers.length) errors.push("--producers is required (comma-separated)");
+  if (new Set(producers).size !== producers.length) errors.push(`--producers lists a producer twice: ${producers.join(",")}`);
+  if (errors.length) return { round, ok: false, errors, producers: [] };
 
   for (const producer of producers) {
     const fail = (why: string) => errors.push(`${producer}: ${why}`);
@@ -133,7 +139,10 @@ export interface PriceRollbackResult {
   beforeImageHash: string;
   restored: number;
   superseded: number;
+  /** Producers fully rolled back, in order. */
+  completed: string[];
   readBack: { pass: boolean; failures: string[] };
+  auditError?: string;
 }
 
 export async function applyPriceRollback(db: Db, plan: PriceRollbackPlan, beforeImagePath: string): Promise<PriceRollbackResult> {
@@ -148,27 +157,55 @@ export async function applyPriceRollback(db: Db, plan: PriceRollbackPlan, before
 
   let restored = 0;
   let superseded = 0;
+  let stopped = false;
+  const completed: string[] = [];
   const failures: string[] = [];
   for (const p of plan.producers) {
     const now = new Date();
+    // 1. Reactivate the earlier circulars (compare-and-set on status and date).
+    const reactivated: CircularRef[] = [];
+    const missed: string[] = [];
     for (const c of p.restore) {
       const r = await circulars.updateOne(
         { _id: c._id, producer: p.producer, status: "superseded", effectiveDate: c.effectiveDate },
         { $set: { status: "active", updatedAt: now } },
       );
-      if (r.modifiedCount === 1) restored++;
-      else failures.push(`${p.producer}: ${String(c._id)} was not "superseded" at write time — not reactivated`);
+      if (r.modifiedCount === 1) reactivated.push(c);
+      else missed.push(`${p.producer}: ${String(c._id)} was not "superseded" at write time — not reactivated`);
     }
+    // 2. Read them back. Only if every one is active is the round's circular superseded.
+    const activeNow = new Set((await circulars.find({ producer: p.producer, status: "active" }).toArray()).map((c) => String(c._id)));
+    if (missed.length || !p.restore.every((c) => activeNow.has(String(c._id)))) {
+      // Put this producer back as it was: the round stays active, the earlier circulars superseded.
+      for (const c of reactivated) {
+        await circulars.updateOne(
+          { _id: c._id, producer: p.producer, status: "active" },
+          { $set: { status: "superseded", updatedAt: new Date() } },
+        );
+      }
+      failures.push(...missed, `${p.producer}: not rolled back — its ${plan.round} circular is still active`);
+      stopped = true;
+      break;
+    }
+    restored += reactivated.length;
+    // 3. Supersede the round's circular.
     const r = await circulars.updateOne(
       { _id: p.supersede._id, producer: p.producer, status: "active", effectiveDate: p.supersede.effectiveDate },
       { $set: { status: "superseded", updatedAt: now } },
     );
-    if (r.modifiedCount === 1) superseded++;
-    else failures.push(`${p.producer}: round circular ${String(p.supersede._id)} was not active at write time`);
+    if (r.modifiedCount !== 1) {
+      failures.push(`${p.producer}: round circular ${String(p.supersede._id)} was not active at write time`);
+      stopped = true;
+      break;
+    }
+    superseded++;
+    completed.push(p.producer);
   }
+  const notDone = plan.producers.map((p) => p.producer).filter((p) => !completed.includes(p));
+  if (stopped && notDone.length) failures.push(`stopped; not rolled back: ${notDone.join(", ")}`);
 
-  // Read back: each producer's active set must be exactly what the backup had.
-  for (const p of plan.producers) {
+  // Read back every producer rolled back: its active set must be exactly what the backup had.
+  for (const p of plan.producers.filter((x) => completed.includes(x.producer))) {
     const active = (await circulars.find({ producer: p.producer, status: "active" }).toArray()).map((c) => String(c._id)).sort();
     const want = p.restore.map((c) => String(c._id)).sort();
     if (JSON.stringify(active) !== JSON.stringify(want)) {
@@ -176,26 +213,35 @@ export async function applyPriceRollback(db: Db, plan: PriceRollbackPlan, before
     }
   }
 
-  const at = new Date();
-  await db.collection("auditLogs").insertMany(
-    plan.producers.map((p) => ({
-      action: "price_circular.rollback",
-      entity: "price_circular",
-      detail: {
-        tool: "rollback-price-round",
-        producer: p.producer,
-        round: plan.round,
-        superseded: String(p.supersede._id),
-        restored: p.restore.map((c) => String(c._id)),
-        beforeImage: beforeImagePath,
-        beforeImageHash: hash,
-        readBackPass: failures.length === 0,
-      },
-      createdAt: at,
-      updatedAt: at,
-    })),
-  );
-  return { beforeImage: beforeImagePath, beforeImageHash: hash, restored, superseded, readBack: { pass: failures.length === 0, failures } };
+  const result: PriceRollbackResult = {
+    beforeImage: beforeImagePath, beforeImageHash: hash, restored, superseded, completed,
+    readBack: { pass: failures.length === 0, failures },
+  };
+  try {
+    const at = new Date();
+    await db.collection("auditLogs").insertMany(
+      plan.producers.map((p) => ({
+        action: "price_circular.rollback",
+        entity: "price_circular",
+        detail: {
+          tool: "rollback-price-round",
+          producer: p.producer,
+          round: plan.round,
+          rolledBack: completed.includes(p.producer),
+          superseded: String(p.supersede._id),
+          restored: p.restore.map((c) => String(c._id)),
+          beforeImage: beforeImagePath,
+          beforeImageHash: hash,
+          readBackPass: result.readBack.pass,
+        },
+        createdAt: at,
+        updatedAt: at,
+      })),
+    );
+  } catch (error) {
+    result.auditError = String((error as Error)?.message ?? error);
+  }
+  return result;
 }
 
 export function printPlan(plan: PriceRollbackPlan): void {
@@ -211,6 +257,7 @@ async function main() {
   const apply = process.argv.includes("--apply");
   const round = arg("round") ?? "";
   const producers = (arg("producers") ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+  const migrationsDir = apply ? beforeImageDir() : "";
   const backupDir = arg("backup");
   if (!backupDir) throw new Error("--backup <P2 backup directory> is required.");
   const uri = process.env.MONGODB_URI;
@@ -234,11 +281,12 @@ async function main() {
     await mongoose.disconnect();
     return;
   }
-  const result = await applyPriceRollback(db, plan, join(MIGRATIONS_DIR, `rollback-price-round-${round}-${Date.now()}.json`));
+  const result = await applyPriceRollback(db, plan, join(migrationsDir, `rollback-price-round-${round}-${Date.now()}.json`));
   console.log(`\nbefore-image saved: ${result.beforeImage} (sha256 ${result.beforeImageHash})`);
-  console.log(`reactivated ${result.restored}, superseded ${result.superseded}`);
+  console.log(`reactivated ${result.restored}, superseded ${result.superseded}; rolled back: ${result.completed.join(", ") || "none"}`);
   console.log(result.readBack.pass ? "read-back: PASS" : "read-back: FAIL");
   for (const f of result.readBack.failures) console.log(`  ${f}`);
+  if (result.auditError) console.log(`  WARNING: the audit entry could not be written: ${result.auditError}`);
   console.log("\nRestart the API — the dataset is cached per round.");
   await mongoose.disconnect();
   if (!result.readBack.pass) process.exit(1);

@@ -22,23 +22,75 @@ export const EJSON = mongoose.mongo.BSON.EJSON;
 
 export const sha256 = (text: string | Buffer) => createHash("sha256").update(text).digest("hex");
 
-/** Canonical EJSON with sorted keys: equal documents give equal strings whatever their field order. */
+/**
+ * Canonical EJSON with sorted keys and numbers compared by value: equal documents
+ * give equal strings whatever their field order and whatever numeric BSON type
+ * holds a value. The driver hands back a stored double 5.0 as the JS number 5
+ * (EJSON `$numberInt`), while a backup parses it as Double(5) (`$numberDouble`);
+ * Int32, Int64, Double and Decimal128 all become one `{"$n": …}` form here.
+ */
 export function canonical(value: unknown): string {
-  return JSON.stringify(sortKeys(JSON.parse(EJSON.stringify(value, { relaxed: false }))));
+  return JSON.stringify(normalise(JSON.parse(EJSON.stringify(value, { relaxed: false }))));
 }
-function sortKeys(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(sortKeys);
+const NUMERIC = ["$numberInt", "$numberLong", "$numberDouble", "$numberDecimal"];
+function normalise(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(normalise);
   if (value !== null && typeof value === "object") {
+    const keys = Object.keys(value as object);
+    if (keys.length === 1 && NUMERIC.includes(keys[0])) return { $n: numericValue(String((value as any)[keys[0]])) };
     const out: Record<string, unknown> = {};
-    for (const key of Object.keys(value as object).sort()) out[key] = sortKeys((value as Record<string, unknown>)[key]);
+    for (const key of keys.sort()) out[key] = normalise((value as Record<string, unknown>)[key]);
     return out;
   }
   return value;
 }
+/** One spelling per value: "<sign><digits>e<exponent>", no leading/trailing zeros; 0 and -0 are "0". */
+export function numericValue(text: string): string {
+  const special = /^([+-])?(nan|inf|infinity)$/i.exec(text.trim());
+  if (special) return /nan/i.test(special[2]) ? "NaN" : `${special[1] === "-" ? "-" : ""}Infinity`;
+  const m = /^([+-])?(\d*)(?:\.(\d*))?(?:[eE]([+-]?\d+))?$/.exec(text.trim());
+  if (!m || (!m[2] && !m[3])) return text;
+  let digits = `${m[2] ?? ""}${m[3] ?? ""}`.replace(/^0+/, "");
+  let exp = Number(m[4] ?? 0) - (m[3]?.length ?? 0);
+  if (!digits) return "0";
+  const trailing = digits.length - digits.replace(/0+$/, "").length;
+  digits = digits.slice(0, digits.length - trailing);
+  exp += trailing;
+  return `${m[1] === "-" ? "-" : ""}${digits}e${exp}`;
+}
 export const same = (a: unknown, b: unknown) => canonical(a ?? null) === canonical(b ?? null);
+
+/**
+ * Hash of one stored document for before/after comparison: `updatedAt` and `__v`
+ * ignored, everything else — nested fields included — hashed canonically.
+ * (Not `JSON.stringify(doc, keyArray)`: an array replacer is an allowlist applied at
+ * EVERY depth and silently drops nested fields such as `producerZone.HMEL`.)
+ */
+export function documentHash(doc: unknown): string {
+  const d = JSON.parse(EJSON.stringify(doc, { relaxed: false }));
+  if (d && typeof d === "object") { delete d.updatedAt; delete d.__v; }
+  return sha256(JSON.stringify(normalise(d)));
+}
+/** Which `documentHash` a stored baseline was made with; a baseline from another version is refused. */
+export const DOCUMENT_HASH_VERSION = "canonical-v2";
 
 export const redact = (uri: string) => uri.replace(/\/\/[^@]*@/, "//***@");
 export const day = (d: Date | string) => new Date(d).toISOString().slice(0, 10);
+
+/** A real calendar date written YYYY-MM-DD. `2026-02-30` is refused, not rolled over to 2 March. */
+export function validRound(round: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(round)) return false;
+  const d = new Date(`${round}T00:00:00.000Z`);
+  return !Number.isNaN(d.getTime()) && day(d) === round;
+}
+export const roundDate = (round: string) => new Date(`${round}T00:00:00.000Z`);
+
+/** `GCPE_MIGRATIONS_DIR` is required to write: a before-image holds production data and must not land in the repo. */
+export function beforeImageDir(): string {
+  const dir = process.env.GCPE_MIGRATIONS_DIR;
+  if (!dir) throw new Error("GCPE_MIGRATIONS_DIR is required with --apply: a directory OUTSIDE the repository for the before-image.");
+  return dir;
+}
 
 /** Parse `--name value` from argv. */
 export function arg(name: string): string | undefined {

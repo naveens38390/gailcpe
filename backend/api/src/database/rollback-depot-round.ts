@@ -25,6 +25,12 @@
  * The before-image holds every deleted entry in full and each location's
  * current depot fields, written and read back before the first write.
  *
+ * Order: re-check every planned location; restore the locations (compare-and-set
+ * on their current depot fields) and read them back; only then delete the
+ * entries. If any location restore fails, the ones already restored are put back
+ * and nothing is deleted — so a failure never leaves the entries gone with the
+ * depot maps unrestored.
+ *
  * Restart the API afterwards — the dataset is cached per round.
  */
 
@@ -34,10 +40,9 @@ import mongoose from "mongoose";
 
 loadEnv();
 
-import { arg, day, readBackup, redact, same, saveBeforeImage } from "./release-lib";
+import { arg, beforeImageDir, day, readBackup, redact, roundDate as dateOf, same, saveBeforeImage, validRound } from "./release-lib";
 
 type Db = mongoose.mongo.Db;
-const MIGRATIONS_DIR = process.env.GCPE_MIGRATIONS_DIR ?? join(__dirname, "..", "..", "..", "migrations");
 const DEPOT_FIELDS = ["producerDepotZone", "producerDepotZoneTier"] as const;
 
 export interface LocationRestore {
@@ -64,9 +69,10 @@ export async function planDepotRollback(
 ): Promise<DepotRollbackPlan> {
   const { round, expect, expectLocations, backupLocations, backupDiscounts } = opts;
   const errors: string[] = [];
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(round)) errors.push(`--round must be YYYY-MM-DD, got "${round}"`);
+  if (!validRound(round)) errors.push(`--round must be a real date written YYYY-MM-DD, got "${round}"`);
   if (!Number.isInteger(expect) || expect < 0) errors.push("--expect <exact number of ex-depot entries> is required");
-  const roundDate = new Date(`${round}T00:00:00.000Z`);
+  if (errors.length) return { round, ok: false, errors, entryIds: [], entriesByProducer: {}, locations: [] };
+  const roundDate = dateOf(round);
 
   // ---- price entries
   const rows = await db
@@ -130,17 +136,41 @@ export interface DepotRollbackResult {
   deleted: number;
   restored: number;
   readBack: { pass: boolean; failures: string[] };
+  auditError?: string;
+}
+
+/** Filter matching a location only while its depot fields still hold exactly `fields` (as read from the database). */
+function whileUnchanged(id: unknown, fields: Record<string, unknown>) {
+  const filter: Record<string, unknown> = { _id: id };
+  for (const f of DEPOT_FIELDS) filter[f] = fields[f] === undefined ? { $exists: false } : fields[f];
+  return filter;
+}
+function setTo(fields: Record<string, unknown>) {
+  const $set: Record<string, unknown> = { updatedAt: new Date() };
+  const $unset: Record<string, ""> = {};
+  for (const f of DEPOT_FIELDS) {
+    if (fields[f] === undefined) $unset[f] = "";
+    else $set[f] = fields[f];
+  }
+  return Object.keys($unset).length ? { $set, $unset } : { $set };
 }
 
 export async function applyDepotRollback(db: Db, plan: DepotRollbackPlan, beforeImagePath: string): Promise<DepotRollbackResult> {
   if (!plan.ok) throw new Error("Refusing to apply a plan with errors.");
   const entries = db.collection("priceEntries");
-  const roundDate = new Date(`${plan.round}T00:00:00.000Z`);
+  const locs = db.collection("locations");
+  const roundDate = dateOf(plan.round);
+
+  // Re-check everything the plan relies on before the first write.
   const fullRows: any[] = [];
   for (let i = 0; i < plan.entryIds.length; i += 5000) {
     fullRows.push(...(await entries.find({ _id: { $in: plan.entryIds.slice(i, i + 5000) as any[] } }).toArray()));
   }
   if (fullRows.length !== plan.entryIds.length) throw new Error("Entries changed between plan and apply. Nothing was written.");
+  for (const l of plan.locations) {
+    const now = await locs.findOne({ _id: l._id as any });
+    if (!same(depotFields(now), l.current)) throw new Error(`${l.name}: depot map changed between plan and apply. Nothing was written.`);
+  }
   const hash = saveBeforeImage(beforeImagePath, {
     action: "rollback-depot-round",
     round: plan.round,
@@ -151,60 +181,68 @@ export async function applyDepotRollback(db: Db, plan: DepotRollbackPlan, before
 
   const failures: string[] = [];
   let deleted = 0;
-  for (let i = 0; i < plan.entryIds.length; i += 5000) {
-    const r = await entries.deleteMany({
-      _id: { $in: plan.entryIds.slice(i, i + 5000) as any[] },
-      effectiveDate: roundDate,
-      basis: "ex_depot",
-    });
-    deleted += r.deletedCount;
-  }
-  if (deleted !== plan.entryIds.length) failures.push(`deleted ${deleted}, planned ${plan.entryIds.length}`);
-
-  const locs = db.collection("locations");
   let restored = 0;
+
+  // 1. Restore the locations, compare-and-set.
+  const done: LocationRestore[] = [];
   for (const l of plan.locations) {
-    const now = await locs.findOne({ _id: l._id as any });
-    if (!same(depotFields(now), l.current)) {
-      failures.push(`${l.name}: depot map changed since the plan — left alone`);
-      continue;
+    const r = await locs.updateOne(whileUnchanged(l._id, l.current), setTo(l.restore));
+    if (r.matchedCount !== 1) {
+      failures.push(`${l.name}: depot map changed at write time — not restored`);
+      break;
     }
-    const $set: Record<string, unknown> = { updatedAt: new Date() };
-    const $unset: Record<string, ""> = {};
-    for (const f of DEPOT_FIELDS) {
-      if (l.restore[f] === undefined) $unset[f] = "";
-      else $set[f] = l.restore[f];
+    done.push(l);
+  }
+  // 2. Read them back.
+  if (!failures.length) {
+    for (const l of plan.locations) {
+      const now = await locs.findOne({ _id: l._id as any });
+      if (!same(depotFields(now), l.restore)) failures.push(`${l.name}: depot map does not match the backup after restore`);
     }
-    await locs.updateOne({ _id: l._id as any }, Object.keys($unset).length ? { $set, $unset } : { $set });
-    restored++;
+  }
+  if (failures.length) {
+    // Put back what was restored; delete nothing.
+    for (const l of done) await locs.updateOne(whileUnchanged(l._id, l.restore), setTo(l.current));
+    failures.push(`stopped before deleting: ${plan.entryIds.length} ex-depot entries left in place, restored locations put back`);
+  } else {
+    restored = done.length;
+    // 3. Only now delete the entries.
+    for (let i = 0; i < plan.entryIds.length; i += 5000) {
+      const r = await entries.deleteMany({
+        _id: { $in: plan.entryIds.slice(i, i + 5000) as any[] },
+        effectiveDate: roundDate,
+        basis: "ex_depot",
+      });
+      deleted += r.deletedCount;
+    }
+    if (deleted !== plan.entryIds.length) failures.push(`deleted ${deleted}, planned ${plan.entryIds.length}`);
+    const left = await entries.countDocuments({ effectiveDate: roundDate, basis: "ex_depot" });
+    if (left !== 0) failures.push(`${left} ex-depot entries dated ${plan.round} remain`);
   }
 
-  // Read back
-  const left = await entries.countDocuments({ effectiveDate: roundDate, basis: "ex_depot" });
-  if (left !== 0) failures.push(`${left} ex-depot entries dated ${plan.round} remain`);
-  for (const l of plan.locations) {
-    const now = await locs.findOne({ _id: l._id as any });
-    if (!same(depotFields(now), l.restore)) failures.push(`${l.name}: depot map does not match the backup after restore`);
+  const result: DepotRollbackResult = { beforeImage: beforeImagePath, beforeImageHash: hash, deleted, restored, readBack: { pass: failures.length === 0, failures } };
+  try {
+    const at = new Date();
+    await db.collection("auditLogs").insertOne({
+      action: "depot.rollback",
+      entity: "price_entries",
+      detail: {
+        tool: "rollback-depot-round",
+        round: plan.round,
+        deleted,
+        entriesByProducer: plan.entriesByProducer,
+        locationsRestored: restored ? plan.locations.map((l) => l.name) : [],
+        beforeImage: beforeImagePath,
+        beforeImageHash: hash,
+        readBackPass: result.readBack.pass,
+      },
+      createdAt: at,
+      updatedAt: at,
+    });
+  } catch (error) {
+    result.auditError = String((error as Error)?.message ?? error);
   }
-
-  const at = new Date();
-  await db.collection("auditLogs").insertOne({
-    action: "depot.rollback",
-    entity: "price_entries",
-    detail: {
-      tool: "rollback-depot-round",
-      round: plan.round,
-      deleted,
-      entriesByProducer: plan.entriesByProducer,
-      locationsRestored: plan.locations.map((l) => l.name),
-      beforeImage: beforeImagePath,
-      beforeImageHash: hash,
-      readBackPass: failures.length === 0,
-    },
-    createdAt: at,
-    updatedAt: at,
-  });
-  return { beforeImage: beforeImagePath, beforeImageHash: hash, deleted, restored, readBack: { pass: failures.length === 0, failures } };
+  return result;
 }
 
 export function printPlan(plan: DepotRollbackPlan): void {
@@ -227,6 +265,7 @@ async function main() {
   const expectLocations = expectArg === "none" ? [] : expectArg.split(",").map((s) => s.trim()).filter(Boolean);
   const uri = process.env.MONGODB_URI;
   if (!uri) throw new Error("MONGODB_URI is required.");
+  const migrationsDir = apply ? beforeImageDir() : "";
 
   const backupLocations = readBackup(backupDir, "locations");
   const backupDiscounts = readBackup(backupDir, "discountSchemes");
@@ -247,11 +286,12 @@ async function main() {
     await mongoose.disconnect();
     return;
   }
-  const result = await applyDepotRollback(db, plan, join(MIGRATIONS_DIR, `rollback-depot-round-${round}-${Date.now()}.json`));
+  const result = await applyDepotRollback(db, plan, join(migrationsDir, `rollback-depot-round-${round}-${Date.now()}.json`));
   console.log(`\nbefore-image saved: ${result.beforeImage} (sha256 ${result.beforeImageHash})`);
   console.log(`deleted ${result.deleted.toLocaleString("en-IN")} entries, restored ${result.restored} location(s)`);
   console.log(result.readBack.pass ? "read-back: PASS" : "read-back: FAIL");
   for (const f of result.readBack.failures) console.log(`  ${f}`);
+  if (result.auditError) console.log(`  WARNING: the audit entry could not be written: ${result.auditError}`);
   console.log("\nRestart the API — the dataset is cached per round.");
   await mongoose.disconnect();
   if (!result.readBack.pass) process.exit(1);

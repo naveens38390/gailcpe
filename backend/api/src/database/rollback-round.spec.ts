@@ -300,3 +300,119 @@ describe("rollback-depot-round (C3b)", () => {
     expect(await snapshot()).toEqual(before);
   });
 });
+
+// ---------------------------------------------------------------------------
+// Failure paths and edge cases added after the pre-review (M1, M2, L1, L2, L3)
+// ---------------------------------------------------------------------------
+describe("rollback-price-round failure paths (M1)", () => {
+  it("a failed reactivation leaves that producer exactly as it was and stops before the next producer", async () => {
+    await seedPreWindow();
+    const dir = await takeBackup();
+    await publishRound();
+    const plan = await planPriceRollback(db, "2026-09-16", ["HMEL", "HPL"], readBackup(dir, "priceCirculars"));
+    expect(plan.ok).toBe(true);
+    // Between plan and apply, something reactivates HMEL's 1 Aug circular: its compare-and-set must fail.
+    await db.collection("priceCirculars").updateOne({ _id: C.hmelAug }, { $set: { status: "active" } });
+    const result = await applyPriceRollback(db, plan, join(tmp, "m1-first.json"));
+    expect(result.readBack.pass).toBe(false);
+    expect(result.completed).toEqual([]);
+    const status = async (id: any) => (await db.collection("priceCirculars").findOne({ _id: id }))!.status;
+    expect(await status(C.hmelNew)).toBe("active"); // the round is still served for HMEL
+    expect(await status(C.hmelSep)).toBe("superseded"); // reactivated then put back
+    expect(await status(C.hplNew)).toBe("active"); // HPL untouched
+    expect(await status(C.hplSep)).toBe("superseded");
+    expect(result.readBack.failures.join("\n")).toMatch(/HMEL: not rolled back[\s\S]*stopped; not rolled back: HMEL, HPL/);
+  });
+
+  it("a failure on a later producer keeps the earlier ones rolled back and reports exactly which", async () => {
+    await seedPreWindow();
+    const dir = await takeBackup();
+    await publishRound();
+    const plan = await planPriceRollback(db, "2026-09-16", ["HMEL", "HPL"], readBackup(dir, "priceCirculars"));
+    await db.collection("priceCirculars").deleteOne({ _id: C.hplAug });
+    const result = await applyPriceRollback(db, plan, join(tmp, "m1-second.json"));
+    expect(result.completed).toEqual(["HMEL"]);
+    expect(result.readBack.pass).toBe(false);
+    const active = async (p: string) => (await db.collection("priceCirculars").find({ producer: p, status: "active" }).toArray()).map((c) => String(c._id)).sort();
+    expect(await active("HMEL")).toEqual([String(C.hmelAug), String(C.hmelSep)].sort());
+    expect(await active("HPL")).toEqual([String(C.hplNew)]); // never left without an active circular
+  });
+
+  it("refuses an invalid round, duplicate producers, and a round circular stored off UTC midnight", async () => {
+    await seedPreWindow();
+    const dir = await takeBackup();
+    await publishRound();
+    const backup = readBackup(dir, "priceCirculars");
+    expect((await planPriceRollback(db, "2026-02-30", ["HMEL"], backup)).errors.join()).toMatch(/real date/);
+    expect((await planPriceRollback(db, "2026-09-16", ["HMEL", "HMEL"], backup)).errors.join()).toMatch(/twice/);
+    // Stored at IST midnight (2026-09-15T18:30Z) it is not the 2026-09-16 round: refuse, never guess.
+    await db.collection("priceCirculars").updateOne({ _id: C.hmelNew }, { $set: { effectiveDate: new Date("2026-09-15T18:30:00Z") } });
+    const plan = await planPriceRollback(db, "2026-09-16", ["HMEL"], backup);
+    expect(plan.ok).toBe(false);
+    expect(plan.errors.join()).toMatch(/expected exactly one active circular dated 2026-09-16/);
+  });
+});
+
+describe("rollback-depot-round failure paths (M2)", () => {
+  it("a location changed between plan and apply: refuses before any write", async () => {
+    await seedPreWindow();
+    const dir = await takeBackup();
+    await publishRound();
+    const plan = await planDepotRollback(db, depotOpts(dir));
+    await db.collection("locations").updateOne({ name: "SAMBALPUR" }, { $set: { producerDepotZone: { HPL: "Somewhere" } } });
+    const before = await snapshot();
+    await expect(applyDepotRollback(db, plan, join(tmp, "m2-changed.json"))).rejects.toThrow(/changed between plan and apply. Nothing was written/);
+    expect(await snapshot()).toEqual(before);
+  });
+
+  it("a location restore failing at write time puts the restored ones back and deletes nothing", async () => {
+    await seedPreWindow();
+    const dir = await takeBackup();
+    await publishRound();
+    await db.collection("locations").updateOne({ name: "GOA" }, { $set: { producerDepotZone: { HMEL: "Goa" }, producerDepotZoneTier: { HMEL: "exact" } } });
+    const plan = await planDepotRollback(db, depotOpts(dir, { expectLocations: ["GOA", "SAMBALPUR"] }));
+    const depotOf = async (n: string) => canonical(await db.collection("locations").findOne({ name: n }, { projection: { _id: 0, producerDepotZone: 1, producerDepotZoneTier: 1 } }));
+    const goaBefore = await depotOf("GOA"), sambalpurBefore = await depotOf("SAMBALPUR");
+    // Make the second location update match nothing, as if it changed in the instant before the write.
+    const proto = Object.getPrototypeOf(db.collection("locations"));
+    const original = proto.updateOne;
+    let calls = 0;
+    proto.updateOne = function (this: any, ...args: any[]) {
+      if (this.collectionName === "locations" && ++calls === 2) return Promise.resolve({ acknowledged: true, matchedCount: 0, modifiedCount: 0, upsertedCount: 0, upsertedId: null });
+      return original.apply(this, args);
+    };
+    let result;
+    try {
+      result = await applyDepotRollback(db, plan, join(tmp, "m2-conflict.json"));
+    } finally {
+      proto.updateOne = original;
+    }
+    expect(result!.readBack.pass).toBe(false);
+    expect(result!.deleted).toBe(0);
+    expect(result!.readBack.failures.join()).toMatch(/stopped before deleting/);
+    expect(await db.collection("priceEntries").countDocuments({ effectiveDate: SEP16, basis: "ex_depot" })).toBe(3);
+    expect(await depotOf("GOA")).toBe(goaBefore); // the first restore was put back
+    expect(await depotOf("SAMBALPUR")).toBe(sambalpurBefore);
+  });
+
+  it("a backup written with $numberDouble does not raise a false discount difference (L1)", async () => {
+    await seedPreWindow();
+    const dir = await takeBackup();
+    // Rewrite the discount backup as another tool would (doubles kept as doubles), with a fresh SHA256SUMS entry.
+    const docs = readBackup<any>(dir, "discountSchemes").map((d) => (d.cashDiscountDepot === undefined ? d : { ...d, cashDiscountDepot: new mongoose.mongo.BSON.Double(Number(d.cashDiscountDepot)) }));
+    expect(EJSON.stringify(docs, { relaxed: false })).toMatch(/\$numberDouble/);
+    const alt = mkdtempSync(join(tmp, "backup-double-"));
+    writeBackup(alt, { locations: readBackup(dir, "locations"), discountSchemes: docs });
+    await publishRound();
+    const plan = await planDepotRollback(db, { ...depotOpts(alt) });
+    expect(plan.errors).toEqual([]);
+  });
+
+  it("refuses an invalid round before reading anything", async () => {
+    await seedPreWindow();
+    const dir = await takeBackup();
+    const plan = await planDepotRollback(db, { ...depotOpts(dir), round: "2026-02-30" });
+    expect(plan.ok).toBe(false);
+    expect(plan.errors.join()).toMatch(/real date/);
+  });
+});
