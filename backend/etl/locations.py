@@ -87,6 +87,9 @@ SPELLINGS = {
     "BARODA": "VADODARA",
     "TRIVANDRUM": "THIRUVANANTHAPURAM",
     "PONDICHERRY": "PUDUCHERRY",
+    # HPL spells Bargarh (Odisha) "Barhgarh" — in its territory list always, in its price list
+    # since 16 Sep 2026; the freight books say BARGARH (verified same place, client-approved 2026-09-26).
+    "BARHGARH": "BARGARH",
 }
 
 
