@@ -3,6 +3,7 @@
  *
  *   API_URL=https://gcpe-api.onrender.com/api \
  *   VERIFY_EMAIL=... VERIFY_PASSWORD=... \
+ *   GCPE_DATA=<the round's data directory, see "cross-grade" below> \
  *   npm run verify-release -- [--stage pre-load|post-load|pre-fallback|post-fallback] [--with-deal]
  *
  * Stages (the release runbooks in docs/release-checklist.md and
@@ -18,8 +19,8 @@
  *              served yet, HPL Bilaspur reads unresolved.
  *   post-fallback  M1 (load-equivalence) applied and the API restarted: every post-load check,
  *              plus 12 towns (60 competitor cells, all five classifications) checked against the
- *              client-approved Competitor Presence workbook, and named checks for Bilaspur,
- *              Latur, Beawar and Ex Depot.
+ *              client-approved Competitor Presence workbook, named checks for Bilaspur,
+ *              Latur, Beawar and Ex Depot, and the round's client decisions (DECISION_TOWNS).
  *
  * It only reads, with side effects to know about: every /pricing/compare is
  * kept in comparison history (about 15 small records), and --with-deal runs
@@ -45,9 +46,17 @@
  * and bump EXPECTED_ROUND when a new round is published.
  *
  * Section "cross-grade" needs no typed figures: it compares the API, grade by
- * grade and town by town, with the price_index.json of the checkout it is run
- * from (so run it from a clean clone of the release commit). It also fails if that
- * file is a different round from the one the API serves.
+ * grade and town by town, with price_index.json from GCPE_DATA (default: the
+ * checkout's backend/data/normalized). It also fails if that file is a different
+ * round from the one the API serves.
+ *
+ * Round 2026-09-16: the repo's data files are still round 2026-09-01, so set
+ * GCPE_DATA to the release package's depot-data directory (the rebuilt round with
+ * production's curated Ex Depot maps: D:/Gail2/staged/round-2026-09-16/deploy-package/depot-data).
+ * Not committed, on purpose: its location map lacks three mappings production still
+ * serves (RIL and HMEL at Goa -> Panjim, HMEL at Silvassa -> Daman; ETL evidence
+ * aliases, E1), so it is not a faithful record of the live mappings. None of those
+ * towns is among the ones this section compares.
  */
 
 import { existsSync, readFileSync } from "node:fs";
@@ -77,15 +86,19 @@ if (!STAGES.includes(STAGE)) {
 }
 
 // ---- the round these figures belong to; checked FIRST so a new round is never mistaken for a bug
-const EXPECTED_ROUND = "2026-09-01";
+const EXPECTED_ROUND = "2026-09-16";
 const DATA_DIR = process.env.GCPE_DATA ?? join(__dirname, "..", "..", "..", "data", "normalized");
 
 // ---- expected figures: grade B52A003 at BHIWANDI, 1 MT, cash --------------------------
+// Round 2026-09-16: every basic at these zones rose by exactly Rs 2,000 from 2026-09-01 on both
+// lists, with discounts and freight unchanged, so each landed figure is the 1 Sep one + 2,000.
+// Checked against the round's data files (backend/data/normalized) and production on 2026-09-28.
 const GRADE = "B52A003";
 const LOCATION = "BHIWANDI";
-const WORKS = { GAIL: 140761.75, IOCL: 139496, RIL: 139529, HMEL: 139540, OPaL: 140315.72 } as const;
-const HPL_WORKS_AFTER_LOAD = 140605; // HPL has no Bhiwandi price until the loader fills its works zone
-const DEPOT = { GAIL: 140420, IOCL: 139296, RIL: 138870, HMEL: 139290, OPaL: 139836 } as const;
+const WORKS = { GAIL: 142761.75, IOCL: 141496, RIL: 141529, HMEL: 141540, OPaL: 142315.72 } as const;
+const HPL_WORKS_AFTER_LOAD = 142605; // HPL has no Bhiwandi price until the loader fills its works zone
+const DEPOT = { GAIL: 142420, IOCL: 141296, RIL: 140870, HMEL: 141290, OPaL: 141836 } as const;
+const AGRA_GAIL_DEPOT = 142990; // GAIL's Agra stock point, the one producer priced there on Ex Depot
 const RIL_DEALER_DISCOUNT = 350;
 const RIL_DELTA_DEPOT = DEPOT.GAIL - DEPOT.RIL; // 1,550
 const TIE_ORDER = ["GAIL", "IOCL", "HMEL", "HPL", "OPaL", "RIL"];
@@ -210,7 +223,7 @@ async function main() {
     const agra = await compare({ pricingBasis: "ex_depot" }, "AGRA");
     const np = agra.quotes.filter((x) => x.invoiceLanded === null && x.basisAvailability?.ex_depot === false).map((x) => x.producer);
     check(["IOCL", "HMEL", "OPaL", "RIL"].every((p) => np.includes(p)), "IOCL, HMEL, OPaL, RIL read Not Published", `not published: ${np.join(",")}`);
-    check(near(q(agra, "GAIL").invoiceLanded, 140990), "GAIL still priced at Agra 1,40,990", inr(q(agra, "GAIL").invoiceLanded));
+    check(near(q(agra, "GAIL").invoiceLanded, AGRA_GAIL_DEPOT), `GAIL still priced at Agra ${inr(AGRA_GAIL_DEPOT)}`, inr(q(agra, "GAIL").invoiceLanded));
     check(/Not published ex depot/.test(agra.warnings.join(" ")), "comparison warning names them");
   }
 
@@ -412,9 +425,30 @@ const FALLBACK_TOWNS = [
 ];
 const FALLBACK_TIERS = ["state_zone", "inferred_location"];
 
+/**
+ * Round 2026-09-16 client decisions (applied by M1 on 2026-09-28): HMEL dropped its Khalapur,
+ * Nimrani and Mundra zones, so eight towns were re-pointed; HPL's Bargarh zone is spelt
+ * Orissa_Barhgarh from this round. [town, producer, zone, match label, km or null].
+ * Zone and match are asserted, not a landed price: several of these towns have no freight rate
+ * for the producer, so a missing landed price there is correct.
+ */
+const DECISION_TOWNS: [string, string, string, string, number | null][] = [
+  ["LONAWALA", "HMEL", "Pune", "Inferred Location Match", 54],
+  ["KHOPOLI", "HMEL", "Mumbai", "Inferred Location Match", 58],
+  ["RAIGAD", "HMEL", "Mumbai", "Inferred Location Match", 62],
+  ["ROHA", "HMEL", "Mumbai", "Inferred Location Match", 75],
+  ["MUNDRA", "HMEL", "Gandhidham", "Inferred Location Match", 50],
+  ["BURHANPUR", "HMEL", "Indore", "Inferred Location Match", 162],
+  ["KHANDWA", "HMEL", "Indore", "Inferred Location Match", 113],
+  ["KHARGONE", "HMEL", "Indore", "Inferred Location Match", 102],
+  ["ROURKELA", "HPL", "Orissa_Barhgarh", "Territory Match", null],
+  ["SAMBALPUR", "HPL", "Orissa_Barhgarh", "Territory Match", null],
+];
+
 async function locationFallback() {
+  const records = FALLBACK_TOWNS.length + 2 + (STAGE === "post-fallback" ? DECISION_TOWNS.length + 1 : 0);
   console.log(`
-Location fallback (${STAGE}; stores ${FALLBACK_TOWNS.length + 2} comparison records)`);
+Location fallback (${STAGE}; stores ${records} comparison records)`);
   const works: Record<string, Cmp> = {};
   for (const town of FALLBACK_TOWNS) works[town] = await compare({}, town);
   const all = Object.values(works).flatMap((c) => c.quotes);
@@ -468,6 +502,15 @@ Location fallback (${STAGE}; stores ${FALLBACK_TOWNS.length + 2} comparison reco
     const leaked = depot.quotes.filter((x) => FALLBACK_TIERS.includes(x.locationTier ?? "") || x.locationMatch?.group === "inferred");
     check(leaked.length === 0, `Ex Depot at ${town}: no fallback or inferred match`, leaked.map((x) => x.producer).join(","));
   }
+
+  console.log(`\nClient decisions for round ${EXPECTED_ROUND}`);
+  for (const [town, producer, zone, label, km] of DECISION_TOWNS) {
+    const x = q(await compare({}, town), producer);
+    const ok = x.zone === zone && x.locationMatch?.label === label && (km === null || x.locationMatch?.distanceKm === km);
+    check(ok, `${producer} ${town}: ${zone} (${label}${km === null ? "" : `, ${km} km`})`, `${x.zone} (${x.locationMatch?.label}, ${x.locationMatch?.distanceKm ?? "-"} km)`);
+  }
+  const sambalpurDepot = q(await compare({ pricingBasis: "ex_depot" }, "SAMBALPUR"), "HPL");
+  check(sambalpurDepot.zone === "Orissa_Barhgarh", "HPL Sambalpur Ex Depot: Orissa_Barhgarh (the relabelled depot zone)", String(sambalpurDepot.zone));
 }
 
 main()
