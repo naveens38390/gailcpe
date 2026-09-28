@@ -17,14 +17,6 @@
  },
  {
   "producer": "HMEL",
-  "town": "ANKLESHWAR",
-  "status": "held",
-  "suggested_zone": "Surat",
-  "reason": "Nearest HMEL priced zone: 51 km straight-line, same state (Gujarat)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "HMEL",
   "town": "BARSI",
   "status": "held",
   "suggested_zone": "Aurangabad",
@@ -45,14 +37,6 @@
   "status": "held",
   "suggested_zone": "Surat",
   "reason": "Nearest HMEL priced zone: 58 km straight-line, same state (Gujarat)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "HMEL",
-  "town": "BHILWARA",
-  "status": "held",
-  "suggested_zone": "Ajmer",
-  "reason": "Nearest HMEL priced zone: 123 km straight-line, same state (Rajasthan)",
   "round": "2026-09-01"
  },
  {
@@ -81,14 +65,6 @@
  },
  {
   "producer": "HMEL",
-  "town": "CHALISGAON",
-  "status": "held",
-  "suggested_zone": "Aurangabad",
-  "reason": "Nearest HMEL priced zone: 73 km straight-line, same state (Maharashtra)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "HMEL",
   "town": "DAMTAL",
   "status": "held",
   "suggested_zone": "Baddi",
@@ -101,14 +77,6 @@
   "status": "held",
   "suggested_zone": "Agra",
   "reason": "Nearest HMEL priced zone: 56 km straight-line, other state (Uttar Pradesh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "HMEL",
-  "town": "DIBIYAPUR",
-  "status": "held",
-  "suggested_zone": "Kanpur",
-  "reason": "Nearest HMEL priced zone: 82 km straight-line, same state (Uttar Pradesh). HPL Annexure V places this town and Kanpur in one price point (Uttar Pradesh_Kanpur)",
   "round": "2026-09-01"
  },
  {
@@ -145,14 +113,6 @@
  },
  {
   "producer": "HMEL",
-  "town": "JAGDISHPUR",
-  "status": "held",
-  "suggested_zone": "Kanpur",
-  "reason": "Nearest HMEL priced zone: 37 km straight-line, same state (Uttar Pradesh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "HMEL",
   "town": "JAMNAGAR",
   "status": "held",
   "suggested_zone": "Mundra",
@@ -165,14 +125,6 @@
   "status": "held",
   "suggested_zone": "Vishakapatnam",
   "reason": "Nearest HMEL priced zone: 147 km straight-line, other state (Andhra Pradesh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "HMEL",
-  "town": "KALOL",
-  "status": "held",
-  "suggested_zone": "Ahmedabad",
-  "reason": "Nearest HMEL priced zone: 26 km straight-line, same state (Gujarat)",
   "round": "2026-09-01"
  },
  {
@@ -241,34 +193,10 @@
  },
  {
   "producer": "HMEL",
-  "town": "NANDYAL",
-  "status": "held",
-  "suggested_zone": "Cuddapah",
-  "reason": "Nearest HMEL priced zone: 117 km straight-line, same state (Andhra Pradesh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "HMEL",
-  "town": "PATHANAMTH",
-  "status": "held",
-  "suggested_zone": "Thiruvananthapuram",
-  "reason": "Nearest HMEL priced zone: 89 km straight-line, same state (Kerala)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "HMEL",
   "town": "RAIGARH",
   "status": "held",
   "suggested_zone": "Bilaspur",
   "reason": "Nearest HMEL priced zone: 130 km straight-line, same state (Chhattisgarh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "HMEL",
-  "town": "RAJMUNDHRY",
-  "status": "held",
-  "suggested_zone": "Vijayawada",
-  "reason": "Nearest HMEL priced zone: 133 km straight-line, same state (Andhra Pradesh)",
   "round": "2026-09-01"
  },
  {
@@ -301,14 +229,6 @@
   "status": "held",
   "suggested_zone": "Karur",
   "reason": "Nearest HMEL priced zone: 78 km straight-line, same state (Tamil Nadu)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "HMEL",
-  "town": "SAMPLA",
-  "status": "held",
-  "suggested_zone": "Gurgaon",
-  "reason": "Nearest HMEL priced zone: 43 km straight-line, same state (Haryana)",
   "round": "2026-09-01"
  },
  {
@@ -361,22 +281,6 @@
  },
  {
   "producer": "HMEL",
-  "town": "WAI",
-  "status": "held",
-  "suggested_zone": "Pune",
-  "reason": "Nearest HMEL priced zone: 63 km straight-line, same state (Maharashtra)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "HMEL",
-  "town": "WARANGAL",
-  "status": "held",
-  "suggested_zone": "Kodad",
-  "reason": "Nearest HMEL priced zone: 119 km straight-line, same state (Telangana)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "HMEL",
   "town": "YANAM",
   "status": "held",
   "suggested_zone": "Vishakapatnam",
@@ -389,14 +293,6 @@
   "status": "held",
   "suggested_zone": "Daman",
   "reason": "Nearest HPL priced zone: 195 km straight-line, same state (Dadra and Nagar Haveli and Daman and Diu)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "HPL",
-  "town": "LONAWALA",
-  "status": "held",
-  "suggested_zone": "Maharashtra_Pune",
-  "reason": "Nearest HPL priced zone: 54 km straight-line, same state (Maharashtra)",
   "round": "2026-09-01"
  },
  {
@@ -421,14 +317,6 @@
   "status": "held",
   "suggested_zone": "Jalgaon",
   "reason": "Nearest IOCL priced zone: 152 km straight-line, same state (Maharashtra)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "IOCL",
-  "town": "ANKLESHWAR",
-  "status": "held",
-  "suggested_zone": "Surat",
-  "reason": "Nearest IOCL priced zone: 51 km straight-line, same state (Gujarat)",
   "round": "2026-09-01"
  },
  {
@@ -489,14 +377,6 @@
  },
  {
   "producer": "IOCL",
-  "town": "CHALISGAON",
-  "status": "held",
-  "suggested_zone": "Aurangabad",
-  "reason": "Nearest IOCL priced zone: 73 km straight-line, same state (Maharashtra)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "IOCL",
   "town": "DAMTAL",
   "status": "held",
   "suggested_zone": "Kathua",
@@ -509,14 +389,6 @@
   "status": "held",
   "suggested_zone": "Gwalior",
   "reason": "Nearest IOCL priced zone: 59 km straight-line, other state (Madhya Pradesh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "IOCL",
-  "town": "DIBIYAPUR",
-  "status": "held",
-  "suggested_zone": "Kanpur",
-  "reason": "Nearest IOCL priced zone: 82 km straight-line, same state (Uttar Pradesh). HPL Annexure V places this town and Kanpur in one price point (Uttar Pradesh_Kanpur)",
   "round": "2026-09-01"
  },
  {
@@ -545,30 +417,6 @@
  },
  {
   "producer": "IOCL",
-  "town": "FIROZPUR",
-  "status": "held",
-  "suggested_zone": "Jalandhar",
-  "reason": "Nearest IOCL priced zone: 102 km straight-line, same state (Punjab)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "IOCL",
-  "town": "JAGDISHPUR",
-  "status": "held",
-  "suggested_zone": "Kanpur",
-  "reason": "Nearest IOCL priced zone: 37 km straight-line, same state (Uttar Pradesh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "IOCL",
-  "town": "JAM KHAMBH",
-  "status": "held",
-  "suggested_zone": "Gandhidham",
-  "reason": "Nearest IOCL priced zone: 109 km straight-line, same state (Gujarat)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "IOCL",
   "town": "JAMNAGAR",
   "status": "held",
   "suggested_zone": "Gandhidham",
@@ -581,14 +429,6 @@
   "status": "held",
   "suggested_zone": "Visak",
   "reason": "Nearest IOCL priced zone: 147 km straight-line, other state (Andhra Pradesh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "IOCL",
-  "town": "KALOL",
-  "status": "held",
-  "suggested_zone": "Ahmedabad",
-  "reason": "Nearest IOCL priced zone: 26 km straight-line, same state (Gujarat)",
   "round": "2026-09-01"
  },
  {
@@ -633,14 +473,6 @@
  },
  {
   "producer": "IOCL",
-  "town": "LONAWALA",
-  "status": "held",
-  "suggested_zone": "Pune",
-  "reason": "Nearest IOCL priced zone: 54 km straight-line, same state (Maharashtra)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "IOCL",
   "town": "NAMAKKAL",
   "status": "held",
   "suggested_zone": "Salem",
@@ -677,14 +509,6 @@
   "status": "held",
   "suggested_zone": "Gurgaon",
   "reason": "Nearest IOCL priced zone: 64 km straight-line, same state (Haryana)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "IOCL",
-  "town": "SAMPLA",
-  "status": "held",
-  "suggested_zone": "Gurgaon",
-  "reason": "Nearest IOCL priced zone: 43 km straight-line, same state (Haryana)",
   "round": "2026-09-01"
  },
  {
@@ -729,14 +553,6 @@
  },
  {
   "producer": "IOCL",
-  "town": "TRICHY",
-  "status": "held",
-  "suggested_zone": "Salem",
-  "reason": "Nearest IOCL priced zone: 110 km straight-line, same state (Tamil Nadu)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "IOCL",
   "town": "VIJAYAPURA",
   "status": "held",
   "suggested_zone": "Dharwad",
@@ -749,22 +565,6 @@
   "status": "held",
   "suggested_zone": "Pondicherry",
   "reason": "Nearest IOCL priced zone: 37 km straight-line, other state (Puducherry)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "IOCL",
-  "town": "WAI",
-  "status": "held",
-  "suggested_zone": "Pune",
-  "reason": "Nearest IOCL priced zone: 63 km straight-line, same state (Maharashtra)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "IOCL",
-  "town": "WARANGAL",
-  "status": "held",
-  "suggested_zone": "Suryapet",
-  "reason": "Nearest IOCL priced zone: 96 km straight-line, same state (Telangana)",
   "round": "2026-09-01"
  },
  {
@@ -789,14 +589,6 @@
   "status": "held",
   "suggested_zone": "Jalgaon",
   "reason": "Nearest OPaL priced zone: 152 km straight-line, same state (Maharashtra)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "OPaL",
-  "town": "AMRITSAR",
-  "status": "held",
-  "suggested_zone": "Ludhiana",
-  "reason": "Nearest OPaL priced zone: 122 km straight-line, same state (Punjab)",
   "round": "2026-09-01"
  },
  {
@@ -833,22 +625,6 @@
  },
  {
   "producer": "OPaL",
-  "town": "BUNDHI",
-  "status": "held",
-  "suggested_zone": "Kota",
-  "reason": "Nearest OPaL priced zone: 35 km straight-line, same state (Rajasthan). HPL Annexure V places this town and Kota in one price point (Rajasthan_Kota)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "OPaL",
-  "town": "CHALISGAON",
-  "status": "held",
-  "suggested_zone": "Aurangabad (MH)",
-  "reason": "Nearest OPaL priced zone: 73 km straight-line, same state (Maharashtra)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "OPaL",
   "town": "DAMTAL",
   "status": "held",
   "suggested_zone": "Baddi",
@@ -869,14 +645,6 @@
   "status": "held",
   "suggested_zone": "Agra",
   "reason": "Nearest OPaL priced zone: 56 km straight-line, other state (Uttar Pradesh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "OPaL",
-  "town": "DIBIYAPUR",
-  "status": "held",
-  "suggested_zone": "Kanpur",
-  "reason": "Nearest OPaL priced zone: 82 km straight-line, same state (Uttar Pradesh). HPL Annexure V places this town and Kanpur in one price point (Uttar Pradesh_Kanpur)",
   "round": "2026-09-01"
  },
  {
@@ -913,30 +681,6 @@
  },
  {
   "producer": "OPaL",
-  "town": "HIMMATNAGAR",
-  "status": "held",
-  "suggested_zone": "Kalol (Mehsana)",
-  "reason": "Nearest OPaL priced zone: 62 km straight-line, same state (Gujarat)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "OPaL",
-  "town": "JAGDISHPUR",
-  "status": "held",
-  "suggested_zone": "Kanpur",
-  "reason": "Nearest OPaL priced zone: 37 km straight-line, same state (Uttar Pradesh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "OPaL",
-  "town": "JAM KHAMBH",
-  "status": "held",
-  "suggested_zone": "Gandhidham",
-  "reason": "Nearest OPaL priced zone: 109 km straight-line, same state (Gujarat)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "OPaL",
   "town": "JAMNAGAR",
   "status": "held",
   "suggested_zone": "Gandhidham",
@@ -969,42 +713,10 @@
  },
  {
   "producer": "OPaL",
-  "town": "KATNI",
-  "status": "held",
-  "suggested_zone": "Jabalpur",
-  "reason": "Nearest OPaL priced zone: 87 km straight-line, same state (Madhya Pradesh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "OPaL",
   "town": "KUNDLI",
   "status": "held",
   "suggested_zone": "Gurgaon",
   "reason": "Nearest OPaL priced zone: 46 km straight-line, same state (Haryana)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "OPaL",
-  "town": "LONAWALA",
-  "status": "held",
-  "suggested_zone": "Navi Mumbai",
-  "reason": "Nearest OPaL priced zone: 52 km straight-line, same state (Maharashtra)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "OPaL",
-  "town": "MUDHOL",
-  "status": "held",
-  "suggested_zone": "Hubli",
-  "reason": "Nearest OPaL priced zone: 111 km straight-line, same state (Karnataka)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "OPaL",
-  "town": "PATHANAMTH",
-  "status": "held",
-  "suggested_zone": "Trivandrum",
-  "reason": "Nearest OPaL priced zone: 89 km straight-line, same state (Kerala)",
   "round": "2026-09-01"
  },
  {
@@ -1053,14 +765,6 @@
   "status": "held",
   "suggested_zone": "Gurgaon",
   "reason": "Nearest OPaL priced zone: 64 km straight-line, same state (Haryana)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "OPaL",
-  "town": "SAMPLA",
-  "status": "held",
-  "suggested_zone": "Gurgaon",
-  "reason": "Nearest OPaL priced zone: 43 km straight-line, same state (Haryana)",
   "round": "2026-09-01"
  },
  {
@@ -1120,22 +824,6 @@
   "round": "2026-09-01"
  },
  {
-  "producer": "OPaL",
-  "town": "WAI",
-  "status": "held",
-  "suggested_zone": "Pune",
-  "reason": "Nearest OPaL priced zone: 63 km straight-line, same state (Maharashtra)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "OPaL",
-  "town": "WARANGAL",
-  "status": "held",
-  "suggested_zone": "Suryapet",
-  "reason": "Nearest OPaL priced zone: 96 km straight-line, same state (Telangana)",
-  "round": "2026-09-01"
- },
- {
   "producer": "RIL",
   "town": "AHMEDNAGAR",
   "status": "held",
@@ -1153,14 +841,6 @@
  },
  {
   "producer": "RIL",
-  "town": "AMRITSAR",
-  "status": "held",
-  "suggested_zone": "LUDHIANA",
-  "reason": "Nearest RIL priced zone: 122 km straight-line, same state (Punjab)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "RIL",
   "town": "ANANTAPUR",
   "status": "held",
   "suggested_zone": "NANDYAL",
@@ -1169,26 +849,10 @@
  },
  {
   "producer": "RIL",
-  "town": "ANKLESHWAR",
-  "status": "held",
-  "suggested_zone": "SURAT",
-  "reason": "Nearest RIL priced zone: 51 km straight-line, same state (Gujarat)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "RIL",
   "town": "BAHADURGARH",
   "status": "held",
   "suggested_zone": "PANIPAT",
   "reason": "Nearest RIL priced zone: 77 km straight-line, same state (Haryana)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "RIL",
-  "town": "BARAMATI",
-  "status": "held",
-  "suggested_zone": "SATARA",
-  "reason": "Nearest RIL priced zone: 81 km straight-line, same state (Maharashtra)",
   "round": "2026-09-01"
  },
  {
@@ -1217,22 +881,6 @@
  },
  {
   "producer": "RIL",
-  "town": "BUNDHI",
-  "status": "held",
-  "suggested_zone": "KOTA",
-  "reason": "Nearest RIL priced zone: 35 km straight-line, same state (Rajasthan). HPL Annexure V places this town and Kota in one price point (Rajasthan_Kota)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "RIL",
-  "town": "CHALISGAON",
-  "status": "held",
-  "suggested_zone": "AURANGBDMH",
-  "reason": "Nearest RIL priced zone: 73 km straight-line, same state (Maharashtra)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "RIL",
   "town": "DAMTAL",
   "status": "held",
   "suggested_zone": "BADDI",
@@ -1253,14 +901,6 @@
   "status": "held",
   "suggested_zone": "AGRA",
   "reason": "Nearest RIL priced zone: 56 km straight-line, other state (Uttar Pradesh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "RIL",
-  "town": "DIBIYAPUR",
-  "status": "held",
-  "suggested_zone": "KANPUR",
-  "reason": "Nearest RIL priced zone: 82 km straight-line, same state (Uttar Pradesh). HPL Annexure V places this town and Kanpur in one price point (Uttar Pradesh_Kanpur)",
   "round": "2026-09-01"
  },
  {
@@ -1313,22 +953,6 @@
  },
  {
   "producer": "RIL",
-  "town": "JAGDISHPUR",
-  "status": "held",
-  "suggested_zone": "KANPUR",
-  "reason": "Nearest RIL priced zone: 37 km straight-line, same state (Uttar Pradesh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "RIL",
-  "town": "JAM KHAMBH",
-  "status": "held",
-  "suggested_zone": "GANDHIDHAM",
-  "reason": "Nearest RIL priced zone: 109 km straight-line, same state (Gujarat)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "RIL",
   "town": "JAMNAGAR",
   "status": "held",
   "suggested_zone": "GANDHIDHAM",
@@ -1349,14 +973,6 @@
   "status": "held",
   "suggested_zone": "VISHAKAPATNAM",
   "reason": "Nearest RIL priced zone: 147 km straight-line, other state (Andhra Pradesh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "RIL",
-  "town": "KALOL",
-  "status": "held",
-  "suggested_zone": "AHMEDABAD",
-  "reason": "Nearest RIL priced zone: 26 km straight-line, same state (Gujarat)",
   "round": "2026-09-01"
  },
  {
@@ -1385,42 +1001,10 @@
  },
  {
   "producer": "RIL",
-  "town": "LONAWALA",
-  "status": "held",
-  "suggested_zone": "PUNE",
-  "reason": "Nearest RIL priced zone: 54 km straight-line, same state (Maharashtra)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "RIL",
-  "town": "PALANPUR",
-  "status": "held",
-  "suggested_zone": "AHMEDABAD",
-  "reason": "Nearest RIL priced zone: 128 km straight-line, same state (Gujarat)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "RIL",
-  "town": "PATHANAMTH",
-  "status": "held",
-  "suggested_zone": "TRIVANDRUM",
-  "reason": "Nearest RIL priced zone: 89 km straight-line, same state (Kerala)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "RIL",
   "town": "RAIGARH",
   "status": "held",
   "suggested_zone": "BILASPUR",
   "reason": "Nearest RIL priced zone: 130 km straight-line, same state (Chhattisgarh)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "RIL",
-  "town": "RAJMUNDHRY",
-  "status": "held",
-  "suggested_zone": "VIJAYAWADA",
-  "reason": "Nearest RIL priced zone: 133 km straight-line, same state (Andhra Pradesh)",
   "round": "2026-09-01"
  },
  {
@@ -1485,14 +1069,6 @@
   "status": "held",
   "suggested_zone": "PONDICHERY",
   "reason": "Nearest RIL priced zone: 37 km straight-line, other state (Puducherry)",
-  "round": "2026-09-01"
- },
- {
-  "producer": "RIL",
-  "town": "WARANGAL",
-  "status": "held",
-  "suggested_zone": "SURYAPET",
-  "reason": "Nearest RIL priced zone: 96 km straight-line, same state (Telangana)",
   "round": "2026-09-01"
  },
  {
