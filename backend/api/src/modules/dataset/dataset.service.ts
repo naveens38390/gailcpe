@@ -51,6 +51,8 @@ const SPELLINGS: Record<string, string> = {
   BARODA: "VADODARA",
   TRIVANDRUM: "THIRUVANANTHAPURAM",
   PONDICHERRY: "PUDUCHERRY",
+  // HPL spells Bargarh (Odisha) "Barhgarh" since 16 Sep 2026; kept in step with locations.py.
+  BARHGARH: "BARGARH",
 };
 
 /** Given rows sorted newest-first, keep only the first (= newest) one per producer. */

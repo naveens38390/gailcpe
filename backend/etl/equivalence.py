@@ -19,7 +19,7 @@ REF = Path(__file__).resolve().parent / "reference"
 # (docs/location-fallback/09-release-impact-summary.md). A different count means the table
 # was regenerated without carrying that approval through — stop rather than load a set nobody
 # has reviewed.
-EXPECTED_ROWS = 1076
+EXPECTED_ROWS = 1077
 
 SOURCE_OF_TIER = {
     "state_zone": "state_zone",
@@ -43,7 +43,8 @@ def validate(
     if len(equivalence) != EXPECTED_ROWS:
         return [
             f"reference/location_equivalence.json has {len(equivalence)} rows, expected "
-            f"{EXPECTED_ROWS} (the approved Option 3 set: 1,016 new + 60 retained-live). "
+            f"{EXPECTED_ROWS} (the approved Option 3 set: 1,016 new + 60 retained-live, plus HMEL Mundra "
+            "added by the client decision of 2026-09-26). "
             "Stopping rather than loading a set that does not match what was reviewed."
         ]
 
@@ -122,7 +123,8 @@ def merge(coverage: dict[str, dict], equivalence: list[dict]) -> dict:
 
     Returns `location_meta`: {producer: {town: {km, crossesState, corroborated, source,
     supplied}}} for every row of the approved table — the approved *Competitor Presence and
-    Fallback Mapping* workbook (2026-09-25) shows a distance and classification for all 1,076,
+    Fallback Mapping* workbook (2026-09-25) shows a distance and classification for all 1,076 (1,077 since the
+    client decision of 2026-09-26 added HMEL Mundra),
     including the 97 where the table only confirms a zone the resolver already found natively.
     `supplied` separates the two: true where this merge filled a gap, false where it confirmed an
     existing match (`fix-hpl-territory.ts` relies on it to leave M1's rows alone). `source` is

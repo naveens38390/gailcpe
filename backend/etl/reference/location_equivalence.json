@@ -310,13 +310,13 @@
  {
   "producer": "HMEL",
   "town": "BURHANPUR",
-  "zone": "Nimrani",
+  "zone": "Indore",
   "tier": "inferred_location",
-  "distance_km": 120,
+  "distance_km": 162,
   "crosses_state": false,
   "corroborated_by_hpl": true,
-  "evidence": "Nearest HMEL priced zone: 120 km straight-line, same state (Madhya Pradesh). HPL Annexure V places this town and Nimrani in one price point (Madhya Pradesh_Indore)",
-  "round": "2026-09-01"
+  "evidence": "Client-approved replacement (decision workbook 2026-09-26, Replacement Zone B): HMEL withdrew Nimrani from Ex Works on 16 Sep 2026. Indore: 162 km straight-line, same state (Madhya Pradesh). HPL Annexure V places this town and Indore in one price point (Madhya Pradesh_Indore)",
+  "round": "2026-09-16"
  },
  {
   "producer": "HMEL",
@@ -937,24 +937,24 @@
  {
   "producer": "HMEL",
   "town": "KHANDWA",
-  "zone": "Nimrani",
+  "zone": "Indore",
   "tier": "inferred_location",
-  "distance_km": 98,
+  "distance_km": 113,
   "crosses_state": false,
   "corroborated_by_hpl": true,
-  "evidence": "Nearest HMEL priced zone: 98 km straight-line, same state (Madhya Pradesh). HPL Annexure V places this town and Nimrani in one price point (Madhya Pradesh_Indore)",
-  "round": "2026-09-01"
+  "evidence": "Client-approved replacement (decision workbook 2026-09-26, Replacement Zone A): HMEL withdrew Nimrani from Ex Works on 16 Sep 2026. Indore: 113 km straight-line, same state (Madhya Pradesh). HPL Annexure V places this town and Indore in one price point (Madhya Pradesh_Indore)",
+  "round": "2026-09-16"
  },
  {
   "producer": "HMEL",
   "town": "KHARGONE",
-  "zone": "Nimrani",
+  "zone": "Indore",
   "tier": "inferred_location",
-  "distance_km": 36,
+  "distance_km": 102,
   "crosses_state": false,
   "corroborated_by_hpl": true,
-  "evidence": "Nearest HMEL priced zone: 36 km straight-line, same state (Madhya Pradesh). HPL Annexure V places this town and Nimrani in one price point (Madhya Pradesh_Indore)",
-  "round": "2026-09-01"
+  "evidence": "Client-approved replacement (decision workbook 2026-09-26, Replacement Zone B): HMEL withdrew Nimrani from Ex Works on 16 Sep 2026. Indore: 102 km straight-line, same state (Madhya Pradesh). HPL Annexure V places this town and Indore in one price point (Madhya Pradesh_Indore)",
+  "round": "2026-09-16"
  },
  {
   "producer": "HMEL",
@@ -970,13 +970,13 @@
  {
   "producer": "HMEL",
   "town": "KHOPOLI",
-  "zone": "Khalapur",
+  "zone": "Mumbai",
   "tier": "inferred_location",
-  "distance_km": 8,
+  "distance_km": 58,
   "crosses_state": false,
-  "corroborated_by_hpl": false,
-  "evidence": "Adjacent to this producer's Khalapur, 8 km apart",
-  "round": "2026-09-01"
+  "corroborated_by_hpl": true,
+  "evidence": "Client-approved replacement (decision workbook 2026-09-26, Replacement Zone A): HMEL withdrew Khalapur from Ex Works on 16 Sep 2026. Mumbai: 58 km straight-line, same state (Maharashtra). HPL Annexure V places this town and Mumbai in one price point (Maharashtra_Mumbai)",
+  "round": "2026-09-16"
  },
  {
   "producer": "HMEL",
@@ -1047,13 +1047,13 @@
  {
   "producer": "HMEL",
   "town": "LONAWALA",
-  "zone": "Khalapur",
+  "zone": "Pune",
   "tier": "inferred_location",
-  "distance_km": 15,
+  "distance_km": 54,
   "crosses_state": false,
-  "corroborated_by_hpl": false,
-  "evidence": "Nearest HMEL priced zone: 15 km straight-line, same state (Maharashtra)",
-  "round": "2026-09-01"
+  "corroborated_by_hpl": true,
+  "evidence": "Client-approved replacement (decision workbook 2026-09-26, Replacement Zone A): HMEL withdrew Khalapur from Ex Works on 16 Sep 2026. Pune: 54 km straight-line, same state (Maharashtra). HPL Annexure V places this town and Pune in one price point (Maharashtra_Pune)",
+  "round": "2026-09-16"
  },
  {
   "producer": "HMEL",
@@ -1186,6 +1186,17 @@
   "corroborated_by_hpl": false,
   "evidence": "Nearest HMEL priced zone: 111 km straight-line, same state (Karnataka)",
   "round": "2026-09-01"
+ },
+ {
+  "producer": "HMEL",
+  "town": "MUNDRA",
+  "zone": "Gandhidham",
+  "tier": "inferred_location",
+  "distance_km": 50,
+  "crosses_state": false,
+  "corroborated_by_hpl": true,
+  "evidence": "Client-approved replacement (decision workbook 2026-09-26, Replacement Zone A): HMEL withdrew Mundra from Ex Works on 16 Sep 2026. Gandhidham: 50 km straight-line, same state (Gujarat). HPL Annexure V places this town and Gandhidham in one price point (Gujarat_Gandhidham)",
+  "round": "2026-09-16"
  },
  {
   "producer": "HMEL",
@@ -1454,13 +1465,13 @@
  {
   "producer": "HMEL",
   "town": "RAIGAD",
-  "zone": "Khalapur",
+  "zone": "Mumbai",
   "tier": "inferred_location",
-  "distance_km": 33,
+  "distance_km": 62,
   "crosses_state": false,
   "corroborated_by_hpl": true,
-  "evidence": "Nearest HMEL priced zone: 33 km straight-line, same state (Maharashtra). HPL Annexure V places this town and Khalapur in one price point (Maharashtra_Mumbai)",
-  "round": "2026-09-01"
+  "evidence": "Client-approved replacement (decision workbook 2026-09-26, Replacement Zone A): HMEL withdrew Khalapur from Ex Works on 16 Sep 2026. Mumbai: 62 km straight-line, same state (Maharashtra). HPL Annexure V places this town and Mumbai in one price point (Maharashtra_Mumbai)",
+  "round": "2026-09-16"
  },
  {
   "producer": "HMEL",
@@ -1542,13 +1553,13 @@
  {
   "producer": "HMEL",
   "town": "ROHA",
-  "zone": "Khalapur",
+  "zone": "Mumbai",
   "tier": "inferred_location",
-  "distance_km": 47,
+  "distance_km": 75,
   "crosses_state": false,
   "corroborated_by_hpl": true,
-  "evidence": "Nearest HMEL priced zone: 47 km straight-line, same state (Maharashtra). HPL Annexure V places this town and Khalapur in one price point (Maharashtra_Mumbai)",
-  "round": "2026-09-01"
+  "evidence": "Client-approved replacement (decision workbook 2026-09-26, Replacement Zone A): HMEL withdrew Khalapur from Ex Works on 16 Sep 2026. Mumbai: 75 km straight-line, same state (Maharashtra). HPL Annexure V places this town and Mumbai in one price point (Maharashtra_Mumbai)",
+  "round": "2026-09-16"
  },
  {
   "producer": "HMEL",
@@ -4171,13 +4182,13 @@
  {
   "producer": "HPL",
   "town": "ROURKELA",
-  "zone": "Orissa_Bargarh",
+  "zone": "Orissa_Barhgarh",
   "tier": "published_map",
   "distance_km": 162,
   "crosses_state": false,
   "corroborated_by_hpl": false,
-  "evidence": "HPL Annexure V (its own territory list): district \"Sundargarh\" (HPL/HMEL freight book) is listed in Annexure V -> price point Orissa_Bargarh",
-  "round": "2026-09-01"
+  "evidence": "HPL Annexure V (its own territory list): district \"Sundargarh\" (HPL/HMEL freight book) is listed in Annexure V -> price point Orissa_Barhgarh (relabelled from Orissa_Bargarh, HPL's price-list spelling to 1 Sep 2026; client-approved 2026-09-26)",
+  "round": "2026-09-16"
  },
  {
   "producer": "HPL",
@@ -4215,13 +4226,13 @@
  {
   "producer": "HPL",
   "town": "SAMBALPUR",
-  "zone": "Orissa_Bargarh",
+  "zone": "Orissa_Barhgarh",
   "tier": "published_map",
   "distance_km": 40,
   "crosses_state": false,
   "corroborated_by_hpl": false,
-  "evidence": "HPL Annexure V (its own territory list): name is an Annexure V district (\"Sambalpur\") -> price point Orissa_Bargarh",
-  "round": "2026-09-01"
+  "evidence": "HPL Annexure V (its own territory list): name is an Annexure V district (\"Sambalpur\") -> price point Orissa_Barhgarh (relabelled from Orissa_Bargarh, HPL's price-list spelling to 1 Sep 2026; client-approved 2026-09-26)",
+  "round": "2026-09-16"
  },
  {
   "producer": "HPL",
