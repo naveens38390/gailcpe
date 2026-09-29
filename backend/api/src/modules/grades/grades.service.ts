@@ -6,7 +6,7 @@ import {
   Grade,
   GradeMapping,
 } from "../../database/schemas/catalog.schema";
-import { additiveBaseOf, normaliseGrade } from "../../core/pricing";
+import { additiveBaseOf, formBaseOf, normaliseGrade } from "../../core/pricing";
 
 /**
  * Grade Finder.
@@ -103,10 +103,19 @@ export class GradesService {
     // base grade's row. Resolved the same way Compare and the quote engine
     // resolve it, so Grade Finder cannot disagree with the price ladder about
     // whether a variant has competitors.
-    const base = direct ? null : additiveBaseOf(gailGrade);
-    const inherited = base
-      ? all.find((m) => normaliseGrade(m.gailGrade) === base)
+    // Both rules crossRefFor applies, in its order: the NA additive first, then
+    // the form letter (W52A009A is W52A009 as shipped). With only the first,
+    // Grade Finder answered "not in the cross-reference" for six A-form grades
+    // that Compare was pricing against the client's equivalents (2026-09-29).
+    const additive = direct ? null : additiveBaseOf(gailGrade);
+    const byAdditive = additive
+      ? all.find((m) => normaliseGrade(m.gailGrade) === additive)
       : undefined;
+    const form = direct || byAdditive ? null : formBaseOf(gailGrade);
+    const byForm = form
+      ? all.find((m) => normaliseGrade(m.gailGrade) === form)
+      : undefined;
+    const inherited = byAdditive ?? byForm;
     const mapping = direct ?? inherited;
 
     if (!mapping) {
@@ -137,9 +146,11 @@ export class GradesService {
       polymer: mapping.polymer,
       section: mapping.section,
       application: mapping.application,
-      characteristic: inherited
+      characteristic: byAdditive
         ? `${mapping.characteristic} (NA additive)`
-        : mapping.characteristic,
+        : byForm
+          ? `${mapping.characteristic} (${mapping.gailGrade} as supplied)`
+          : mapping.characteristic,
       process: mapping.process,
       mfi: mapping.mfi,
       density: mapping.density,
