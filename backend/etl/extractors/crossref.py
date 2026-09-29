@@ -147,3 +147,47 @@ def index_by_gail_grade(data: dict) -> dict[str, dict]:
             entry["polymer"] = polymer.upper()
             out[entry["gail_grade"]] = entry
     return out
+
+
+def apply_decisions(index: dict[str, dict], decisions: list[dict]) -> list[str]:
+    """
+    Lay the approved equivalence decisions (reference/crossref_decisions.json) over the master.
+
+    The master workbook is the client's document and lags behind what they have approved since:
+    the 2026-09-25 mapping review and the 2026-09-28 sheet (re-confirmed 2026-09-29) were applied
+    in production, but a rebuild from the master alone put every one of them back. So each decision
+    names the value the master holds and the value that was approved:
+
+      master cell == approved   the master has caught up; nothing to do
+      master cell == master     replaced by the approved value
+      anything else             the master changed underneath a decision: stop, so a person decides
+                                which one stands, rather than either silently winning
+
+    Returns one note per decision; raises SystemExit on a conflict. Mutates `index` in place.
+    """
+    notes: list[str] = []
+    conflicts: list[str] = []
+    for d in decisions:
+        grade, producer = d["gail_grade"], d["producer"]
+        entry = index.get(grade)
+        if entry is None:
+            conflicts.append(f"  {grade} {producer}: grade is no longer in the master")
+            continue
+        current = list(entry.get("equivalents", {}).get(producer, []))
+        if current == d["approved"]:
+            notes.append(f"  {grade:<11} {producer:<5} master already carries {d['approved']}")
+        elif current == d["master"]:
+            entry.setdefault("equivalents", {})[producer] = list(d["approved"])
+            notes.append(f"  {grade:<11} {producer:<5} {current} -> {d['approved']}")
+        else:
+            conflicts.append(
+                f"  {grade} {producer}: master now says {current}; decision expects {d['master']} "
+                f"(to become {d['approved']}, {d['source']})"
+            )
+    if conflicts:
+        raise SystemExit(
+            "\nBuild stopped: the cross-reference master disagrees with an approved decision.\n"
+            + "\n".join(conflicts)
+            + "\n\nDecide which stands, then update reference/crossref_decisions.json."
+        )
+    return notes
