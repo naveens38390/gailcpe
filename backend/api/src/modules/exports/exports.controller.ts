@@ -45,6 +45,17 @@ export class ExportsController {
     res.send(buf);
   }
 
+  @Get("round/:date/excel")
+  @ApiOperation({
+    summary: "Round-YYYY-MM-DD.xlsx — every producer's published price book for one round, Ex Works and Ex Depot (date or 'latest')",
+  })
+  async roundExcel(@Param("date") date: string, @Res() res: Response) {
+    const { wb, effectiveDate } = await this.excel.roundWorkbook(date);
+    attachment(res, `PriceRound-${effectiveDate}.xlsx`, XLSX_TYPE);
+    await wb.xlsx.write(res);
+    res.end();
+  }
+
   @Get("freight-circular/:id/excel")
   @ApiOperation({ summary: "FreightCircular.xlsx for one published freight circular" })
   async freightCircularExcel(@Param("id") id: string, @Res() res: Response) {
