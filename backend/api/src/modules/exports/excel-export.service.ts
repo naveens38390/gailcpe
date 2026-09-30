@@ -21,6 +21,7 @@ import {
   PriceEntry,
 } from "../../database/schemas/circular.schema";
 import { DiscountTerms } from "../../database/schemas/discount-terms.schema";
+import { additiveBaseOf, formBaseOf, normaliseGrade } from "../../core/pricing";
 
 const TITLE_FILL: ExcelJS.Fill = {
   type: "pattern",
@@ -66,6 +67,23 @@ function headerRow(sheet: ExcelJS.Worksheet, headers: string[]) {
   });
   sheet.views = [{ state: "frozen", ySplit: row.number }];
   return row;
+}
+
+/** The client's names for how a town reached a producer's price point. */
+function tierLabel(tier: string | undefined): string {
+  switch (tier) {
+    case "exact":
+    case "evidence":
+    case "alias":
+      return "Exact published match";
+    case "published_map":
+    case "state_zone":
+      return "Territory match";
+    case "inferred_location":
+      return "Inferred location match";
+    default:
+      return tier ?? "";
+  }
 }
 
 function borderRow(row: ExcelJS.Row) {
@@ -339,9 +357,120 @@ export class ExcelExportService {
     return wb;
   }
 
+  /**
+   * Every producer's published price circular for one round, in one workbook: a summary sheet,
+   * then an Ex Works and (where loaded) an Ex Depot sheet per producer. `date` is YYYY-MM-DD or
+   * "latest" (the newest round with an active circular). Historical rounds export as they were
+   * published: a superseded circular is still the one that round was priced from. Record-only
+   * documents (GAIL Stock Point, OPaL CSA) and unpublished drafts are not rounds' price books.
+   */
+  async roundWorkbook(date: string): Promise<{ wb: ExcelJS.Workbook; effectiveDate: string }> {
+    let day: Date;
+    if (date === "latest") {
+      const newest = await this.priceCirculars
+        .findOne({ status: "active", secondary: { $ne: true } })
+        .sort({ effectiveDate: -1 })
+        .lean();
+      if (!newest) throw new NotFoundException("No active price circular.");
+      day = newest.effectiveDate;
+    } else {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new NotFoundException(`Not a round date: ${date}`);
+      day = new Date(`${date}T00:00:00.000Z`);
+    }
+    const found = await this.priceCirculars
+      .find({ effectiveDate: day, status: { $in: ["active", "superseded"] }, secondary: { $ne: true } })
+      .lean();
+    if (!found.length) throw new NotFoundException(`No published price circular for ${day.toISOString().slice(0, 10)}.`);
+    // One circular per producer: the active one, else the most recently published.
+    const byProducer = new Map<string, (typeof found)[number]>();
+    for (const c of found.sort((a, b) =>
+      a.status === b.status ? +new Date((b as any).updatedAt ?? 0) - +new Date((a as any).updatedAt ?? 0) : a.status === "active" ? -1 : 1,
+    )) {
+      if (!byProducer.has(c.producer)) byProducer.set(c.producer, c);
+    }
+    const order = ["GAIL", "IOCL", "RIL", "HMEL", "HPL", "OPaL"];
+    const rank = (p: string) => (order.includes(p) ? order.indexOf(p) : order.length);
+    const circulars = [...byProducer.values()].sort(
+      (a, b) => rank(a.producer) - rank(b.producer) || a.producer.localeCompare(b.producer),
+    );
+    const effectiveDate = day.toISOString().slice(0, 10);
+
+    const wb = new ExcelJS.Workbook();
+    wb.creator = "GCPE";
+    wb.created = new Date();
+    const summary = wb.addWorksheet("Round");
+    summary.columns = [
+      { key: "producer", width: 10 },
+      { key: "reference", width: 44 },
+      { key: "status", width: 12 },
+      { key: "works", width: 16 },
+      { key: "depot", width: 16 },
+    ];
+    titleBar(summary, 5, [`Price round ${effectiveDate}`, `${circulars.length} producers · Generated ${new Date().toLocaleString("en-IN")}`]);
+    headerRow(summary, ["Producer", "Circular", "Status", "Ex Works lines", "Ex Depot lines"]);
+
+    const cols = [
+      { key: "zone", width: 26 },
+      { key: "grade", width: 16 },
+      { key: "price", width: 14 },
+      { key: "basis", width: 14 },
+      { key: "supplyPoint", width: 16 },
+    ];
+    const bookSheet = (name: string, title: string, rows: PriceEntry[]) => {
+      const sheet = wb.addWorksheet(name);
+      sheet.columns = cols;
+      titleBar(sheet, cols.length, [title, `${rows.length} lines`]);
+      headerRow(sheet, ["Zone / location", "Grade", "Price (Rs/MT)", "Basis", "Supply point"]);
+      for (const r of rows) sheet.addRow([r.zone, r.grade, r.price, r.basis, r.supplyPoint ?? ""]);
+      sheet.getColumn(3).numFmt = "#,##0.00";
+    };
+    for (const c of circulars) {
+      const [works, depot] = await Promise.all([
+        this.priceEntries.find({ circular: c._id, basis: { $ne: "ex_depot" } }).sort({ zone: 1, grade: 1 }).lean(),
+        this.priceEntries.find({ circular: c._id, basis: "ex_depot" }).sort({ zone: 1, grade: 1 }).lean(),
+      ]);
+      borderRow(summary.addRow([c.producer, c.reference, c.status, works.length, depot.length]));
+      bookSheet(`${c.producer} Ex Works`, `${c.producer} · ${c.reference} · Ex Works`, works as PriceEntry[]);
+      if (depot.length) bookSheet(`${c.producer} Ex Depot`, `${c.producer} · ${c.reference} · Ex Depot`, depot as PriceEntry[]);
+    }
+    return { wb, effectiveDate };
+  }
+
+  /**
+   * GAIL codes in the live books that have no cross-reference row of their own, each with the row
+   * that governs it — resolved by the same two rules as `crossRefFor` (NA additive, then form
+   * letter), so the sheet says what Compare does. The client's equivalence tables list these as
+   * "Equivalent (inherited)"; before 2026-09-29 the export left them out entirely.
+   */
+  private async inheritedGradeRows(own: GradeMapping[]) {
+    const live = await this.priceCirculars
+      .find({ producer: "GAIL", status: "active", secondary: { $ne: true } }, { _id: 1 })
+      .lean();
+    const codes: string[] = live.length
+      ? await this.priceEntries.distinct("grade", { circular: { $in: live.map((c) => c._id) } })
+      : [];
+    const byFolded = new Map(own.map((g) => [normaliseGrade(g.gailGrade), g]));
+    const rows: Array<{ code: string; base: GradeMapping | null; rule: string }> = [];
+    for (const code of [...new Set(codes)].sort()) {
+      const folded = normaliseGrade(code);
+      if (byFolded.has(folded)) continue;
+      const additive = additiveBaseOf(code);
+      const form = formBaseOf(code);
+      const viaAdditive = additive ? byFolded.get(additive) : undefined;
+      const viaForm = !viaAdditive && form ? byFolded.get(form) : undefined;
+      rows.push({
+        code,
+        base: viaAdditive ?? viaForm ?? null,
+        rule: viaAdditive ? "NA additive of" : viaForm ? "form letter of" : "",
+      });
+    }
+    return rows;
+  }
+
   async gradeMappingWorkbook(): Promise<ExcelJS.Workbook> {
     const grades = await this.gradeMappings.find().sort({ gailGrade: 1 }).lean();
     const producers = await this.producers.find({ active: true, isSelf: false }).sort({ code: 1 }).lean();
+    const inherited = await this.inheritedGradeRows(grades as GradeMapping[]);
 
     const wb = new ExcelJS.Workbook();
     wb.creator = "GCPE";
@@ -361,12 +490,12 @@ export class ExcelExportService {
       { key: "status", width: 12 },
     ];
     const producerCols = producers.map((p) => ({ key: `eq_${p.code}`, width: 20 }));
-    sheet.columns = [...baseCols, ...producerCols, { key: "intl", width: 24 }];
+    sheet.columns = [...baseCols, ...producerCols, { key: "intl", width: 24 }, { key: "via", width: 30 }];
 
     const span = sheet.columns.length;
     titleBar(sheet, span, [
       "Grade Mapping Master",
-      `${grades.length} grades · Generated ${new Date().toLocaleString("en-IN")}`,
+      `${grades.length} grades with their own row · ${inherited.length} more GAIL codes priced in the live book · Generated ${new Date().toLocaleString("en-IN")}`,
     ]);
     headerRow(sheet, [
       "GAIL grade",
@@ -381,9 +510,21 @@ export class ExcelExportService {
       "Status",
       ...producers.map((p) => `${p.code} equivalent`),
       "International equivalents",
+      "Equivalents from",
     ]);
 
-    for (const g of grades) {
+    type Line = { g: any; code: string; via: string; muted: boolean };
+    const lines: Line[] = [
+      ...grades.map((g) => ({ g, code: g.gailGrade, via: "own row", muted: g.status !== "active" })),
+      ...inherited.map((r) => ({
+        g: r.base ?? { status: "unmapped", application: "Not in the cross-reference", equivalents: {} },
+        code: r.code,
+        via: r.base ? `inherited: ${r.rule} ${r.base.gailGrade}` : "no row: GAIL only",
+        muted: true,
+      })),
+    ].sort((a, b) => a.code.localeCompare(b.code));
+
+    for (const { g, code, via, muted } of lines) {
       const row = sheet.addRow([
         g.gailGrade,
         g.polymer ?? "",
@@ -397,10 +538,14 @@ export class ExcelExportService {
         g.status,
         ...producers.map((p) => (g.equivalents?.[p.code] ?? []).join(", ")),
         (g.international ?? []).join(", "),
+        via,
       ]);
-      if (g.status !== "active") {
+      row.getCell(1).value = code;
+      if (muted) {
+        // Orange: a row that is not active. Grey: a code that takes another row's equivalents.
+        const inactive = via === "own row" || g.status === "unmapped";
         row.eachCell((cell) => {
-          cell.font = { italic: true, color: { argb: "FF9A6B00" } };
+          cell.font = { italic: true, color: { argb: inactive ? "FF9A6B00" : "FF5B6770" } };
         });
       }
       borderRow(row);
@@ -421,11 +566,17 @@ export class ExcelExportService {
 
     const zoneCols = producers.map((p) => ({ key: `zone_${p.code}`, width: 20 }));
     const freightCols = producers.map((p) => ({ key: `freight_${p.code}`, width: 20 }));
+    // Appended after the original columns so a sheet built on the old layout still lines up.
+    const depotProducers = ["GAIL", ...producers.map((p) => p.code)];
+    const tierCols = producers.map((p) => ({ key: `tier_${p.code}`, width: 18 }));
+    const depotCols = depotProducers.map((p) => ({ key: `depot_${p}`, width: 22 }));
     sheet.columns = [
       { key: "name", width: 24 },
       { key: "sapCode", width: 14 },
       ...zoneCols,
       ...freightCols,
+      ...tierCols,
+      ...depotCols,
     ];
 
     const span = sheet.columns.length;
@@ -438,6 +589,8 @@ export class ExcelExportService {
       "SAP code",
       ...producers.map((p) => `${p.code} pricing zone`),
       ...producers.map((p) => `${p.code} freight destination`),
+      ...producers.map((p) => `${p.code} match type`),
+      ...depotProducers.map((p) => `${p} Ex Depot point`),
     ]);
 
     for (const loc of locations) {
@@ -446,6 +599,8 @@ export class ExcelExportService {
         loc.sapCode ?? "",
         ...producers.map((p) => loc.producerZone?.[p.code] ?? ""),
         ...producers.map((p) => loc.freightDestination?.[p.code] ?? ""),
+        ...producers.map((p) => (loc.producerZone?.[p.code] ? tierLabel(loc.producerZoneTier?.[p.code]) : "")),
+        ...depotProducers.map((p) => loc.producerDepotZone?.[p] ?? ""),
       ]);
       borderRow(row);
     }

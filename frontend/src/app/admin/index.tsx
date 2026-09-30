@@ -2,7 +2,8 @@ import { router } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
-import { api, type DashboardResponse } from "../../services/api";
+import { api, type DashboardResponse, type Round } from "../../services/api";
+import { SelectField, type Option } from "../../components/select";
 import { BarChart, LineChart, RatioBar } from "../../components/charts";
 import { KpiCard, KpiGroup, RecentActivityFeed } from "../../components/dashboard";
 import { theme } from "../../theme";
@@ -156,6 +157,8 @@ export default function AdminIndexScreen() {
           edits and re-uploads.
         </Text>
 
+        <RoundExport />
+
         <Text style={styles.reportLabel}>Discount Circular — GAIL vs Others</Text>
         <ExportButtons
           excel={{ path: "/exports/discount-circular/excel", filename: "DiscountCircular.xlsx" }}
@@ -169,6 +172,42 @@ export default function AdminIndexScreen() {
         <ExportButtons excel={{ path: "/exports/location-master/excel", filename: "LocationMaster.xlsx" }} />
       </Card>
     </ScrollView>
+  );
+}
+
+/**
+ * Every producer's price book for one round in one workbook — Ex Works and Ex Depot — so a round
+ * is handed over as a single file rather than six circular downloads. Past rounds export as they
+ * were published.
+ */
+function RoundExport() {
+  const styles = useStyles();
+  const [rounds, setRounds] = useState<Round[]>([]);
+  const [round, setRound] = useState("latest");
+
+  useEffect(() => {
+    api.rounds().then(setRounds).catch(() => setRounds([]));
+  }, []);
+
+  const options: Option[] = [
+    { value: "latest", label: "Latest round", detail: "The round Compare is pricing from now" },
+    ...rounds.map((r) => {
+      const day = r.effectiveDate.slice(0, 10);
+      return {
+        value: day,
+        label: new Date(`${day}T00:00:00Z`).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }),
+        detail: r.producers.join(", "),
+        badge: `${r.producers.length} producers`,
+      };
+    }),
+  ];
+
+  return (
+    <>
+      <Text style={styles.reportLabel}>Whole price round — every producer, Ex Works and Ex Depot</Text>
+      <SelectField label="Round" placeholder="Choose a round" value={round} options={options} onChange={setRound} />
+      <ExportButtons excel={{ path: `/exports/round/${round}/excel`, filename: `PriceRound-${round}.xlsx` }} />
+    </>
   );
 }
 

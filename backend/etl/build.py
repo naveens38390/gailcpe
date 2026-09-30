@@ -37,6 +37,7 @@ import mzo  # noqa: E402
 import opal as opal_x  # noqa: E402
 import ril as ril_x  # noqa: E402
 from locations import (  # noqa: E402
+    ALIASES,
     SPELLINGS,
     Resolver,
     derive_aliases,
@@ -678,8 +679,18 @@ def main() -> None:
     # Freight destinations need resolving too, and through the same machinery:
     # HMEL and HPL both deliver to Goa, but bill it as "Panaji". A second,
     # ad-hoc lookup path is how one of them silently reports "no freight".
+    # Reviewed spelling aliases between GAIL's town names and each freight book's (YAWATMAL is
+    # YAVATMAL, RAJPALAYAM is RAJPALYAM ...): 83 towns that otherwise reported "no freight rate"
+    # although the book carries the town (2026-09-29). Freight only — price zones are untouched.
+    freight_alias_path = Path(__file__).resolve().parent / "reference" / "freight_aliases.json"
+    freight_aliases = json.loads(freight_alias_path.read_text(encoding="utf-8"))["aliases"]
     freight_resolvers = {
-        producer: Resolver(producer, sorted({e["destination"] for e in book}), evidence_over_exact=True)
+        producer: Resolver(
+            producer,
+            sorted({e["destination"] for e in book}),
+            aliases={**ALIASES.get(producer, {}), **freight_aliases.get(producer, {})},
+            evidence_over_exact=True,
+        )
         for producer, book in freights.items()
     }
     freight_evidence = derive_freight_aliases(freights, mzo.expectations(src["mzo"]))
@@ -754,6 +765,14 @@ def main() -> None:
     xref = crossref.load(src["crossref"])
     xref_index = crossref.index_by_gail_grade(xref)
     note(f"\ncross-reference  {len(xref_index)} GAIL grades, {len(xref['gaps'])} portfolio gaps")
+    # Approved decisions the master does not carry yet. Without them a rebuild reverts every
+    # equivalence correction applied in production since 2026-09-25 (verified 2026-09-29).
+    decisions_path = Path(__file__).resolve().parent / "reference" / "crossref_decisions.json"
+    decisions = json.loads(decisions_path.read_text(encoding="utf-8"))["decisions"]
+    decision_notes = crossref.apply_decisions(xref_index, decisions)
+    note(f"cross-reference  {len(decisions)} approved decisions applied over the master")
+    for line in decision_notes:
+        note(line)
 
     # ---- emit -------------------------------------------------------------
     write(

@@ -1,0 +1,347 @@
+{
+ "_comment": [
+  "Approved grade-equivalence decisions that the cross-reference master does not (yet) carry.",
+  "build.py applies these on top of the master: a master cell equal to \"master\" is replaced by \"approved\"; one already equal to \"approved\" is left; anything else stops the build for a decision.",
+  "Without this file a rebuild from GAIL_PE_CrossReference_Master.xlsx reverts every entry below (verified 2026-09-29)."
+ ],
+ "decisions": [
+  {
+   "gail_grade": "B55HM0003",
+   "producer": "HPL",
+   "master": [
+    "B5500",
+    "B5010"
+   ],
+   "approved": [
+    "B5500"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  },
+  {
+   "gail_grade": "B55HM0003",
+   "producer": "IOCL",
+   "master": [
+    "003DB52",
+    "001DB50"
+   ],
+   "approved": [
+    "003DB52"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  },
+  {
+   "gail_grade": "B55HM0003",
+   "producer": "RIL",
+   "master": [
+    "52GB003",
+    "52GB007"
+   ],
+   "approved": [
+    "52GB003",
+    "B56003",
+    "B5502"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  },
+  {
+   "gail_grade": "E24A070U",
+   "producer": "HMEL",
+   "master": [
+    "E0725L",
+    "W0426L"
+   ],
+   "approved": [
+    "E0725L"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  },
+  {
+   "gail_grade": "E24A070U",
+   "producer": "RIL",
+   "master": [
+    "JE24065",
+    "X24065",
+    "LL24FA030"
+   ],
+   "approved": [
+    "E24065"
+   ],
+   "source": "Client grade-equivalence sheet 2026-09-28; re-confirmed in the client table of 2026-09-29",
+   "client_table_2026_09_29": true
+  },
+  {
+   "gail_grade": "E45A003",
+   "producer": "RIL",
+   "master": [
+    "F46003",
+    "F4600",
+    "F46003E"
+   ],
+   "approved": [
+    "F46003",
+    "F46003E"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  },
+  {
+   "gail_grade": "E52U003",
+   "producer": "HMEL",
+   "master": [
+    "P0147DU"
+   ],
+   "approved": [
+    "P0142SU",
+    "P0142S"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  },
+  {
+   "gail_grade": "F18S020U",
+   "producer": "IOCL",
+   "master": [
+    "020F18S"
+   ],
+   "approved": [
+    "020F18A"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  },
+  {
+   "gail_grade": "F20S020",
+   "producer": "IOCL",
+   "master": [
+    "020F18S"
+   ],
+   "approved": [
+    "020F18A"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  },
+  {
+   "gail_grade": "F55HM0003",
+   "producer": "RIL",
+   "master": [
+    "F56003"
+   ],
+   "approved": [
+    "F46003"
+   ],
+   "source": "Client grade-equivalence sheet 2026-09-28; re-confirmed in the client table of 2026-09-29",
+   "client_table_2026_09_29": true
+  },
+  {
+   "gail_grade": "I50A180",
+   "producer": "HMEL",
+   "master": [
+    "M2056S"
+   ],
+   "approved": [
+    "M2050S"
+   ],
+   "source": "Client grade-equivalence sheet 2026-09-28; re-confirmed in the client table of 2026-09-29",
+   "client_table_2026_09_29": true
+  },
+  {
+   "gail_grade": "I50A250",
+   "producer": "HMEL",
+   "master": [
+    "M3056S"
+   ],
+   "approved": [
+    "M2050S"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": true
+  },
+  {
+   "gail_grade": "I50A250",
+   "producer": "HPL",
+   "master": [
+    "M5025L"
+   ],
+   "approved": [
+    "M5018L"
+   ],
+   "source": "Client grade-equivalence sheet 2026-09-28; re-confirmed in the client table of 2026-09-29",
+   "client_table_2026_09_29": true
+  },
+  {
+   "gail_grade": "I56A200U",
+   "producer": "HMEL",
+   "master": [
+    "M2056S"
+   ],
+   "approved": [
+    "M2050S"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": true
+  },
+  {
+   "gail_grade": "I60U080",
+   "producer": "OPaL",
+   "master": [
+    "M6008U"
+   ],
+   "approved": [
+    "M6008"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  },
+  {
+   "gail_grade": "I62U080U",
+   "producer": "OPaL",
+   "master": [
+    "M6008U"
+   ],
+   "approved": [
+    "M6008"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  },
+  {
+   "gail_grade": "R35A042",
+   "producer": "RIL",
+   "master": [
+    "R35042",
+    "LL36RA045"
+   ],
+   "approved": [
+    "O35042"
+   ],
+   "source": "Client grade-equivalence sheet 2026-09-28; re-confirmed in the client table of 2026-09-29",
+   "client_table_2026_09_29": true
+  },
+  {
+   "gail_grade": "R36A050",
+   "producer": "RIL",
+   "master": [
+    "JLL36RA045"
+   ],
+   "approved": [
+    "LL36RA045"
+   ],
+   "source": "Client grade-equivalence sheet 2026-09-28; re-confirmed in the client table of 2026-09-29",
+   "client_table_2026_09_29": true
+  },
+  {
+   "gail_grade": "R36U050U",
+   "producer": "RIL",
+   "master": [
+    "JLL36RA045UV"
+   ],
+   "approved": [
+    "LL36RA045UV"
+   ],
+   "source": "Client grade-equivalence sheet 2026-09-28; re-confirmed in the client table of 2026-09-29",
+   "client_table_2026_09_29": true
+  },
+  {
+   "gail_grade": "T50A010",
+   "producer": "HMEL",
+   "master": [
+    "R0154S"
+   ],
+   "approved": [
+    "R0151D"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  },
+  {
+   "gail_grade": "W52A009",
+   "producer": "HMEL",
+   "master": [
+    "Y0150S"
+   ],
+   "approved": [
+    "R0151D"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  },
+  {
+   "gail_grade": "W52A009",
+   "producer": "RIL",
+   "master": [
+    "HD55EF010"
+   ],
+   "approved": [
+    "E52009",
+    "52GB002"
+   ],
+   "source": "Client grade-equivalence sheet 2026-09-28; re-confirmed in the client table of 2026-09-29",
+   "client_table_2026_09_29": true
+  },
+  {
+   "gail_grade": "W52ASR009",
+   "producer": "HMEL",
+   "master": [
+    "Y0150S"
+   ],
+   "approved": [
+    "R0151D"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  },
+  {
+   "gail_grade": "W52ASR009",
+   "producer": "RIL",
+   "master": [
+    "HD55EF010"
+   ],
+   "approved": [
+    "E52009"
+   ],
+   "source": "Client grade-equivalence sheet 2026-09-28; re-confirmed in the client table of 2026-09-29",
+   "client_table_2026_09_29": true
+  },
+  {
+   "gail_grade": "W55A004",
+   "producer": "HMEL",
+   "master": [
+    "Y0150S"
+   ],
+   "approved": [
+    "B0148D"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  },
+  {
+   "gail_grade": "W55A004",
+   "producer": "RIL",
+   "master": [
+    "HD55EF010"
+   ],
+   "approved": [
+    "E52009"
+   ],
+   "source": "Client grade-equivalence sheet 2026-09-28; re-confirmed in the client table of 2026-09-29",
+   "client_table_2026_09_29": true
+  },
+  {
+   "gail_grade": "Y50A010U",
+   "producer": "HMEL",
+   "master": [
+    "R0154S"
+   ],
+   "approved": [
+    "R0151D"
+   ],
+   "source": "Approved mapping review 2026-09-25 (applied in production, commit 19666777)",
+   "client_table_2026_09_29": false
+  }
+ ]
+}
