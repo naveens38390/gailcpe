@@ -16,6 +16,7 @@
  */
 
 import { Injectable, Logger } from "@nestjs/common";
+import { detectMeta, type DetectedMeta } from "./circular-meta";
 
 /** Labels a producer puts in front of the number, most explicit first. */
 const LABELLED = [
@@ -82,6 +83,13 @@ export class ReferenceDetectorService {
   async detect(buffer: Buffer): Promise<DetectedReference> {
     const text = await this.readText(buffer);
     return detectReferenceInText(text);
+  }
+
+  /** Reference, producer, effective date and kind together, for filing a whole round at once. */
+  async detectAll(buffer: Buffer, filename: string, producers: string[]): Promise<DetectedReference & DetectedMeta> {
+    const isPdf = buffer.subarray(0, 4).toString("latin1") === "%PDF";
+    const text = isPdf ? await this.readText(buffer) : "";
+    return { ...detectReferenceInText(text), ...detectMeta(text, filename, producers) };
   }
 
   /**

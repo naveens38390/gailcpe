@@ -1,11 +1,14 @@
 import * as DocumentPicker from "expo-document-picker";
 import { router } from "expo-router";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Linking, Platform, Pressable, ScrollView, Text, View } from "react-native";
+import { Alert, Linking, Platform, Pressable, ScrollView, Text, View } from "react-native";
 
 import {
   api,
   ApiError,
+  type BulkUploadResult,
+  type PublishAllJob,
+  type PublishAllPreview,
   type CircularExtractResult,
   type CircularRecord,
   type FreightPdfExtractionRefused,
@@ -63,6 +66,8 @@ export default function CircularsScreen() {
 
   return (
     <ScrollView style={styles.root} contentContainerStyle={styles.body} keyboardShouldPersistTaps="handled">
+      <PublishAllCard onPublished={load} />
+      <BulkUploadCard onFiled={load} />
       <UploadForm onFiled={load} />
       {error ? <ErrorNote message={error} /> : null}
       {loading ? <Loading label="Loading circulars" /> : null}
@@ -95,6 +100,8 @@ function UploadForm({ onFiled }: { onFiled: () => void }) {
   const [detecting, setDetecting] = useState(false);
   const [detectNote, setDetectNote] = useState<string | null>(null);
   const [kind, setKind] = useState<"price" | "freight">("price");
+  const [dateChoice, setDateChoice] = useState("");
+  const dateOptions = useMemo(effectiveDateOptions, []);
 
   const producerOptions: Option[] = useMemo(
     () =>
@@ -156,7 +163,9 @@ function UploadForm({ onFiled }: { onFiled: () => void }) {
       const form = new FormData();
       appendFile(form, picked);
       form.append("kind", kind);
-      form.append("producer", producer.trim().toUpperCase());
+      // The code exactly as the catalog has it: upper-casing it filed OPaL's circulars as "OPAL",
+      // a producer the pricing engine does not carry.
+      form.append("producer", producer.trim());
       form.append("reference", reference.trim());
       form.append("effectiveDate", effectiveDate.trim());
       const result = await api.uploadCircular(form);
@@ -165,6 +174,7 @@ function UploadForm({ onFiled }: { onFiled: () => void }) {
       setProducer("");
       setReference("");
       setEffectiveDate("");
+      setDateChoice("");
       setDetectNote(null);
       onFiled();
     } catch (e) {
@@ -208,9 +218,22 @@ function UploadForm({ onFiled }: { onFiled: () => void }) {
       >
         <Input value={reference} onChangeText={setReference} placeholder="PE/2026-27/019" />
       </Field>
-      <Field label="Effective date" hint="YYYY-MM-DD — when it takes effect, not today">
-        <Input value={effectiveDate} onChangeText={setEffectiveDate} placeholder="2026-10-01" />
-      </Field>
+      <SelectField
+        label="Effective date"
+        placeholder="Choose the date it takes effect"
+        hint="When it takes effect, not today. Producers publish on the 1st and the 16th"
+        value={dateChoice}
+        options={dateOptions}
+        onChange={(v) => {
+          setDateChoice(v);
+          setEffectiveDate(v === OTHER_DATE ? "" : v);
+        }}
+      />
+      {dateChoice === OTHER_DATE ? (
+        <Field label="Other effective date" hint="YYYY-MM-DD">
+          <Input value={effectiveDate} onChangeText={setEffectiveDate} placeholder="2026-10-01" />
+        </Field>
+      ) : null}
 
       <Pressable onPress={pick} style={styles.picker} disabled={detecting}>
         <Text style={styles.pickerText}>
@@ -242,6 +265,26 @@ function CircularRow({ circular, onChanged }: { circular: CircularRecord; onChan
 
   const id = String(circular._id);
   const hasDraft = Boolean(circular.draft);
+  const recordOnly = Boolean(circular.secondary);
+  const deletable = circular.status === "draft";
+
+  async function remove() {
+    const ok = await confirmAction(
+      `Delete ${circular.producer} ${circular.reference ?? ""}?`,
+      "The filed document, and its draft if it has one, are removed. Nothing published is touched.",
+    );
+    if (!ok) return;
+    setBusy(true);
+    setError(null);
+    try {
+      await api.deleteCircular(id);
+      onChanged();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not delete that circular.");
+    } finally {
+      setBusy(false);
+    }
+  }
   const isPrice = circular.kind === "price";
   const draftRoute = isPrice ? "price-circular" : "freight-circular";
 
@@ -278,8 +321,8 @@ function CircularRow({ circular, onChanged }: { circular: CircularRecord; onChan
           {circular.producer} · {circular.reference ?? "no reference"}
         </Text>
         <Pill
-          label={hasDraft ? "DRAFTED" : "AWAITING EXTRACT"}
-          color={hasDraft ? colors.success : colors.warning}
+          label={recordOnly ? "RECORD ONLY" : hasDraft ? "DRAFTED" : circular.status === "draft" ? "AWAITING EXTRACT" : String(circular.status).toUpperCase()}
+          color={recordOnly ? colors.neutral : hasDraft ? colors.success : colors.warning}
         />
       </View>
       <Text style={styles.rowMeta}>
@@ -293,7 +336,7 @@ function CircularRow({ circular, onChanged }: { circular: CircularRecord; onChan
           <Text style={styles.link}>Open document</Text>
         </Pressable>
 
-        {!hasDraft ? (
+        {!hasDraft && !recordOnly ? (
           <Pressable onPress={attach} disabled={busy} hitSlop={8}>
             <Text style={styles.link}>
               {busy
@@ -313,12 +356,241 @@ function CircularRow({ circular, onChanged }: { circular: CircularRecord; onChan
             <Text style={styles.link}>Review draft</Text>
           </Pressable>
         ) : null}
+
+        {deletable ? (
+          <Pressable onPress={remove} disabled={busy} hitSlop={8}>
+            <Text style={[styles.link, styles.danger]}>Delete</Text>
+          </Pressable>
+        ) : null}
       </View>
 
       {error ? <ErrorNote message={error} /> : null}
       {refused ? <PdfExtractionRefused refusal={refused} /> : null}
       {result ? <ExtractSummary result={result} /> : null}
     </View>
+  );
+}
+
+const OTHER_DATE = "__other__";
+
+/** The 1st and the 16th from two months back to three ahead: the dates producers publish on. */
+function effectiveDateOptions(): Option[] {
+  const out: Option[] = [];
+  const now = new Date();
+  for (let k = -2; k <= 3; k++) {
+    const month = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + k, 1));
+    for (const day of [1, 16]) {
+      const d = new Date(Date.UTC(month.getUTCFullYear(), month.getUTCMonth(), day));
+      const value = d.toISOString().slice(0, 10);
+      out.push({
+        value,
+        label: d.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }),
+        detail: value,
+        badge: k === 0 ? "this month" : undefined,
+      });
+    }
+  }
+  out.push({ value: OTHER_DATE, label: "Another date…", detail: "Type it in" });
+  return out;
+}
+
+/** Yes/no before anything is deleted or published; the browser's own dialog on the web. */
+function confirmAction(title: string, message: string): Promise<boolean> {
+  if (Platform.OS === "web") {
+    return Promise.resolve(typeof window !== "undefined" && window.confirm(`${title}\n\n${message}`));
+  }
+  return new Promise((resolve) =>
+    Alert.alert(title, message, [
+      { text: "Cancel", style: "cancel", onPress: () => resolve(false) },
+      { text: "Continue", style: "destructive", onPress: () => resolve(true) },
+    ]),
+  );
+}
+
+/** A whole round's documents in one upload: each one's producer, date and reference are read from it. */
+function BulkUploadCard({ onFiled }: { onFiled: () => void }) {
+  const styles = useStyles();
+  const { colors } = useTheme();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [result, setResult] = useState<BulkUploadResult | null>(null);
+
+  async function pickAndFile() {
+    setError(null);
+    setResult(null);
+    const picked = await DocumentPicker.getDocumentAsync({
+      type: ["application/pdf", "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
+      multiple: true,
+      copyToCacheDirectory: true,
+    });
+    if (picked.canceled || !picked.assets?.length) return;
+    setBusy(true);
+    try {
+      const form = new FormData();
+      for (const asset of picked.assets) {
+        const file: PickedFile = { name: asset.name, uri: asset.uri, mimeType: asset.mimeType, file: (asset as { file?: unknown }).file };
+        appendFile(form, file, "files");
+      }
+      setResult(await api.bulkUploadCirculars(form));
+      onFiled();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not file those circulars.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  const tone = (s: string) => (s === "filed" ? colors.success : s === "already_filed" ? colors.neutral : s === "needs_input" ? colors.warning : colors.danger);
+  return (
+    <Card>
+      <SectionTitle>File a whole round</SectionTitle>
+      <Text style={styles.note}>
+        Choose every circular of the round at once. The producer, circular number and effective date are read
+        from each document; one that cannot be read is listed below to file from the form.
+      </Text>
+      <PrimaryButton label={busy ? "Reading and filing…" : "Choose the round's circulars"} onPress={pickAndFile} busy={busy} />
+      {error ? <ErrorNote message={error} /> : null}
+      {result ? (
+        <View style={styles.summary}>
+          <Text style={styles.summaryLine}>
+            Filed {result.filed} · needs input {result.needsInput} · already on file {result.alreadyFiled}
+            {result.errors ? ` · failed ${result.errors}` : ""}
+          </Text>
+          {result.results.map((r) => (
+            <View key={r.filename} style={styles.bulkRow}>
+              <View style={styles.rowHead}>
+                <Text style={styles.rowTitle}>{r.filename}</Text>
+                <Pill label={r.status.replace("_", " ").toUpperCase()} color={tone(r.status)} />
+              </View>
+              <Text style={styles.rowMeta}>
+                {[r.producer ?? "producer?", r.effectiveDate ?? "date?", r.kind, r.reference ?? "no reference", r.secondary ? "record only" : ""]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </Text>
+              {r.message ? <Text style={styles.summaryLine}>{r.message}</Text> : null}
+              {r.notes.map((n, i) => (
+                <Text key={i} style={styles.summaryLine}>{n}</Text>
+              ))}
+            </View>
+          ))}
+        </View>
+      ) : null}
+    </Card>
+  );
+}
+
+/**
+ * Publish every ready draft in one go. The preview shows what will go live and holds back anything
+ * that fails a check (two drafts for one producer, an unknown producer code, a date already
+ * published, a reading much smaller or larger than the live book), with the reason.
+ */
+function PublishAllCard({ onPublished }: { onPublished: () => void }) {
+  const styles = useStyles();
+  const { colors } = useTheme();
+  const [preview, setPreview] = useState<PublishAllPreview | null>(null);
+  const [job, setJob] = useState<PublishAllJob | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function check() {
+    setError(null);
+    setJob(null);
+    setBusy(true);
+    try {
+      setPreview(await api.publishAllPreview());
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not check the drafts.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function publish() {
+    if (!preview?.ready) return;
+    const ok = await confirmAction(
+      `Publish ${preview.ready} circular${preview.ready === 1 ? "" : "s"}?`,
+      "Their prices, and Ex Depot prices where the reading carries them, go live for every user.",
+    );
+    if (!ok) return;
+    setBusy(true);
+    setError(null);
+    try {
+      let current = await api.startPublishAll();
+      setJob(current);
+      // Publishing a round takes longer than one request may wait: follow it on the server.
+      while (current.state === "running") {
+        await new Promise((r) => setTimeout(r, 3000));
+        current = await api.publishAllStatus(current.id);
+        setJob(current);
+      }
+      setPreview(null);
+      onPublished();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Publish All did not complete; check the circulars list before trying again.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <Card>
+      <SectionTitle>Publish all</SectionTitle>
+      <Text style={styles.note}>Publish every drafted circular of the round with one click, after a check.</Text>
+      {!preview && !job ? <PrimaryButton label="Check drafts ready to publish" onPress={check} busy={busy} /> : null}
+      {error ? <ErrorNote message={error} /> : null}
+      {preview && !job ? (
+        <View style={styles.summary}>
+          {preview.items.length === 0 ? <Text style={styles.summaryLine}>No drafts to publish.</Text> : null}
+          {preview.items.map((i) => (
+            <View key={i.draftId} style={styles.bulkRow}>
+              <View style={styles.rowHead}>
+                <Text style={styles.rowTitle}>
+                  {i.producer} · {i.circularNumber} · {i.effectiveDate}
+                </Text>
+                <Pill label={i.ready ? "READY" : "HELD"} color={i.ready ? colors.success : colors.danger} />
+              </View>
+              <Text style={styles.rowMeta}>
+                {i.rowCount.toLocaleString("en-IN")} prices ({i.changedRowCount.toLocaleString("en-IN")} changed)
+                {i.depotRowCount ? ` · ${i.depotRowCount.toLocaleString("en-IN")} Ex Depot prices` : " · no Ex Depot prices"}
+              </Text>
+              {i.problems.map((p, n) => (
+                <Caveat key={n}>{p}</Caveat>
+              ))}
+            </View>
+          ))}
+          {preview.ready ? (
+            <PrimaryButton label={`Publish ${preview.ready} ready circular${preview.ready === 1 ? "" : "s"}`} onPress={publish} busy={busy} />
+          ) : null}
+          <Pressable onPress={() => setPreview(null)} hitSlop={8}>
+            <Text style={styles.link}>Close</Text>
+          </Pressable>
+        </View>
+      ) : null}
+      {job ? (
+        <View style={styles.summary}>
+          <Text style={styles.summaryLine}>
+            {job.state === "running" ? `Publishing… ${job.done} of ${job.total}` : `Finished: ${job.results.filter((r) => r.ok).length} published`}
+          </Text>
+          {job.results.map((r) => (
+            <Text key={r.draftId} style={[styles.summaryLine, !r.ok && styles.danger]}>
+              {r.ok ? "✓" : "✗"} {r.producer}: {r.message}
+            </Text>
+          ))}
+          {job.state !== "running"
+            ? job.held.map((h) => (
+                <Text key={h.draftId} style={styles.summaryLine}>
+                  Held back: {h.producer}: {h.problems.join(" ")}
+                </Text>
+              ))
+            : null}
+          {job.state !== "running" ? (
+            <Pressable onPress={() => setJob(null)} hitSlop={8}>
+              <Text style={styles.link}>Done</Text>
+            </Pressable>
+          ) : null}
+        </View>
+      ) : null}
+    </Card>
   );
 }
 
@@ -460,12 +732,12 @@ async function pickFile(types: string[]): Promise<PickedFile | null> {
  * Web has a real File object and must send that; React Native wants the
  * uri/name/type triple instead, which its own fetch understands.
  */
-function appendFile(form: FormData, picked: PickedFile): void {
+function appendFile(form: FormData, picked: PickedFile, field = "file"): void {
   if (Platform.OS === "web" && picked.file) {
-    form.append("file", picked.file as Blob, picked.name);
+    form.append(field, picked.file as Blob, picked.name);
     return;
   }
-  form.append("file", {
+  form.append(field, {
     uri: picked.uri,
     name: picked.name,
     type: picked.mimeType ?? "application/octet-stream",
@@ -503,6 +775,8 @@ const useStyles = makeStyles((c) => ({
   rowMeta: { color: c.textFaint, fontSize: 11, marginTop: 2 },
   actions: { flexDirection: "row", gap: theme.space(4), marginTop: theme.space(2), flexWrap: "wrap" },
   link: { color: c.primary, fontSize: 13, fontWeight: "700" },
+  danger: { color: c.danger },
+  bulkRow: { paddingVertical: theme.space(2), borderTopWidth: 1, borderTopColor: c.border },
 
   summary: { marginTop: theme.space(3), gap: theme.space(2) },
   counts: { flexDirection: "row", gap: theme.space(4), flexWrap: "wrap" },

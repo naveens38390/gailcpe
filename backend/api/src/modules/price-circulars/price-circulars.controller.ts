@@ -21,6 +21,25 @@ export class PriceCircularsController {
     return this.circulars.list(status);
   }
 
+  // Declared before ":id" so "publish-all" is never read as a draft id.
+  @Get("publish-all/preview")
+  @ApiOperation({ summary: "What Publish All would publish, and why any draft would be held back" })
+  publishAllPreview() {
+    return this.circulars.publishAllPreview();
+  }
+
+  @Post("publish-all")
+  @ApiOperation({ summary: "Publish every ready draft in one go (runs in the background; poll the job)" })
+  publishAll(@Req() req: any) {
+    return this.circulars.startPublishAll(req.user.id);
+  }
+
+  @Get("publish-all/:jobId")
+  @ApiOperation({ summary: "Progress of a Publish All job" })
+  publishAllStatus(@Param("jobId") jobId: string) {
+    return this.circulars.publishAllStatus(jobId);
+  }
+
   @Get(":id")
   @ApiOperation({ summary: "One draft circular's header" })
   detail(@Param("id") id: string) {

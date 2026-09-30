@@ -106,6 +106,13 @@ export class CircularStoreService {
     return { key, bytes: file.buffer.length, label: match.label };
   }
 
+  /** Remove a stored document; used only when its filed circular is deleted before publishing. */
+  async remove(key: string | undefined): Promise<boolean> {
+    if (!key) return false;
+    const r = await this.documents.deleteOne({ key });
+    return r.deletedCount === 1;
+  }
+
   /** A stored document, for the "open the circular" link. */
   async read(key: string): Promise<{ data: Buffer; filename?: string; label: string }> {
     // Not `.lean()`: that hands back Mongo's Binary wrapper, and the point of

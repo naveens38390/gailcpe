@@ -65,6 +65,13 @@ export class PriceCircular {
   @Prop({ type: Types.ObjectId })
   draft?: Types.ObjectId;
 
+  /**
+   * A second document for a producer's round (GAIL's Stock Point list, OPaL's CSA list): filed
+   * for the record, never given a reading of its own — its prices travel with the main circular.
+   */
+  @Prop({ default: false })
+  secondary?: boolean;
+
   @Prop({ type: Object, default: {} })
   stats!: Record<string, number>;
 }

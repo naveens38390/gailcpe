@@ -67,6 +67,17 @@ export class PriceCircularDraft {
   /** The real PriceCircular this became, once published. */
   @Prop({ type: Types.ObjectId })
   publishedCircular?: Types.ObjectId;
+
+  /**
+   * The producer's Ex Depot (stock point) book for the same round, zone -> grade -> price, when
+   * the reading carries one. Published with the circular as ex_depot rows, so a round's depot
+   * prices go live together with its works prices.
+   */
+  @Prop({ type: Object })
+  depotZones?: Record<string, Record<string, number>>;
+
+  @Prop({ default: 0 })
+  depotRowCount?: number;
 }
 
 @Schema({ collection: "priceCircularDraftRows" })

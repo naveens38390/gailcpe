@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -9,9 +10,10 @@ import {
   Req,
   Res,
   UploadedFile,
+  UploadedFiles,
   UseInterceptors,
 } from "@nestjs/common";
-import { FileInterceptor } from "@nestjs/platform-express";
+import { FileInterceptor, FilesInterceptor } from "@nestjs/platform-express";
 import { ApiConsumes, ApiOperation, ApiTags } from "@nestjs/swagger";
 import type { Response } from "express";
 
@@ -41,6 +43,20 @@ export class CircularsController {
   ) {
     if (!file) throw new BadRequestException("Attach the circular as `file`.");
     return this.circulars.upload(dto, file, req.user?.id);
+  }
+
+  @Post("bulk-upload")
+  @ApiConsumes("multipart/form-data")
+  @ApiOperation({ summary: "File a whole round's circulars at once; producer, date, kind and reference are read from each" })
+  @UseInterceptors(FilesInterceptor("files", 30, { limits: { fileSize: MAX_UPLOAD_BYTES } }))
+  bulkUpload(@UploadedFiles() files: { buffer: Buffer; originalname?: string }[] | undefined, @Req() req: any) {
+    return this.circulars.bulkUpload(files ?? [], req.user?.id);
+  }
+
+  @Delete(":id")
+  @ApiOperation({ summary: "Delete a filed circular that has not been published (with its unpublished draft and documents)" })
+  deleteFiled(@Param("id") id: string, @Req() req: any) {
+    return this.circulars.deleteFiled(id, req.user?.id);
   }
 
   @Post("detect-reference")
