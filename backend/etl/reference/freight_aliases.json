@@ -1,0 +1,600 @@
+{
+ "_comment": [
+  "GAIL towns whose name differs from the SAME town in a producer's freight circular (reviewed 2026-09-29).",
+  "Matched by name (spelling/transliteration/truncation), then checked against the rate to the nearest same-state town; each pair was reviewed by hand. build.py feeds these to the freight resolvers only, never to price zones.",
+  "Rejected look-alikes (different towns): ASANGAON/MANGAON, KHAMGAON/KHARGON, PADRA/DADRA, PALANPUR/MALANPUR, RANIA/RANGIA, KALOL/HALOL, PALGHAT/PALGHAR, WANI/WAI, JETPUR/JEYPUR, NALANDA/NALGONDA, SOHAGPUR/SOLAPUR."
+ ],
+ "aliases": {
+  "GAIL": {
+   "BERHAMPUR": "BERHANPUR",
+   "DEGLOOR": "DEGLOOR (DIST NANDED",
+   "JAM KHAMBH": "JAM KHAMBHALIYA",
+   "KHAMGAON": "KHAMGAON(DIST BULDHA",
+   "PATHANAMTH": "PATHANAMTHITTA",
+   "RAI BAREILLY": "RAE BAREILLY",
+   "RAJPALAYAM": "RAJPALYAM",
+   "YAWATMAL": "YAVATMAL"
+  },
+  "HMEL": {
+   "AMRAWATI": "Amravati",
+   "ANNAND": "Anand",
+   "BUNDHI": "Bundi",
+   "BYRNIHAT": "Barnihat",
+   "HALDAWANI": "Haldwani",
+   "HIMMATNAGAR": "Himatnagar",
+   "HISSAR": "Hisar",
+   "KALA AMB": "Kalaamb",
+   "KASORGOD": "Kasaragod",
+   "KHARGONE": "Khargon",
+   "MAHBOOBNAGAR": "Mahbubnagar",
+   "Machlipatnam": "Machilipatnam",
+   "PARWANU": "Parwanoo",
+   "PATHANAMTH": "Pathanamthitta",
+   "RAJMUNDHRY": "Rajamundry",
+   "RAJNANDGAON": "Raj Nandgaon",
+   "RAJPALAYAM": "Rajapalayam",
+   "RATHANGARH": "Ratangarh",
+   "RATNAGARI": "Ratnagiri",
+   "RUDERPUR": "Rudrapur",
+   "SANSARPUR TERRACE": "Samsarpur Terrace",
+   "SILIGUDI": "Siliguri",
+   "SIVAKASI": "Sivakashi",
+   "SONEPAT": "Sonipat",
+   "TIRUPATHI": "Tirupati",
+   "TIRUPUR": "Tiruppur",
+   "UMBERGAON": "Umergaon",
+   "VERAWAL": "Veraval",
+   "VIJAYWADA": "Vijayawada",
+   "VILLUPURAM": "Viluppuram",
+   "YAWATMAL": "Yavatmal"
+  },
+  "HPL": {
+   "BEHROR": "BAHROR",
+   "BUNDHI": "BUNDI",
+   "BYRNIHAT": "BARNIHAT",
+   "HALDAWANI": "HALDWANI",
+   "HIMMATNAGAR": "HIMATNAGAR",
+   "HISSAR": "HISAR",
+   "JEYPORE": "JEYPUR",
+   "KASORGOD": "KASARAGOD",
+   "KHARGONE": "KHARGON",
+   "LONAWALA": "LONAVALE",
+   "PARWANU": "PARWANOO",
+   "RAJMUNDHRY": "RAJAMUNDRY",
+   "RATHANGARH": "RATANGARH",
+   "RATNAGARI": "RATNAGIRI",
+   "ROURKELA": "ROURKELLA",
+   "RUDERPUR": "RUDRAPUR",
+   "SAMBALPUR": "SAMBHALPUR",
+   "SILIGUDI": "SILIGURI",
+   "SIVAKASI": "SIVAKASHI",
+   "SIVSAGAR": "SIBSAGAR",
+   "SONEPAT": "SONIPAT",
+   "TIRUPATHI": "TIRUPATI",
+   "UMBERGAON": "UMERGAON"
+  },
+  "OPaL": {
+   "AMRAWATI": "Amravati",
+   "ANNAND": "Anand",
+   "BARSI": "Barshi",
+   "BUNDHI": "Bundi",
+   "CHITTOREGARH": "Chittorgarh",
+   "HIMMATNAGAR": "Himatnagar",
+   "KALA AMB": "Kalaamb",
+   "KASORGOD": "Kasaragod",
+   "LONAWALA": "Lonavala",
+   "Mangalore": "Mangaluru",
+   "PARWANU": "Parwanoo",
+   "RAJPALAYAM": "Rajapalayam",
+   "RATNAGARI": "Ratnagiri",
+   "RUDERPUR": "Rudrapur",
+   "SILIGUDI": "Siliguri",
+   "SIVSAGAR": "Sivasagar",
+   "SONEPAT": "Sonipat",
+   "TIRUPATHI": "Tirupati",
+   "VERAWAL": "Veraval",
+   "VIJAYWADA": "Vijayawada",
+   "YAWATMAL": "Yavatmal"
+  }
+ },
+ "evidence": [
+  {
+   "producer": "GAIL",
+   "town": "BERHAMPUR",
+   "destination": "BERHANPUR",
+   "evidence": "rate 3411 = CUTTACK 3409 (Odisha); BURHANPUR (MP) is a separate entry at 1698"
+  },
+  {
+   "producer": "GAIL",
+   "town": "DEGLOOR",
+   "destination": "DEGLOOR (DIST NANDED",
+   "evidence": "rate 2794 vs NANDED 2649 at 73 km, Maharashtra"
+  },
+  {
+   "producer": "GAIL",
+   "town": "JAM KHAMBH",
+   "destination": "JAM KHAMBHALIYA",
+   "evidence": "rate 2489 vs JAMNAGAR 2381 at 52 km, Gujarat"
+  },
+  {
+   "producer": "GAIL",
+   "town": "KHAMGAON",
+   "destination": "KHAMGAON(DIST BULDHA",
+   "evidence": "rate 2209 vs AKOLA 2115 at 45 km, Maharashtra"
+  },
+  {
+   "producer": "GAIL",
+   "town": "PATHANAMTH",
+   "destination": "PATHANAMTHITTA",
+   "evidence": "rate 5741 vs KOTTAYAM 5709 at 46 km, Kerala"
+  },
+  {
+   "producer": "GAIL",
+   "town": "RAI BAREILLY",
+   "destination": "RAE BAREILLY",
+   "evidence": "rate 1631 vs FATEHPUR 1242 at 54 km, Uttar Pradesh"
+  },
+  {
+   "producer": "GAIL",
+   "town": "RAJPALAYAM",
+   "destination": "RAJPALYAM",
+   "evidence": "rate 5563 vs SIVAKASI 5526 at 27 km, Tamil Nadu"
+  },
+  {
+   "producer": "GAIL",
+   "town": "YAWATMAL",
+   "destination": "YAVATMAL",
+   "evidence": "rate 2179 vs WARDHA 2012 at 62 km, Maharashtra"
+  },
+  {
+   "producer": "HMEL",
+   "town": "AMRAWATI",
+   "destination": "Amravati",
+   "evidence": "rate 3140 vs AKOLA 3050 at 82 km, Maharashtra"
+  },
+  {
+   "producer": "HMEL",
+   "town": "ANNAND",
+   "destination": "Anand",
+   "evidence": "rate 2070 vs SAVLI 2070 at 28 km, Gujarat"
+  },
+  {
+   "producer": "HMEL",
+   "town": "BUNDHI",
+   "destination": "Bundi",
+   "evidence": "rate 1800 vs KOTA 1860 at 35 km, Rajasthan"
+  },
+  {
+   "producer": "HMEL",
+   "town": "BYRNIHAT",
+   "destination": "Barnihat",
+   "evidence": "Byrnihat is also written Burnihat/Barnihat; no other N-E name close"
+  },
+  {
+   "producer": "HMEL",
+   "town": "HALDAWANI",
+   "destination": "Haldwani",
+   "evidence": "rate 2380 vs SITARGANJ 2160 at 37 km, Uttarakhand"
+  },
+  {
+   "producer": "HMEL",
+   "town": "HIMMATNAGAR",
+   "destination": "Himatnagar",
+   "evidence": "rate 1860 vs MEHSANA 1960 at 59 km, Gujarat"
+  },
+  {
+   "producer": "HMEL",
+   "town": "HISSAR",
+   "destination": "Hisar",
+   "evidence": "rate 960 vs BHIWANI 980 at 57 km, Haryana"
+  },
+  {
+   "producer": "HMEL",
+   "town": "KALA AMB",
+   "destination": "Kalaamb",
+   "evidence": "rate 1290 vs PAONTA SAHIB 1170 at 40 km, Himachal Pradesh"
+  },
+  {
+   "producer": "HMEL",
+   "town": "KASORGOD",
+   "destination": "Kasaragod",
+   "evidence": "rate 6200 vs KANNUR 6410 at 81 km, Kerala"
+  },
+  {
+   "producer": "HMEL",
+   "town": "KHARGONE",
+   "destination": "Khargon",
+   "evidence": "rate 2940 vs KHANDWA 3050 at 76 km, Madhya Pradesh"
+  },
+  {
+   "producer": "HMEL",
+   "town": "Machlipatnam",
+   "destination": "Machilipatnam",
+   "evidence": "rate 5300 vs ELURU 5300 at 59 km, Andhra Pradesh"
+  },
+  {
+   "producer": "HMEL",
+   "town": "MAHBOOBNAGAR",
+   "destination": "Mahbubnagar",
+   "evidence": "rate 4750 vs HYDERABAD 4510 at 87 km, Telangana"
+  },
+  {
+   "producer": "HMEL",
+   "town": "PARWANU",
+   "destination": "Parwanoo",
+   "evidence": "same town; the other candidate, Barwani, is in Madhya Pradesh"
+  },
+  {
+   "producer": "HMEL",
+   "town": "PATHANAMTH",
+   "destination": "Pathanamthitta",
+   "evidence": "rate 7320 vs KOTTAYAM 7240 at 46 km, Kerala"
+  },
+  {
+   "producer": "HMEL",
+   "town": "RAJMUNDHRY",
+   "destination": "Rajamundry",
+   "evidence": "rate 5460 vs KAKINADA 5300 at 49 km, Andhra Pradesh"
+  },
+  {
+   "producer": "HMEL",
+   "town": "RAJNANDGAON",
+   "destination": "Raj Nandgaon",
+   "evidence": "rate 4650 vs DURG 4650 at 28 km, Chhattisgarh"
+  },
+  {
+   "producer": "HMEL",
+   "town": "RAJPALAYAM",
+   "destination": "Rajapalayam",
+   "evidence": "rate 7320 vs MADURAI 7240 at 81 km, Tamil Nadu"
+  },
+  {
+   "producer": "HMEL",
+   "town": "RATHANGARH",
+   "destination": "Ratangarh",
+   "evidence": "rate 1210 vs SIKAR 1300 at 73 km, Rajasthan"
+  },
+  {
+   "producer": "HMEL",
+   "town": "RATNAGARI",
+   "destination": "Ratnagiri",
+   "evidence": "rate 3770 vs KOLHAPUR 4030 at 103 km, Maharashtra"
+  },
+  {
+   "producer": "HMEL",
+   "town": "RUDERPUR",
+   "destination": "Rudrapur",
+   "evidence": "rate 2100 vs SITARGANJ 2160 at 30 km, Uttarakhand"
+  },
+  {
+   "producer": "HMEL",
+   "town": "SANSARPUR TERRACE",
+   "destination": "Samsarpur Terrace",
+   "evidence": "rate 1250 vs DAMTAL 1250 at 40 km, Himachal Pradesh"
+  },
+  {
+   "producer": "HMEL",
+   "town": "SILIGUDI",
+   "destination": "Siliguri",
+   "evidence": "rate 4960 vs DURGAPUR 4650 at 373 km, West Bengal"
+  },
+  {
+   "producer": "HMEL",
+   "town": "SIVAKASI",
+   "destination": "Sivakashi",
+   "evidence": "rate 7320 vs MADURAI 7240 at 63 km, Tamil Nadu"
+  },
+  {
+   "producer": "HMEL",
+   "town": "SONEPAT",
+   "destination": "Sonipat",
+   "evidence": "rate 1190 vs KUNDLI 1190 at 17 km, Haryana"
+  },
+  {
+   "producer": "HMEL",
+   "town": "TIRUPATHI",
+   "destination": "Tirupati",
+   "evidence": "rate 5870 vs CHITTOOR 5870 at 59 km, Andhra Pradesh"
+  },
+  {
+   "producer": "HMEL",
+   "town": "TIRUPUR",
+   "destination": "Tiruppur",
+   "evidence": "same town; the other candidate, Tarapur (Anand), is in Gujarat"
+  },
+  {
+   "producer": "HMEL",
+   "town": "UMBERGAON",
+   "destination": "Umergaon",
+   "evidence": "rate 2370 vs VAPI 2370 at 15 km, Gujarat"
+  },
+  {
+   "producer": "HMEL",
+   "town": "VERAWAL",
+   "destination": "Veraval",
+   "evidence": "rate 2480 vs JUNAGADH 2270 at 69 km, Gujarat"
+  },
+  {
+   "producer": "HMEL",
+   "town": "VIJAYWADA",
+   "destination": "Vijayawada",
+   "evidence": "rate 5270 vs GUNTUR 5300 at 31 km, Andhra Pradesh"
+  },
+  {
+   "producer": "HMEL",
+   "town": "VILLUPURAM",
+   "destination": "Viluppuram",
+   "evidence": "rate 6620 vs RANIPET 6200 at 111 km, Tamil Nadu"
+  },
+  {
+   "producer": "HMEL",
+   "town": "YAWATMAL",
+   "destination": "Yavatmal",
+   "evidence": "rate 3160 vs WARDHA 3260 at 62 km, Maharashtra"
+  },
+  {
+   "producer": "HPL",
+   "town": "BEHROR",
+   "destination": "BAHROR",
+   "evidence": "rate 3192 vs ALWAR 3287 at 50 km, Rajasthan"
+  },
+  {
+   "producer": "HPL",
+   "town": "BUNDHI",
+   "destination": "BUNDI",
+   "evidence": "rate 3316 vs KOTA 3320 at 35 km, Rajasthan"
+  },
+  {
+   "producer": "HPL",
+   "town": "BYRNIHAT",
+   "destination": "BARNIHAT",
+   "evidence": "Byrnihat is also written Burnihat/Barnihat; no other N-E name close"
+  },
+  {
+   "producer": "HPL",
+   "town": "HALDAWANI",
+   "destination": "HALDWANI",
+   "evidence": "rate 3374 vs SITARGANJ 2971 at 37 km, Uttarakhand"
+  },
+  {
+   "producer": "HPL",
+   "town": "HIMMATNAGAR",
+   "destination": "HIMATNAGAR",
+   "evidence": "rate 3878 vs KALOL 3738 at 62 km, Gujarat"
+  },
+  {
+   "producer": "HPL",
+   "town": "HISSAR",
+   "destination": "HISAR",
+   "evidence": "rate 3569 vs BHIWANI 3444 at 57 km, Haryana"
+  },
+  {
+   "producer": "HPL",
+   "town": "JEYPORE",
+   "destination": "JEYPUR",
+   "evidence": "Jeypore (Odisha) spelling; rate 2612 vs BERHAMPUR 2098, 239 km further"
+  },
+  {
+   "producer": "HPL",
+   "town": "KASORGOD",
+   "destination": "KASARAGOD",
+   "evidence": "rate 5656 vs KANNUR 5647 at 81 km, Kerala"
+  },
+  {
+   "producer": "HPL",
+   "town": "KHARGONE",
+   "destination": "KHARGON",
+   "evidence": "rate 3161 vs KHANDWA 3642 at 76 km, Madhya Pradesh"
+  },
+  {
+   "producer": "HPL",
+   "town": "LONAWALA",
+   "destination": "LONAVALE",
+   "evidence": "same town; HPL already bills PUNE to Lonavale"
+  },
+  {
+   "producer": "HPL",
+   "town": "PARWANU",
+   "destination": "PARWANOO",
+   "evidence": "rate 3709 vs SOLAN 3713 at 16 km, Himachal Pradesh"
+  },
+  {
+   "producer": "HPL",
+   "town": "RAJMUNDHRY",
+   "destination": "RAJAMUNDRY",
+   "evidence": "rate 2490 vs KAKINADA 2541 at 49 km, Andhra Pradesh"
+  },
+  {
+   "producer": "HPL",
+   "town": "RATHANGARH",
+   "destination": "RATANGARH",
+   "evidence": "rate 3514 vs SIKAR 3205 at 73 km, Rajasthan"
+  },
+  {
+   "producer": "HPL",
+   "town": "RATNAGARI",
+   "destination": "RATNAGIRI",
+   "evidence": "rate 4674 vs KOLHAPUR 4006 at 103 km, Maharashtra"
+  },
+  {
+   "producer": "HPL",
+   "town": "ROURKELA",
+   "destination": "ROURKELLA",
+   "evidence": "same town (spelling); rate 1600 vs CUTTACK 1044 is 222 km further inland"
+  },
+  {
+   "producer": "HPL",
+   "town": "RUDERPUR",
+   "destination": "RUDRAPUR",
+   "evidence": "rate 2975 vs SITARGANJ 2971 at 30 km, Uttarakhand"
+  },
+  {
+   "producer": "HPL",
+   "town": "SAMBALPUR",
+   "destination": "SAMBHALPUR",
+   "evidence": "Sambalpur (Odisha) spelling; the other candidate, Jabalpur, is in Madhya Pradesh"
+  },
+  {
+   "producer": "HPL",
+   "town": "SILIGUDI",
+   "destination": "SILIGURI",
+   "evidence": "same town (spelling); rate 2418 vs DURGAPUR 1034 is 373 km further north"
+  },
+  {
+   "producer": "HPL",
+   "town": "SIVAKASI",
+   "destination": "SIVAKASHI",
+   "evidence": "rate 4510 vs MADURAI 4449 at 63 km, Tamil Nadu"
+  },
+  {
+   "producer": "HPL",
+   "town": "SIVSAGAR",
+   "destination": "SIBSAGAR",
+   "evidence": "rate 4389 vs SILCHAR 4686 at 297 km, Assam"
+  },
+  {
+   "producer": "HPL",
+   "town": "SONEPAT",
+   "destination": "SONIPAT",
+   "evidence": "rate 3336 vs BAHADURGARH 3334 at 35 km, Haryana"
+  },
+  {
+   "producer": "HPL",
+   "town": "TIRUPATHI",
+   "destination": "TIRUPATI",
+   "evidence": "rate 3728 vs CHITTOOR 3500 at 59 km, Andhra Pradesh"
+  },
+  {
+   "producer": "HPL",
+   "town": "UMBERGAON",
+   "destination": "UMERGAON",
+   "evidence": "rate 3569 vs VALSAD 3216 at 41 km, Gujarat"
+  },
+  {
+   "producer": "OPaL",
+   "town": "AMRAWATI",
+   "destination": "Amravati",
+   "evidence": "rate 2485 vs AKOLA 2135 at 82 km, Maharashtra"
+  },
+  {
+   "producer": "OPaL",
+   "town": "ANNAND",
+   "destination": "Anand",
+   "evidence": "rate 484 vs SAVLI 556 at 28 km, Gujarat"
+  },
+  {
+   "producer": "OPaL",
+   "town": "BARSI",
+   "destination": "Barshi",
+   "evidence": "rate 2477 vs SOLAPUR 2898 at 67 km, Maharashtra"
+  },
+  {
+   "producer": "OPaL",
+   "town": "BUNDHI",
+   "destination": "Bundi",
+   "evidence": "rate 1785 vs KOTA 1688 at 35 km, Rajasthan"
+  },
+  {
+   "producer": "OPaL",
+   "town": "CHITTOREGARH",
+   "destination": "Chittorgarh",
+   "evidence": "rate 1523 vs BHILWARA 1633 at 51 km, Rajasthan"
+  },
+  {
+   "producer": "OPaL",
+   "town": "HIMMATNAGAR",
+   "destination": "Himatnagar",
+   "evidence": "rate 1063 vs VISNAGAR 1108 at 44 km, Gujarat"
+  },
+  {
+   "producer": "OPaL",
+   "town": "KALA AMB",
+   "destination": "Kalaamb",
+   "evidence": "rate 3350 vs SOLAN 3508 at 47 km, Himachal Pradesh"
+  },
+  {
+   "producer": "OPaL",
+   "town": "KASORGOD",
+   "destination": "Kasaragod",
+   "evidence": "rate 3871 vs KANNUR 4135 at 81 km, Kerala"
+  },
+  {
+   "producer": "OPaL",
+   "town": "LONAWALA",
+   "destination": "Lonavala",
+   "evidence": "rate 1707 vs KHOPOLI 1665 at 7 km, Maharashtra"
+  },
+  {
+   "producer": "OPaL",
+   "town": "Mangalore",
+   "destination": "Mangaluru",
+   "evidence": "rate 3724 vs BANGALORE 3979 at 297 km, Karnataka"
+  },
+  {
+   "producer": "OPaL",
+   "town": "PARWANU",
+   "destination": "Parwanoo",
+   "evidence": "rate 3414 vs SOLAN 3508 at 16 km, Himachal Pradesh"
+  },
+  {
+   "producer": "OPaL",
+   "town": "RAJPALAYAM",
+   "destination": "Rajapalayam",
+   "evidence": "rate 5503 vs SIVAKASI 5465 at 27 km, Tamil Nadu"
+  },
+  {
+   "producer": "OPaL",
+   "town": "RATNAGARI",
+   "destination": "Ratnagiri",
+   "evidence": "rate 2616 vs KOLHAPUR 2808 at 103 km, Maharashtra"
+  },
+  {
+   "producer": "OPaL",
+   "town": "RUDERPUR",
+   "destination": "Rudrapur",
+   "evidence": "rate 3663 vs SITARGANJ 3714 at 30 km, Uttarakhand"
+  },
+  {
+   "producer": "OPaL",
+   "town": "SILIGUDI",
+   "destination": "Siliguri",
+   "evidence": "rate 5165 vs DURGAPUR 4580 at 373 km, West Bengal"
+  },
+  {
+   "producer": "OPaL",
+   "town": "SIVSAGAR",
+   "destination": "Sivasagar",
+   "evidence": "rate 7119 vs DIBRUGARH 7179 at 67 km, Assam"
+  },
+  {
+   "producer": "OPaL",
+   "town": "SONEPAT",
+   "destination": "Sonipat",
+   "evidence": "rate 2854 vs KUNDLI 2866 at 17 km, Haryana"
+  },
+  {
+   "producer": "OPaL",
+   "town": "TIRUPATHI",
+   "destination": "Tirupati",
+   "evidence": "same town; OPaL already bills CHITTOOR to Tirupati"
+  },
+  {
+   "producer": "OPaL",
+   "town": "VERAWAL",
+   "destination": "Veraval",
+   "evidence": "rate 1341 vs JUNAGADH 1150 at 69 km, Gujarat"
+  },
+  {
+   "producer": "OPaL",
+   "town": "VIJAYWADA",
+   "destination": "Vijayawada",
+   "evidence": "rate 3805 vs GUNTUR 3889 at 31 km, Andhra Pradesh"
+  },
+  {
+   "producer": "OPaL",
+   "town": "YAWATMAL",
+   "destination": "Yavatmal",
+   "evidence": "rate 2684 vs HINGANGHAT 3030 at 76 km, Maharashtra"
+  }
+ ]
+}

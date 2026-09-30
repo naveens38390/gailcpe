@@ -26,7 +26,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from pdfrows import assign_to_columns, rows  # noqa: E402
+from pdfrows import assign_to_columns, char_rows, rows  # noqa: E402
 
 # F2001S, D2001S, E2507, T3804U, M2525, ULLE, B48H02U, M6112, P5002, B55H02.
 GRADE_CODE = re.compile(r"^(?=.*\d)[A-Z][A-Z0-9]{2,8}$|^U[A-Z]{3,4}$")
@@ -92,6 +92,39 @@ def _label_edges(block: list) -> list[float]:
     return sorted(x for x, _ in edges.most_common(3))
 
 
+FUSED = re.compile(r"(?=.*[A-Za-z])(?=.*\d)")
+PRICE_DIGITS = 6  # every OPaL price is Rs 1,00,000-9,99,999 per MT
+
+
+def _fused_values(path: str, row, boundary: float) -> list[tuple[float, float]]:
+    """Prices whose digits the PDF interleaves with the wrapped state name.
+
+    "Dadra and Nagar Haveli and Daman and Diu" overflows its cell on the
+    Silvassa and Daman rows and is drawn over the first price, so word
+    extraction returns "Da1m32a2n3", "a1nd", "Diu146171": the first price
+    (132231) threaded through the state name, the second glued to its end.
+    Dropping those tokens (as the label reader must) dropped the prices with
+    them — 30 of OPaL's Ex Depot prices at Silvassa and 3 at Daman on
+    16 Sep 2026. Characters keep their own positions, so the digits are read
+    back in order and cut into six-digit prices, each placed at its digits' x.
+    """
+    fused = [w for w in row.words if FUSED.match(w.text) and w.x0 < boundary]
+    if not fused:
+        return []
+    start = min(w.x0 for w in fused)
+    digits = []
+    for crow in char_rows(path, pages=[row.page]):
+        if abs(crow.top - row.top) > 2.0:
+            continue
+        digits.extend(c for c in crow.words if c.text.isdigit() and start - 0.5 <= c.x0 < boundary)
+    digits.sort(key=lambda c: c.x0)
+    out: list[tuple[float, float]] = []
+    for i in range(0, len(digits) - PRICE_DIGITS + 1, PRICE_DIGITS):
+        group = digits[i:i + PRICE_DIGITS]
+        out.append((float("".join(c.text for c in group)), sum(c.xmid for c in group) / len(group)))
+    return out
+
+
 def prices(path: str) -> dict:
     """{"sheets": {annexure: {pricing_zone: {"zone", "state", "prices"}}},
     "aliases": {alias: primary}}"""
@@ -108,9 +141,25 @@ def prices(path: str) -> dict:
 
         seen_data = False
         last_zone: str | None = None
+        # A row whose label wraps: "Mumbai Silvassa Dadra and Nagar Haveli" on one line, then
+        # "and Daman and Diu <prices>" — the price line has no pricing zone of its own.
+        pending: tuple[str, str, str] | None = None
+
+        def split_label(row) -> list[list[str]]:
+            limit = row.numeric_boundary()
+            parts: list[list[str]] = [[], [], []]
+            for w in row.words:
+                if limit is not None and w.x0 >= limit:
+                    continue
+                slot = sum(1 for e in edges if w.x0 >= e - 1.0) - 1
+                parts[max(0, min(2, slot))].append(w.text)
+            return parts
 
         for row in block[1:]:
             label, values = row.label_and_values()
+            boundary = row.numeric_boundary()
+            if boundary is not None:
+                values = values + _fused_values(path, row, boundary)
             codes = [(w.text, w.xmid) for w in row.words if GRADE_CODE.match(w.text)]
 
             if not values and codes and not seen_data:
@@ -121,6 +170,12 @@ def prices(path: str) -> dict:
                 continue
 
             if len(values) < MIN_VALUES:
+                if seen_data and label and not values and not label.startswith("OPaL"):
+                    head = split_label(row)
+                    if head[0] and head[1]:
+                        # a new zone and pricing zone: the label of a row whose prices follow
+                        pending = tuple(" ".join(p).strip() for p in head)  # type: ignore[assignment]
+                        continue
                 # A state name too long for its cell continues on its own line.
                 # Drop any token carrying a digit: on the crowded rows that
                 # continuation overlaps the price column and the two arrive
@@ -136,17 +191,14 @@ def prices(path: str) -> dict:
                 continue
 
             seen_data = True
-            boundary = row.numeric_boundary()
-            parts: list[list[str]] = [[], [], []]
-            for w in row.words:
-                if w.x0 >= boundary:
-                    continue
-                slot = sum(1 for e in edges if w.x0 >= e - 1.0) - 1
-                parts[max(0, min(2, slot))].append(w.text)
+            parts = split_label(row)
             # On crowded rows the wrapped state text runs into the price
             # column and the two fuse into one token; drop those.
             parts[2] = [t for t in parts[2] if not HAS_DIGIT.search(t)]
             zone, pricing_zone, state = (" ".join(p).strip() for p in parts)
+            if not pricing_zone and not zone and pending:
+                zone, pricing_zone, state = pending[0], pending[1], f"{pending[2]} {state}".strip()
+            pending = None
             if not pricing_zone:
                 continue
             entry = zones.setdefault(
